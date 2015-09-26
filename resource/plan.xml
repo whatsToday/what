@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="plan">
+   <typeAlias alias="PlanVo" type="com.bit2015.what.vo.PlanVo"/>
+   
+   <insert id="insert" parameterClass="PlanVo">
+      <![CDATA[
+         insert INTO plan VALUES(plan_no_seq.nextval, #member_no#, #planName#, #memberName#, #message#, to_Date(sysdate, 'yyyy-MM-dd'))
+      ]]>
+   </insert>
+
+   <select id="selectAll" resultClass="PlanVo">
+      <![CDATA[
+         select plan_no, member_no, planName, memberName, message, to_char(planDate,'yyyy-mm-dd')as planDate from plan order by plan_no desc
+      ]]>
+   </select>
+   
+   <select id="selectVo" parameterClass="java.lang.Long" resultClass="PlanVo">
+      <![CDATA[
+         select plan_no, member_no, planName, memberName, message, to_char(planDate,'yyyy-mm-dd')as planDate from plan where plan_no=#plan_no# 
+      ]]>
+   </select>
+   <select id="getUserPlan" parameterClass="java.lang.Long" resultClass="PlanVo">
+      <![CDATA[
+         select plan_no, member_no, planName, memberName, message, to_char(planDate,'yyyy-mm-dd')as planDate from plan where member_no=#member_no# order by plan_no desc
+      ]]>
+   </select>
+
+   <delete id="delete" parameterClass="java.lang.Long">
+      <![CDATA[
+         delete from plan where plan_no=#plan_no#
+      ]]>
+   </delete>
+   
+   <update id="update" parameterClass="PlanVo">
+      <![CDATA[
+         update plan set 
+         member_no=#member_no#,
+          planName = #planName#,
+          memberName = #memberName#,
+          message = #message#,
+         planDate=to_Date(#planDate#, 'yyyy-MM-dd')
+         where plan_no=#plan_no#
+      ]]>
+   </update>
+   
+   
+</sqlMap>

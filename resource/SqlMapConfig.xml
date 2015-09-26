@@ -8,5 +8,6 @@
 
  	<!-- sql mapping files -->
  	<sqlMap resource="test.xml"/>
+ 	<sqlMap resource="content.xml"/>
  	
 </sqlMapConfig>

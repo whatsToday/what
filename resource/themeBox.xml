@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="themeBox">
+	<typeAlias alias="ThemeBoxVo" type="com.bit2015.what.vo.ThemeBoxVo"/>
+	
+	
+	<insert id="insert" parameterClass="ThemeBoxVo">
+		<![CDATA[
+			insert INTO THEMEBOX VALUES(themeBox_no_seq.nextval, #member_no#, #theme_no#, #themeName#)
+		]]>
+	</insert>
+	
+	<select id="selectAll" resultClass="ThemeBoxVo">
+		<![CDATA[
+			select * from THEMEBOX order by themeBox_no desc
+		]]>
+	</select>
+	
+	<select id="selectAllByMm" parameterClass="java.lang.Long" resultClass="ThemeBoxVo">
+		<![CDATA[
+			select * from THEMEBOX where member_no=#member_no# order by themeBox_no desc 
+		]]>
+	</select>
+	
+	<select id="selectVo" parameterClass="java.lang.Long" resultClass="ThemeBoxVo">
+		<![CDATA[
+			select * from THEMEBOX where themeBox_no=#themeBox_no#
+		]]>
+	</select>
+
+	<delete id="delete" parameterClass="java.lang.Long">
+		<![CDATA[
+			delete from THEMEBOX where themeBox_no=#themeBox_no#
+		]]>
+	</delete>
+	<delete id="deleteMember" parameterClass="java.lang.Long">
+		<![CDATA[
+			delete from THEMEBOX where member_no=#member_no#
+		]]>
+	</delete>
+	
+	<update id="update" parameterClass="ThemeBoxVo">
+		<![CDATA[
+			update THEMEBOX set 
+			member_no=#member_no#,
+			theme_no=#theme_no#,
+			themeName=#themeName#
+			where themeBox_no=#themeBox_no#
+		]]>
+	</update>
+	
+</sqlMap>

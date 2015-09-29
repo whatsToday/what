@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="theme">
+	<typeAlias alias="ThemeVo" type="com.bit2015.what.vo.ThemeVo"/>
+	
+	<select id="selectAll" resultClass="ThemeVo">
+		<![CDATA[
+			select * from theme order by theme_no desc
+		]]>
+	</select>
+	
+	<select id="selectVo" parameterClass="java.lang.Long" resultClass="ThemeVo">
+		<![CDATA[
+			select * from theme where theme_no=#theme_no#
+		]]>
+	</select>
+	<select id="getNo" parameterClass="java.lang.String" resultClass="ThemeVo">
+		<![CDATA[
+			select * from theme where themeName=#themeName#
+		]]>
+	</select>
+	
+	<insert id="insert" parameterClass="ThemeVo">
+		<![CDATA[
+			insert INTO theme VALUES(theme_no_seq.nextval, #themeName#, #imageUrl#)
+		]]>
+	</insert>
+
+	<delete id="delete" parameterClass="java.lang.Long">
+		<![CDATA[
+			delete from theme where theme_no=#theme_no#
+		]]>
+	</delete>
+	
+	<update id="update" parameterClass="ThemeVo">
+		<![CDATA[
+			update theme set themeName = #themeName#, imageUrl = #imageUrl# where theme_no=#theme_no#
+		]]>
+	</update>
+	
+</sqlMap>

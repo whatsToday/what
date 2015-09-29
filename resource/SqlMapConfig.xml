@@ -9,5 +9,10 @@
  	<!-- sql mapping files -->
  	<sqlMap resource="test.xml"/>
  	<sqlMap resource="content.xml"/>
+ 	<sqlMap resource="plan.xml"/>
+ 	<sqlMap resource="contentBox.xml"/>
+ 	<sqlMap resource="theme.xml"/>
+ 	<sqlMap resource="themeBox.xml"/>
+ 	
  	
 </sqlMapConfig>

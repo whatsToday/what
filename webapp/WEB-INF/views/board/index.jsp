@@ -9,8 +9,79 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>오늘 뭐하지?</title>
+<!-- script -->
+<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=c12b4d88c8259cf4652b89c1f64db8e8&libraries=services"></script>
+<script type="text/javascript" src="/assets/js/board/jquery-1.9.1.min.js"></script>
+<!-- css -->
+<style type="text/css">
+* { margin:0; padding:0;}
+div {
+		padding:10px;
+}
+div#container{
+			   background-color : #ededed;
+			   margin:7% 20%;
+			   width: 50%;
+			   height: 900px;
+			   position: relative;
+}
+div#photo {
+			float:left;
+			width: 30%;
+			height: 80px;
+}
+div#title {
+			height: 80px;
+			width: 65%;
+			margin-left: 32%;
+}
+div#title input{
+				margin-top:58px;
+				width: 100%;
+				height: 30px;
+}
+div#selectPlan{
+				height: 50px;
+}
+div#selectPlan a{
+				text-decoration: none;
+				color:#000;
+}
+
+div#selectPlan ul#planList{
+			display:none;
+			list-style: none;
+}
+
+div#map{
+			width: 96.5%;
+			height: 350px;
+}
+div#message {
+			width:96.5%;
+			height: 300px;
+}
+div#message textarea {
+			width:100%;
+			height: 100%;
+			resize:none;
+}
+div#submit{
+			float:right;
+}
+</style>
 </head>
 <body>
-
+<!-- header -->
+<c:import url="/WEB-INF/views/include/header.jsp"/>
+<!-- container -->
+<div id="container">
+<div id="photo">${planBoard.titleImage}</div>
+<div id="title">${planBoard.planName}</div>
+<div id="map">Map</div>
+<div id="message"><textarea id="msg" readonly="readonly">${planBoard.message}</textarea></div>
+<div id="comment">댓글</div>
+</div>
+<!-- footer -->
 </body>
 </html>

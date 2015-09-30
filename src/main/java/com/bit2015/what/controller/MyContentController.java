@@ -23,7 +23,9 @@ public class MyContentController {
 	@RequestMapping("/mycontent")
 	public String index(HttpSession session, Model model) {
 		MemberVo memberVo = (MemberVo)session.getAttribute("authUser");
+		System.out.println(memberVo);
 		List<PlanVo> list = myContentService.userPlan(memberVo.getMember_no());
+		System.out.println(list);
 		model.addAttribute("planList", list);
 		
 		return "/mycontent/mycontent";

@@ -27,9 +27,9 @@
 				<div class="pro"><img class="image_pro" src="${authUser.imageUrl}"/></div>
 				<ul><li class="soo">5</li><li class="top_menu">팔로잉</li><li>팔로잉보기</li></ul>
 				<ul><li class="soo">5</li><li class="top_menu">팔로워</li><li>팔로워보기</li></ul>
-				<ul><li class="soo">5</li><li class="top_menu">게시물</li><li>게시물편집</li></ul>
+				<ul><li class="soo">5</li><li class="top_menu">게시물</li><li><a href="/board/addBoard">게시물쓰기</a></li></ul>
 				<div class="pro_modi">프로필 편집</div>
-				<div class="pro_name">${authUser.memberName }</div>
+				<div class="pro_name">${authUser.memberName}</div>
 				</div>
 				<div class="menu">
 					<ul>
@@ -48,7 +48,7 @@
 				<div class="content">
 				<ul>
 				<c:forEach var="i" items="${planList}">
-				<li>${i.}</li>
+				<li><img src="${i.titleImage}"/></li>
 				</c:forEach>
 				</ul>
 				</div>

@@ -14,7 +14,6 @@ public class MyContentService {
 	@Autowired
 	PlanDao planDao;
 	
-	
 	public List<PlanVo> userPlan(Long member_no){
 		List<PlanVo> list = planDao.getUserPlan(member_no);
 		return list;

@@ -39,5 +39,8 @@ public class BoardService {
 	public void updatePlan(String planName, String message, Long plan_no){
 		planDao.update(planName, message, plan_no);
 	}
-
+	public PlanVo getPlanVo(Long plan_no){
+		PlanVo planVo = planDao.selectVo(plan_no);
+		return planVo;
+	}
 }

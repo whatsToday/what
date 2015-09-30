@@ -23,7 +23,9 @@ public class BoardController {
 	BoardService boardService;
 	
 	@RequestMapping()
-	public String index(){
+	public String index(@RequestParam Long plan_no, Model model){
+		PlanVo planVo = boardService.getPlanVo(plan_no);
+		model.addAttribute("planBoard", planVo);
 		return "/board/index";
 	}
 	@RequestMapping("/addBoard")

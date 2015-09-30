@@ -20,31 +20,35 @@
 	<div class="container">
 			<div class="omu"><img src="/assets/img/omu.jpg"></div>
 		<div class="mycontent" >
-			<div class="top">
 			<c:choose>
-				<c:when test="${empty authUser }">
-				<div class="pro"><img class="image_pro" src="/assets/img/no_img.jpg"/></div>
+				<c:when test="${not empty authUser }">
+				<div class="top">
+				<div class="pro"><img class="image_pro" src="${authUser.imageUrl }"/></div>
 				<ul><li class="soo">5</li><li class="top_menu">팔로잉</li><li>팔로잉보기</li></ul>
 				<ul><li class="soo">5</li><li class="top_menu">팔로워</li><li>팔로워보기</li></ul>
 				<ul><li class="soo">5</li><li class="top_menu">게시물</li><li>게시물편집</li></ul>
 				<div class="pro_modi">프로필 편집</div>
-				<div class="pro_name">박성국</div>
-				
+				<div class="pro_name">${authUser.memberName }</div>
+				</div>
 				<div class="menu">
 					<ul>
-						<li>메뉴4</li>
+						<li>메뉴44</li>
 					</ul>
 					<ul>
-						<li>메뉴3</li>
+						<li>메뉴33</li>
 					</ul>
 					<ul>
-						<li>메뉴2</li>
+						<li>메뉴22</li>
 					</ul>
 					<ul>
-						<li>메뉴1</li>
-					</ul>
+						<li>메뉴11</li>
+					</ul> 
 				</div>
-				<div class="content"></div>
+				<div class="content">
+				<ul><li>plan 사진</li></ul>
+				<ul><li>plan 사진</li></ul>
+				<ul><li>plan 사진</li></ul>
+				</div>
 				<div class="bottom"></div>
 				</c:when>
 				<c:otherwise>
@@ -53,7 +57,7 @@
 				</c:otherwise>
 			</c:choose>
 
-			</div>
+	
 		</div>
 	</div>
 

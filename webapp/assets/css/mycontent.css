@@ -1,9 +1,9 @@
 @CHARSET "UTF-8";
 
-.omu {margin-top:30px}
+.omu {margin-top:20px}
 
 /* mycontent */
-.mycontent {width:1000px;height:500px;border:solid 1px #000;margin-top:50px;margin-bottom:50px;margin-left:auto;margin-right:auto}
+.mycontent {width:1000px;border:solid 1px #000;margin-top:10px;margin-bottom:50px;margin-left:auto;margin-right:auto}
 .image_pro{width:200px;height:200px;border-radius:100px;overflow:hidden}
 
 /* top */
@@ -16,12 +16,12 @@
 .top .pro_modi {float:right;width:700px;height:30px;border:solid 1px #000;text-align:center;margin:20px 25px 0 0}
 .top .pro_name {margin-top:200px;width:200px;border:solid 1px #000;text-align:center}
 
-/* menu */
-.menu {width:980px;height:120px;border:solid 1px #000}
-.menu ul {width:230px;height:100px;border:solid 1px #000;padding:10px}
+/* menu */ 
+.menu {width:1000px;height:120px;border:solid 1px #000;}
+.menu ul {float:left;width:228px;height:100px;border:solid 1px #000;margin:10px}
 
 
 /* content */
-
+.content ul {float:left;width:312px;height:250px;border:solid 1px #000;margin:10px}
 
 /* bottom */

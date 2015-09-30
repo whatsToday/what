@@ -12,4 +12,8 @@ public class MyContentController {
 	public String index() {
 		return "/mycontent/mycontent";
 	}
+	
+	
+	
+	
 }

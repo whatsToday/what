@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.bit2015.what.service.AdminService;
 import com.bit2015.what.vo.MemberVo;
+import com.bit2015.what.vo.PlanVo;
 
 @Controller
 @RequestMapping("/admin")
@@ -47,4 +48,33 @@ public class AdminController {
 		return "redirect:/admin/member";
 	}
 
+	// plan 조회
+
+	@RequestMapping("/plan")
+	public String planList(Model model) {
+		List<MemberVo> memberList = adminService.selectMember();
+		List<PlanVo> planList = adminService.selectPlan();
+		model.addAttribute("memberList",memberList);
+		model.addAttribute("planList", planList);
+		return "/admin/plan";
+	}
+    // plan 등록
+	@RequestMapping("/insertplan")
+	public String insertplan(PlanVo planVo,@RequestParam(required = false) MultipartFile img) {
+		
+		
+		/*List<MemberVo> memberList = adminService.selectMember();*/
+		/*System.out.println("두번째"+memberList);
+		model.addAttribute("memberList", memberList);*/
+		adminService.insertPlan(planVo, img);
+		
+		return "redirect:/admin/plan";
+	}
+	// plan 삭제 
+	@RequestMapping("/deleteplan")
+	public String deletePlan(@RequestParam Long plan_no){
+		adminService.deletePlan(plan_no);
+		return "redirect:/admin/plan";
+
+	}
 }

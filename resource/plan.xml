@@ -5,13 +5,13 @@
    
    <insert id="insert" parameterClass="PlanVo">
       <![CDATA[
-         insert INTO plan VALUES(plan_no_seq.nextval, #member_no#, #planName#, #memberName#, #message#, to_Date(sysdate, 'yyyy-MM-dd'))
+         INSERT INTO PLAN VALUES(plan_no_seq.nextval, #member_no#, #titleImage#, #planName#, #memberName#, #message#, to_Date(#planDate#, 'yyyy-MM-dd'))
       ]]>
    </insert>
 
    <select id="selectAll" resultClass="PlanVo">
       <![CDATA[
-         select plan_no, member_no, planName, memberName, message, to_char(planDate,'yyyy-mm-dd')as planDate from plan order by plan_no desc
+         select plan_no, titleImage,member_no, planName, memberName, message, to_char(planDate,'yyyy-mm-dd')as planDate from plan order by plan_no desc
       ]]>
    </select>
     <select id="selectTodayList" parameterClass="java.lang.Long" resultClass="PlanVo">

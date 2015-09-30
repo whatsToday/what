@@ -1,0 +1,27 @@
+@CHARSET "UTF-8";
+
+.omu {margin-top:30px}
+
+/* mycontent */
+.mycontent {width:1000px;height:500px;border:solid 1px #000;margin-top:50px;margin-bottom:50px;margin-left:auto;margin-right:auto}
+.image_pro{width:200px;height:200px;border-radius:100px;overflow:hidden}
+
+/* top */
+.top {padding:10px;}
+.top .pro {float:left}
+.top ul {float:right;width:250px;text-aling:center;margin-top:30px}
+.top ul li {text-align:center}
+.top ul .soo {font-size:20px;font-weight:bold}
+.top ul .top_menu {font-size:15px}
+.top .pro_modi {float:right;width:700px;height:30px;border:solid 1px #000;text-align:center;margin:20px 25px 0 0}
+.top .pro_name {margin-top:200px;width:200px;border:solid 1px #000;text-align:center}
+
+/* menu */
+.menu {width:980px;height:120px;border:solid 1px #000}
+.menu ul {width:230px;height:100px;border:solid 1px #000;padding:10px}
+
+
+/* content */
+
+
+/* bottom */

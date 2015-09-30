@@ -4,7 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!--css -->
 <link href="/assets/css/layout.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" type="text/css" href="/assets/css/navi.css" media="screen" /> 
+<link href="/assets/css/navi.css" rel="stylesheet" type="text/css"  media="screen" /> 
+<link href="/assets/css/common.css" rel="stylesheet" type="text/css" />
 
  
 <script>

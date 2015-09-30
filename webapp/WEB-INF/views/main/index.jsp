@@ -37,7 +37,14 @@
 				        <div class="option">
 				            <p>
 				                <form onsubmit="searchPlaces(); return false;"> 
-				                키워드 : <input type="text" value="${memberTheme.get(0).getThemeName()}" id="keyword" size="15"> 
+							       		<c:choose>
+							       		<c:when test="${not empty memberTheme }">
+							                키워드 : <input type="text" value="${memberTheme.get(0).getThemeName()}" id="keyword" size="15"> 
+							        	</c:when>
+							        	<c:otherwise>
+							                키워드 : <input type="text" value="강남역 맛집" id="keyword" size="15">
+							          </c:otherwise>
+									</c:choose>
 				                <button type="submit">검색하기</button> 
 				            </p>
 				        </div>

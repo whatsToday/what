@@ -22,12 +22,12 @@
 		]]>
 	</select>
 	
-	<select id="selectAllByCno" resultClass="ContentBoxVo" parameterClass="java.lang.Long">
+	<select id="selectAllByCno" parameterClass="java.lang.Long" resultClass="ContentBoxVo">
 		<![CDATA[
 			select * from contentBox where content_no=#content_no# order by contentBox_no desc
 		]]>
 	</select>
-	<select id="getContentBoxNo" resultClass="ContentBoxVo" parameterClass="java.util.Map">
+	<select id="getContentBoxNo" parameterClass="java.util.Map" resultClass="ContentBoxVo">
 		<![CDATA[
 			select * from contentBox where content_no=#content_no# and plan_no=#plan_no#
 		]]>
@@ -54,16 +54,4 @@
 			where contentBox_no=#contentBox_no#
 		]]>
 	</update>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 </sqlMap>

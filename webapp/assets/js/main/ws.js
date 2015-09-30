@@ -76,8 +76,6 @@ function getMyPlan() {
 
 		},
 		success : function(response) {
-			console.log(response.MyPlanList);
-			console.log(response.MyPlanList[0]);
 
 			var se = document.getElementById('plan_no');
 			if(response.MyPlanList[0]!=undefined){
@@ -91,6 +89,7 @@ function getMyPlan() {
 	
 					se.appendChild(op);
 				}
+				callContents(se.value);
 			}else{
 				console.log("일정이 없습니다!");
 				var op = document.createElement("option");
@@ -100,6 +99,7 @@ function getMyPlan() {
 				
 				se.appendChild(op);
 			}
+			
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
 			alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
@@ -153,7 +153,7 @@ function insertPlan(index){
 
 
 function callContents(plan_no){
-	
+	console.log("call contens plan_no = " + plan_no);
 	$.ajax({
 		type: "Post",
 		url: "/callContents",
@@ -161,9 +161,20 @@ function callContents(plan_no){
 			plan_no : plan_no,
 		},
 		success: function(response){
-			console.log("callContents 성공");
 			
 			var sP =document.getElementById('showPlan');
+			
+			//초기화
+			var node ; 
+			var i=0;
+			for ( var j=0 ; j < sP.childNodes.length ;j++){
+				node = sP.childNodes.item(j-i); 
+//				alert(node.nodeName);
+				if(node.nodeName=='TR') {
+					sP.removeChild(node);
+					i++;
+				}
+			}
 			
 			for (var i in response.contentList) {
 				var planLi = document.createElement('tr');

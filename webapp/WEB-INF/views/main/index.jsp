@@ -88,7 +88,7 @@
 //planlist부름
 getMyPlan();
 
-
+//callContents(plan_no);
 
 </script>
 </html>

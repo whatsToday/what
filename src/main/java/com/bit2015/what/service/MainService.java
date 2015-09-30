@@ -1,6 +1,10 @@
 package com.bit2015.what.service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
@@ -141,16 +145,23 @@ public class MainService {
 		PlanVo planVo = new PlanVo();
 		
 		//plan 없으면 만들어서 보내주기.
-		if(plan_no == null){
+		if(plan_no == null || plan_no == -1){
 			String size =String.valueOf(planDao.getUserPlan(memberVo.getMember_no()).size());
 			
 			PlanVo pvo = new PlanVo();
 			pvo.setMember_no(memberVo.getMember_no());
 			pvo.setPlanName(memberVo.getMemberName()+"님의 "+size+"번째 일정");
 			pvo.setMemberName(memberVo.getMemberName());
+			
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+			Date today=Calendar.getInstance().getTime();
+			String planDate=df.format(today);
+			System.out.println(planDate);
+			pvo.setPlanDate(planDate);
 			planDao.insert(pvo);
 			
 			List<PlanVo> planList = planDao.selectTodayList(memberVo.getMember_no());
+			System.out.println(planList.toString());
 			planVo = planList.get(0);
 			plan_no = planVo.getPlan_no();
 		}
@@ -166,12 +177,17 @@ public class MainService {
 
 		
 		//contentBox에 넣기
+		long content_no=contentVo.getContent_no();
 		ContentBoxVo contentBoxVo=new ContentBoxVo();
-		contentBoxVo.setContent_no(contentVo.getContent_no());
+		contentBoxVo.setContent_no(content_no);
 		contentBoxVo.setPlan_no(plan_no);
 		contentBoxVo.setPlanName(planVo.getPlanName());
 		
+		//중복된 plan_no , content_no 안들어가게
+		if(contentBoxDao.getContentBoxNo(content_no, plan_no)==null){
+			System.out.println("중복되는 contentbox tuple이 있습니다");
 		contentBoxDao.insert(contentBoxVo);
+		}
 	}
 
 	public List<PlanVo> getMyPlan(HttpSession session) {

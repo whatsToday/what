@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<script type="text/javascript" src="/assets/js/board/jquery-1.9.1.min.js"></script>
 	<tr>
 
 		<td>
@@ -10,25 +10,28 @@
 			<form action="/admin/insertplan" method="post" enctype="multipart/form-data">
 				<table border="1" >
 					<tr>
-					    <td bgcolor="#CCCCCC" align="center">멤버이름</td>
+					    <td bgcolor="#CCCCCC" align="center">회원번호</td>
+						<td bgcolor="#CCCCCC" align="center">플랜이미지</td>
 						<td bgcolor="#CCCCCC" align="center">플랜이름</td>
+						<td bgcolor="#CCCCCC" align="center">멤버이름</td>
 						<td bgcolor="#CCCCCC" align="center">메세지</td>
 						<td bgcolor="#CCCCCC" align="center">플랜 날짜</td>
-						<td bgcolor="#CCCCCC" align="center">타이틀이미지</td>
 					</tr>
 					<tr>
 						<td>
-						<select name="member_no">
+						<select name="member_no" onchange="changeEvent(this.value)">
 							 <c:forEach var="vo" items="${memberList}">
-							  <option value="${vo.getMember_no()}">${vo.getMemberName()}</option>
+							  <option value="${vo.getMember_no()}">${vo.getMember_no()}</option>
+							<%--   <option value="${vo.getMember_no()}">${vo.getMemberName()}</option> --%>
 							 </c:forEach>
 					  </select> 
 							
 						</td>
+					    <td><input type="file" name="img"></td>
 						<td><input size="10" type="text" name="planName"></td>
+						<td><input size="10" type="text" id=memberName name="memberName" readonly="readonly"></td>
 						<td><input size="10" type="text" name="message"></td>
 						<td><input type="Date" name="planDate"></td>
-					    <td><input type="file" name="img"></td>
 						<td><input type="submit" value="등록"></td>
 					</tr>
 				</table>
@@ -62,9 +65,26 @@
 								플랜 사진 없습니다.							
 								</c:otherwise>
 							</c:choose>
+							</td>
 						<td><a href="/admin/deleteplan?plan_no=${vo.plan_no }">삭제</a></td>
 					</tr>
 					</c:forEach>
 				</table>
 		</td>
+
 	</tr>
+	<script>
+	    function changeEvent(val){
+	    	$.ajax({
+				type : 'get',
+			    url:'/admin/getMemberName',
+			    data : {
+			    	 member_no : val
+			    },
+			    dataType:'json',
+			    success: function(response){
+			    	$("#memberName").val(response.memberName);
+			    } 
+			 })
+	    } 
+	</script>

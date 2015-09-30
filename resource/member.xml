@@ -6,7 +6,7 @@
     
     <insert id="insert" parameterClass="MemberVo">
         <![CDATA[
-           INSERT INTO MEMBER VALUES(member_no_seq.nextval, #memberName#, #email#, #password#, #imageUrl#, 'guest')
+           INSERT INTO MEMBER VALUES(member_no_seq.nextval, #memberName#, #email#, #password#, #imageUrl#, #memberGrade#)
         ]]>
     </insert>
     <select id="selectAll" resultClass="MemberVo">

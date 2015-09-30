@@ -14,6 +14,7 @@
  	<sqlMap resource="theme.xml"/>
  	<sqlMap resource="themeBox.xml"/>
  	<sqlMap resource="member.xml"/>
+ 	<sqlMap resource="comments.xml"/>
  	
  	
 </sqlMapConfig>

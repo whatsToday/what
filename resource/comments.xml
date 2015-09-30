@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="comments">
+	<typeAlias alias="CommentsVo" type="com.bit2015.what.vo.CommentsVo"/>
+	
+	<select id="selectAll" resultClass="CommentsVo">
+    <![CDATA[
+       select * from comments order by comments_no desc
+    ]]>
+	</select>
+	
+	<select id="selectVo" parameterClass="java.lang.Long" resultClass="CommentsVo">
+    <![CDATA[
+       select * from comments where comments_no=#comments_no#
+    ]]>
+	</select>
+	
+	<insert id="insert" parameterClass="CommentsVo">
+		<![CDATA[
+			insert INTO comments VALUES(comments_no_seq.nextval,#member_no#,#content_no#,#memberName#,#message# ,sysdate)
+		]]>
+	</insert>
+	
+	<delete id="delete" parameterClass="java.lang.Long">
+	  <![CDATA[
+	    delete from comments where comments_no=#comments_no#
+	  ]]>
+	</delete>
+	
+	
+	
+	</sqlMap>

@@ -150,7 +150,7 @@ public class MainService {
 			
 			PlanVo pvo = new PlanVo();
 			pvo.setMember_no(memberVo.getMember_no());
-			pvo.setPlanName(memberVo.getMemberName()+"님의 "+size+"번째 일정");
+			pvo.setPlanName(memberVo.getMemberName()+"님의 "+(size+1)+"번째 일정");
 			pvo.setMemberName(memberVo.getMemberName());
 			
 			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");

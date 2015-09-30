@@ -8,7 +8,8 @@
 <!--css -->
 <link href="/assets/css/common.css" rel="stylesheet" type="text/css" />
 <link href="/assets/css/mycontent.css" rel="stylesheet" type="text/css" />
-
+<!-- script -->
+<script type="text/javascript" src="/assets/js/board/jquery-1.9.1.min.js"></script>
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -56,8 +57,6 @@
 				
 				</c:otherwise>
 			</c:choose>
-
-	
 		</div>
 	</div>
 

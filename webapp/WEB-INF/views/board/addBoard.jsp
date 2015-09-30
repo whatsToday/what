@@ -61,6 +61,11 @@ div#message {
 			width:96.5%;
 			height: 300px;
 }
+div#message textarea {
+			width:100%;
+			height: 100%;
+			resize:none;
+}
 div#submit{
 			float:right;
 }
@@ -68,27 +73,24 @@ div#submit{
 </head>
 <body>
 <!-- header -->
+<c:import url="/WEB-INF/views/include/header.jsp"/>
 <!-- container -->
 <div id="container">
-<div id="photo">사진</div>
-<div id="title"><input type="text" id="title"></div>
+<div id="photo">사진<button onclick="upload()">사진선택</button><input type="file" id="uploadMainPhoto" style="display:none;"></div>
+<div id="title"><input type="text" id="planName"></div>
 <div id="selectPlan"><a href="javascript:showPlan();">플랜선택</a>
 	<ul id="planList">
-		<li>1
-		</li>
+		<c:forEach var="i" items="${planList}">
+		<li><a href="javascript:getPlan(${i.plan_no});">${i.planName}</a></li>
+		</c:forEach>
 	</ul>
 </div>
 <div id="map">Map</div>
-<div id="message">message</div>
-<div id="submit">등록</div>
+<div id="message"><textarea id="msg"></textarea></div>
+<div id="submit"></div>
 </div>
 <!-- footer -->
 </body>
-<script>
-function showPlan(){
-	$("#planList").toggle();
-}
-</script>
 <script>
 //마커를 담을 배열입니다
 var markers = [];
@@ -101,5 +103,67 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 
 // 지도를 생성합니다    
 var map = new daum.maps.Map(mapContainer, mapOption); 
+</script>
+<script>
+function showPlan(){
+	$("#planList").toggle();
+}
+function upload(){
+	$('#uploadMainPhoto').click();
+}
+function getPlan(plan_no){
+	removeMarker();
+	var lat;
+	var lng;
+	$.ajax({
+		type : 'get',
+	    url:'/board/getPlan',
+	    data : {
+	    	 plan_no : plan_no
+	    },
+	    dataType:'json',
+	    success: function(response){
+			for(var i=0; i<response.length; i++){
+				lat = response[i].latitude;
+				lng = response[i].longitude;
+			    	markers[i] = new daum.maps.Marker({
+						position : new daum.maps.LatLng(response[i].latitude ,response[i].longitude)
+					});
+					markers[i].setMap(map);
+			    	}
+			    	var moveLatLon = new daum.maps.LatLng(lat, lng);
+					map.setCenter(moveLatLon);
+					map.setLevel(2);
+			}
+	 })
+	    $("#planList").hide();
+		$("#submit").html('<button onclick="addPlan('+plan_no+');">등록</button>');
+	
+}
+function addPlan(plan_no){
+	var title = $("#planName").val();
+	var message = $("#msg").val();
+	console.log(message);
+	$.ajax({
+		type : 'get',
+	    url:'/board/addPlan',
+	    data : {
+	    	 title : title,
+	    	 message : message,
+	    	 plan_no : plan_no
+	    },
+	    dataType:'json',
+	    success: function(response){
+			}
+	 })
+}
+</script>
+<script>
+function removeMarker() {
+    for ( var i = 0; i < markers.length; i++ ) {
+        markers[i].setMap(null);
+    }   
+    markers = [];
+}
 </script>
 </html>

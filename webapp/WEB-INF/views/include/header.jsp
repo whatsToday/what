@@ -6,7 +6,8 @@
 <link href="/assets/css/layout.css" rel="stylesheet" type="text/css" />
 <link href="/assets/css/navi.css" rel="stylesheet" type="text/css"  media="screen" /> 
 <link href="/assets/css/common.css" rel="stylesheet" type="text/css" />
-
+<!-- script -->
+<script type="text/javascript" charset="utf-8" src="/assets/js/jquery.leanModal.min.js"></script>
  
 <script>
 $(function(){
@@ -65,7 +66,7 @@ $(function(){
 						<li style="margin-left:10px"><a href="javascript:planner(2)">일정짜기</a></li>
 						<li><a href="/review">게시판</a></li>
 						<li style="float:right;margin-right:220px"><a class="pink" href="/member/logout" >Logout</a></li>
-		            	<li style="float:right"><a class="pink" href="/mypage" >MyPage</a></li>
+		            	<li style="float:right"><a class="pink" href="/mycontent" >MyPage</a></li>
 		            	<c:choose>
 		            	<c:when test="${not empty themeList }">
 		            	<li style="float:right"><a class="pink" href="#interset"  id="modaltrigger">Interest</a></li>
@@ -179,7 +180,7 @@ $(function(){
   $('#modaltrigger').leanModal({ top: 110, overlay: 0.8, closeButton: ".hidemodal" });
 });
 $(function(){
-	$('#modaltrigger2').leanModal2({ top: 110, overlay: 0.8, closeButton: ".hidemodal" });
+	$('#modaltrigger2').leanModal({ top: 110, overlay: 0.8, closeButton: ".hidemodal" });
 });
 </script>
  <script >

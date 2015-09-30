@@ -1,8 +1,8 @@
 package com.bit2015.what.dao;
 
+import java.util.HashMap;
 import java.util.List;
-
-
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
@@ -46,7 +46,11 @@ public class PlanDao {
 		sqlMapClientTemplate.delete("plan.delete", plan_no);
 	}
 	
-	public void update(PlanVo planVo) {
-		sqlMapClientTemplate.update("plan.update", planVo);
+	public void update(String planName, String message, Long plan_no) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("planName", planName);
+		map.put("message", message);
+		map.put("plan_no", plan_no);
+		sqlMapClientTemplate.update("plan.update", map);
 	}
 }

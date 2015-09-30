@@ -36,15 +36,9 @@
       ]]>
    </delete>
    
-   <update id="update" parameterClass="PlanVo">
+   <update id="update" parameterClass="java.util.Map">
       <![CDATA[
-         update plan set 
-         member_no=#member_no#,
-          planName = #planName#,
-          memberName = #memberName#,
-          message = #message#,
-         planDate=to_Date(#planDate#, 'yyyy-MM-dd')
-         where plan_no=#plan_no#
+         update plan set planName = #planName#, message = #message# where plan_no=#plan_no#
       ]]>
    </update>
    

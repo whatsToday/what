@@ -12,6 +12,11 @@
 
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="/assets/js/jquery.leanModal.min.js"></script>
+<script>
+if(${param.a}='error'){
+	  alert("로그인 실패!");
+}
+</script>
 <style>
 
 a[rel=leanModal] {
@@ -97,9 +102,6 @@ background-repeat: no-repeat;
 							<td><input type="submit" value="로그인"></input></td>
 <!-- 							<td><button onclick="$('#picktheme').click();$('#joinModal').hide();">가입</button></td> -->
 						</tr>
-						<tr>
-							<td><strong style="font-size: 4px;">가입버튼을 누르시면 자동으로 <a href="#">이용약관</a>에 동의하시는 것으로 처리됩니다.</strong></td>
-						</tr>     
 				     </table>
 					</form>
 			    </div>

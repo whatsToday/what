@@ -15,12 +15,11 @@
 </head>
 <body>
 <div id="wrapper">
-<div><h6>header</h6></div><!-- header will come here -->
+<c:import url="/WEB-INF/views/include/header.jsp"/>
 <c:import url="/WEB-INF/views/main/modal.jsp"/>
-<hr>
 	<div class="container"><!-- 본문		 -->
 <!-- 	위 아이콘 -->
-			<div class="wsTable">
+			<div class="wsTable effect">
 				<table>
 					<tr>
 						<td><button>이벤트</button></td>

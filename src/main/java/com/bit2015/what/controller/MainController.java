@@ -48,7 +48,6 @@ public class MainController {
 	
 	@RequestMapping("/join")
 	public String join(HttpSession session, MemberVo memberVo) {
-		System.out.println(memberVo.toString());
 		
 		mainService.join(session, memberVo);
 		
@@ -61,14 +60,15 @@ public class MainController {
 		
 		mainService.login(session, memberVo);
 		
-		return "redirect:/";
-//		boolean Bo = mainService.login(session, memberVo);
-//		if(Bo){
-//			return "redirect:/";
-//		}else{
-//			return "redirect:/";
-//			
-//		}
+		boolean Bo = mainService.login(session, memberVo);
+		if(Bo){
+			System.out.println("로그인 되었습니다.");
+			return "redirect:/";
+		}else{
+			System.out.println("등록된 회원이 없습니다.");
+			return "redirect:/?a=error";
+			
+		}
 	}
 
 	@RequestMapping("/getnear")
@@ -114,7 +114,6 @@ public class MainController {
 		System.out.println(contentVo.toString());
 		
 		mainService.insertPlan(contentVo, plan_no, session);
-		
 		
 		// ajax-jason
 		// mainService.getInfo(map, id);

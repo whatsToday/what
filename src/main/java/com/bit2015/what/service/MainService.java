@@ -206,17 +206,16 @@ public class MainService {
 		session.setAttribute("authUser", memberVo);
 	}
 
-	public void login(HttpSession session, MemberVo vo) {
+	public boolean login(HttpSession session, MemberVo vo) {
 		
 		if(memberDao.checkMember(vo)!=null){
 			MemberVo memberVo = memberDao.checkMember(vo);
 			session.setAttribute("authUser", memberVo);
+			return true;
+		}else{
+			System.out.println("회원이 없는데요?");
+			return false;
 		}
-			
-//			return true;
-//		}else{
-//			return false;
-//		}
 		
 		
 	}

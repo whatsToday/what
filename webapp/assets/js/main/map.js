@@ -220,7 +220,7 @@ function displayInfowindow(marker, items) {
 }
 
 function displayInfowindow2(marker, items, index) {
-	var content = '<div class="wsTable" style="width:200px;"><table><tr><th class="wshd" colspan="2">'+items.title+'</th></tr>';
+	var content = '<div class="wsTable effect" style="width:200px;"><table><tr><th class="wshd" colspan="2">'+items.title+'</th></tr>';
 	
 	//상세 정보 페이지, 찜하기 페이지
 	if(items.placeUrl==""){

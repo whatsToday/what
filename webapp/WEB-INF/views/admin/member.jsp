@@ -22,7 +22,7 @@
               </tr>
               <tr>
                   <td>${vo.member_no}</td>
-                  <td>${vo.eamil}</td>
+                  <td>${vo.email}</td>
                   <td>${vo.password }</td>
                   <td>${vo.imageUrl }</td>
                   <td>${vo.memberGrade }</td>

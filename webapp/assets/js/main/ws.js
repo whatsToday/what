@@ -80,14 +80,24 @@ function getMyPlan() {
 			console.log(response.MyPlanList[0]);
 
 			var se = document.getElementById('plan_no');
-
-			for ( var i in response.MyPlanList) {
-				var pvo = response.MyPlanList[i];
+			if(response.MyPlanList[0]!=undefined){
+				console.log("일정이 있습니다!");
+				for ( var i in response.MyPlanList) {
+					var pvo = response.MyPlanList[i];
+					var op = document.createElement("option");
+					op.value = pvo.plan_no;
+					op.innerHTML = pvo.planName;
+					op.selected = true;
+	
+					se.appendChild(op);
+				}
+			}else{
+				console.log("일정이 없습니다!");
 				var op = document.createElement("option");
-				op.value = pvo.plan_no;
-				op.innerHTML = pvo.planName;
+				op.value='-1';
+				op.innerHTML = '오늘의 일정이 없습니다.';
 				op.selected = true;
-
+				
 				se.appendChild(op);
 			}
 		},

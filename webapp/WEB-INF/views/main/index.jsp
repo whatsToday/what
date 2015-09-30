@@ -18,6 +18,7 @@
 <c:import url="/WEB-INF/views/include/header.jsp"/>
 <c:import url="/WEB-INF/views/main/modal.jsp"/>
 	<div class="container"><!-- 본문		 -->
+	<hr>
 <!-- 	위 아이콘 -->
 			<div class="wsTable effect">
 				<table>
@@ -73,10 +74,10 @@
 						</tr>
 					</table>
 				</div>
+				<hr>
 	</div><!-- 	end container -->
 
-<hr>
-<div><h6>footer</h6></div><!-- 	 footer  will come here -->
+<c:import url="/WEB-INF/views/include/footer.jsp"/>
 </div><!-- end wrapper -->
 </body>
 

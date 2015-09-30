@@ -5,14 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.bit2015.what.dao.MemberDao;
 import com.bit2015.what.dao.PlanDao;
+import com.bit2015.what.dao.ThemeBoxDao;
 import com.bit2015.what.dao.ThemeDao;
 import com.bit2015.what.util.FileUploader;
 import com.bit2015.what.vo.MemberVo;
 import com.bit2015.what.vo.PlanVo;
+import com.bit2015.what.vo.ThemeBoxVo;
 import com.bit2015.what.vo.ThemeVo;
 
 @Service
@@ -23,6 +26,8 @@ public class AdminService {
 	PlanDao planDao;
 	@Autowired
 	ThemeDao themeDao;
+	@Autowired
+	ThemeBoxDao themeBoxDao;
 
 	// 파일올리는거야
 	FileUploader ful = new FileUploader();
@@ -100,5 +105,19 @@ public class AdminService {
 	}
 	public void deleteTheme(Long theme_no){
 		themeDao.delete(theme_no);
+	}
+	
+	//themeBox 조회
+	public List<ThemeBoxVo> selectThemeBox(){
+		List<ThemeBoxVo> selectThemeBox = themeBoxDao.selectAll();
+		return selectThemeBox;
+	} 
+	//themeBox 등록
+	public void insertThemeBox(ThemeBoxVo themeBoxVo){
+		themeBoxDao.insert(themeBoxVo);
+	}
+	public void deleteThemeBox(@RequestParam Long themeBox_no){
+		themeBoxDao.delete(themeBox_no);
+		
 	}
 }

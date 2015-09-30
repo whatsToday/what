@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.bit2015.what.service.AdminService;
 import com.bit2015.what.vo.MemberVo;
 import com.bit2015.what.vo.PlanVo;
+import com.bit2015.what.vo.ThemeBoxVo;
 import com.bit2015.what.vo.ThemeVo;
 
 @Controller
@@ -82,21 +83,40 @@ public class AdminController {
 		return memberVo;
 
 	}
-	@RequestMapping("theme")
+	@RequestMapping("/theme")
 	public String themeList(Model model){
 		List<ThemeVo> themeList = adminService.selectTheme();
 		model.addAttribute("themeList",themeList);
 		return "/admin/theme";
 	}
-	@RequestMapping("inserttheme")
+	@RequestMapping("/inserttheme")
 	public String insertTheme(ThemeVo themeVo,@RequestParam(required = false) MultipartFile img){
 		adminService.insertTheme(themeVo,img);
 		return "redirect:/admin/theme";
 	}
-	@RequestMapping("deletetheme")
+	@RequestMapping("/deletetheme")
 	public String deleteTheme(@RequestParam Long theme_no){
 		adminService.deleteTheme(theme_no);
 		return "redirect:/admin/theme";
 	}
-	
+	@RequestMapping("/themebox")
+	public String themeBoxList(Model model){
+		List<MemberVo> memberList = adminService.selectMember();
+		List<ThemeVo> themeList = adminService.selectTheme();
+		List<ThemeBoxVo> themeBoxList = adminService.selectThemeBox();
+		model.addAttribute("memberList",memberList);
+		model.addAttribute("themeList",themeList);
+		model.addAttribute("themeBoxList",themeBoxList);
+	   return "/admin/themebox";	
+	}
+	@RequestMapping("insertthemebox")
+	public String insertThemeBox(ThemeBoxVo themeBoxVo){
+		adminService.insertThemeBox(themeBoxVo);
+		return "redirect:/admin/themebox";
+	}
+	@RequestMapping("deletethemebox")
+	public String deleteThemeBox(@RequestParam Long themeBox_no){
+		adminService.deleteThemeBox(themeBox_no);
+		return "redirect:/admin/themebox";
+	}
 }

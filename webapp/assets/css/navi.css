@@ -1,0 +1,281 @@
+/* `XHTML, HTML4, HTML5 Reset
+----------------------------------------------------------------------------------------------------*/
+
+/* a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,dialog,div
+,dl,dt,em,embed,fieldset,figcaption,figure,font,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,hr,html,i,iframe,img,ins,kbd,label,legend,
+li,mark,menu,meter,nav,object,ol,output,p,pre,progress,q,rp,rt,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,
+td,tfoot,th,thead,time,tr,tt,u,ul,var,video,xmp {border: 0;margin: 0;padding: 0;font-size: 100%;}
+html,body {height: 100%;}
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {display: block;}
+b,strong {font-weight: bold;}
+img {color: transparent;font-size: 0;vertical-align: middle;-ms-interpolation-mode: bicubic;}
+li {display: list-item;}
+table {border-collapse: collapse;border-spacing: 0;}
+th,td,caption {font-weight: normal;vertical-align: top;text-align: left;}
+q {quotes: none;}
+q:before,q:after {content: '';content: none;}
+sub,sup,small {font-size: 75%;}
+sub,sup {line-height: 0;position: relative;vertical-align: baseline;}
+sub {bottom: -0.25em;}
+sup {top: -0.5em;}
+svg {overflow: hidden;}
+ */
+
+
+
+
+
+/* == 10. Horizontal menu Background == */
+
+/*====================
+	Color Scheme Begin
+=====================================================================
+====================================================================*/
+
+/* Menu bar background color */
+#navigation, 
+#nav li ul li, 
+#nav li ul li a{
+background: #ededed; 
+}
+
+/* Menu Item text color */
+#nav li a, 
+#nav li a:hover, 
+#nav li ul li,
+#nav li ul li a,
+#nav li ul li a:hover  {
+color: #000; 
+}
+#nav li a.pink, 
+#nav li a.pink:hover, 
+#nav li ul li .pink,
+#nav li ul li a.pink,
+#nav li ul li a.pink:hover  {
+color: #fb6f92; 
+}
+/* Menu Item background color on hover */
+#nav li a:hover, 
+#nav li ul li a:hover  {
+background: #fb6f92; 
+color:#fff;
+}
+#nav li a.pink:hover, 
+#nav li ul li a.pink:hover  {
+background: #fb6f92; 
+color:#fff;
+}
+/* Text Shadow */
+/* #nav li a, 
+#nav li a:hover, 
+#nav li ul li a:hover  {
+text-shadow: 0 1px 1px #333; 
+} */
+
+/* Search form colors */
+.searchform input, .searchform input:not(:focus){
+color:#B1B1B1; /*search form text color default*/
+background: #fff; /*search form background color default*/
+}
+.searchfield:focus{
+color: #000; /* search form text color after click */
+}
+
+/*=====================================================================
+=======================================================================
+	Color Scheme End
+====================*/
+
+#menu_div{
+clear: both;
+position: relative;
+top: 0;
+left: 0;
+} /* Free space to top specialy for menu */
+
+#navigation {
+position: fixed;
+}
+
+#navigation, #menu_div, #plan_nav {
+width: 100%;
+margin: 0 !important;
+padding: 0 !important;
+}
+
+#menu_div, #navigation, #menu, #nav, #plan_menu{
+height: 65px; /* menu height */
+}
+
+#menu_div:hover,
+#navigation:hover,
+#nav li a:hover, #nav li ul a 
+{
+opacity: 0.95;/* Menu transparency on mouse hover*/
+} 
+
+#menu_div,
+#navigation, 
+#nav li a, 
+#menu_div:not(:hover), 
+#navigation:not(:hover)
+{
+opacity: 0.8;/* Menu transparency on mouse out */
+}
+
+
+#menu {
+width: 1160px;
+margin:0 auto; /*center the menu*/
+padding:0;
+position: relative;
+}
+#plan_menu {
+margin:0 auto; /*center the menu*/
+padding:0;
+position: relative;
+}
+
+#nav{
+width: 1160px;
+margin:0;
+padding:0;
+position: relative;
+font-family: 'Arial', Helvetica, sans-serif;
+}
+
+#nav li a,#nav li {
+float:left;
+}
+
+#nav li ,.select1 ,.select2, .select3  {
+list-style:none;
+position:relative;
+}
+
+#nav li a, .select1 a, .select2 a, .select3 a{
+line-height: 65px;
+padding:0 15px;
+text-decoration:none;
+margin:0;
+font-size:15px;
+font-weight:bold;
+text-transform:uppercase;
+}
+
+/*====================
+	Submenu 
+=====================*/
+#nav li ul  {
+display:none;
+position:absolute;
+left:0;
+top:100%;
+padding:0;
+margin:0;
+} /* hide submenu */
+
+#nav li:hover > ul {
+display:block;
+} /* show submenu on hover */
+
+#nav li ul li,#nav li ul li a ,.select1 ul li,.select2 ul li.select3 ul li  {
+float:none;
+height: 35px; /* submenu item height */
+line-height: 35px;
+border-right: 0;
+text-shadow: none;
+display:block;
+font-size:13px;
+text-transform:inherit;
+} /* Submenu item */
+
+#nav li ul li {
+_display:inline; /* for IE */
+}
+
+/* == 12. Sub-Sub Menu == */
+#nav li ul li ul  {
+display:none;
+}
+
+#nav li ul li:hover ul {
+left:100%;
+top:0;
+}
+
+/*====================
+	Search form 
+====================*/
+
+.searchform {
+position: absolute;
+right: 15px;
+top: 6px;
+display: inline-block;
+zoom: 1;
+*display: inline;
+border: 0;
+padding: 0;
+}
+.searchform input {
+font: normal 12px/100% Arial, Helvetica, sans-serif;
+}
+.searchform .searchfield {
+height: 27px;
+line-height: 27px;
+padding-left: 10px;
+padding-right: 10px;
+width: 150px;
+border: 2px solid #ff86a4;
+outline: none;
+-webkit-border-radius: 2em;
+-moz-border-radius: 2em;
+border-radius: 2em;
+-moz-box-shadow: inset 1px 1px 2px #A1A1A1;
+-webkit-box-shadow: inset 1px 1px 2px #A1A1A1;
+box-shadow: inner 1px 1px 2px #A1A1A1;
+}
+
+.searchfield:focus{
+width: 220px;
+}
+
+.searchfield:not(:focus){
+width: 150px;
+}
+
+
+/*========================
+		Transitions
+========================*/
+
+#nav li a:hover,
+#nav li ul li a:hover {
+-webkit-transition-property:color, background; 
+-webkit-transition-duration: 0.3s, 0.3s; 
+-webkit-transition-timing-function: linear, ease-out;
+}
+
+.searchfield:focus,
+.searchfield:not(:focus){
+-webkit-transition-property:width; 
+-webkit-transition-duration: 0.3s, 0.3s; 
+-webkit-transition-timing-function: linear, ease-out;
+}
+
+#menu_div:hover,
+#navigation:hover,
+#nav li ul a, 
+#menu_div,
+#navigation, 
+#nav li a,
+#menu_div:not(:hover), 
+#navigation:not(:hover)
+{
+-webkit-transition-property:opacity; 
+-webkit-transition-duration: 0.3s, 0.3s; /* duration in seconds */
+-webkit-transition-timing-function: linear, ease-out;
+} /* Menu transparency animation */
+
+

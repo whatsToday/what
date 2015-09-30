@@ -48,6 +48,8 @@
 				<div class="bottom"></div>
 				</c:when>
 				<c:otherwise>
+				
+				
 				</c:otherwise>
 			</c:choose>
 

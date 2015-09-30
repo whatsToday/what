@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
-<sqlMap namespace="member">
+<sqlMap namespace="member" >
     <typeAlias alias="MemberVo" type="com.bit2015.what.vo.MemberVo"/>
     
-    <insert id="insert">
+    <insert id="insert" parameterClass="MemberVo">
         <![CDATA[
-           INSERT INTO MEMBER VALUES(member_no_seq.nextval, 'membername', 'email', 'password', 'imageurl', 'membergrade')
+           INSERT INTO MEMBER VALUES(member_no_seq.nextval, #memberName#, #email#, #password#, #imageUrl#, 'guest')
         ]]>
     </insert>
     <select id="selectAll" resultClass="MemberVo">
@@ -14,4 +14,9 @@
            SELECT * FROM MEMBER
         ]]>
     </select>
+      <delete id="delete" parameterClass="java.lang.Long">
+        <![CDATA[
+           delete from MEMBER where member_no=#member_no#
+        ]]>
+    </delete>
 </sqlMap>

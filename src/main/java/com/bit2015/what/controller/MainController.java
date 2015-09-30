@@ -28,14 +28,8 @@ public class MainController {
 
 	@RequestMapping
 	public String index(Model model, HttpSession session) {
-		// MemberVo memberVo = (MemberVo) session.getAttribute("authUser");
-
-		MemberVo memberVo = new MemberVo();
-		memberVo.setMember_no(1);
-		memberVo.setMemberName("주우성");
-		memberVo.setEmail("woosungchu@nate.com");
-		memberVo.setPassword("1234");
-		session.setAttribute("authUser", memberVo);
+		if(session.getAttribute("authUser") != null){
+			System.out.println("session이 있습니다.");
 
 		//authUser의 기존 관심사 가져오는중
 		mainService.memberTheme(model, session);
@@ -43,13 +37,22 @@ public class MainController {
 		//선택창에 띄울 테마들 다 가져오는중
 		mainService.callTheme(model);
 		
-//		//오늘 일정 가져오는중
-//		if(session.getAttribute("authUser") != null){
-//			mainService.getTodayPlan(model, session);
-//		}
-		
-
 		return "/main/index";
+		
+		}else{
+			System.out.println("session이 없습니다. 회원가입 페이지로 이동합니다");
+			
+		return "/main/join";
+		}
+	}
+	
+	@RequestMapping("/join")
+	public String login(HttpSession session, MemberVo memberVo) {
+		System.out.println(memberVo.toString());
+		
+		mainService.join(session, memberVo);
+		
+		return "redirect:/";
 	}
 
 	@RequestMapping("/getnear")

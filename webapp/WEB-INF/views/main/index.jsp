@@ -23,7 +23,6 @@
 			<div class="wsTable">
 				<table>
 					<tr>
-<!-- 						<img alt="events" src=""><img alt="빨로빨로빨로뮈!" src="/assets/image/FFolome.png"><img alt="액뗌!액뗌!액뗌!" src=""> -->
 						<td><button>이벤트</button></td>
 						<td><button>팔로우</button></td>
 						<td onclick="$('#picktheme').click();">테마 추가하기</td>
@@ -69,8 +68,7 @@
 					<table id="showPlan">
 						<tr>
 							<th class="wshd">
-								<select id="plan_no" onchange="alert()">
-								</select>
+								<select id="plan_no" onchange="alert()"></select>
 								일정
 							</th>
 						</tr>
@@ -90,17 +88,8 @@
 <script>
 //planlist부름
 getMyPlan();
-//plan_no 가져가서 content아래다가 뿌려야함.
-// var sP =document.getElementById('showPlan');
-// 			var abc = ['1','2','3','4','5'];
-			
-// 			for (var i = 0; i < abc.length; i++) {
-// 				var planLi = document.createElement('tr');
-// 				planStr ='<td>test'+i+'</td>';
-				
-// 				planLi.innerHTML = planStr;
-				
-// 				sP.appendChild(planLi);
-// 			}
+
+
+
 </script>
 </html>

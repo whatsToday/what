@@ -4,30 +4,30 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!-- join  modal -->
-<c:if test="${empty authUser }">
-<a id="join" rel="leanModal" href="#joinModal">join header</a>
-<div id="joinModal">
-		   <div class="wsTable" style="border:none; width:100%; height:100%;">
-			     <table>
-					<tr>
-						<td style="text-align:right">로그인</td>
-			     	</tr>
-			     	<tr>
-			     		<td>오늘 뭐하지</td>
-			     	</tr>
-					<tr>
-						<td><input type="text" name="email"/></td>
-					</tr>
-					<tr>
-						<td><input type="password" name="password"/></td>
-					</tr>     
-					<tr>
-						<td><button  onclick="$('#picktheme').click();$('#joinModal').hide();">가입</button></td>
-					</tr>
-			     </table>
-		    </div>
-</div>
-</c:if>
+<%-- <c:if test="${not empty authUser }"> --%>
+<!-- <a id="join" rel="leanModal" href="#joinModal">join header</a> -->
+<!-- <div id="joinModal"> -->
+<!-- 		   <div class="wsTable" style="border:none; width:100%; height:100%;"> -->
+<!-- 			     <table> -->
+<!-- 					<tr> -->
+<!-- 						<td style="text-align:right">로그인</td> -->
+<!-- 			     	</tr> -->
+<!-- 			     	<tr> -->
+<!-- 			     		<td>오늘 뭐하지</td> -->
+<!-- 			     	</tr> -->
+<!-- 					<tr> -->
+<!-- 						<td><input type="text" name="email"/></td> -->
+<!-- 					</tr> -->
+<!-- 					<tr> -->
+<!-- 						<td><input type="password" name="password"/></td> -->
+<!-- 					</tr>      -->
+<!-- 					<tr> -->
+<!-- 						<td><button  onclick="$('#picktheme').click();$('#joinModal').hide();">가입</button></td> -->
+<!-- 					</tr> -->
+<!-- 			     </table> -->
+<!-- 		    </div> -->
+<!-- </div> -->
+<%-- </c:if> --%>
 
 <!-- theme modal -->
 <a id="picktheme" rel="leanModal" href="#themeModal">pickTheme</a>

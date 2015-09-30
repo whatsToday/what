@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 
 import com.bit2015.what.dao.ContentBoxDao;
 import com.bit2015.what.dao.ContentDao;
+import com.bit2015.what.dao.MemberDao;
 import com.bit2015.what.dao.PlanDao;
 import com.bit2015.what.dao.ThemeBoxDao;
 import com.bit2015.what.dao.ThemeDao;
@@ -44,6 +45,8 @@ public class MainService {
 	ThemeDao themeDao;
 	@Autowired
 	ThemeBoxDao themeBoxDao;
+	@Autowired
+	MemberDao memberDao;
 	
 	FileUploader ful = new FileUploader();
 
@@ -194,6 +197,13 @@ public class MainService {
 		}
 		
 		return contentList;
+	}
+
+	public void join(HttpSession session, MemberVo memberVo) {
+		//memberVo.setMemberGrade('guest');
+		
+		//memberDao.insert(memberVo);
+		session.setAttribute("authUser", memberVo);
 	}
 	
 	

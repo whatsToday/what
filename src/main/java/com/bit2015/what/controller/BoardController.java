@@ -44,7 +44,10 @@ public class BoardController {
 	}
 	@RequestMapping("/addPlan")
 	@ResponseBody
-	public void updatePlan(@RequestParam String title, @RequestParam String message, @RequestParam Long plan_no){
+	public Long updatePlan(@RequestParam String title, @RequestParam String message, @RequestParam Long plan_no,HttpSession session){
+		MemberVo memberVo = (MemberVo)session.getAttribute("authUser");
+		Long member_no = memberVo.getMember_no();
 		boardService.updatePlan(title, message, plan_no);
+		return member_no;
 	}
 }

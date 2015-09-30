@@ -143,6 +143,7 @@ function getPlan(plan_no){
 function addPlan(plan_no){
 	var title = $("#planName").val();
 	var message = $("#msg").val();
+	var member_no;
 	console.log(message);
 	$.ajax({
 		type : 'get',
@@ -154,7 +155,9 @@ function addPlan(plan_no){
 	    },
 	    dataType:'json',
 	    success: function(response){
-			}
+	    	member_no = response;
+		 location.href="/mycontent?member_no="+member_no;
+		}
 	 })
 }
 </script>

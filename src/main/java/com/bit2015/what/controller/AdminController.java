@@ -23,24 +23,28 @@ public class AdminController {
 	public String index() {
 		return "/admin/index";
 	}
-  // member조회
+
+	// member조회
 	@RequestMapping("/member")
 	public String memberList(Model model) {
 		List<MemberVo> memberList = adminService.selectMember();
 		model.addAttribute("memberList", memberList);
 		return "/admin/member";
 	}
-  // member등록
+
+	// member등록
 	@RequestMapping("/insertmember")
 	public String insert(MemberVo memberVo,
 			@RequestParam(required = false) MultipartFile img) {
 		adminService.insertMember(memberVo, img);
 		return "redirect:/admin/member";
 	}
-  // member 삭제
+
+	// member 삭제
 	@RequestMapping("/deletemember")
-	public String delete(@RequestParam Long memeber_no) {
-		adminService.deleteMember(memeber_no);
+	public String deleteMember(@RequestParam Long member_no) {
+		adminService.deleteMember(member_no);
 		return "redirect:/admin/member";
 	}
+
 }

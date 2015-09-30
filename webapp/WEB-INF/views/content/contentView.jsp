@@ -22,7 +22,7 @@
 
 
 	<div class="container">
-		<div style="margin:auto;border:solid 1px #000;width:1000px">
+		<div style="margin:auto;border:solid 1px #69ABED;width:1000px">
 		<form method="post" action="/commentwrite">
 			<img src="/assets/img/noimage.jpg" style="width:300px;padding:0px;border:solid 1px #e1e1e1;float:left;margin-bottom:20px">
 			<div style="font-size:15px;float:left;width:630px;margin-left:30px;margin-top:20px;float:left">
@@ -33,6 +33,7 @@
 					<div style="margin-top:10px">phone : ${contentVo.phone }</div>
 					<input type="hidden" name="member_no" value="${authUser.member_no }">
 					<input type="hidden" name="content_no" value="${contentVo.content_no }">
+					<input type="hidden" name="memberName" value="${authUser.memberName }">
 <!-- 좋아요 -->
 					<a href="javascript:likeCon(${contentVo.content_no },${authUser.member_no })" id="like"><img src="/assets/img/like.jpg" style="width:70px;margin:10px 0 0 -5px"></a>
 <!-- 찜하기 -->
@@ -41,7 +42,7 @@
 			</div>
 				<div id="staticMap" style="width:1000px;height:350px;margin-top:60px"></div>
 <!-- 댓글 -->
-			<div style="width:1000px;margin:auto;border:solid 2px #FDB7C8;padding:15px;margin-top:20px;margin-bottom:20px">
+			<div style="width:1000px;margin:auto;border:solid 2px #69ABED;padding:15px;margin-top:20px;margin-bottom:20px">
 				<c:choose>
 				<c:when test="${empty authUser }">
 				<span style="font-weight:bold">비회원</span>
@@ -50,7 +51,7 @@
 				<span style="font-weight:bold">${authUser.memberName }</span>
 				</c:otherwise>
 				</c:choose>
-				<span style="margin-left:15px"><textarea name="message" cols=110 rows=3></textarea></span>
+				<span style="margin-left:15px"><textarea name="message" cols=112 rows=3></textarea></span>
 				<span style="margin-left:20px"><input style="width:60px;height:60px" type="submit" value="덧글등록"></span>
 			</div>	
 		</form>
@@ -59,8 +60,9 @@
 		
 		<c:forEach var="vo" items="${commentsList}" varStatus="status">
 		<c:if test="${contentVo.content_no eq vo.content_no }">
-		<div style="width:1000px;margin:auto;border:solid 1px #FDB7C8;padding:15px;font-size:15px;margin-top:10px">
-			<span>${vo.message }</span>
+		<div style="width:1000px;margin:auto;border:solid 1px #69ABED;padding:15px;font-size:15px;margin-top:10px">
+			<span style="font-weight:bold">${vo.memberName }</span>
+			<span style="margin-left:10px">${vo.message }</span>
 		<c:choose>
 		<c:when test="${authUser.member_no == vo.member_no }">
 			<span style="float:right;width:30px"><a href="/commentdelete?comments_no=${vo.comments_no }">삭제</a></span>
@@ -70,7 +72,6 @@
 		</c:otherwise>
 		</c:choose>
 			<span style="float:right;margin-right:15px">${vo.regDate }</span>
-			<span style="float:right;margin-right:15px"></span>
 		</div>
 		</c:if>
 		<c:if test="${empty commentsList }"><span style="margin-left:320px">댓글이 없습니다.  처음으로 덧글을 남겨보세요.</span></c:if>

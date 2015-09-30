@@ -24,7 +24,7 @@
 			<c:choose>
 				<c:when test="${not empty authUser }">
 				<div class="top">
-				<div class="pro"><img class="image_pro" src="${authUser.imageUrl }"/></div>
+				<div class="pro"><img class="image_pro" src="${authUser.imageUrl}"/></div>
 				<ul><li class="soo">5</li><li class="top_menu">팔로잉</li><li>팔로잉보기</li></ul>
 				<ul><li class="soo">5</li><li class="top_menu">팔로워</li><li>팔로워보기</li></ul>
 				<ul><li class="soo">5</li><li class="top_menu">게시물</li><li>게시물편집</li></ul>
@@ -46,9 +46,11 @@
 					</ul> 
 				</div>
 				<div class="content">
-				<ul><li>plan 사진</li></ul>
-				<ul><li>plan 사진</li></ul>
-				<ul><li>plan 사진</li></ul>
+				<ul>
+				<c:forEach var="i" items="${planList}">
+				<li>${i.}</li>
+				</c:forEach>
+				</ul>
 				</div>
 				<div class="bottom"></div>
 				</c:when>

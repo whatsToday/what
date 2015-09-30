@@ -8,6 +8,15 @@ public class PlanVo {
 	private String memberName;
 	private String message;
 	private String planDate;
+	private String titleImage;
+	
+	
+	public String getTitleImage() {
+		return titleImage;
+	}
+	public void setTitleImage(String titleImage) {
+		this.titleImage = titleImage;
+	}
 	public long getPlan_no() {
 		return plan_no;
 	}
@@ -48,9 +57,9 @@ public class PlanVo {
 	public String toString() {
 		return "PlanVo [plan_no=" + plan_no + ", member_no=" + member_no
 				+ ", planName=" + planName + ", memberName=" + memberName
-				+ ", message=" + message + ", planDate=" + planDate + "]";
+				+ ", message=" + message + ", planDate=" + planDate
+				+ ", titleImage=" + titleImage + "]";
 	}
-
 	
 
 }

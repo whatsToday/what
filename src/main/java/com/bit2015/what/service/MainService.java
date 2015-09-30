@@ -202,8 +202,23 @@ public class MainService {
 	public void join(HttpSession session, MemberVo memberVo) {
 		//memberVo.setMemberGrade('guest');
 		
-		//memberDao.insert(memberVo);
+		memberDao.insert(memberVo);
 		session.setAttribute("authUser", memberVo);
+	}
+
+	public void login(HttpSession session, MemberVo vo) {
+		
+		if(memberDao.checkMember(vo)!=null){
+			MemberVo memberVo = memberDao.checkMember(vo);
+			session.setAttribute("authUser", memberVo);
+		}
+			
+//			return true;
+//		}else{
+//			return false;
+//		}
+		
+		
 	}
 	
 	

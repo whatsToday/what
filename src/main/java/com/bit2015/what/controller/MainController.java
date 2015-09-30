@@ -47,12 +47,28 @@ public class MainController {
 	}
 	
 	@RequestMapping("/join")
-	public String login(HttpSession session, MemberVo memberVo) {
+	public String join(HttpSession session, MemberVo memberVo) {
 		System.out.println(memberVo.toString());
 		
 		mainService.join(session, memberVo);
 		
 		return "redirect:/";
+	}
+	
+	@RequestMapping("/login")
+	public String login(HttpSession session, MemberVo memberVo) {
+		System.out.println(memberVo.toString());
+		
+		mainService.login(session, memberVo);
+		
+		return "redirect:/";
+//		boolean Bo = mainService.login(session, memberVo);
+//		if(Bo){
+//			return "redirect:/";
+//		}else{
+//			return "redirect:/";
+//			
+//		}
 	}
 
 	@RequestMapping("/getnear")

@@ -19,4 +19,9 @@
            delete from MEMBER where member_no=#member_no#
         ]]>
     </delete>
+	<select id="checkMember" resultClass="MemberVo" parameterClass="MemberVo">
+	<![CDATA[
+		SELECT * from MEMBER where email=#email# and password=#password#
+		]]>
+	</select>
 </sqlMap>

@@ -26,5 +26,11 @@ public class MemberDao {
   public void delete(long member_no) {
 		sqlMapClientTemplate.delete("member.delete", member_no);
 	}
+public MemberVo checkMember(MemberVo memberVo) {
+	MemberVo testVo = (MemberVo) sqlMapClientTemplate.queryForObject("member.checkMember", memberVo);
+	return testVo;
+	
+	
+}
 	
 }

@@ -29,7 +29,7 @@ a[rel=leanModal] {
     display: none;
 }
 
-#joinModal {
+#joinModal,#loginModal {
 width: 716px;
 height: 430px;
 /* width: 600px; */
@@ -59,7 +59,7 @@ background-repeat: no-repeat;
 				   <form action="/join" method="post">
 				     <table>
 						<tr>
-							<td style="text-align:right">로그인</td>
+							<td style="text-align:right" ><a href="#" onclick="$('#joinModal').hide();$('#login').click();">로그인</a></td>
 				     	</tr>
 				     	<tr>
 				     		<td><strong>회원가입을 하시면 더 많은 기능을 이용하실 수 있습니다</strong></td>
@@ -72,6 +72,29 @@ background-repeat: no-repeat;
 						</tr>     
 						<tr>
 							<td><input type="submit" value="가입"></input></td>
+<!-- 							<td><button onclick="$('#picktheme').click();$('#joinModal').hide();">가입</button></td> -->
+						</tr>
+						<tr>
+							<td><strong style="font-size: 4px;">가입버튼을 누르시면 자동으로 <a href="#">이용약관</a>에 동의하시는 것으로 처리됩니다.</strong></td>
+						</tr>     
+				     </table>
+					</form>
+			    </div>
+	</div>
+	
+		<a id="login" rel="leanModal" href="#loginModal">join header</a>
+	<div id="loginModal">
+			   <div class="wsTable" style="border:none; width:100%; height:100%;">
+				   <form action="/login" method="post">
+				     <table>
+						<tr>
+							<td><input  type="text" placeholder="이메일 주소" name="email"/></td>
+						</tr>
+						<tr>
+							<td><input type="password" placeholder="비밀번호" name="password"/></td>
+						</tr>     
+						<tr>
+							<td><input type="submit" value="로그인"></input></td>
 <!-- 							<td><button onclick="$('#picktheme').click();$('#joinModal').hide();">가입</button></td> -->
 						</tr>
 						<tr>

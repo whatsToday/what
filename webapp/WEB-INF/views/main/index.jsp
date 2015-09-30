@@ -69,7 +69,6 @@
 						<tr>
 							<th class="wshd">
 								<select id="plan_no" onchange="alert()"></select>
-								일정
 							</th>
 						</tr>
 					</table>

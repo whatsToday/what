@@ -16,17 +16,17 @@
    </select>
     <select id="selectTodayList" parameterClass="java.lang.Long" resultClass="PlanVo">
       <![CDATA[
-         select plan_no, member_no, planName, memberName, message, to_char(planDate,'yyyy-mm-dd')as planDate from plan where planDate = to_Date(sysdate, 'yyyy-MM-dd') and member_no=#member_no# order by plan_no desc
+         select plan_no,  titleImage,member_no, planName, memberName, message, to_char(planDate,'yyyy-mm-dd')as planDate from plan where planDate = to_Date(sysdate, 'yyyy-MM-dd') and member_no=#member_no# order by plan_no desc
       ]]>
    </select>
    <select id="selectVo" parameterClass="java.lang.Long" resultClass="PlanVo">
       <![CDATA[
-         select plan_no, member_no, titleImage, planName, memberName, message, to_char(planDate,'yyyy-mm-dd')as planDate from plan where plan_no=#plan_no# 
+         select plan_no, titleImage,member_no, titleImage, planName, memberName, message, to_char(planDate,'yyyy-mm-dd')as planDate from plan where plan_no=#plan_no# 
       ]]>
    </select>
    <select id="getUserPlan" parameterClass="java.lang.Long" resultClass="PlanVo">
       <![CDATA[
-         select plan_no, member_no, titleImage, planName, memberName, message, to_char(planDate,'yyyy-mm-dd')as planDate from plan where member_no=#member_no# order by plan_no desc
+         select plan_no, titleImage,member_no, titleImage, planName, memberName, message, to_char(planDate,'yyyy-mm-dd')as planDate from plan where member_no=#member_no# order by plan_no desc
       ]]>
    </select>
 

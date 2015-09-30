@@ -10,9 +10,8 @@
 			<form action="/admin/insertplan" method="post" enctype="multipart/form-data">
 				<table border="1" >
 					<tr>
-					    <td bgcolor="#CCCCCC" align="center">회원번호</td>
+					    <td bgcolor="#CCCCCC" align="center">멤버이름</td>
 						<td bgcolor="#CCCCCC" align="center">플랜이름</td>
-						<td bgcolor="#CCCCCC" align="center">멤버이름</td>
 						<td bgcolor="#CCCCCC" align="center">메세지</td>
 						<td bgcolor="#CCCCCC" align="center">플랜 날짜</td>
 						<td bgcolor="#CCCCCC" align="center">타이틀이미지</td>
@@ -27,7 +26,6 @@
 							
 						</td>
 						<td><input size="10" type="text" name="planName"></td>
-						<td><input size="10" type="text" name="memberName"></td>
 						<td><input size="10" type="text" name="message"></td>
 						<td><input type="Date" name="planDate"></td>
 					    <td><input type="file" name="img"></td>

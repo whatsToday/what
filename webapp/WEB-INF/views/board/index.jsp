@@ -30,6 +30,9 @@ div#photo {
 			width: 30%;
 			height: 80px;
 }
+div#photo img{
+			width: 100%;
+}
 div#title {
 			height: 80px;
 			width: 65%;
@@ -76,11 +79,12 @@ div#submit{
 <c:import url="/WEB-INF/views/include/header.jsp"/>
 <!-- container -->
 <div id="container">
-<div id="photo">${planBoard.titleImage}</div>
+<div id="photo"><img src="${planBoard.titleImage}"/></div>
 <div id="title">${planBoard.planName}</div>
 <div id="map">Map</div>
 <div id="message"><textarea id="msg" readonly="readonly">${planBoard.message}</textarea></div>
 <div id="comment">댓글</div>
+<div>댓글내용</div>
 </div>
 <!-- footer -->
 </body>

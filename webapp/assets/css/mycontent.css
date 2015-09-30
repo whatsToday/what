@@ -18,10 +18,16 @@
 
 /* menu */ 
 .menu {width:1000px;height:120px;border:solid 1px #000;}
-.menu ul {float:left;width:228px;height:100px;border:solid 1px #000;margin:10px}
+.menu ul {float:left;width:31.3%;height:100px;border-right:solid 1px #000;border-left:solid 1px #000;margin:10px}
+.menu ul li img{margin-left:90px; height:100px;}
 
 
 /* content */
-.content ul {float:left;width:312px;height:250px;border:solid 1px #000;margin:10px}
-.cotent ul li img{size:10px;}
+.content ul#squares {float:left;width:312px;height:250px;border:solid 1px #000;margin:10px;}
+.content ul#squares li img{padding:3px; width: 309px; height: 245px;}
+
+.content ul#menuView { display:none; width:98%;height:400px;border:solid 1px #000;margin:10px;}
+.content ul#menuView li img{padding:3px; width: 100%; height: 230px;}
+
+div#map { display:none; width: 100%; height: 600px;}
 /* bottom */

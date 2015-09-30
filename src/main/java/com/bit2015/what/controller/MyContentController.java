@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bit2015.what.service.MyContentService;
 import com.bit2015.what.vo.MemberVo;
@@ -21,12 +22,11 @@ public class MyContentController {
 	MyContentService myContentService;
 	
 	@RequestMapping("/mycontent")
-	public String index(HttpSession session, Model model) {
-		MemberVo memberVo = (MemberVo)session.getAttribute("authUser");
-		System.out.println(memberVo);
-		List<PlanVo> list = myContentService.userPlan(memberVo.getMember_no());
-		System.out.println(list);
+	public String index(@RequestParam Long member_no, Model model) {
+		MemberVo memberVo = myContentService.getMemberVo(member_no);
+		List<PlanVo> list = myContentService.userPlan(member_no);
 		model.addAttribute("planList", list);
+		model.addAttribute("memberVo", memberVo);
 		
 		return "/mycontent/mycontent";
 	}

@@ -14,6 +14,11 @@
            SELECT * FROM MEMBER
         ]]>
     </select>
+    <select id="getMember" resultClass="MemberVo" parameterClass="java.lang.Long">
+        <![CDATA[
+           SELECT * FROM MEMBER WHERE MEMBER_NO=#MEMBER_NO#
+        ]]>
+    </select>
       <delete id="delete" parameterClass="java.lang.Long">
         <![CDATA[
            delete from MEMBER where member_no=#member_no#

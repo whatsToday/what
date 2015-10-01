@@ -105,6 +105,7 @@ public class MainController {
 	public Map<String, Object> getMyPlan(HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
 
+		//List<PlanVo> MyPlanList = mainService.getMyPlan(session);
 		List<PlanVo> MyPlanList = mainService.getMyPlan(session);
 		
 		map.put("MyPlanList", MyPlanList);
@@ -113,14 +114,14 @@ public class MainController {
 	}
 
 	@RequestMapping("/insertPlan")
-	public String insertPlan(ContentVo contentVo,@RequestParam(required=false) Long plan_no, HttpSession session) {
-		System.out.println(contentVo.toString());
+	@ResponseBody
+	public Map<String, Object> insertPlan(ContentVo contentVo,@RequestParam(required=false) Long plan_no, HttpSession session) {
+		Map<String, Object> map = new HashMap<String, Object>();
 		
-		mainService.insertPlan(contentVo, plan_no, session);
+		long plan_no2 = mainService.insertPlan(contentVo, plan_no, session);
 		
-		// ajax-jason
-		// mainService.getInfo(map, id);
-		return "redirect:/";
+		map.put("plan_no", plan_no2);
+		return map;
 	}
 	
 	@RequestMapping("/callContents")

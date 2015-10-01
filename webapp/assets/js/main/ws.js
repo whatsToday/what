@@ -76,7 +76,7 @@ function getMyPlan() {
 		success : function(response) {
 
 			var se = document.getElementById('plan_no');
-			if(response.MyPlanList[0]!=undefined){
+
 				for ( var i in response.MyPlanList) {
 					var pvo = response.MyPlanList[i];
 					var op = document.createElement("option");
@@ -86,17 +86,11 @@ function getMyPlan() {
 	
 					se.appendChild(op);
 				}
-				callContents(se.value);
-			}else{
-				console.log("일정이 없습니다!");
-				var op = document.createElement("option");
-				op.value='-1';
-				op.innerHTML = '오늘의 일정이 없습니다.';
-				op.selected = true;
-				
-				se.appendChild(op);
-			}
-			
+//				console.log(se.childNodes.item(0));
+				if(se.value!=-1){
+					se.childNodes.item(0).selected = true;
+					callContents(se.value);
+				}
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
 			alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
@@ -131,10 +125,19 @@ function insertPlan(index){
 			addressBCode : items.addressBCode
 		},
 		success: function(response){
+			console.log(document.getElementById('plan_no').value);
 			console.log("insertPlan 성공");
-			
-			callContents(plan_no);
-			
+			console.log(response.plan_no);
+			if(plan_no="-1"){
+				var se = document.getElementById('plan_no');
+				//se 초기화
+				while (se.firstChild) {
+					se.removeChild(se.firstChild);
+				}
+				getMyPlan();
+			}else{
+				callContents(response.plan_no);
+			}
 
 		},
 		error:function(jqXHR, textStatus, errorThrown){

@@ -144,17 +144,17 @@ public class MainService {
 		map.put("planList", planList);
 	}
 
-	public void insertPlan(ContentVo cvo, Long plan_no, HttpSession session) {
+	public long insertPlan(ContentVo cvo, Long plan_no, HttpSession session) {
 		MemberVo memberVo = (MemberVo)session.getAttribute("authUser");
 		PlanVo planVo = new PlanVo();
 		
 		//plan 없으면 만들어서 보내주기.
 		if(plan_no == null || plan_no == -1){
-			String size =String.valueOf(planDao.getUserPlan(memberVo.getMember_no()).size());
+			String size =String.valueOf(planDao.getUserPlan(memberVo.getMember_no()).size()+1);
 			
 			PlanVo pvo = new PlanVo();
 			pvo.setMember_no(memberVo.getMember_no());
-			pvo.setPlanName(memberVo.getMemberName()+"님의 "+(size+1)+"번째 일정");
+			pvo.setPlanName(memberVo.getMemberName()+"님의 "+size+"번째 일정");
 			pvo.setMemberName(memberVo.getMemberName());
 			
 			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -189,9 +189,12 @@ public class MainService {
 		
 		//중복된 plan_no , content_no 안들어가게
 		if(contentBoxDao.getContentBoxNo(content_no, plan_no)==null){
-			System.out.println("중복되는 contentbox tuple이 있습니다");
 		contentBoxDao.insert(contentBoxVo);
+		}else{
+			System.out.println("중복되는 contentbox tuple이 있습니다");
 		}
+		
+		return plan_no;
 	}
 
 	public List<PlanVo> getMyPlan(HttpSession session) {
@@ -199,6 +202,20 @@ public class MainService {
 		
 		List<PlanVo> MyPlanList = planDao.getUserPlan(memberVo.getMember_no());
 		
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		Date today = Calendar.getInstance().getTime();
+		String planDate = df.format(today);
+		System.out.println("MyPlanList.get(0).getPlanDate() == " + MyPlanList.get(0).getPlanDate());
+		System.out.println("planDate =" + planDate);
+		System.out.println(!MyPlanList.get(0).getPlanDate().equals(planDate));
+		if(MyPlanList.get(0) == null || !MyPlanList.get(0).getPlanDate().equals(planDate)){
+			PlanVo addVo = new PlanVo();
+			addVo.setPlan_no(-1);
+			addVo.setPlanName("오늘의 일정이 없습니다");
+			
+			MyPlanList.add(addVo);
+		}
+				
 		return MyPlanList;
 	}
 

@@ -1,6 +1,6 @@
 package com.bit2015.what.vo;
 
-public class FollwVo {
+public class FollowVo {
 	private long follow_no;
 	private long member_no;
 	private String followNum;

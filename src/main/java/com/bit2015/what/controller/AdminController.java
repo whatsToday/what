@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.bit2015.what.dao.FollowDao;
 import com.bit2015.what.service.AdminService;
 import com.bit2015.what.vo.CommentsVo;
 import com.bit2015.what.vo.ContentVo;
+import com.bit2015.what.vo.FollowVo;
 import com.bit2015.what.vo.MemberVo;
 import com.bit2015.what.vo.PlanVo;
 import com.bit2015.what.vo.ThemeBoxVo;
@@ -177,5 +179,23 @@ public class AdminController {
 		adminService.deleteComments(comments_no);
 		return "redirect:/admin/comments";
 	}
-
+	@RequestMapping("/follow")
+	public String followList(Model model){
+		List<MemberVo> memberList = adminService.selectMember();
+		List<FollowVo> followList = adminService.selectFollow();
+		
+		model.addAttribute("memberList",memberList);
+		model.addAttribute("followList",followList);
+		return "/admin/follow";
+	}
+    @RequestMapping("/insertfollow")
+    public String insertFollow(FollowVo followVo){
+    	adminService.insertFollow(followVo);
+    	return "redirect:/admin/follow";
+    }
+    @RequestMapping("/deletefollow")
+    public String deleteFollow(@RequestParam Long follow_no){
+    	adminService.deleteFollow(follow_no);
+    	return "redirect:/admin/follow";
+    }
 }

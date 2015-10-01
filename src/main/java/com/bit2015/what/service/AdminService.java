@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.bit2015.what.dao.CommentsDao;
 import com.bit2015.what.dao.ContentDao;
+import com.bit2015.what.dao.FollowDao;
 import com.bit2015.what.dao.MemberDao;
 import com.bit2015.what.dao.PlanDao;
 import com.bit2015.what.dao.ThemeBoxDao;
@@ -17,6 +18,7 @@ import com.bit2015.what.dao.ThemeDao;
 import com.bit2015.what.util.FileUploader;
 import com.bit2015.what.vo.CommentsVo;
 import com.bit2015.what.vo.ContentVo;
+import com.bit2015.what.vo.FollowVo;
 import com.bit2015.what.vo.MemberVo;
 import com.bit2015.what.vo.PlanVo;
 import com.bit2015.what.vo.ThemeBoxVo;
@@ -36,6 +38,8 @@ public class AdminService {
 	ContentDao  contentDao;
 	@Autowired
 	CommentsDao commentsDao;
+	@Autowired
+	FollowDao followDao;
 
 	// 파일올리는거야
 	FileUploader ful = new FileUploader();
@@ -160,5 +164,16 @@ public class AdminService {
 	}
 	public void deleteComments(@RequestParam Long comments_no){
 		commentsDao.delete(comments_no);
+	}
+	
+	public List<FollowVo> selectFollow(){
+		List<FollowVo> selectFollow = followDao.selectAll();
+		return selectFollow;
+	}
+	public void insertFollow(FollowVo followVo){
+		followDao.insert(followVo);
+	}
+	public void deleteFollow(@RequestParam Long follow_no){
+		followDao.delete(follow_no);
 	}
 }

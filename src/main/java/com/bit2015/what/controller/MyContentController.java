@@ -33,22 +33,23 @@ public class MyContentController {
 				list1.add(planVo);
 			}
 		}
-		List<FollowVo> list2 = myContentService.following(member_no);
+		List<Object> list2 = myContentService.following(member_no);
 		List<Object> list3 = myContentService.follower(member_no);
 		model.addAttribute("planList", list1);
 		model.addAttribute("followerList", list2);
 		model.addAttribute("followingList", list3);
 		model.addAttribute("memberVo", memberVo);
-		System.out.println(list2);
-		System.out.println(list3);
 		return "/mycontent/mycontent";
 	}
-	@RequestMapping("/follower")
-	@ResponseBody
-	public List<FollowVo> selectUser(@RequestParam Long member_no){
-		System.out.println(member_no);
-		List<FollowVo> list = myContentService.following(member_no);
-		System.out.println(list);
-			return list;
+	
+	@RequestMapping("/unFollow")
+	public String unFollow(@RequestParam Long following, @RequestParam Long follower, @RequestParam Long member_no){
+		myContentService.unFollow(following, follower);
+		return "redirect:/mycontent?member_no="+member_no;
+	}
+	@RequestMapping("/follow")
+	public String follow(@RequestParam Long following, @RequestParam Long follower, @RequestParam Long member_no){
+		myContentService.follow(following, follower);
+		return "redirect:/mycontent?member_no="+member_no;
 	}
 }

@@ -25,15 +25,18 @@
 		<div class="mycontent" >
 				<div class="top">
 				<div class="pro"><img class="image_pro" src="${memberVo.imageUrl}"/></div>
-				<ul><li class="soo">5</li><li class="top_menu">팔로잉</li><li><a href='javascript:viewFollowing("${memberVo.member_no}")'>팔로잉보기</a><ul id="followingList"><c:forEach var="i" items="${followingList}"><li>${i.followingName}</li></c:forEach></ul></li></ul>
-				<ul><li class="soo">5</li><li class="top_menu">팔로워</li><li><a href='javascript:viewFollower("${memberVo.member_no}")'>팔로워보기</a><ul id="followerList"><c:forEach var="i" items="${followerList}"><li>${i.followName }</li></c:forEach></ul></li></ul>
+				<ul><li class="soo">${followingList.size()}</li><li class="top_menu">팔로잉</li><li><a href='javascript:viewFollowing("${memberVo.member_no}")'>팔로잉보기</a><ul id="followingList"><c:forEach var="i" items="${followingList}"><a href="/mycontent?member_no=${i.followingNum}"><li><img src="${i.Url}"><span>${i.followingName}</span></li></a></c:forEach></ul></li></ul>
+				<ul><li class="soo">${followerList.size()}</li><li class="top_menu">팔로워</li><li><a href='javascript:viewFollower("${memberVo.member_no}")'>팔로워보기</a><ul id="followerList"><c:forEach var="i" items="${followerList}"><a href="/mycontent?member_no=${i.followerNum}"><li><img src="${i.Url}">${i.followerName}</li></c:forEach></ul></li></a></ul>
 				<ul><li class="soo">${planList.size()}</li><li class="top_menu">게시물</li><c:if test="${authUser.member_no == param.member_no }"><li><a href="/board/addBoard">게시물쓰기</a></li></c:if></ul>
 				<c:choose>
 				<c:when test="${authUser.member_no == param.member_no}">
 				<div class="pro_modi"><a href="#modifyForm" id="modify">프로필 편집</a></div>
 				</c:when>
+				<c:when test="${not empty followerList}">
+				<div class="pro_modi1"><a href="javascript:unFollow(${memberVo.member_no},${authUser.member_no});">팔로우 됨<img src="/assets/img/button/check.png"></a></div>
+				</c:when>
 				<c:otherwise>
-				<div class="pro_modi"><a href="javascript:follow();">팔로우하기</a></div>
+				<div class="pro_modi"><a href="javascript:follow(${memberVo.member_no},${authUser.member_no});">팔로우하기</a></div>
 				</c:otherwise>
 				</c:choose>
 				<div class="pro_name">${memberVo.memberName}</div>
@@ -131,6 +134,17 @@ function viewFollowing(num){
 }
 function viewFollower(num){
 	$("#followerList").toggle();
+}
+function unFollow(following, follower){
+	console.log(following);
+	console.log(follower);
+	if (confirm('언팔로우하시겠습니까??')) {
+		location.href="/mycontent/unFollow?following="+following+"&follower="+follower+"&member_no="+${param.member_no};
+	} else {
+	}
+}
+function follow(following, follower){
+	location.href="/mycontent/follow?following="+following+"&follower="+follower+"&member_no="+${param.member_no};
 }
 </script>
 <script>

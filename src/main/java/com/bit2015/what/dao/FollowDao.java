@@ -1,6 +1,8 @@
 package com.bit2015.what.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
@@ -30,5 +32,12 @@ public class FollowDao {
     }
     public void delete(long follow_no){
     	sqlMapClientTemplate.delete("follow.delete",follow_no);
+    }
+    public void unFollow(long following, long follower){
+    	Map<String, Object> map = new HashMap<String, Object>();
+    	map.put("following", following);
+    	map.put("follower", follower);
+    	
+    	sqlMapClientTemplate.delete("follow.unFollow",map);
     }
 }

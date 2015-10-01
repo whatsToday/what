@@ -14,10 +14,14 @@
 .top ul .soo {font-size:20px;font-weight:bold}
 .top ul .top_menu {font-size:15px}
 .top .pro_modi {float:right;width:700px;height:30px;border:solid 1px #69ABED;text-align:center;margin:20px 25px 0 0;background-color:#69ABED;}
+.top .pro_modi1{float:right;width:700px;height:30px;border:solid 1px #F78181;text-align:center;margin:20px 25px 0 0;background-color:#F78181;}
+.top .pro_modi1 a{font-weight: bold; color:#fff; text-decoration: none; font-size:16px; line-height:30px}
+.top .pro_modi1 img{margin-top:-5px;margin-left:20px;}
 .top .pro_name {margin-top:220px;width:200px;text-align:center; font-size:20px; font-weight: bold; }
 .top .pro_modi a{font-weight: bold; color:#fff; text-decoration: none; font-size:16px; line-height:30px}
 .top ul#followingList,.top ul#followerList{display:none; position:fixed; background-color:#fff; width: 150px; max-height:250px; margin-left:50px; font-size:12px; color:#69ABED; font-weight: bold;  overflow-y:scroll;margin-top:0px;}
 .top ul#followingList li,.top ul#followerList li {padding:10px;}
+.top ul#followingList li img,.top ul#followerList li img {margin-left:0px;width: 35px; height: 35px; border-radius:25px; margin-right:20px;}
 .top ul#followingList p,.top ul#followerList p{ height:20px;font-size:16px; padding-top:0;padding-bottom:20px; background-color:#69ABED; color:#fff;}
 
 /* menu */ 

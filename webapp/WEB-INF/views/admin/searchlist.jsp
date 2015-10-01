@@ -15,6 +15,7 @@
 						<td bgcolor="#CCCCCC" align="center">찾기</td>
 						<td bgcolor="#CCCCCC" align="center">위도</td>
 						<td bgcolor="#CCCCCC" align="center">경도</td>
+						<td bgcolor="#CCCCCC" align="center">등록</td>
 					</tr>
 					<tr>
 						<td>

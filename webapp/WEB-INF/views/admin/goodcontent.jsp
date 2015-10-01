@@ -14,6 +14,7 @@
 						<td bgcolor="#CCCCCC" align="center">멤버번호</td>
 						<td bgcolor="#CCCCCC" align="center">멤버이름</td>
 						<td bgcolor="#CCCCCC" align="center">타이틀</td>
+						<td bgcolor="#CCCCCC" align="center">등록</td>
 					</tr>
 					<tr>
 					<td>

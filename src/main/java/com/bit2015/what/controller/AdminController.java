@@ -13,12 +13,14 @@ import org.springframework.web.multipart.MultipartFile;
 import com.bit2015.what.dao.FollowDao;
 import com.bit2015.what.service.AdminService;
 import com.bit2015.what.vo.CommentsVo;
+import com.bit2015.what.vo.ContentBoxVo;
 import com.bit2015.what.vo.ContentVo;
 import com.bit2015.what.vo.FollowVo;
 import com.bit2015.what.vo.GoodContentVo;
 import com.bit2015.what.vo.GoodPlanVo;
 import com.bit2015.what.vo.MemberVo;
 import com.bit2015.what.vo.PlanCommentsVo;
+import com.bit2015.what.vo.PlanImgVo;
 import com.bit2015.what.vo.PlanVo;
 import com.bit2015.what.vo.SearchListVo;
 import com.bit2015.what.vo.ThemeBoxVo;
@@ -246,7 +248,7 @@ public class AdminController {
     	adminService.deletePlanComments(planComments_no);
     	return "redirect:/admin/plancomments";
     }
-    @RequestMapping("goodplan")
+    @RequestMapping("/goodplan")
     public String goodPlanList(Model model){
     	List<GoodPlanVo> goodPlanList=adminService.selectGoodPlan();
     	List<MemberVo>   memberList = adminService.selectMember();
@@ -258,17 +260,17 @@ public class AdminController {
     	
     	return "/admin/goodplan";
     }
-    @RequestMapping("insertgoodplan")
+    @RequestMapping("/insertgoodplan")
     public String insertGoodPlan(GoodPlanVo goodPlanVo){
     	adminService.insertGoodPlan(goodPlanVo);
     	return "redirect:/admin/goodplan";
     }
-    @RequestMapping("deletegoodplan")
+    @RequestMapping("/deletegoodplan")
     public String deleteGoodPlan(@RequestParam Long goodPlan_no){
     	adminService.deleteGoodPlan(goodPlan_no);
     	return"redirect:/admin/goodplan";
     }
-    @RequestMapping("goodcontent")
+    @RequestMapping("/goodcontent")
     public String goodContentList(Model model){
     	List<ContentVo> contentList = adminService.selectContent();
     	List<MemberVo> memberList = adminService.selectMember();
@@ -278,15 +280,55 @@ public class AdminController {
     	model.addAttribute("contentList", contentList);
     	return "/admin/goodcontent";
     }
-    @RequestMapping("insertgoodcontent")
+    @RequestMapping("/insertgoodcontent")
     public String insertGoodContent(GoodContentVo goodContentVo){
     	adminService.insertGoodContent(goodContentVo);
     	return "redirect:/admin/goodcontent";
     }
-    @RequestMapping("deletegoodcontent")
+    @RequestMapping("/deletegoodcontent")
                      
     public String deleteGoodContent(@RequestParam Long goodContent_no){
     	adminService.deleteGoodContent(goodContent_no);
     	return "redirect:/admin/goodcontent";
+    }
+    @RequestMapping("/contentbox")
+    public String contentBoxList(Model model){
+    	List<PlanVo> planList = adminService.selectPlan();
+    	List<ContentVo> contentList = adminService.selectContent();
+    	List<ContentBoxVo> contentBoxList = adminService.selectContentBox();
+    	
+    	model.addAttribute("planList",planList);
+    	model.addAttribute("contentList",contentList);
+    	model.addAttribute("contentBoxList", contentBoxList);
+    	return "/admin/contentbox";
+    }
+    @RequestMapping("/insertcontentbox")
+    public String insertContentBox(ContentBoxVo contentBoxVo){
+    	adminService.insertContentBox(contentBoxVo);
+    	return "redirect:/admin/contentbox";
+    }
+    @RequestMapping("/deletecontentbox")
+    public String deleteContentBox(@RequestParam Long contentBox_no){
+    	adminService.deleteContentBox(contentBox_no);
+    	return "redirect:/admin/contentbox";
+    }
+    @RequestMapping("/planimg")
+    public String planImgList(Model model){
+    	List<PlanVo> planList = adminService.selectPlan();
+    	List<PlanImgVo> planImgList = adminService.selectPlanImg();
+    	
+    	model.addAttribute("planList",planList);
+    	model.addAttribute("planImgList",planImgList);
+    	return "/admin/planimg";
+    }
+    @RequestMapping("/insertplanimg")
+    public String insertPlanImg(PlanImgVo planImgVo,@RequestParam(required = false) MultipartFile img ){
+    	adminService.insertPlanImg(planImgVo, img);
+    	return "redirect:/admin/planimg";
+    }
+    @RequestMapping("/deleteplanimg")
+    public String deletePlanImg(@RequestParam Long planImg_no){
+    	adminService.deletePlanImg(planImg_no);
+    	return "redirect:/admin/planimg";
     }
 }

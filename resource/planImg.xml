@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="planImg">
+	<typeAlias alias="PlanImgVo" type="com.bit2015.what.vo.PlanImgVo"/>
+	
+	
+	<insert id="insert" parameterClass="PlanImgVo">
+		<![CDATA[
+			INSERT INTO PLANIMG VALUES(planImg_no_seq.nextval, #plan_no#, #planName#, #imageUrl#)
+		]]>
+	</insert>
+	
+	<select id="selectAll" resultClass="PlanImgVo">
+		<![CDATA[
+			select * from PLANIMG 
+		]]>
+	</select>
+	
+	
+	<delete id="delete" parameterClass="java.lang.Long">
+		<![CDATA[
+			delete from PLANIMG where planImg_no=#planImg_no#
+		]]>
+	</delete>
+
+	
+</sqlMap>

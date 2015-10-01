@@ -20,5 +20,6 @@
  	<sqlMap resource="searchList.xml"/>
  	<sqlMap resource="planComments.xml"/>
  	<sqlMap resource="goodplan.xml"/>
+ 	<sqlMap resource="planImg.xml"/>
  	
 </sqlMapConfig>

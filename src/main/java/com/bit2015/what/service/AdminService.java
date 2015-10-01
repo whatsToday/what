@@ -9,24 +9,28 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.bit2015.what.dao.CommentsDao;
+import com.bit2015.what.dao.ContentBoxDao;
 import com.bit2015.what.dao.ContentDao;
 import com.bit2015.what.dao.FollowDao;
 import com.bit2015.what.dao.GoodContentDao;
 import com.bit2015.what.dao.GoodPlanDao;
 import com.bit2015.what.dao.MemberDao;
 import com.bit2015.what.dao.PlanDao;
+import com.bit2015.what.dao.PlanImgDao;
 import com.bit2015.what.dao.SearchListDao;
 import com.bit2015.what.dao.ThemeBoxDao;
 import com.bit2015.what.dao.ThemeDao;
 import com.bit2015.what.dao.planCommentsDao;
 import com.bit2015.what.util.FileUploader;
 import com.bit2015.what.vo.CommentsVo;
+import com.bit2015.what.vo.ContentBoxVo;
 import com.bit2015.what.vo.ContentVo;
 import com.bit2015.what.vo.FollowVo;
 import com.bit2015.what.vo.GoodContentVo;
 import com.bit2015.what.vo.GoodPlanVo;
 import com.bit2015.what.vo.MemberVo;
 import com.bit2015.what.vo.PlanCommentsVo;
+import com.bit2015.what.vo.PlanImgVo;
 import com.bit2015.what.vo.PlanVo;
 import com.bit2015.what.vo.SearchListVo;
 import com.bit2015.what.vo.ThemeBoxVo;
@@ -56,6 +60,11 @@ public class AdminService {
     GoodPlanDao goodPlanDao;
     @Autowired
     GoodContentDao goodContentDao;
+    @Autowired
+    ContentBoxDao contentBoxDao;
+    @Autowired
+    PlanImgDao planImgDao;
+    
     
 	// 파일올리는거야
 	FileUploader ful = new FileUploader();
@@ -235,5 +244,31 @@ public class AdminService {
 	public void deleteGoodContent(@RequestParam Long goodContent_no){
 		goodContentDao.delete(goodContent_no);
 	}
-	
+    public List<ContentBoxVo> selectContentBox(){
+    	List<ContentBoxVo> selectContentBox = contentBoxDao.selectAll();
+    	return selectContentBox;
+    }
+    public void insertContentBox(ContentBoxVo contentBoxVo){
+    	contentBoxDao.insert(contentBoxVo);
+    }
+    public void deleteContentBox(@RequestParam Long contentBox_no){
+    	contentBoxDao.delete(contentBox_no);
+    }
+    public List<PlanImgVo> selectPlanImg(){
+    	List<PlanImgVo> selectPlanImg = planImgDao.selectAll();
+    	return selectPlanImg;
+    }
+    public void insertPlanImg(PlanImgVo planImgVo, MultipartFile imageUrl){
+    	if (imageUrl == null) {
+    		planImgVo.setImageUrl("");
+		} else {
+			String member_img_url = ful.upload(imageUrl);
+			planImgVo.setImageUrl(member_img_url);
+		}
+		System.out.println(planImgVo.toString());
+		planImgDao.insert(planImgVo);
+    }
+    public void deletePlanImg(@RequestParam Long planImg_no){
+    	planImgDao.delete(planImg_no);
+    }
 }

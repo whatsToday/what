@@ -16,6 +16,7 @@
 						<td bgcolor="#CCCCCC" align="center">멤버이름</td>
 						<td bgcolor="#CCCCCC" align="center">메세지</td>
 						<td bgcolor="#CCCCCC" align="center">플랜 날짜</td>
+						<td bgcolor="#CCCCCC" align="center">등록</td>
 					</tr>
 					<tr>
 						<td>

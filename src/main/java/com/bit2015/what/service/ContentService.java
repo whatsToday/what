@@ -10,11 +10,11 @@ import org.springframework.ui.Model;
 
 import com.bit2015.what.dao.CommentsDao;
 import com.bit2015.what.dao.ContentDao;
+import com.bit2015.what.dao.GoodContentDao;
 import com.bit2015.what.vo.CommentsVo;
-import com.bit2015.what.vo.ContentBoxVo;
 import com.bit2015.what.vo.ContentVo;
+import com.bit2015.what.vo.GoodContentVo;
 import com.bit2015.what.vo.MemberVo;
-import com.bit2015.what.vo.PlanVo;
 
 @Service
 public class ContentService {
@@ -23,6 +23,8 @@ public class ContentService {
 	ContentDao contentDao;
 	@Autowired
 	CommentsDao commentsDao;
+	@Autowired
+	GoodContentDao goodContentDao;
 	
 	
 	public ContentVo getContent(Model model, Long content_no){
@@ -45,6 +47,12 @@ public class ContentService {
 		commentsDao.delete(comments_no);
 		
 	}	
+	
+	public GoodContentVo selectMno(Long member_no, Long content_no){
+		GoodContentVo goodContentVo = goodContentDao.selectVoCnoMno(content_no, member_no);
+		return goodContentVo;
+	}
+	
 	
 	public void saveItem(HttpSession session, Long content_no) {
 		MemberVo memberVo =(MemberVo) session.getAttribute("authUser");

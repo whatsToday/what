@@ -1,14 +1,12 @@
 package com.bit2015.what.controller;
 
 
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bit2015.what.service.ContentService;
 import com.bit2015.what.vo.CommentsVo;
 import com.bit2015.what.vo.ContentVo;
-import com.bit2015.what.vo.MemberVo;
+import com.bit2015.what.vo.GoodContentVo;
 
 @Controller
 @RequestMapping
@@ -56,6 +54,18 @@ public class ContentController {
 		  return vo;	  
 	  }
 	  
+	  
+	  @RequestMapping("/like")
+	  @ResponseBody
+	  public void like(@RequestParam Long member_no, @RequestParam Long content_no, Model model){
+		  GoodContentVo goodContentVo = contentService.selectMno(member_no, content_no);
+		  System.out.println("!!!");
+		  if(goodContentVo == null){
+			  System.out.println("!");
+		  }  else{
+			  System.out.println("!!");
+		  }
+	  }
 	  
 
 	  

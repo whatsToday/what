@@ -22,7 +22,7 @@
 
 
 	<div class="container">
-		<div style="margin:auto;border:solid 1px #69ABED;width:1000px">
+		<div style="margin:auto;border:solid 1px #69ABED;width:1000px;margin-bottom:50px">
 		<form method="post" action="/commentwrite">
 			<img src="/assets/img/noimage.jpg" style="width:300px;padding:0px;border:solid 1px #e1e1e1;float:left;margin-bottom:20px">
 			<div style="font-size:15px;float:left;width:630px;margin-left:30px;margin-top:20px;float:left">

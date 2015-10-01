@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="goodContent">
+	<typeAlias alias="GoodContentVo" type="com.bit2015.what.vo.GoodContentVo"/>
+	
+	
+	<insert id="insert" parameterClass="GoodContentVo">
+		<![CDATA[
+			insert INTO goodContent VALUES(goodContent_no_seq.nextval, #content_no#, #member_no#, #memberName#, #title#)
+		]]>
+	</insert>
+	
+	<select id="selectAll" resultClass="GoodContentVo">
+		<![CDATA[
+			select * from goodContent order by goodContent_no desc
+		]]>
+	</select>
+	
+	<select id="selectVo" parameterClass="java.lang.Long" resultClass="GoodContentVo">
+		<![CDATA[
+			select * from goodContent where goodContent_no=#goodContent_no#
+		]]>
+	</select>
+	
+	<select id="selectVoCnoMno" parameterClass="java.util.Map" resultClass="GoodContentVo">
+		<![CDATA[
+			select * from goodContent where content_no=#content_no# and member_no=#member_no#
+		]]>
+	</select>
+	<select id="selectVoMno" parameterClass="java.lang.Long" resultClass="GoodContentVo">
+		<![CDATA[
+			select * from goodContent where member_no=#member_no#
+		]]>
+	</select>
+	
+	<delete id="delete" parameterClass="java.lang.Long">
+		<![CDATA[
+			delete from gooContent where goodContent_no=#goodContent_no#
+		]]>
+	</delete>
+	
+	
+	<select id="selectAllByCno" parameterClass="java.lang.Long" resultClass="GoodContentVo">
+		<![CDATA[
+			select * from gooContent where content_no=#content_no# 
+		]]>
+	</select>
+	
+</sqlMap>

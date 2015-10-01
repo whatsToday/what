@@ -13,6 +13,7 @@ import com.bit2015.what.dao.ContentDao;
 import com.bit2015.what.dao.FollowDao;
 import com.bit2015.what.dao.MemberDao;
 import com.bit2015.what.dao.PlanDao;
+import com.bit2015.what.dao.SearchListDao;
 import com.bit2015.what.dao.ThemeBoxDao;
 import com.bit2015.what.dao.ThemeDao;
 import com.bit2015.what.util.FileUploader;
@@ -21,6 +22,7 @@ import com.bit2015.what.vo.ContentVo;
 import com.bit2015.what.vo.FollowVo;
 import com.bit2015.what.vo.MemberVo;
 import com.bit2015.what.vo.PlanVo;
+import com.bit2015.what.vo.SearchListVo;
 import com.bit2015.what.vo.ThemeBoxVo;
 import com.bit2015.what.vo.ThemeVo;
 
@@ -40,7 +42,8 @@ public class AdminService {
 	CommentsDao commentsDao;
 	@Autowired
 	FollowDao followDao;
-
+    @Autowired
+    SearchListDao searchListDao;
 	// 파일올리는거야
 	FileUploader ful = new FileUploader();
 
@@ -175,5 +178,16 @@ public class AdminService {
 	}
 	public void deleteFollow(@RequestParam Long follow_no){
 		followDao.delete(follow_no);
+	}
+	
+	public List<SearchListVo> selectSerchList(){
+		List<SearchListVo> selectSerchList= searchListDao.selectAll();
+		return selectSerchList;
+	}
+	public void insertSearchList(SearchListVo searchListVo){
+		searchListDao.insert(searchListVo);
+	}
+	public void deleteSearchList(@RequestParam Long searchList_no){
+		searchListDao.delete(searchList_no);
 	}
 }

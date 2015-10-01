@@ -17,6 +17,7 @@ import com.bit2015.what.vo.ContentVo;
 import com.bit2015.what.vo.FollowVo;
 import com.bit2015.what.vo.MemberVo;
 import com.bit2015.what.vo.PlanVo;
+import com.bit2015.what.vo.SearchListVo;
 import com.bit2015.what.vo.ThemeBoxVo;
 import com.bit2015.what.vo.ThemeVo;
 import com.sun.java.swing.plaf.motif.resources.motif;
@@ -200,5 +201,24 @@ public class AdminController {
     public String deleteFollow(@RequestParam Long follow_no){
     	adminService.deleteFollow(follow_no);
     	return "redirect:/admin/follow";
+    }
+    
+    @RequestMapping("/searchlist")
+    public String searchList(Model model){
+    	List<MemberVo> memberList = adminService.selectMember();
+    	List<SearchListVo> searchList=adminService.selectSerchList();
+    	model.addAttribute("memberList",memberList); 
+    	model.addAttribute("searchList",searchList);
+    	return "/admin/searchlist";
+    }
+    @RequestMapping("/insertsearchlist")
+    public String insertSearchList(SearchListVo searchListVo){
+    	adminService.insertSearchList(searchListVo);
+    	return "redirect:/admin/searchlist";
+    }
+    @RequestMapping("/deletesearchlist")
+    public String deleteSearchList(@RequestParam Long searchList_no){
+    	adminService.deleteSearchList(searchList_no);
+    	return "redirect:/admin/searchlist";
     }
 }

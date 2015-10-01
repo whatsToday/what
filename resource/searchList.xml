@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="searchList">
+   <typeAlias alias="SearchListVo" type="com.bit2015.what.vo.SearchListVo"/>
+   
+   <insert id="insert" parameterClass="SearchListVo">
+      <![CDATA[
+      INSERT INTO SEARCHLIST VALUES(searchList_no_seq.nextval, #member_no#, #memberName#, #search#, sysdate, #latitude#, #longitude#)
+      ]]>
+   </insert>
+
+   <select id="selectAll" resultClass="SearchListVo">
+      <![CDATA[
+       SELECT * FROM SEARCHLIST
+      ]]>
+   </select>
+  
+   <delete id="delete" parameterClass="java.lang.Long">
+      <![CDATA[
+         delete from SEARCHLIST where  searchList_no=#searchList_no#
+      ]]>
+   </delete>
+   
+   
+   
+   
+</sqlMap>

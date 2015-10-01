@@ -26,12 +26,12 @@
 						</td>
 					<td>
 						   	<select name="followNum" onchange="changeFollow(this.value)">
-				           <c:if test="${vo.member_no !=vo.getMember_no() }"> 
+				          
 							 <c:forEach var="vo" items="${memberList}">
 							  <option id="vlaue" value="${vo.getMember_no()}">${vo.getMember_no()}</option>
 							
 							 </c:forEach>
-			              </c:if>
+			           
 							</select>
 					</td>
 					<td>

@@ -140,7 +140,7 @@ function checkThemeBox(){
 	
 	for (var i = 0; i < $themeBoxList.length; i++) {
 		document.getElementById('theme_no_'+$themeBoxList[i].theme_no).className  += ' checkTm';	
-		console.log(document.getElementById('theme_no_'+$themeBoxList[i].theme_no));
+		//console.log(document.getElementById('theme_no_'+$themeBoxList[i].theme_no));
 	}
 }
 

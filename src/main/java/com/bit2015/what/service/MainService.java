@@ -134,8 +134,10 @@ public class MainService {
 			List<ContentBoxVo> contentBoxList = contentBoxDao
 					.selectAllById(contentVo.getContent_no());
 			for (int i = 0; i < contentBoxList.size(); i++) {
-				planList.add(planDao.selectVo(contentBoxList.get(i)
-						.getPlan_no()));
+				PlanVo tempVo = planDao.selectVo(contentBoxList.get(i).getPlan_no());
+				if(tempVo.getMessage()!=null){
+					planList.add(tempVo);
+				}
 			}
 		}
 

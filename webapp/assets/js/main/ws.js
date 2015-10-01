@@ -51,7 +51,6 @@ var userLocation;
 		  var crd = pos.coords;
 		  userLocation=new daum.maps.LatLng(crd.latitude, crd.longitude);
 		  map.setCenter(userLocation);
-console.log("userLocation = "+userLocation);
 
 searchPlaces();
 		  //주변 3km내에 있는 content getcha! 		  
@@ -78,7 +77,6 @@ function getMyPlan() {
 
 			var se = document.getElementById('plan_no');
 			if(response.MyPlanList[0]!=undefined){
-				console.log("일정이 있습니다!");
 				for ( var i in response.MyPlanList) {
 					var pvo = response.MyPlanList[i];
 					var op = document.createElement("option");
@@ -110,10 +108,8 @@ function getMyPlan() {
 // insertPlan
 function insertPlan(index){
 	plan_no = document.getElementById('plan_no').value;
-	console.log(plan_no);
 	
 	items=placesArray[index];
-	console.log(items);
 	
 	$.ajax({
 		type: "Post",
@@ -152,7 +148,6 @@ function insertPlan(index){
 
 
 function callContents(plan_no){
-	console.log("call contens plan_no = " + plan_no);
 	$.ajax({
 		type: "Post",
 		url: "/callContents",
@@ -162,16 +157,15 @@ function callContents(plan_no){
 		success: function(response){
 			
 			var sP =document.getElementById('showPlan');
-			
-			//초기화
+
 			var node ; 
 			var i=0;
-			for ( var j=0 ; j < sP.childNodes.length ;j++){
-				node = sP.childNodes.item(j-i); 
-//				alert(node.nodeName);
+			var last = sP.childNodes.length;
+			for ( var j=last-1 ; j > 1 ;j--){
+				node = sP.childNodes.item(j); 
+				//console.log(node.nodeName);
 				if(node.nodeName=='TR') {
 					sP.removeChild(node);
-					i++;
 				}
 			}
 			
@@ -183,6 +177,7 @@ function callContents(plan_no){
 				
 				sP.appendChild(planLi);
 			}
+			console.log(sP.childNodes);
 
 		},
 		error:function(jqXHR, textStatus, errorThrown){
@@ -195,51 +190,4 @@ function callContents(plan_no){
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//onclick="insertPlan(items.phone,items.newAddress,items.imageUrl,items.direction,items.zipcode,items.placeUrl,items.id,items.title,items.category,items.address,items.longitude,items.latitude,items.addressBCode+'); return false;" >찜 하기</a></td></tr>';
-
-
-
-//location.href="/insertPlan?phone='+items.phone+'&newAddress='+items.newAddress+'&imageUrl='+items.imageUrl+'&direction='+items.direction+'&zipcode='+items.zipcode+'&placeUrl='+items.placeUrl+'&id='+items.id+'&title='+items.title+'&category='+items.category+'&address='+items.address+'&longitude='+items.longitude";
-//	content += '&latitude='+items.latitude+'&addressBCode='+items.addressBCode+'" onclick="history.back">찜 하기</a></td></tr>';
-	
-
-//function insertPlan(phone,newAddress,imageUrl,direction,zipcode,placeUrl,id,title,category,address,longitude,latitude,addressBCode){
-//console.log("!");
-//	//console.log(phone,newAddress,imageUrl,direction,zipcode,placeUrl,id,title,category,address,longitude,latitude,addressBCode);
-//	
-//}
-
-//찜하기
-//content += '<td onclick="insertPlan()">찜 하기</td>'
-//	content += '<td><a href="/insertPlan?phone='+items.phone+'&newAddress='+items.newAddress+'&imageUrl='+items.imageUrl;
-//	content += '&direction='+items.direction+'&zipcode='+items.zipcode+'&placeUrl='+items.placeUrl+'&id='+items.id;
-//	content += '&title='+items.title+'&category='+items.category+'&address='+items.address+'&longitude='+items.longitude;
-//	content += '&latitude='+items.latitude+'&addressBCode='+items.addressBCode+'" onclick="history.back">찜 하기</a></td></tr>';
-
-	//content += '<td data-items="/insertPlan?phone='+items.phone+'&newAddress='+items.newAddress+'&imageUrl='+items.imageUrl+'&direction='+items.direction+'&zipcode='+items.zipcode+'&placeUrl='+items.placeUrl+'&id='+items.id+'&title='+items.title+'&category='+items.category+'&address='+items.address+'&longitude='+items.longitude+'&latitude='+items.latitude+'&addressBCode='+items.addressBCode+'" onclick=insertPlan(this);></td>'
-
-//content += '<td onclick="insertPlan('+items.phone+','+items.newAddress+','+items.imageUrl+','+items.direction+','+items.zipcode+','+items.placeUrl+','+items.id+','+items.title+','+items.category+','+items.address+','+items.longitude+','+items.latitude+','+items.addressBCode+')">찜하기</td>'
-//console.log(items.phone);
-		
 

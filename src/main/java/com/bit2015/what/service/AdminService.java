@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.bit2015.what.dao.CommentsDao;
 import com.bit2015.what.dao.ContentDao;
 import com.bit2015.what.dao.FollowDao;
+import com.bit2015.what.dao.GoodContentDao;
 import com.bit2015.what.dao.GoodPlanDao;
 import com.bit2015.what.dao.MemberDao;
 import com.bit2015.what.dao.PlanDao;
@@ -22,6 +23,7 @@ import com.bit2015.what.util.FileUploader;
 import com.bit2015.what.vo.CommentsVo;
 import com.bit2015.what.vo.ContentVo;
 import com.bit2015.what.vo.FollowVo;
+import com.bit2015.what.vo.GoodContentVo;
 import com.bit2015.what.vo.GoodPlanVo;
 import com.bit2015.what.vo.MemberVo;
 import com.bit2015.what.vo.PlanCommentsVo;
@@ -52,6 +54,8 @@ public class AdminService {
     planCommentsDao planCommentsDao;
     @Autowired
     GoodPlanDao goodPlanDao;
+    @Autowired
+    GoodContentDao goodContentDao;
     
 	// 파일올리는거야
 	FileUploader ful = new FileUploader();
@@ -219,6 +223,17 @@ public class AdminService {
 	}
 	public void deleteGoodPlan(@RequestParam Long goodPlan_no){
 		goodPlanDao.delete(goodPlan_no);
+	}
+	
+	public List<GoodContentVo> selectGoodContent(){
+		List<GoodContentVo> selectGoodContent = goodContentDao.selectAll();
+		return selectGoodContent;
+	}
+	public void insertGoodContent(GoodContentVo goodContentVo){
+		goodContentDao.insert(goodContentVo);
+	}
+	public void deleteGoodContent(@RequestParam Long goodContent_no){
+		goodContentDao.delete(goodContent_no);
 	}
 	
 }

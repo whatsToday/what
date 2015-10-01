@@ -34,7 +34,7 @@ public class GoodContentDao {
 		return goodContentVo;
 	}
 	
-	public void delete(Long goodContent_no) {
+	public void delete(long goodContent_no) {
 		sqlMapClientTemplate.delete("goodContent.delete", goodContent_no);
 	}
 	

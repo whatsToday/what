@@ -12,7 +12,7 @@
 	
 	<select id="selectAll" resultClass="GoodContentVo">
 		<![CDATA[
-			select * from goodContent order by goodContent_no desc
+			select * from goodContent
 		]]>
 	</select>
 	
@@ -35,7 +35,7 @@
 	
 	<delete id="delete" parameterClass="java.lang.Long">
 		<![CDATA[
-			delete from gooContent where goodContent_no=#goodContent_no#
+			delete from goodContent where goodContent_no=#goodContent_no#
 		]]>
 	</delete>
 	

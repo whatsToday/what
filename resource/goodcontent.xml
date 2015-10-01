@@ -42,7 +42,7 @@
 	
 	<select id="selectAllByCno" parameterClass="java.lang.Long" resultClass="GoodContentVo">
 		<![CDATA[
-			select * from gooContent where content_no=#content_no# 
+			select * from goodContent where content_no=#content_no# 
 		]]>
 	</select>
 	

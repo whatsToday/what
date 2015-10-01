@@ -1,5 +1,6 @@
 package com.bit2015.what.service;
 
+
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -39,6 +40,17 @@ public class ContentService {
 		return null;
 	}
 	
+	public void selectCntNo(Model model, Long content_no) {
+		List<GoodContentVo> list = goodContentDao.selectAllByCno(content_no);
+		model.addAttribute("goodContent", list.size());
+		return;
+	}	
+	
+	public List<GoodContentVo> selectCntNo(Long content_no){
+		List<GoodContentVo> list = goodContentDao.selectAllByCno(content_no);
+		return list;
+	}
+	
 	public void  insert (CommentsVo commentsVo){
 		commentsDao.insert(commentsVo);
 	}
@@ -51,6 +63,15 @@ public class ContentService {
 	public GoodContentVo selectMno(Long member_no, Long content_no){
 		GoodContentVo goodContentVo = goodContentDao.selectVoCnoMno(content_no, member_no);
 		return goodContentVo;
+	}
+	
+	public void insertGood(HttpSession session, Long content_no, Long member_no){
+		GoodContentVo goodContentVo = new GoodContentVo();
+		MemberVo memberVo = (MemberVo) session.getAttribute("authUser");
+		goodContentVo.setMemberName(memberVo.getMemberName());
+		goodContentVo.setContent_no(content_no);
+		goodContentVo.setMember_no(member_no);
+		goodContentDao.insert(goodContentVo);
 	}
 	
 	

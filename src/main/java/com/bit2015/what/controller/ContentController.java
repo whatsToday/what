@@ -1,6 +1,6 @@
 package com.bit2015.what.controller;
 
-
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -27,6 +27,7 @@ public class ContentController {
 	public String contentView(Model model, HttpSession session, @RequestParam Long content_no) {
 		contentService.getContent(model, content_no);
 		contentService.getComments(model);
+		contentService.selectCntNo(model, content_no);
 		return "content/contentView";
 	}
 	
@@ -57,13 +58,13 @@ public class ContentController {
 	  
 	  @RequestMapping("/like")
 	  @ResponseBody
-	  public void like(@RequestParam Long member_no, @RequestParam Long content_no, Model model){
-		  GoodContentVo goodContentVo = contentService.selectMno(member_no, content_no);
-		  System.out.println("!!!");
-		  if(goodContentVo == null){
+	  public void like(HttpSession session, @RequestParam Long member_no, @RequestParam Long content_no, Model model){
+		  GoodContentVo goodVo = contentService.selectMno(member_no, content_no);
+		  if(goodVo == null){
 			  System.out.println("!");
-		  }  else{
-			  System.out.println("!!");
+			  contentService.insertGood(session, content_no, member_no);
+			  List<GoodContentVo> list = contentService.selectCntNo(content_no);
+			  model.addAttribute("good", list.size());
 		  }
 	  }
 	  

@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<script type="text/javascript" src="/assets/js/board/jquery-1.9.1.min.js"></script>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -22,12 +22,12 @@
 
 
 	<div class="container">
-		<div style="margin:auto;border:solid 1px #69ABED;width:1000px;margin-bottom:50px">
+		<div style="margin:auto;width:1000px;margin-bottom:50px;margin-top:50px">
 		<form method="post" action="/commentwrite">
 			<img src="/assets/img/noimage.jpg" style="width:300px;padding:0px;border:solid 1px #e1e1e1;float:left;margin-bottom:20px">
-			<div style="font-size:15px;float:left;width:630px;margin-left:30px;margin-top:20px;float:left">
+			<div style="font-size:15px;float:left;width:630px;margin-left:30px;margin-top:20px;">
 					<div style="float:left">
-					<h4>title : ${contentVo.title }</h4><img style="width:30px;margin:-2px 0 0 10px" src="/assets/img/like2.jpg"><span style="margin-left:-12px;color:#fff;font-weight:bold">${good }</span>
+					<h4>title : ${contentVo.title }</h4><img style="width:30px;" src="/assets/img/like2.jpg"><span style="margin-left:-12px;color:#fff;font-weight:bold;margin-top:2px">${goodContent }</span>
 					<div style="margin-top:10px">Category : ${contentVo.category }</div>
 					<div style="margin-top:10px">address : ${contentVo.address }</div>
 					<div style="margin-top:10px">phone : ${contentVo.phone }</div>
@@ -35,12 +35,12 @@
 					<input type="hidden" name="content_no" value="${contentVo.content_no }">
 					<input type="hidden" name="memberName" value="${authUser.memberName }">
 <!-- 좋아요 -->
-					<a href="javascript:likeCon(${contentVo.content_no },${authUser.member_no })" id="like"><img src="/assets/img/like.jpg" style="width:70px;margin:10px 0 0 -5px"></a>
+					<a href="javascript:likeCon(${contentVo.content_no },${authUser.member_no })" id="likegood"><img src="/assets/img/like.jpg" style="width:70px;margin:10px 0 0 -5px"></a>
 <!-- 찜하기 -->
 					<a href="/jjim?content_no=${param.content_no}" id="jjim" ><img src="/assets/img/jjim.jpg" style="width:70px;margin:10px 0 0 10px"></a>
 					</div>
 			</div>
-				<div id="staticMap" style="width:1000px;height:350px;margin-top:60px"></div>
+				<div id="staticMap" style="width:1000px;height:300px;margin-top:80px"></div>
 <!-- 댓글 -->
 			<div style="width:1000px;margin:auto;border:solid 2px #69ABED;padding:15px;margin-top:20px;margin-bottom:20px">
 				<c:choose>
@@ -102,12 +102,12 @@ $.ajax({
     success: function(response){
     	lat = response.latitude;
     	lng = response.longitude;
+    	
     	 var mapContainer = document.getElementById('staticMap'), 
  		mapOption = {
  			center : new daum.maps.LatLng(lat, lng), 
  			level : 3
  		};
-  
  		var map = new daum.maps.Map(mapContainer, mapOption);
  			var marker = new daum.maps.Marker({
  				position : new daum.maps.LatLng(lat, lng)
@@ -117,21 +117,6 @@ $.ajax({
  })
  
 </script>
-
-<!-- <script>
-var markerPosition  = new daum.maps.LatLng(33.450701, 126.570667); 
-var marker = {
- position: markerPosition
-};
-var staticMapContainer  = document.getElementById('staticMap'), 
- staticMapOption = { 
-     center: new daum.maps.LatLng(33.450701, 126.570667),
-     level: 3, 
-     marker: marker
- };    
-var staticMap = new daum.maps.StaticMap(staticMapContainer, staticMapOption);
-</script>
- -->
 
 
 
@@ -143,11 +128,11 @@ function likeCon( content_no, member_no){
 	    url:'/like',
 	    data : {
 	    		content_no : content_no,
-	    		member_no : member_no
-	    },
+	    		member_no : member_no,
+	    },	
 	    dataType:'json',
 	    success: function(){
-	    	alert("좋아요를 누르셨습니다.");
+
 	    },
 })
 }
@@ -156,10 +141,12 @@ function likeCon( content_no, member_no){
 $('#jjim').click(function(){
 	alert("오늘 날짜로 등록되었습니다.");
 });
-$('#like').click(function(){
+$('#likegood').click(function(){
 	alert("좋아요를 누르셨습니다 새로고침하면 적용됩니다.");
 });
 </script>
+
+
 
 </body>
 </html>

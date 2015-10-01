@@ -41,7 +41,8 @@ public class GoodContentDao {
 	public List<GoodContentVo> selectAllByCno(Long content_no) {
 		List<GoodContentVo> list=sqlMapClientTemplate.queryForList("goodContent.selectAllByCno", content_no);
 		return list;
-	}public List<GoodContentVo> selectMno(Long member_no) {
+	}
+	public List<GoodContentVo> selectMno(Long member_no) {
 		List<GoodContentVo> list=sqlMapClientTemplate.queryForList("goodContent.selectVoMno", member_no);
 		return list;
 	}

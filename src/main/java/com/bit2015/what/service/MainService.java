@@ -238,8 +238,19 @@ public class MainService {
 		
 	}
 
-	public void insertThemeBox(ThemeBoxVo themeBoxVo) {
-		themeBoxDao.insert(themeBoxVo);
+	public void insertThemeBox(Long[] param, HttpSession session) {
+		MemberVo memberVo = (MemberVo)session.getAttribute("authUser");
+		//초기화 한 후 
+		themeBoxDao.deleteMember(memberVo.getMember_no());
+		//insert
+		ThemeBoxVo themeBoxVo = new ThemeBoxVo();
+		themeBoxVo.setMember_no(memberVo.getMember_no());
+		for (int i = 0; i < param.length; i++) {
+			long theme_no = param[i];
+			themeBoxVo.setTheme_no(theme_no);
+			themeBoxVo.setThemeName(themeDao.selectVo(theme_no).getThemeName());
+			themeBoxDao.insert(themeBoxVo);
+		}
 	}
 
 	public void checkThemeBox(Model model, HttpSession session) {

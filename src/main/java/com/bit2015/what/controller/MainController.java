@@ -135,10 +135,20 @@ public class MainController {
 		return map;
 	}
 	
+//	@RequestMapping("/insertThemeBox")
+//	public String insertThemeBox(ThemeBoxVo themeBoxVo) {
+//		System.out.println(themeBoxVo.toString());
+//		mainService.insertThemeBox(themeBoxVo);
+//		
+//		return "redirect:/";
+//	}
 	@RequestMapping("/insertThemeBox")
-	public String insertThemeBox(ThemeBoxVo themeBoxVo) {
-		System.out.println(themeBoxVo.toString());
-		mainService.insertThemeBox(themeBoxVo);
+	public String insertThemeBox(@RequestParam Long[] param,HttpSession session) {
+		for (int i = 0; i < param.length; i++) {
+			System.out.println(param[i].toString());
+		}
+		
+		mainService.insertThemeBox(param, session);
 		
 		return "redirect:/";
 	}

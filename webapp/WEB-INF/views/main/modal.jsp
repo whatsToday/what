@@ -147,15 +147,23 @@ function checkThemeBox(){
 function submitTm(){
 	var checked = document.getElementsByClassName("checkTm");
 	console.log(checked);
-	//console.log(checked[0].getAttribute("data-no"));
-	var member_no =${authUser.getMember_no()};
-	var theme_no = checked[0].getAttribute("data-no");
-	var themeName = checked[0].getAttribute("data-name");;
 	
-	console.log(member_no+','+theme_no+','+themeName);
+//	var member_no =${authUser.getMember_no()};
+//	var theme_no = checked[0].getAttribute("data-no");
+//	var themeName = checked[0].getAttribute("data-name");;
+
+	var url="/insertThemeBox?param="+checked[0].getAttribute("data-no");
+	
+	for (var i = 1; i < checked.length; i++) {
+		url += "&param="+checked[i].getAttribute("data-no");
+		
+	}
+	location.href=url;
+	
+	
+	//console.log(member_no+','+theme_no+','+themeName);
 	//member_no , theme_no , themeName
 	
-	location.href="/insertThemeBox?member_no="+member_no+"&theme_no="+theme_no+"&themeName="+themeName;
 // 	$.ajax({
 // 		type: "Post",
 // 		url: "/insertThemeBox",

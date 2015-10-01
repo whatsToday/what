@@ -16,11 +16,13 @@ import com.bit2015.what.dao.PlanDao;
 import com.bit2015.what.dao.SearchListDao;
 import com.bit2015.what.dao.ThemeBoxDao;
 import com.bit2015.what.dao.ThemeDao;
+import com.bit2015.what.dao.planCommentsDao;
 import com.bit2015.what.util.FileUploader;
 import com.bit2015.what.vo.CommentsVo;
 import com.bit2015.what.vo.ContentVo;
 import com.bit2015.what.vo.FollowVo;
 import com.bit2015.what.vo.MemberVo;
+import com.bit2015.what.vo.PlanCommentsVo;
 import com.bit2015.what.vo.PlanVo;
 import com.bit2015.what.vo.SearchListVo;
 import com.bit2015.what.vo.ThemeBoxVo;
@@ -44,6 +46,8 @@ public class AdminService {
 	FollowDao followDao;
     @Autowired
     SearchListDao searchListDao;
+    @Autowired
+    planCommentsDao planCommentsDao;
 	// 파일올리는거야
 	FileUploader ful = new FileUploader();
 
@@ -189,5 +193,16 @@ public class AdminService {
 	}
 	public void deleteSearchList(@RequestParam Long searchList_no){
 		searchListDao.delete(searchList_no);
+	}
+	
+	public List<PlanCommentsVo> selectPlanComments(){
+		List<PlanCommentsVo> selectPlanComments = planCommentsDao.selectAll();
+		return selectPlanComments;
+	}
+	public void insertPlanComments(PlanCommentsVo planCommentsVo){
+		planCommentsDao.insert(planCommentsVo);
+	}
+	public void deletePlanComments(@RequestParam Long planComments_no){
+		planCommentsDao.delete(planComments_no);
 	}
 }

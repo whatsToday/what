@@ -16,6 +16,7 @@ import com.bit2015.what.vo.CommentsVo;
 import com.bit2015.what.vo.ContentVo;
 import com.bit2015.what.vo.FollowVo;
 import com.bit2015.what.vo.MemberVo;
+import com.bit2015.what.vo.PlanCommentsVo;
 import com.bit2015.what.vo.PlanVo;
 import com.bit2015.what.vo.SearchListVo;
 import com.bit2015.what.vo.ThemeBoxVo;
@@ -221,4 +222,27 @@ public class AdminController {
     	adminService.deleteSearchList(searchList_no);
     	return "redirect:/admin/searchlist";
     }
+    
+    @RequestMapping("/plancomments")
+    public String planCommentsList(Model model){
+    	List<MemberVo> memberList = adminService.selectMember();
+    	List<PlanVo> planList = adminService.selectPlan();
+    	List<PlanCommentsVo> planCommentsList = adminService.selectPlanComments();
+    	
+        model.addAttribute("memberList",memberList);
+        model.addAttribute("planList",planList);
+        model.addAttribute("planCommentsList",planCommentsList);
+        return "/admin/plancomments";
+    }
+    @RequestMapping("/insertplancomments")
+    public String insertPlanComments(PlanCommentsVo planCommentsVo){
+    	adminService.insertPlanComments(planCommentsVo);
+    	return"redirect:/admin/plancomments";
+    }
+    @RequestMapping("/deleteplancomments")
+    public String deletePalnComments(@RequestParam Long planComments_no){
+    	adminService.deletePlanComments(planComments_no);
+    	return "redirect:/admin/plancomments";
+    }
+    
 }

@@ -14,6 +14,7 @@
 						<td bgcolor="#CCCCCC" align="center">followName</td>
 						<td bgcolor="#CCCCCC" align="center"><b>등록</b></td>
 					</tr>
+					
 			<form action="/admin/insertfollow" method="post">
 					<tr>
 						<td>

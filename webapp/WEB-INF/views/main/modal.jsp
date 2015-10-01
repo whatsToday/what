@@ -32,28 +32,34 @@
 <!-- theme modal -->
 <a id="picktheme" rel="leanModal" href="#themeModal">pickTheme</a>
 <div id="themeModal">
-		   <div class="wsTable" style="border:none; width:100%; height:100%; padding:4px 10px; background-color:#E0F5FF;">
-			     <table>
+		   <div class="wsTable" style="border:none; width:100%; height:780px; padding:4px 10px;">
+			     <table style=" height:100%; ">
 			     	<tr>
-			     		<td bgcolor="#5CB8E6"><font size="6" color="#5CB8E6">테마 고르기</font></td>
+			     		<td height="100px">
+			     		<h1><font size="6" color=" #53A6CF "><b>테마 고르기</b></font></h1>
+			     		<h4><font size="4" color=" #53A6CF "><b>선택하신 테마에 맞게 지도에 추천 장소를 띄워드릴 것입니다.</b></font></h4>
+			     		</td>
 			     	</tr>
 			     	<tr>
-			     		<td>선택하신 테마에 맞게 지도에 추천 장소를 띄워드릴 것입니다.</td>
-			     	</tr>
-			     	<tr><td>검색창</td></tr>
+			     		<td height="42px">
+			     			<div class="searchTm">
+			     				<input type="text" placeholder="search..."></input>
+			     			</div>
+			     		</td>
 					<tr>
-						<td>
+						<td height="530px">
 							<div style="overflow:scroll; width:100%; heigth:100%;">
-							<table style=" border-collapse: separate; border-spacing: 5px;"><tr>
+							<table style="border-collapse: separate; border-spacing: 5px;"><tr>
 								<c:forEach var="theme" items="${themeList }" varStatus="status">
 									<c:if test="${status.index%5==0 }"><tr></tr></c:if>
-									<td class ="themeBox" background="${theme.getImageUrl()}"><strong>${theme.getThemeName()}</strong></td>
+									<td class ="themeBox" background="${theme.getImageUrl()}">
+									<div><strong>${theme.getThemeName()}</strong></div></td>
 								</c:forEach>
 							</tr></table></div>
 						</td>
 					</tr>
 					<tr>
-						<td bgcolor="#5CB8E6" onclick="$('#lean_overlay').click();"><font size="3" color="#fff">완료</font></td>
+						<td style="border-radius: 5px;" height="50px" bgcolor="#5CB8E6" onclick="$('#lean_overlay').click();"><font style="margin:3px auto;" size="4" color="#fff"><b>완료</b></font></td>
 					</tr>
 			     </table>
 		    </div>
@@ -93,7 +99,7 @@ box-shadow: 0px 0px 4px rgba(0,0,0,0.7);
 
 #themeModal {
 width: 50%;
-height: 72%;
+height: 780px;
 /* width: 600px; */
 /* padding: 30px; */
 display: none; 

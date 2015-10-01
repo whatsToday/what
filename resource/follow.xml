@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="follow" >
+    <typeAlias alias="FollowVo" type="com.bit2015.what.vo.FollowVo"/>
+    
+    <insert id="insert" parameterClass="FollowVo">
+        <![CDATA[
+           INSERT INTO FOLLOW VALUES(follow_no_seq.nextval, #member_no#, #followNum#, #memberName#, #followName#)
+        ]]>
+    </insert>
+    <select id="selectAll" resultClass="FollowVo">
+        <![CDATA[
+           SELECT * FROM follow
+        ]]>
+    </select>
+      <delete id="delete" parameterClass="java.lang.Long">
+        <![CDATA[
+           delete from follow where follow_no=#follow_no#
+        ]]>
+    </delete>
+
+</sqlMap>

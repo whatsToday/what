@@ -26,7 +26,7 @@ var circle = new daum.maps.Circle({
 
 //var ket = $('memberTheme.get(0)');
 //console.log(ket);
-searchPlaces();
+//searchPlaces();
 
 
 
@@ -52,7 +52,6 @@ function searchPlaces() {
 		//daum.maps.services.ImageFilter.ALL 
 	}); 
 }
-
 
 function placesSearchCB(status, data, pagination) {
     if (status === daum.maps.services.Status.OK) {

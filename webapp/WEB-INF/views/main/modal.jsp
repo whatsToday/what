@@ -33,7 +33,7 @@
 <a id="picktheme" rel="leanModal" href="#themeModal">pickTheme</a>
 <div id="themeModal">
 		   <div class="wsTable" style="border:none; width:100%; height:780px; padding:4px 10px;">
-			     <table style=" height:100%; ">
+			     <table style="height:100%;">
 			     	<tr>
 			     		<td height="100px">
 			     		<h1><font size="6" color=" #53A6CF "><b>테마 고르기</b></font></h1>
@@ -52,14 +52,15 @@
 							<table style="border-collapse: separate; border-spacing: 5px;"><tr>
 								<c:forEach var="theme" items="${themeList }" varStatus="status">
 									<c:if test="${status.index%5==0 }"><tr></tr></c:if>
-									<td class ="themeBox" background="${theme.getImageUrl()}">
-									<div><strong>${theme.getThemeName()}</strong></div></td>
+									<td class ="themeBox" data-no="${theme.getTheme_no()}" data-name="${theme.getThemeName()}"
+									 onclick="checkTm(this)" background="${theme.getImageUrl()}">
+									<span></span><div><strong>${theme.getThemeName()}</strong></div></td>
 								</c:forEach>
 							</tr></table></div>
 						</td>
 					</tr>
 					<tr>
-						<td style="border-radius: 5px;" height="50px" bgcolor="#5CB8E6" onclick="$('#lean_overlay').click();"><font style="margin:3px auto;" size="4" color="#fff"><b>완료</b></font></td>
+						<td class="submitTm" onclick="submitTm();$('#lean_overlay').click();">완료</td>
 					</tr>
 			     </table>
 		    </div>
@@ -115,13 +116,58 @@ box-shadow: 0px 0px 4px rgba(0,0,0,0.7);
 	
 
 <script type="text/javascript">
+
+
   //$("#login").leanModal();
   $('a[rel*=leanModal]').leanModal();
   $("#join").click();
   
 //   $("#joinModal").on('hide', function(){
 //   });
+function checkTm(theme){
+	
+	if(theme.className.indexOf("checkTm") > -1 ){
+		theme.className = theme.className.split(' ')[0];
+	}else {
+		theme.className += ' checkTm';	
+	}
+	
+}
 
+function submitTm(){
+	var checked = document.getElementsByClassName("checkTm");
+	console.log(checked);
+	//console.log(checked[0].getAttribute("data-no"));
+	var member_no =${authUser.getMember_no()};
+	var theme_no = checked[0].getAttribute("data-no");
+	var themeName = checked[0].getAttribute("data-name");;
+	
+	console.log(member_no+','+theme_no+','+themeName);
+	//member_no , theme_no , themeName
+	
+	
+	$.ajax({
+		type: "Post",
+		url: "/insertThemeBox",
+		data:{
+			member_no : member_no,
+			theme_no : theme_no,
+			themeName : themeName
+		},
+		success: function(response){
+			console.log("insertThemeBox 성공");
+			
+
+		},
+		error:function(jqXHR, textStatus, errorThrown){
+            alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
+            self.close();
+        }
+		
+	});//end ajax1
+	
+	
+}
 </script>
 
 

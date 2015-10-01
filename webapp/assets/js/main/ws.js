@@ -1,4 +1,3 @@
-
 function changeColor(Obj) {
     Obj.style.backgroundColor = '#FED4DE';
     Obj.onmouseout = function(){
@@ -54,7 +53,7 @@ var userLocation;
 		  map.setCenter(userLocation);
 console.log("userLocation = "+userLocation);
 
-
+searchPlaces();
 		  //주변 3km내에 있는 content getcha! 		  
 		//placesNear(1);
 			

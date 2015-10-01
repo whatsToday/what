@@ -87,9 +87,11 @@
 <script>
 //planlist부름
 getMyPlan();
-var $mT = ${memberTheme};
-if($mT==null){
-	
+
+//memberTheme 없으면 띄워드립니다.
+var $mT = ${memberTheme.size()};
+if($mT==0){
+$('#picktheme').click();
 }
 //callContents(plan_no);
 

@@ -235,6 +235,10 @@ public class MainService {
 		
 		
 	}
+
+	public void insertThemeBox(ThemeBoxVo themeBoxVo) {
+		themeBoxDao.insert(themeBoxVo);
+	}
 	
 	
 	

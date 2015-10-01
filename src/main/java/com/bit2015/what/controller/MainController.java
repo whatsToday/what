@@ -17,6 +17,7 @@ import com.bit2015.what.service.MainService;
 import com.bit2015.what.vo.ContentVo;
 import com.bit2015.what.vo.MemberVo;
 import com.bit2015.what.vo.PlanVo;
+import com.bit2015.what.vo.ThemeBoxVo;
 import com.bit2015.what.vo.ThemeVo;
 
 @Controller
@@ -131,5 +132,13 @@ public class MainController {
 		
 		return map;
 	}
+	
+	@RequestMapping("/insertThemeBox")
+	@ResponseBody
+	public void insertThemeBox(ThemeBoxVo themeBoxVo) {
+		System.out.println(themeBoxVo.toString());
+		mainService.insertThemeBox(themeBoxVo);
+	}
+	
 	
 }

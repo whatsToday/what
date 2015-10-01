@@ -17,6 +17,14 @@ public class FollowDao {
     	List<FollowVo> list = sqlMapClientTemplate.queryForList("follow.selectAll");
     	return list;
     }
+    public List<FollowVo> selectUser(Long member_no){
+    	List<FollowVo> list = sqlMapClientTemplate.queryForList("follow.selectUser", member_no);
+    	return list;
+    }
+    public List<FollowVo> selectMe(Long followNum){
+    	List<FollowVo> list = sqlMapClientTemplate.queryForList("follow.selectMe", followNum);
+    	return list;
+    }
     public void insert(FollowVo followVo){
     	sqlMapClientTemplate.insert("follow.insert",followVo);
     }

@@ -3,10 +3,11 @@ package com.bit2015.what.vo;
 public class FollowVo {
 	private long follow_no;
 	private long member_no;
-	private String followNum;
+	private long followNum;
 	private String memberName;
 	private String followName;
-
+	
+	
 	public long getFollow_no() {
 		return follow_no;
 	}
@@ -23,11 +24,11 @@ public class FollowVo {
 		this.member_no = member_no;
 	}
 
-	public String getFollowNum() {
+	public long getFollowNum() {
 		return followNum;
 	}
 
-	public void setFollowNum(String followNum) {
+	public void setFollowNum(long followNum) {
 		this.followNum = followNum;
 	}
 

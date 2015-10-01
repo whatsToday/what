@@ -38,7 +38,7 @@
    
    <update id="update" parameterClass="java.util.Map">
       <![CDATA[
-         update plan set planName = #planName#, message = #message# where plan_no=#plan_no#
+         update plan set titleImage=#titleImage#, planName = #planName#, message = #message# where plan_no=#plan_no#
       ]]>
    </update>
    

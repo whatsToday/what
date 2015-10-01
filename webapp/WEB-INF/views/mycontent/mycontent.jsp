@@ -11,6 +11,7 @@
 <!-- script -->
 <script type="text/javascript" src="/assets/js/board/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=c12b4d88c8259cf4652b89c1f64db8e8&libraries=services"></script>
+<script type="text/javascript" charset="utf-8" src="/assets/js/jquery.leanModal.min.js"></script>
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -24,12 +25,12 @@
 		<div class="mycontent" >
 				<div class="top">
 				<div class="pro"><img class="image_pro" src="${memberVo.imageUrl}"/></div>
-				<ul><li class="soo">5</li><li class="top_menu">팔로잉</li><li><a href="javascript:viewFollowing()">팔로잉보기</a></li></ul>
-				<ul><li class="soo">5</li><li class="top_menu">팔로워</li><li><a href="javascript:viewFollower()">팔로워보기</a></li></ul>
+				<ul><li class="soo">5</li><li class="top_menu">팔로잉</li><li><a href='javascript:viewFollowing("${memberVo.member_no}")'>팔로잉보기</a><ul id="followingList"><c:forEach var="i" items="${followingList}"><li>${i.followingName}</li></c:forEach></ul></li></ul>
+				<ul><li class="soo">5</li><li class="top_menu">팔로워</li><li><a href='javascript:viewFollower("${memberVo.member_no}")'>팔로워보기</a><ul id="followerList"><c:forEach var="i" items="${followerList}"><li>${i.followName }</li></c:forEach></ul></li></ul>
 				<ul><li class="soo">${planList.size()}</li><li class="top_menu">게시물</li><c:if test="${authUser.member_no == param.member_no }"><li><a href="/board/addBoard">게시물쓰기</a></li></c:if></ul>
 				<c:choose>
 				<c:when test="${authUser.member_no == param.member_no}">
-				<div class="pro_modi"><a href="javascript:modify();">프로필 편집</a></div>
+				<div class="pro_modi"><a href="#modifyForm" id="modify">프로필 편집</a></div>
 				</c:when>
 				<c:otherwise>
 				<div class="pro_modi"><a href="javascript:follow();">팔로우하기</a></div>
@@ -38,36 +39,32 @@
 				<div class="pro_name">${memberVo.memberName}</div>
 				</div>
 				<div class="menu">
-					<ul>
+					<ul id="squaresStyle">
 						<li><a href="javascript:squares();"><img src="/assets/img/button/squares.png"/></a></li>
 					</ul>
-					<ul>
-						<li><a href="javascript:menu();"><img src="/assets/img/button/menu.png"/></a></li>
+					<ul id="menuStyle">
+						<li><a href="javascript:menu();"><img src="/assets/img/button/menugray.png"/></a></li>
 					</ul>
-					<ul>
-						<li><a href="javascript:getMap();"><img src="/assets/img/button/map.png"/></a></li>
+					<ul id="mapStyle">
+						<li><a href="javascript:getMap();"><img src="/assets/img/button/mapgray.png"/></a></li>
 					</ul>
 				</div>
 				
 				<div class="content">
 				
 				<c:forEach var="i" items="${planList}">
-				<c:if test="${not empty i.planName && not empty i.message}">
 				<ul class="squares">
 				<li><a href="/board?plan_no=${i.plan_no}"><img src="${i.titleImage}"/></a></li>
 				</ul>
-				</c:if> 
 				</c:forEach>
 				
 				<c:forEach var="i" items="${planList}">
-				<c:if test="${not empty i.planName && not empty i.message}">
 				<ul class="menuView">
 				<img src="${i.titleImage}"/>
 				<li>${i.planName}</li>
 				<li>${i.message}</li>
 				<li id="comment"><a>종아요</a>&nbsp&nbsp<a>댓글</a></li>
 				</ul>
-				</c:if>
 				</c:forEach>
 				<div id="map" style="display:none"></div>
 				</div>
@@ -75,23 +72,71 @@
 		</div>
 	</div>
 	</div>
+	<div id="modifyForm" style="display:none; ">
+				<div style="width:620px;height:300px;background-color:#fff;font-color:#c7c7c7;font-size:15px;padding:10px">
+				<form method="post" action="#">
+					<div style="float:left"><img style="width:300px; height: 250px;" src="${memberVo.imageUrl}"></div><a style="position:fixed;margin-top:260px; margin-left:-300px;"href="javascript:mainPhoto()">사진변경</a><input type="file" id="mainPhoto" style="display:none;">
+					<div>이름</div><input type="text" value="${memberVo.memberName}">
+					<div id="checkPass"><a href="javascript:modifyPassword()">비밀번호 변경</a></div>
+					<div id="pass" style="display:none">
+						 비밀번호<input type="password"></br>
+						 비밀번호 확인<input type="password">
+					</div>
+					<div><input type="submit" value="수정"></div>
+				</form>
+			</div>
+		</div>
 </body>
 <script>
 function squares(){
+	$("#squaresStyle").html('<li><a href="javascript:squares();"><img src="/assets/img/button/squares.png"/></a></li>')
+	$("#menuStyle").html('<li><a href="javascript:menu();"><img src="/assets/img/button/menugray.png"/></a></li>');
+	$("#mapStyle").html('<li><a href="javascript:getMap();"><img src="/assets/img/button/mapgray.png"/></a></li>')
 	$(".squares").show();
 	$(".menuView").hide();
 	$("#map").hide();
 }
 function menu(){
+	$("#squaresStyle").html('<li><a href="javascript:squares();"><img src="/assets/img/button/squaresgray.png"/></a></li>')
+	$("#menuStyle").html('<li><a href="javascript:menu();"><img src="/assets/img/button/menu.png"/></a></li>');
+	$("#mapStyle").html('<li><a href="javascript:getMap();"><img src="/assets/img/button/mapgray.png"/></a></li>')
 	$(".squares").hide();
 	$(".menuView").show();
 	$("#map").hide();
 }
 function getMap(){
+	$("#squaresStyle").html('<li><a href="javascript:squares();"><img src="/assets/img/button/squaresgray.png"/></a></li>')
+	$("#menuStyle").html('<li><a href="javascript:menu();"><img src="/assets/img/button/menugray.png"/></a></li>');
+	$("#mapStyle").html('<li><a href="javascript:getMap();"><img src="/assets/img/button/map.png"/></a></li>')
 	$(".squares").hide();
 	$(".menuView").hide();
 	$("#map").show();
+	map.relayout();
+	
 }
+function mainPhoto(){
+	$("#mainPhoto").click();
+}
+function modifyPassword(){
+	if (confirm('비밀번호를 변경하시겠습니까?')) {
+		$("#pass").show();
+		$("#checkPass").hide();
+	} else {
+		alert('취소되었습니다.');
+		location.reload();
+	}
+} 
+function viewFollowing(num){
+	$("#followingList").toggle();
+}
+function viewFollower(num){
+	$("#followerList").toggle();
+}
+</script>
+<script>
+$(function(){
+	 $('#modify').leanModal({ top: 110, overlay: 0.8, closeButton: ".hidemodal" });
+})
 </script>
 <script>
 //마커를 담을 배열입니다
@@ -105,6 +150,7 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 
 // 지도를 생성합니다    
 var map = new daum.maps.Map(mapContainer, mapOption); 
+
 </script>
 
 </html>

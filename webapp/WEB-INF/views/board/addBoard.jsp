@@ -14,82 +14,120 @@
 <script type="text/javascript" src="/assets/js/board/jquery-1.9.1.min.js"></script>
 <!-- css -->
 <style type="text/css">
-* { margin:0; padding:0;}
-div {
-		padding:10px;
+div.container{
+			margin-top : 5%;
 }
-div#container{
-			   background-color : #ededed;
-			   margin:7% 20%;
-			   width: 50%;
-			   height: 900px;
-			   position: relative;
+div#board{
+			margin : 3% 17% 0% 17%;
+			width:65%;
+			background-color: #ddd;
+			position: relative;
 }
 div#photo {
+			width: 20%;
+			height: 40px;
 			float:left;
-			width: 30%;
-			height: 80px;
+			border: 1px solid #000;
 }
-div#title {
-			height: 80px;
-			width: 65%;
-			margin-left: 32%;
+div#photo img{
+				max-width:100%;
+				max-height:100%;
+				margin-left: 33%;
 }
-div#title input{
-				margin-top:58px;
-				width: 100%;
-				height: 30px;
+div#title {	
+			border: 1px solid #000;
+			height: 40px;
+}
+div#title input[type=text] {
+				width:79.2%;
+				height:20px;
+				margin-top: 8px;
+				
 }
 div#selectPlan{
-				height: 50px;
+			border: 1px solid #000;
+			height: 30px;
 }
-div#selectPlan a{
-				text-decoration: none;
-				color:#000;
+div#selectPlan a#select{
+			border: 1px solid #000;
+			background-color: #fff;
+			text-decoration: none;
+			color:#000;
+			padding:0 150px;
 }
-
-div#selectPlan ul#planList{
-			display:none;
-			list-style: none;
-}
-
-div#map{
-			width: 96.5%;
-			height: 350px;
-}
-div#message {
-			width:96.5%;
-			height: 300px;
-}
-div#message textarea {
-			width:100%;
-			height: 100%;
-			resize:none;
+div#map {
+		border: 1px solid #000;
+		height: 400px;
+		z-index: 0;
 }
 div#submit{
-			float:right;
+		border: 1px solid #000;
 }
+div#submit button{
+ 			border: 1px solid #000;
+ 			float : right;
+ 			background-color: #fdfdfd;
+ 			padding : 15px;
+ 			
+ }
+div#selectPlan ul{
+		z-index: 5;
+		position: relative;
+		list-style: none;
+		background-color: #ededed;
+		margin-top:10px;
+		width: 365px;
+		overflow-x:hidden;
+		overflow-y: scroll;
+		height: 100px;
+}
+div#selectPlan ul li{
+						margin:10px;
+}
+div#selectPlan ul li a{
+						text-decoration: none;
+						color:#000;
+}
+div#message {
+				height: 200px;
+}
+div.container textarea{
+					width:100%;
+					height: 100%;
+					resize:none;
+					
+}
+div#contentPhoto{
+				border: 1px solid #000;
+				padding:10px;
+}
+span:hover{
+			cursor: pointer;
+}		
 </style>
 </head>
 <body>
 <!-- header -->
+<div id="wrapper">
 <c:import url="/WEB-INF/views/include/header.jsp"/>
 <!-- container -->
-<div id="container">
-<div id="photo">사진<button onclick="upload()">사진선택</button><input type="file" id="uploadMainPhoto" style="display:none;"></div>
+<div class="container">
+<div id="photo">사진<button onclick="upload(1)">사진선택</button><input type="file" name="img" id="uploadMainPhoto" style="display:none;"></div>
 <div id="title"><input type="text" id="planName"></div>
 <div id="selectPlan"><a href="javascript:showPlan();">플랜선택</a>
 	<ul id="planList">
-		<c:forEach var="i" items="${planList}">
-		<li><a href="javascript:getPlan(${i.plan_no});">${i.planName}</a></li>
+		<c:forEach var="i" items="${planList}" varStatus="status">
+		<li><a href="javascript:getPlan(${i.plan_no});">${status.count}번째 플랜</a></li>
 		</c:forEach>
 	</ul>
 </div>
 <div id="map">Map</div>
 <div id="message"><textarea id="msg"></textarea></div>
+<div id="msgPhoto"><button onclick="upload(2)">사진선택</button><input type="file" name="img1" id="uploadPhoto" style="display:none;"><a href="javascript:testss()">+</a></div>
 <div id="submit"></div>
 </div>
 <!-- footer -->
+</div>
 </body>
 <script>
 //마커를 담을 배열입니다
@@ -105,11 +143,19 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 var map = new daum.maps.Map(mapContainer, mapOption); 
 </script>
 <script>
+function testss(){
+	$("#msgPhoto").append('<button onclick="upload(2)">사진선택</button><input type="file" name="img1" id="uploadPhoto" style="display:none;"><a href="javascript:testss()">+</a>');
+}
 function showPlan(){
 	$("#planList").toggle();
 }
-function upload(){
-	$('#uploadMainPhoto').click();
+function upload(num){
+	if(num==1){
+		$('#uploadMainPhoto').click();
+	}
+	if(num==2){
+		$('#uploadPhoto').click();	
+	}
 }
 function getPlan(plan_no){
 	removeMarker();
@@ -144,14 +190,14 @@ function addPlan(plan_no){
 	var title = $("#planName").val();
 	var message = $("#msg").val();
 	var member_no;
-	console.log(message);
+	 
 	$.ajax({
 		type : 'get',
 	    url:'/board/addPlan',
 	    data : {
 	    	 title : title,
 	    	 message : message,
-	    	 plan_no : plan_no
+	    	 plan_no : plan_no,
 	    },
 	    dataType:'json',
 	    success: function(response){

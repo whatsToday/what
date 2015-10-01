@@ -14,6 +14,16 @@
            SELECT * FROM follow
         ]]>
     </select>
+        <select id="selectUser" resultClass="FollowVo" parameterClass="java.lang.Long">
+        <![CDATA[
+           SELECT * FROM follow where member_no=#member_no#
+        ]]>
+    </select>
+     <select id="selectMe" resultClass="FollowVo" parameterClass="java.lang.Long">
+        <![CDATA[
+           SELECT * FROM follow where followNum=#followNum#
+        ]]>
+    </select>
       <delete id="delete" parameterClass="java.lang.Long">
         <![CDATA[
            delete from follow where follow_no=#follow_no#

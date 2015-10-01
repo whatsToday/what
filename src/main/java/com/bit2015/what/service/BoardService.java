@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.bit2015.what.dao.ContentBoxDao;
 import com.bit2015.what.dao.ContentDao;
 import com.bit2015.what.dao.PlanDao;
+import com.bit2015.what.util.FileUploader;
 import com.bit2015.what.vo.ContentBoxVo;
 import com.bit2015.what.vo.PlanVo;
 
@@ -20,6 +22,9 @@ public class BoardService {
 	ContentBoxDao contentBoxDao;
 	@Autowired
 	ContentDao contentDao;
+	
+	// 파일올리는거야
+		FileUploader ful = new FileUploader();
 	
 	public List<PlanVo> userPlan(Long member_no){
 		List<PlanVo> list = planDao.getUserPlan(member_no);
@@ -37,7 +42,7 @@ public class BoardService {
 		return cntVo;
 	}
 	public void updatePlan(String planName, String message, Long plan_no){
-		planDao.update(planName, message, plan_no);
+		planDao.update(planName, message, plan_no );
 	}
 	public PlanVo getPlanVo(Long plan_no){
 		PlanVo planVo = planDao.selectVo(plan_no);

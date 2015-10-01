@@ -8,11 +8,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.bit2015.what.dao.CommentsDao;
+import com.bit2015.what.dao.ContentDao;
 import com.bit2015.what.dao.MemberDao;
 import com.bit2015.what.dao.PlanDao;
 import com.bit2015.what.dao.ThemeBoxDao;
 import com.bit2015.what.dao.ThemeDao;
 import com.bit2015.what.util.FileUploader;
+import com.bit2015.what.vo.CommentsVo;
+import com.bit2015.what.vo.ContentVo;
 import com.bit2015.what.vo.MemberVo;
 import com.bit2015.what.vo.PlanVo;
 import com.bit2015.what.vo.ThemeBoxVo;
@@ -28,6 +32,10 @@ public class AdminService {
 	ThemeDao themeDao;
 	@Autowired
 	ThemeBoxDao themeBoxDao;
+	@Autowired
+	ContentDao  contentDao;
+	@Autowired
+	CommentsDao commentsDao;
 
 	// 파일올리는거야
 	FileUploader ful = new FileUploader();
@@ -119,5 +127,38 @@ public class AdminService {
 	public void deleteThemeBox(@RequestParam Long themeBox_no){
 		themeBoxDao.delete(themeBox_no);
 		
+	}
+	//content 조회 
+	public List<ContentVo> selectContent(){
+		List<ContentVo> selectContent = contentDao.selectAll();
+		return selectContent;
+	}
+	// content 등록
+	public void insertContent(ContentVo contentVo, MultipartFile imageUrl){
+		if (imageUrl == null) {
+			contentVo.setImageUrl("");
+		} else {
+			String member_img_url = ful.upload(imageUrl);
+			contentVo.setImageUrl(member_img_url);
+		}
+		System.out.println(contentVo.toString());
+		contentDao.insert(contentVo);
+	}
+	// content 삭제
+	public void deleteContent(@RequestParam Long content_no){
+		contentDao.delete(content_no);
+	}
+	
+	// comments 조회
+	public List<CommentsVo> selectComments(){
+		List<CommentsVo> selectComments = commentsDao.selectAll();
+		return selectComments;
+	}
+	// comments 등록
+	public void insertComments(CommentsVo commentsVo){
+		commentsDao.insert(commentsVo);
+	}
+	public void deleteComments(@RequestParam Long comments_no){
+		commentsDao.delete(comments_no);
 	}
 }

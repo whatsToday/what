@@ -1,7 +1,6 @@
 package com.bit2015.what.dao;
 
 import java.util.HashMap;
-
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +9,7 @@ import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.bit2015.what.vo.ContentVo;
+import com.bit2015.what.vo.MemberVo;
 
 
 @Repository
@@ -66,4 +66,9 @@ public class ContentDao {
 		List<ContentVo> list= sqlMapClientTemplate.queryForList("content.selectAllNear", map);
 		return list;
 	}
+	
+	  public ContentVo getContentVo(long content_no){
+		  ContentVo contentVo = (ContentVo)sqlMapClientTemplate.queryForObject("content.getTitle", content_no);
+		  return contentVo;
+	  }
 }

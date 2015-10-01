@@ -331,4 +331,14 @@ public class AdminController {
     	adminService.deletePlanImg(planImg_no);
     	return "redirect:/admin/planimg";
     }
+    
+    @RequestMapping("/getTitle")
+	@ResponseBody
+	public ContentVo getTitle(@RequestParam(required=false) Long content_no) {
+			
+    	ContentVo contentVo = adminService.getTitle(content_no);
+				return contentVo;
+			
+			
+			}
 }

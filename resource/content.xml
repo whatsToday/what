@@ -39,6 +39,12 @@
 	  ]]>
 	</delete>
 	
+	    <select id="getTitle" resultClass="ContentVo" parameterClass="java.lang.Long">
+        <![CDATA[
+           SELECT * FROM content WHERE content_no=#content_no#
+        ]]>
+    </select>
+	
 <!-- 	<select id="selectAllByDist" parameterMap="java.util.Map" resultClass="ContentVo"> -->
 <!-- 	  <![CDATA[ -->
 <!-- 	    SELECT * FROM content  -->

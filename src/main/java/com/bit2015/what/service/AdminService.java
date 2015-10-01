@@ -118,7 +118,7 @@ public class AdminService {
 	public void deletePlan(Long plan_no) {
 		planDao.delete(plan_no);
 	}
-     // onchange 할때 ajax를 사용하기 위해하거야 
+     // onchange memberName할때 ajax를 사용하기 위해하거야 
 	public MemberVo getMemberName(Long member_no) {
 		MemberVo memberVo = memberDao.getMemberVo(member_no);
 		return memberVo;
@@ -271,4 +271,10 @@ public class AdminService {
     public void deletePlanImg(@RequestParam Long planImg_no){
     	planImgDao.delete(planImg_no);
     }
+    
+    // onchange title할때 ajax를 사용하기 위해하거야 
+	public ContentVo getTitle(Long content_no) {
+		ContentVo contentVo = contentDao.getContentVo(content_no);
+		return contentVo;
+	}
 }

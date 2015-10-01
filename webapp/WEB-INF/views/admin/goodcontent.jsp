@@ -13,12 +13,12 @@
 					    <td bgcolor="#CCCCCC" align="center">content_no</td>
 						<td bgcolor="#CCCCCC" align="center">멤버번호</td>
 						<td bgcolor="#CCCCCC" align="center">멤버이름</td>
-						<td bgcolor="#CCCCCC" align="center">타이틀</td>
+						<td bgcolor="#CCCCCC" align="center"style="width: 120px">타이틀</td>
 						<td bgcolor="#CCCCCC" align="center">등록</td>
 					</tr>
 					<tr>
 					<td>
-						<select name="content_no">
+						<select name="content_no" onchange="changeContent(this.value)">
 							 <c:forEach var="vo" items="${contentList}">
 							  <option value="${vo.getContent_no()}">${vo.getContent_no()}</option>
 							 </c:forEach>
@@ -28,13 +28,12 @@
 						<select name="member_no" onchange="changeEvent(this.value)">
 							 <c:forEach var="vo" items="${memberList}">
 							  <option value="${vo.getMember_no()}">${vo.getMember_no()}</option>
-							<%--   <option value="${vo.getMember_no()}">${vo.getMemberName()}</option> --%>
 							 </c:forEach>
 					  </select> 
 							
 						</td>
 						<td><input size="10" type="text" id=memberName name="memberName" readonly="readonly"></td>
-						<td><input size="10" type="text" name="title"></td>
+						<td><input size="10" type="text" id="title" name="title" readonly="readonly"></td>
 						<td><input type="submit" value="등록"></td>
 					</tr>
 				</table>
@@ -77,4 +76,17 @@
 			    } 
 			 })
 	    } 
+	    function changeContent(val){
+	 	   $.ajax({
+	 		   type :'get',
+	 		   url  :'/admin/getTitle',
+	 		   data :{
+	 			   content_no:val
+	 		   },
+	 		   dataType:'json',
+	 		   success:function(response){
+	 			   $("#title").val(response.title);
+	 		   }
+	 	   })
+	    }
 	</script>

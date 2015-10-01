@@ -19,5 +19,6 @@
  	<sqlMap resource="follow.xml"/>
  	<sqlMap resource="searchList.xml"/>
  	<sqlMap resource="planComments.xml"/>
+ 	<sqlMap resource="goodplan.xml"/>
  	
 </sqlMapConfig>

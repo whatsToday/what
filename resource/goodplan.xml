@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="goodPlan" >
+    <typeAlias alias="GoodPlanVo" type="com.bit2015.what.vo.GoodPlanVo"/>
+    
+    <insert id="insert" parameterClass="GoodPlanVo">
+        <![CDATA[
+          INSERT INTO GOODPLAN VALUES(goodPlan_no_seq.nextval, #plan_no#, #member_no#, #memberName#, #planName#)
+        ]]>
+    </insert>
+    <select id="selectAll" resultClass="GoodPlanVo">
+        <![CDATA[
+           SELECT * FROM GOODPLAN
+        ]]>
+    </select>
+ 
+      <delete id="delete" parameterClass="java.lang.Long">
+        <![CDATA[
+           delete from GOODPLAN where goodPlan_no=#goodPlan_no#
+        ]]>
+    </delete>
+	
+</sqlMap>

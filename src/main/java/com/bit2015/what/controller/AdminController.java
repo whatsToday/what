@@ -15,6 +15,7 @@ import com.bit2015.what.service.AdminService;
 import com.bit2015.what.vo.CommentsVo;
 import com.bit2015.what.vo.ContentVo;
 import com.bit2015.what.vo.FollowVo;
+import com.bit2015.what.vo.GoodPlanVo;
 import com.bit2015.what.vo.MemberVo;
 import com.bit2015.what.vo.PlanCommentsVo;
 import com.bit2015.what.vo.PlanVo;
@@ -244,5 +245,26 @@ public class AdminController {
     	adminService.deletePlanComments(planComments_no);
     	return "redirect:/admin/plancomments";
     }
-    
+    @RequestMapping("goodplan")
+    public String goodPlanList(Model model){
+    	List<GoodPlanVo> goodPlanList=adminService.selectGoodPlan();
+    	List<MemberVo>   memberList = adminService.selectMember();
+    	List<PlanVo>     planList = adminService.selectPlan();
+    	
+    	model.addAttribute("memberList",memberList);
+    	model.addAttribute("planList",planList);
+    	model.addAttribute("goodPlanList",goodPlanList);
+    	
+    	return "/admin/goodplan";
+    }
+    @RequestMapping("insertgoodplan")
+    public String insertGoodPlan(GoodPlanVo goodPlanVo){
+    	adminService.insertGoodPlan(goodPlanVo);
+    	return "redirect:/admin/goodplan";
+    }
+    @RequestMapping("deletegoodplan")
+    public String deleteGoodPlan(@RequestParam Long goodPlan_no){
+    	adminService.deleteGoodPlan(goodPlan_no);
+    	return"redirect:/admin/goodplan";
+    }
 }

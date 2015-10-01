@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<link href="/assets/css/main/ws.css" rel="stylesheet" />
 <!-- join  modal -->
 <%-- <c:if test="${not empty authUser }"> --%>
 <!-- <a id="join" rel="leanModal" href="#joinModal">join header</a> -->
@@ -32,21 +32,28 @@
 <!-- theme modal -->
 <a id="picktheme" rel="leanModal" href="#themeModal">pickTheme</a>
 <div id="themeModal">
-		   <div class="wsTable" style="border:none; width:100%; height:100%;">
+		   <div class="wsTable" style="border:none; width:100%; height:100%; padding:4px 10px; background-color:#E0F5FF;">
 			     <table>
 			     	<tr>
-			     		<td colspan="5">선택하신 테마에 맞게 지도에 추천 장소를 띄워드릴 것입니다.</td>
+			     		<td bgcolor="#5CB8E6"><font size="6" color="#5CB8E6">테마 고르기</font></td>
 			     	</tr>
-			     	<tr><td colspan="5">검색창</td></tr>
+			     	<tr>
+			     		<td>선택하신 테마에 맞게 지도에 추천 장소를 띄워드릴 것입니다.</td>
+			     	</tr>
+			     	<tr><td>검색창</td></tr>
 					<tr>
-						<c:forEach var="theme" items="${themeList }" varStatus="status">
-							<c:if test="${status.index%5==0 }"><tr></tr></c:if>
-							<td>${theme.getThemeName()}${theme.getImageUrl()}</td>
-<!-- 							bgcolor=imagurl  -->
-						</c:forEach>
+						<td>
+							<div style="overflow:scroll; width:100%; heigth:100%;">
+							<table style=" border-collapse: separate; border-spacing: 5px;"><tr>
+								<c:forEach var="theme" items="${themeList }" varStatus="status">
+									<c:if test="${status.index%5==0 }"><tr></tr></c:if>
+									<td class ="themeBox" background="${theme.getImageUrl()}"><strong>${theme.getThemeName()}</strong></td>
+								</c:forEach>
+							</tr></table></div>
+						</td>
 					</tr>
 					<tr>
-						<td colspan="5"><button onclick="$('#lean_overlay').click();$('#themeModal').hide();">선택 끝</button></td>
+						<td bgcolor="#5CB8E6" onclick="$('#lean_overlay').click();"><font size="3" color="#fff">완료</font></td>
 					</tr>
 			     </table>
 		    </div>
@@ -85,8 +92,8 @@ box-shadow: 0px 0px 4px rgba(0,0,0,0.7);
 }
 
 #themeModal {
-width: 716px;
-height: 430px;
+width: 50%;
+height: 72%;
 /* width: 600px; */
 /* padding: 30px; */
 display: none; 

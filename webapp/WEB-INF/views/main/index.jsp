@@ -87,7 +87,10 @@
 <script>
 //planlist부름
 getMyPlan();
-
+var $mT = ${memberTheme};
+if($mT==null){
+	
+}
 //callContents(plan_no);
 
 </script>

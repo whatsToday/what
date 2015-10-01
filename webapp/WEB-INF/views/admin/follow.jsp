@@ -17,21 +17,28 @@
 			<form action="/admin/insertfollow" method="post">
 					<tr>
 						<td>
-							<select name="member_no">
+							<select name="member_no" onchange="changeMember(this.value)">
 							 <c:forEach var="vo" items="${memberList}">
 							  <option value="${vo.getMember_no()}">${vo.getMember_no()}</option>
 							 </c:forEach>
 							</select>
 						</td>
 					<td>
-						   <input size="10" type="text" name="followNum">
+						   	<select name="followNum" onchange="changeFollow(this.value)">
+				           <c:if test="${vo.member_no !=vo.getMember_no() }"> 
+							 <c:forEach var="vo" items="${memberList}">
+							  <option id="vlaue" value="${vo.getMember_no()}">${vo.getMember_no()}</option>
+							
+							 </c:forEach>
+			              </c:if>
+							</select>
 					</td>
 					<td>
-						   <input size="10" type="text" name="memberName">
+						   <input size="10" type="text" id="memberName" name="memberName" readonly="readonly">
 				     </td>
 					
 						<td>
-						   <input size="10" type="text" name="followName">
+						   <input size="10" type="text" id="followName" name="followName" readonly="readonly">
 						</td>
 						<td><input size="10" type="submit" value="등록"></td>
 					</tr>
@@ -60,4 +67,36 @@
 				</table>
 		</td>
 	</tr>
+<script>
+      function changeMember(val){
+    	 $.ajax({
+    		 type:'get',
+    		 url :'/admin/getMemberName',
+    		 data:{
+    			 member_no : val
+    		 },
+    		 dataType : 'json',
+    		 success  : function(response){
+    			 $("#memberName").val(response.memberName);
+    		 } 
+    	 })
+    	 
+      }
+      
+      function changeFollow(val){
+     	 $.ajax({
+     		 type:'get',
+     		 url :'/admin/getMemberName',
+     		 data:{
+     			followNum : val
+     		 },
+     		 dataType : 'json',
+     		 success  : function(response){
+     			 $("#followName").val(response.memberName);
+     		 } 
+     	 })
+     	 
+       }
+      
+</script>
 				

@@ -87,12 +87,15 @@ public class AdminController {
 
 	@RequestMapping("/getMemberName")
 	@ResponseBody
-	public MemberVo getMemberName(@RequestParam Long member_no) {
-		MemberVo memberVo = adminService.getMemberName(member_no);
-		return memberVo;
-
-	}
-
+	public MemberVo getMemberName(@RequestParam(required=false) Long member_no, @RequestParam(required=false) Long followNum) {
+			if(member_no==null){
+				MemberVo memberVo = adminService.getMemberName(followNum);
+				return memberVo;
+			}else{
+				MemberVo memberVo = adminService.getMemberName(member_no);
+				return memberVo;
+			}
+		}
 	@RequestMapping("/theme")
 	public String themeList(Model model) {
 		List<ThemeVo> themeList = adminService.selectTheme();

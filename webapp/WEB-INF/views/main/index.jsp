@@ -95,5 +95,8 @@ $('#picktheme').click();
 }
 //callContents(plan_no);
 
+//이미 등록된 테마는 check 표시해줌
+checkThemeBox();
+
 </script>
 </html>

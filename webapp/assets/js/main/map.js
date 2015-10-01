@@ -59,8 +59,8 @@ function placesSearchCB(status, data, pagination) {
         displayPlaces(data.places);
         displayPagination(pagination);
 
-    } else if (status === daum.maps.services.Status.ZERO_RESULT) {  alert('검색 결과가 존재하지 않습니다.');   return;
-    } else if (status === daum.maps.services.Status.ERROR) {   alert('검색 결과 중 오류가 발생했습니다.');  return;
+    } else if (status === daum.maps.services.Status.ZERO_RESULT) {  alert('지도 검색 결과가 존재하지 않습니다.');   return;
+    } else if (status === daum.maps.services.Status.ERROR) {   alert('지도 검색 결과 중 오류가 발생했습니다.');  return;
     }
 }
 

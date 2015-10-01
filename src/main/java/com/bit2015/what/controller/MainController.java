@@ -37,6 +37,8 @@ public class MainController {
 
 		//선택창에 띄울 테마들 다 가져오는중
 		mainService.callTheme(model);
+		//themeBox 뒤지는 중
+		mainService.checkThemeBox(model,session);
 		
 		return "/main/index";
 		
@@ -134,10 +136,11 @@ public class MainController {
 	}
 	
 	@RequestMapping("/insertThemeBox")
-	@ResponseBody
-	public void insertThemeBox(ThemeBoxVo themeBoxVo) {
+	public String insertThemeBox(ThemeBoxVo themeBoxVo) {
 		System.out.println(themeBoxVo.toString());
 		mainService.insertThemeBox(themeBoxVo);
+		
+		return "redirect:/";
 	}
 	
 	

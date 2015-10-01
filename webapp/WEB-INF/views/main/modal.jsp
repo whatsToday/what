@@ -52,9 +52,9 @@
 							<table style="border-collapse: separate; border-spacing: 5px;"><tr>
 								<c:forEach var="theme" items="${themeList }" varStatus="status">
 									<c:if test="${status.index%5==0 }"><tr></tr></c:if>
-									<td class ="themeBox" data-no="${theme.getTheme_no()}" data-name="${theme.getThemeName()}"
-									 onclick="checkTm(this)" background="${theme.getImageUrl()}">
-									<span></span><div><strong>${theme.getThemeName()}</strong></div></td>
+											<td id="theme_no_${theme.getTheme_no()}" class ="themeBox" data-no="${theme.getTheme_no()}" data-name="${theme.getThemeName()}"
+											 onclick="checkTm(this)" background="${theme.getImageUrl()}">
+											<span></span><div><strong>${theme.getThemeName()}</strong></div></td>
 								</c:forEach>
 							</tr></table></div>
 						</td>
@@ -133,6 +133,16 @@ function checkTm(theme){
 	}
 	
 }
+  ${ themeBoxList}  
+function checkThemeBox(){
+	var themeList =document.getElementsByClassName("themeBox");
+ 	var $themeBoxList = ${themeBoxList} // $('themeBoxList');
+	
+	for (var i = 0; i < $themeBoxList.length; i++) {
+		document.getElementById('theme_no_'+$themeBoxList[i].theme_no).className  += ' checkTm';	
+		console.log(document.getElementById('theme_no_'+$themeBoxList[i].theme_no));
+	}
+}
 
 function submitTm(){
 	var checked = document.getElementsByClassName("checkTm");
@@ -145,26 +155,31 @@ function submitTm(){
 	console.log(member_no+','+theme_no+','+themeName);
 	//member_no , theme_no , themeName
 	
-	
-	$.ajax({
-		type: "Post",
-		url: "/insertThemeBox",
-		data:{
-			member_no : member_no,
-			theme_no : theme_no,
-			themeName : themeName
-		},
-		success: function(response){
-			console.log("insertThemeBox 성공");
+	location.href="/insertThemeBox?member_no="+member_no+"&theme_no="+theme_no+"&themeName="+themeName;
+// 	$.ajax({
+// 		type: "Post",
+// 		url: "/insertThemeBox",
+// 		data:{
+// 			member_no : member_no,
+// 			theme_no : theme_no,
+// 			themeName : themeName
+// 		},
+// 		success: function(response){
+// 			console.log("insertThemeBox 성공");
+			
+// 			//다시 테마 해논거 체크유무 설정 해주기.
+// 			checkThemeBox();
+			
+// 			location.reload();
 			
 
-		},
-		error:function(jqXHR, textStatus, errorThrown){
-            alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
-            self.close();
-        }
+// 		},
+// 		error:function(jqXHR, textStatus, errorThrown){
+//             alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
+//             self.close();
+//         }
 		
-	});//end ajax1
+// 	});//end ajax1
 	
 	
 }

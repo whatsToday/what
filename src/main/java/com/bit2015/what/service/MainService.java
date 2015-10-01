@@ -34,6 +34,8 @@ import com.bit2015.what.vo.MemberVo;
 import com.bit2015.what.vo.PlanVo;
 import com.bit2015.what.vo.ThemeBoxVo;
 import com.bit2015.what.vo.ThemeVo;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 @Service
@@ -239,8 +241,27 @@ public class MainService {
 	public void insertThemeBox(ThemeBoxVo themeBoxVo) {
 		themeBoxDao.insert(themeBoxVo);
 	}
+
+	public void checkThemeBox(Model model, HttpSession session) {
+		MemberVo memberVo = (MemberVo)session.getAttribute("authUser");
+		List<ThemeBoxVo> themeBoxList = themeBoxDao.selectAllByMm(memberVo.getMember_no());
+		String json=jsonn((ArrayList<?>) themeBoxList);
+		
+		model.addAttribute("themeBoxList", json);
+	}
 	
-	
+	public String jsonn(ArrayList<?> list) {
+		String jsonn = "";
+
+		ObjectMapper objectMapper = new ObjectMapper();
+		try {
+			jsonn = objectMapper.writeValueAsString(list);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+
+		return jsonn;
+	}
 	
 }// main Service
 

@@ -5,7 +5,7 @@ public class ThemeBoxVo {
 	private long themeBox_no;
 	private long member_no;
 	private long theme_no;
-	private String ThemeName;
+	private String themeName;
 	public long getThemeBox_no() {
 		return themeBox_no;
 	}
@@ -25,18 +25,17 @@ public class ThemeBoxVo {
 		this.theme_no = theme_no;
 	}
 	public String getThemeName() {
-		return ThemeName;
+		return themeName;
 	}
 	public void setThemeName(String themeName) {
-		ThemeName = themeName;
+		this.themeName = themeName;
 	}
 	@Override
 	public String toString() {
 		return "ThemeBoxVo [themeBox_no=" + themeBox_no + ", member_no="
-				+ member_no + ", theme_no=" + theme_no + ", ThemeName="
-				+ ThemeName + "]";
+				+ member_no + ", theme_no=" + theme_no + ", themeName="
+				+ themeName + "]";
 	}
-	
 	
 
 }

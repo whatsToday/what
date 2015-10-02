@@ -20,7 +20,6 @@
 <div id="wrapper">
 		<c:import url="/WEB-INF/views/include/header.jsp"/> 
 
-
 	<div class="container">
 		<div style="margin:auto;width:1000px;margin-bottom:50px;margin-top:50px">
 		<form method="post" action="/commentwrite">
@@ -80,6 +79,10 @@
 			</div>
 	</div>
 </div>
+
+
+
+
 
 
 
@@ -145,8 +148,6 @@ $('#likegood').click(function(){
 	alert("좋아요를 누르셨습니다 새로고침하면 적용됩니다.");
 });
 </script>
-
-
 
 </body>
 </html>

@@ -52,17 +52,17 @@ color: #000;
 #nav li ul li .pink,
 #nav li ul li a.pink,
 #nav li ul li a.pink:hover  {
-color: #fb6f92; 
+color: #69ABED; 
 }
 /* Menu Item background color on hover */
 #nav li a:hover, 
 #nav li ul li a:hover  {
-background: #fb6f92; 
+background: #69ABED; 
 color:#fff;
 }
 #nav li a.pink:hover, 
 #nav li ul li a.pink:hover  {
-background: #fb6f92; 
+background: #69ABED; 
 color:#fff;
 }
 /* Text Shadow */
@@ -227,7 +227,7 @@ line-height: 27px;
 padding-left: 10px;
 padding-right: 10px;
 width: 150px;
-border: 2px solid #ff86a4;
+border: 2px solid #69ABED;
 outline: none;
 -webkit-border-radius: 2em;
 -moz-border-radius: 2em;

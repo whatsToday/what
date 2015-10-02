@@ -28,7 +28,7 @@ public class ContentController {
 		contentService.getContent(model, content_no);
 		contentService.getComments(model);
 		contentService.selectCntNo(model, content_no);
-		return "content/contentView";
+		return "/content/contentView";
 	}
 	
 	 @RequestMapping("/commentwrite")
@@ -55,7 +55,7 @@ public class ContentController {
 		  return vo;	  
 	  }
 	  
-	  
+//		좋아요
 	  @RequestMapping("/like")
 	  @ResponseBody
 	  public void like(HttpSession session, @RequestParam Long member_no, @RequestParam Long content_no, Model model){
@@ -68,12 +68,20 @@ public class ContentController {
 		  }
 	  }
 	  
-
-	  
+//		찜하기 (미구현)
 	  @RequestMapping("/jjim")
 	  public String jjim(HttpSession session, @RequestParam Long content_no){
 		  contentService.saveItem(session, content_no);
 		  return "redirect:/contentView?content_no="+content_no;
 	  }
+	  
+	  @RequestMapping("/test")
+	  public String test(){
+		  return "/content/test";
+	  }	  
 
+	  @RequestMapping("/test2")
+	  public String test2(){
+		  return "/content/test2";
+	  }	  
 }

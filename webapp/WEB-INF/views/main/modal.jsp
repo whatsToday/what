@@ -125,6 +125,8 @@ box-shadow: 0px 0px 4px rgba(0,0,0,0.7);
 //   $("#joinModal").on('hide', function(){
 //   });
 function checkTm(theme){
+	var checkList =document.getElementsByClassName("checkTm");
+	console.log(checkList);
 	
 	if(theme.className.indexOf("checkTm") > -1 ){
 		theme.className = theme.className.split(' ')[0];
@@ -156,7 +158,6 @@ function submitTm(){
 	
 	for (var i = 1; i < checked.length; i++) {
 		url += "&param="+checked[i].getAttribute("data-no");
-		
 	}
 	location.href=url;
 	

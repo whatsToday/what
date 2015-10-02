@@ -45,17 +45,6 @@
         ]]>
     </select>
 	
-<!-- 	<select id="selectAllByDist" parameterMap="java.util.Map" resultClass="ContentVo"> -->
-<!-- 	  <![CDATA[ -->
-<!-- 	    SELECT * FROM content  -->
-	    
-<!-- 	    where 6371 * ACOS(COS( #lat# * 0.017453293 ) * COS( LATITUDE * 0.017453293 )* COS( (LONGITUDE * 0.017453293) -->
-<!-- 	     - (#lng# * 0.017453293))+ SIN( #lat# * 0.017453293 )* SIN( LATITUDE * 0.017453293 ))  -->
-	     
-<!-- 	     < #distance# -->
-<!-- 	  ]]> -->
-<!-- 	</select> -->
-	
 	<select id="selectAllNear" parameterClass="java.util.Map" resultClass="ContentVo">
 	  <![CDATA[
 	   SELECT 	* 
@@ -68,7 +57,29 @@
         		* COS( (r.LONGITUDE * 0.017453293) - (#lng# * 0.017453293))
         		+ SIN( #lat# * 0.017453293 )
         		* SIN( r.LATITUDE * 0.017453293 )
-    	) < #distance#;
+    	) < #distance#
+	  ]]>
+	</select>
+	
+	<select id="selectAllNearWithTheme" parameterClass="java.util.Map" resultClass="ContentVo">
+	  <![CDATA[
+	  	SELECT 	* 
+		FROM 	( select cbc.* from (select c.* from 	(select cbb.* from 	(select content_no from content where category like '%'||#themeName#||'%') cno,
+																			(select plan_no from plan where message is not null) pno,
+																			contentbox cbb
+														where	cno.content_no = cbb.content_no and
+																pno.plan_no = cbb.plan_no) cb, 
+														content c 
+									where cb.CONTENT_NO=c.CONTENT_NO) cbc,
+  			 						(select content_no, count(plan_no) as cnt from contentbox group by content_no order by cnt desc) aa 
+			 		where cbc.content_no = aa.content_no) r
+		where 6371 * ACOS(
+        		COS( #lat# * 0.017453293 )
+        		* COS( r.LATITUDE * 0.017453293 )
+        		* COS( (r.LONGITUDE * 0.017453293) - (#lng# * 0.017453293))
+        		+ SIN( #lat# * 0.017453293 )
+        		* SIN( r.LATITUDE * 0.017453293 )
+    	) < #distance#
 	  ]]>
 	</select>
 	

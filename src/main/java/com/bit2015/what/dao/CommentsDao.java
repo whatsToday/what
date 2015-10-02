@@ -18,7 +18,10 @@ public class CommentsDao {
 		List<CommentsVo> list= sqlMapClientTemplate.queryForList("comments.selectAll");
 		return list;
 	}
-	
+	public List<CommentsVo> selectAllByCno(Long content_no){
+		List<CommentsVo> list= sqlMapClientTemplate.queryForList("comments.selectAllByCno",content_no);
+		return list;
+	}
 	public CommentsVo selectVo(Long content_no ) {
 		CommentsVo vo = (CommentsVo) sqlMapClientTemplate.queryForObject("comments.selectVo",content_no);
 		return vo;

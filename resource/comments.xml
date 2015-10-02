@@ -8,13 +8,16 @@
        select * from comments order by comments_no desc
     ]]>
 	</select>
-	
+	<select id="selectAllByCno" resultClass="CommentsVo">
+    <![CDATA[
+       select * from comments where content_no = #content_no# order by comments_no desc
+    ]]>
+	</select>
 	<select id="selectVo" parameterClass="java.lang.Long" resultClass="CommentsVo">
     <![CDATA[
        select * from comments where comments_no=#comments_no#
     ]]>
 	</select>
-	
 	<insert id="insert" parameterClass="CommentsVo">
 		<![CDATA[
 			insert INTO comments VALUES(comments_no_seq.nextval,#member_no#,#content_no#,#memberName#,#message# ,sysdate)

@@ -20,16 +20,6 @@ var circle = new daum.maps.Circle({
 });
 
 
-//themeSearch($('#theme_0').get(0).innerText);
-//circle.setPosition(map.getCenter());
-//alert();
-
-//var ket = $('memberTheme.get(0)');
-//console.log(ket);
-//searchPlaces();
-
-
-
 
 
 
@@ -39,6 +29,13 @@ function searchPlaces() {
         alert('키워드를 입력해주세요!');
         return false;
     }
+    
+    circle.setMap(null);
+	circle.setPosition(userLocation);
+	//circle.setRadius(distance*1000);
+	circle.setRadius(150);
+	circle.setMap(map);	
+	
     ps.keywordSearch( keyword, placesSearchCB, {
 	
 		location: map.getCenter(),
@@ -58,7 +55,7 @@ function placesSearchCB(status, data, pagination) {
     	
         displayPlaces(data.places);
         displayPagination(pagination);
-
+        console.log(pagination);
     } else if (status === daum.maps.services.Status.ZERO_RESULT) {  alert('지도 검색 결과가 존재하지 않습니다.');   return;
     } else if (status === daum.maps.services.Status.ERROR) {   alert('지도 검색 결과 중 오류가 발생했습니다.');  return;
     }
@@ -241,7 +238,7 @@ function displayInfowindow2(marker, items, index) {
 				},
 				success: function(response){
 					//좋아요 갯수, 댓글 갯수 
-					content += '<tr><td>'+'&hearts; = 0'+'</td><td>'+'댓글 갯수'+'</td></tr>';
+					content += '<tr><td>'+'&hearts; = '+response.good+'</td><td> 댓글 = '+response.comments+'</td></tr>';
 					
 					//플랜 수집
 					content += '<tr><th class="wshd" colspan="2">후기 게시판</th></tr>';
@@ -250,17 +247,17 @@ function displayInfowindow2(marker, items, index) {
 							if(response.planList.length%2==0){
 								for ( var i in response.planList) {
 											if(i%2==0){
-											content += '<tr><td onmouseover="changeColor(this)" id="'+response.planList[i].plan_no+'" onclick="showplan(this)"><b>'+response.planList[i].plan_no+'</b> 번 후기</td>';
+											content += '<tr><td id="'+response.planList[i].plan_no+'" onclick="showplan(this)"><b>'+response.planList[i].plan_no+'</b> 번 후기</td>';
 											}else{
-												content += '<td onmouseover="changeColor(this)" id="'+response.planList[i].plan_no+'" onclick="showplan(this)"><b>'+response.planList[i].plan_no+'</b> 번 후기</td></tr>';
+												content += '<td id="'+response.planList[i].plan_no+'" onclick="showplan(this)"><b>'+response.planList[i].plan_no+'</b> 번 후기</td></tr>';
 											}
 								}
 							}else{
 								for ( var i in response.planList) {
 											if(i%2==0){
-											content += '<tr><td onmouseover="changeColor(this)" id="'+response.planList[i].plan_no+'" onclick="showplan(this)"><b>'+response.planList[i].plan_no+'</b> 번 후기</td>';
+											content += '<tr><td id="'+response.planList[i].plan_no+'" onclick="showplan(this)"><b>'+response.planList[i].plan_no+'</b> 번 후기</td>';
 											}else{
-												content += '<td onmouseover="changeColor(this)" id="'+response.planList[i].plan_no+'" onclick="showplan(this)"><b>'+response.planList[i].plan_no+'</b> 번 후기</td></tr>';
+												content += '<td id="'+response.planList[i].plan_no+'" onclick="showplan(this)"><b>'+response.planList[i].plan_no+'</b> 번 후기</td></tr>';
 											}
 								}
 									content += '</tr>';

@@ -30,7 +30,7 @@ public class MainController {
 	@RequestMapping
 	public String index(Model model, HttpSession session) {
 		if(session.getAttribute("authUser") != null){
-			System.out.println("session이 있습니다.");
+//			System.out.println("session이 있습니다.");
 
 		//authUser의 기존 관심사 가져오는중
 		mainService.memberTheme(model, session);
@@ -43,7 +43,7 @@ public class MainController {
 		return "/main/index";
 		
 		}else{
-			System.out.println("session이 없습니다. 회원가입 페이지로 이동합니다");
+//			System.out.println("session이 없습니다. 회원가입 페이지로 이동합니다");
 			
 		return "/main/join";
 		}
@@ -65,10 +65,10 @@ public class MainController {
 		
 		boolean Bo = mainService.login(session, memberVo);
 		if(Bo){
-			System.out.println("로그인 되었습니다.");
+//			System.out.println("로그인 되었습니다.");
 			return "redirect:/";
 		}else{
-			System.out.println("등록된 회원이 없습니다.");
+//			System.out.println("등록된 회원이 없습니다.");
 			return "redirect:/?a=error";
 			
 		}
@@ -105,7 +105,6 @@ public class MainController {
 	public Map<String, Object> getMyPlan(HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
 
-		//List<PlanVo> MyPlanList = mainService.getMyPlan(session);
 		List<PlanVo> MyPlanList = mainService.getMyPlan(session);
 		
 		map.put("MyPlanList", MyPlanList);
@@ -136,23 +135,22 @@ public class MainController {
 		return map;
 	}
 	
-//	@RequestMapping("/insertThemeBox")
-//	public String insertThemeBox(ThemeBoxVo themeBoxVo) {
-//		System.out.println(themeBoxVo.toString());
-//		mainService.insertThemeBox(themeBoxVo);
-//		
-//		return "redirect:/";
-//	}
 	@RequestMapping("/insertThemeBox")
 	public String insertThemeBox(@RequestParam Long[] param,HttpSession session) {
-		for (int i = 0; i < param.length; i++) {
-			System.out.println(param[i].toString());
-		}
 		
 		mainService.insertThemeBox(param, session);
 		
 		return "redirect:/";
 	}
 	
+	@RequestMapping("/placesNear")
+	@ResponseBody
+	public Map<String, Object> placesNear(@RequestParam String[] themeName, @RequestParam Double lat, @RequestParam Double lng, @RequestParam(required=false, defaultValue="5") Double distance) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		mainService.placesNear(map, themeName, lat, lng, distance);
+		
+		return map;
+	}
 	
 }

@@ -23,8 +23,7 @@
 			<div class="wsTable effect">
 				<table>
 					<tr>
-						<td><button>이벤트</button></td>
-						<td><button>팔로우</button></td>
+						<td>팔로우</td>
 						<td onclick="$('#picktheme').click();">테마 추가하기</td>
 					</tr>
 				</table>
@@ -53,13 +52,12 @@
 				    </div>
 				</div>
 <!-- 		테마 -->
-				<div class="wsTable">
+				<div class="wsTable effect">
 						<table>
 							<tr>
 <!-- 								<td style="color: #fb6f92" onclick="$('#picktheme').click();" onmouseover="changeColor(this)">테마 추가하기</td> -->
 								<c:forEach var="vo" items="${memberTheme}" varStatus="status">
-									<td id="theme_${status.index}" class="themeClass" onclick="themeSearch('${vo.themeName}')"
-										onmouseover="changeColor(this)">${vo.themeName}</td>
+									<td id="theme_${status.index}" class="themeClass" onclick="themeSearch('${vo.themeName}')">${vo.themeName}</td>
 								</c:forEach>
 							</tr>
 						</table>
@@ -68,7 +66,7 @@
 					<table id="showPlan">
 						<tr>
 							<th class="wshd">
-								<select id="plan_no" onchange="alert()"></select>
+								<select id="plan_no" onchange="callContents(this.value);"></select>
 							</th>
 						</tr>
 					</table>
@@ -93,8 +91,6 @@ var $mT = ${memberTheme.size()};
 if($mT==0){
 $('#picktheme').click();
 }
-//callContents(plan_no);
-
 //이미 등록된 테마는 check 표시해줌
 checkThemeBox();
 

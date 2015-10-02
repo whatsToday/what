@@ -48,22 +48,24 @@ public class ContentDao {
 		List<ContentVo> list= sqlMapClientTemplate.queryForList("content.selectContentByTheme", theme_no);
 		return list;
 	}
-	public List<ContentVo> selectAllByDist(Long lat, Long lng, Long distance){
+	public List<ContentVo> selectAllNear(Double lat, Double lng, Double distance){
 		Map<String, Object> map= new HashMap<String, Object>();
 		map.put("lat", lat);
 		map.put("lng", lng);
 		map.put("distance", distance);
 		
-		List<ContentVo> list= sqlMapClientTemplate.queryForList("content.selectAllByDist", map);
+		List<ContentVo> list= sqlMapClientTemplate.queryForList("content.selectAllNear", map);
 		return list;
 	}
-	public List<ContentVo> selectAllNear(Double lat, Double lng, double d){
+	
+	public List<ContentVo> selectAllNearWithTheme(String themeName, Double lat, Double lng, Double distance){
 		Map<String, Object> map= new HashMap<String, Object>();
+		map.put("themeName", themeName);
 		map.put("lat", lat);
 		map.put("lng", lng);
-		map.put("distance", d);
+		map.put("distance", distance);
 		
-		List<ContentVo> list= sqlMapClientTemplate.queryForList("content.selectAllNear", map);
+		List<ContentVo> list= sqlMapClientTemplate.queryForList("content.selectAllNearWithTheme", map);
 		return list;
 	}
 	

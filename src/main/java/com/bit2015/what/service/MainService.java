@@ -20,16 +20,21 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.bit2015.what.dao.CommentsDao;
 import com.bit2015.what.dao.ContentBoxDao;
 import com.bit2015.what.dao.ContentDao;
+import com.bit2015.what.dao.GoodContentDao;
 import com.bit2015.what.dao.MemberDao;
 import com.bit2015.what.dao.PlanDao;
 import com.bit2015.what.dao.ThemeBoxDao;
 import com.bit2015.what.dao.ThemeDao;
+import com.bit2015.what.dao.planCommentsDao;
 import com.bit2015.what.util.FileUploader;
 import com.bit2015.what.vo.ContentBoxVo;
 import com.bit2015.what.vo.ContentVo;
+import com.bit2015.what.vo.GoodContentVo;
 import com.bit2015.what.vo.MemberVo;
 import com.bit2015.what.vo.PlanVo;
 import com.bit2015.what.vo.ThemeBoxVo;
@@ -53,6 +58,10 @@ public class MainService {
 	ThemeBoxDao themeBoxDao;
 	@Autowired
 	MemberDao memberDao;
+	@Autowired
+	GoodContentDao goodContentDao;
+	@Autowired
+	CommentsDao commentsDao;
 	
 	FileUploader ful = new FileUploader();
 
@@ -115,32 +124,38 @@ public class MainService {
 
 	public void getInfo(Map<String, Object> map, String id) {
 
-		// 좋아요
-		//goodContentDao
-		
-		// 댓글
-		
-		//planCommentsDao
-		
-
 		// 후기 수집
 		List<PlanVo> planList = new ArrayList<PlanVo>();
+		long good = 0; 
+		long comments = 0 ;
 
 		if (contentDao.selectVoById(id) == null) {
 			System.out.println("해당 id로 아무것도 검색되지 않았습니다.");
 		} else {
 			ContentVo contentVo = contentDao.selectVoById(id);
+			long content_no=contentVo.getContent_no();
 
-			List<ContentBoxVo> contentBoxList = contentBoxDao
-					.selectAllById(contentVo.getContent_no());
+			List<ContentBoxVo> contentBoxList = contentBoxDao.selectAllById(content_no);
 			for (int i = 0; i < contentBoxList.size(); i++) {
 				PlanVo tempVo = planDao.selectVo(contentBoxList.get(i).getPlan_no());
 				if(tempVo.getMessage()!=null){
 					planList.add(tempVo);
 				}
 			}
+			
+			// 좋아요
+			//good 갯수
+			good = goodContentDao.selectAllByCno(content_no).size();
+			// 댓글
+			comments = commentsDao.selectAllByCno(content_no).size();
+			
+			//eventDao.selectVo(id);
+			
+			
 		}
-
+		
+		map.put("comments", comments);
+		map.put("good", good);
 		map.put("planList", planList);
 	}
 
@@ -291,6 +306,20 @@ public class MainService {
 		}
 
 		return jsonn;
+	}
+
+	public void placesNear(Map<String, Object> map, String[] themeName, Double lat, Double lng, Double distance) {
+		System.out.println("service 진입");
+		List<ContentVo> ctList = new ArrayList<ContentVo>();
+		
+		for (int i = 0; i < themeName.length; i++) {
+			System.out.println(themeName[i]);
+			ctList.addAll(contentDao.selectAllNearWithTheme(themeName[i], lat, lng, distance));
+			System.out.println(i+"번째 ctList.toString() ="+ctList.toString());
+		}
+		
+		map.put("contentList", ctList);
+		
 	}
 	
 }// main Service

@@ -1,9 +1,9 @@
-function changeColor(Obj) {
-    Obj.style.backgroundColor = '#FED4DE';
-    Obj.onmouseout = function(){
-        Obj.style.backgroundColor = '#FFFFFF';
-    }
-}
+//function changeColor(Obj) {
+//    Obj.style.backgroundColor = '#faced2';
+//    Obj.onmouseout = function(){
+//        Obj.style.backgroundColor = '#FFFFFF';
+//    }
+//}
 
 function themeSearch(Obj) {
 	
@@ -52,7 +52,8 @@ var userLocation;
 		  userLocation=new daum.maps.LatLng(crd.latitude, crd.longitude);
 		  map.setCenter(userLocation);
 
-searchPlaces();
+//searchPlaces();
+		  placesNear(5);
 		  //주변 3km내에 있는 content getcha! 		  
 		//placesNear(1);
 			
@@ -180,7 +181,6 @@ function callContents(plan_no){
 				
 				sP.appendChild(planLi);
 			}
-			console.log(sP.childNodes);
 
 		},
 		error:function(jqXHR, textStatus, errorThrown){
@@ -192,5 +192,54 @@ function callContents(plan_no){
 	
 }
 
+
+///////////////
+
+function placesNear(distance){
+	var themeList = document.getElementsByClassName("themeClass");
+	var theme = [] ;
+	var url = "/placesNear";
+	
+	if(themeList.length >= 1){
+		url += "?themeName="+themeList[0].textContent;
+		for (var i = 1; i < themeList.length; i++) {
+			url +="&themeName="+themeList[i].textContent;
+		}
+	}
+	
+	console.log(url);
+	
+	
+	var latlng=map.getCenter();
+	var lvl=map.getLevel();
+	
+	circle.setMap(null);
+	circle.setPosition(latlng);
+	circle.setRadius(distance*1000);
+	circle.setMap(map);	
+	
+	//여기에 theme list추가하면 될듯
+	$.ajax({
+		  url: url,
+		  data: {
+			lat : map.getCenter().getLat(),
+			lng : map.getCenter().getLng(),
+			distance : distance 
+		  },
+			success : function(response){
+				console.log("placeNear 탐색 완료");
+				if(response.contentList.length!=0){
+					displayPlaces(response.contentList);
+					if(map.getLevel() < lvl){
+						map.setLevel(lvl);
+					}
+				}else{
+					alert("선택 범위안에 후기글이 없습니다. \n\n\t 다시선택해주세요");
+				}
+			},
+			error: function (xhr, textStatus, errorThrown) { console.log(errorThrown); }
+		});
+	
+}
 
 

@@ -73,4 +73,10 @@ public class ContentDao {
 		  ContentVo contentVo = (ContentVo)sqlMapClientTemplate.queryForObject("content.getTitle", content_no);
 		  return contentVo;
 	  }
+	  
+	  
+	  public ContentVo getContent_no(String title){
+	        ContentVo contentVo =  (ContentVo) sqlMapClientTemplate.queryForObject("content.getContent_no",title);
+	        return contentVo;
+	     }
 }

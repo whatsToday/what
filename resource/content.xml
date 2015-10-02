@@ -83,4 +83,10 @@
 	  ]]>
 	</select>
 	
+	
+	<select id="getContent_no" resultClass="ContentVo" parameterClass="java.lang.String">
+        <![CDATA[
+           SELECT * FROM content WHERE title=#title#
+        ]]>
+    </select>
 </sqlMap>

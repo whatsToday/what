@@ -309,7 +309,7 @@ public class MainService {
 	}
 
 	public void placesNear(Map<String, Object> map, String[] themeName, Double lat, Double lng, Double distance) {
-		System.out.println("service 진입");
+		System.out.println("사용자가 고른 관심사와 관련된 message가 있는 후기글(plan)들을 가지고 있는 content를 가져옵니다");
 		List<ContentVo> ctList = new ArrayList<ContentVo>();
 		
 		for (int i = 0; i < themeName.length; i++) {

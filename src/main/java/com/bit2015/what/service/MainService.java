@@ -315,8 +315,8 @@ public class MainService {
 		for (int i = 0; i < themeName.length; i++) {
 			System.out.println(themeName[i]);
 			ctList.addAll(contentDao.selectAllNearWithTheme(themeName[i], lat, lng, distance));
-			System.out.println(i+"번째 ctList.toString() ="+ctList.toString());
 		}
+		System.out.println("ctList.toString() ="+ctList.toString());
 		
 		map.put("contentList", ctList);
 		

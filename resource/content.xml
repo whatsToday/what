@@ -63,7 +63,7 @@
 	
 	<select id="selectAllNearWithTheme" parameterClass="java.util.Map" resultClass="ContentVo">
 	  <![CDATA[
-	  	SELECT 	* 
+	  	SELECT 	distinct * 
 		FROM 	( select cbc.* from (select c.* from 	(select cbb.* from 	(select content_no from content where category like '%'||#themeName#||'%') cno,
 																			(select plan_no from plan where message is not null) pno,
 																			contentbox cbb

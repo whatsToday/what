@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.bit2015.what.vo.MemberVo;
 import com.bit2015.what.vo.PlanVo;
 
 
@@ -53,4 +54,9 @@ public class PlanDao {
 		map.put("plan_no", plan_no);
 		sqlMapClientTemplate.update("plan.update", map);
 	}
+	
+	 public PlanVo getPlanName(Long plan_no){
+		 PlanVo planVo = (PlanVo)sqlMapClientTemplate.queryForObject("plan.getPlanName", plan_no);
+		  return planVo;
+	  }
 }

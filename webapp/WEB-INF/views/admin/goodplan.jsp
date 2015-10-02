@@ -10,8 +10,8 @@
 			<form action="/admin/insertgoodplan" method="post">
 				<table border="1" >
 					<tr>
-					    <td bgcolor="#CCCCCC" align="center">플랜번호</td>
 						<td bgcolor="#CCCCCC" align="center">멤버번호</td>
+					    <td bgcolor="#CCCCCC" align="center">플랜번호</td>
 						<td bgcolor="#CCCCCC" align="center">멤버이름</td>
 						<td bgcolor="#CCCCCC" align="center">플랜이름</td>
 						<td bgcolor="#CCCCCC" align="center">등록</td>
@@ -27,14 +27,14 @@
 							
 						</td>
 							<td>
-						<select name="plan_no">
+						<select name="plan_no" onchange="changePlan(this.value)">
 							 <c:forEach var="vo" items="${planList}">
 							  <option value="${vo.getPlan_no()}">${vo.getPlan_no()}</option>
 							 </c:forEach>
 					  </select> 
 						</td>
-						<td><input size="10" type="text" id=memberName name="memberName" readonly="readonly"></td>
-						<td><input size="10" type="text" name="planName"></td>
+						<td><input size="10" type="text" id="memberName" name="memberName" readonly="readonly"></td>
+						<td><input size="10" type="text" id="planName" name="planName" readonly="readonly"></td>
 						<td><input type="submit" value="등록"></td>
 					</tr>
 				</table>
@@ -74,6 +74,20 @@
 			    dataType:'json',
 			    success: function(response){
 			    	$("#memberName").val(response.memberName);
+			    } 
+			 })
+	    } 
+	    
+	    function changePlan(val){
+	    	$.ajax({
+				type : 'get',
+			    url:'/admin/getplanname',
+			    data : {
+			    	 plan_no : val
+			    },
+			    dataType:'json',
+			    success: function(response){
+			    	$("#planName").val(response.planName);
 			    } 
 			 })
 	    } 

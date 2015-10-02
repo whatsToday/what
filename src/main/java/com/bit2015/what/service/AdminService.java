@@ -297,4 +297,14 @@ public class AdminService {
 		ContentVo contentVo = contentDao.getContent_no(title);
 		return contentVo;
 	}
+	
+	public PlanVo getPlanName(long plan_no){
+		PlanVo planVo = planDao.getPlanName(plan_no);
+		return planVo;
+	}
+	
+	public ThemeVo getThemeName(long theme_no){
+		ThemeVo themeVo = themeDao.getThemeName(theme_no);
+		return themeVo;
+	}
 }

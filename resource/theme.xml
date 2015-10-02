@@ -37,5 +37,9 @@
 			update theme set themeName = #themeName#, imageUrl = #imageUrl# where theme_no=#theme_no#
 		]]>
 	</update>
-	
+	     <select id="getThemeName" resultClass="ThemeVo" parameterClass="java.lang.Long">
+        <![CDATA[
+           SELECT * FROM theme WHERE theme_no=#theme_no#
+        ]]>
+    </select>
 </sqlMap>

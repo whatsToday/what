@@ -5,10 +5,12 @@ import java.util.List;
 
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.bit2015.what.vo.ThemeBoxVo;
 import com.bit2015.what.vo.ThemeVo;
 
 @Repository
@@ -43,5 +45,8 @@ public class ThemeDao {
 		sqlMapClientTemplate.update("theme.update", themeVo);
 	}
 	
-	
+	 public ThemeVo getThemeName(Long theme_no){
+		 ThemeVo themeVo = (ThemeVo) sqlMapClientTemplate.queryForObject("theme.getThemeName", theme_no);
+		  return themeVo;
+	  }
 }

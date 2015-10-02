@@ -63,7 +63,7 @@
 		</td>
 	</tr>
 
-	<script>
+<!-- 	<script>
 	    $(function(){
 	    	$("#insert").submit(function(){
 	    	   //1. 이름
@@ -83,4 +83,4 @@
 	    	   
 	    	});
 	    });
-	</script>
+	</script> -->

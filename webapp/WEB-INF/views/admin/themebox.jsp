@@ -10,6 +10,7 @@
 					<tr>
 						<td bgcolor="#CCCCCC" align="center">member_no</td>
 						<td bgcolor="#CCCCCC" align="center">theme_no</td>
+						<td bgcolor="#CCCCCC" align="center">themeName</td>
 						<td bgcolor="#CCCCCC" align="center"><b>등록</b></td>
 					</tr>
 			<form action="/admin/insertthemebox" method="post">
@@ -22,14 +23,14 @@
 							</select>
 						</td>
 						<td>
-							<select name="theme_no">
+							<select name="theme_no" onchange="changeTheme(this.value)">
 							 <c:forEach var="vo" items="${themeList}">
-							  <option value="${vo.getTheme_no()}">${vo.getThemeName()}</option>
+							  <option value="${vo.getTheme_no()}">${vo.getTheme_no()}</option>
 							 </c:forEach>
 							</select>
 						</td>
 						<td>
-						   <input size="10" type="text" name="themeName">
+						   <input size="10" type="text" id="themeName" name="themeName" readonly="readonly">
 						</td>
 						<td><input size="10" type="submit" value="등록"></td>
 					</tr>
@@ -56,4 +57,19 @@
 				</table>
 		</td>
 	</tr>
-				
+<script type="text/javascript">
+function changeTheme(val){
+	$.ajax({
+		type : 'get',
+	    url:'/admin/getthemename',
+	    data : {
+	    	 theme_no : val
+	    },
+	    dataType:'json',
+	    success: function(response){
+	    	$("#themeName").val(response.themeName);
+	    } 
+	 })
+} 
+
+</script>		

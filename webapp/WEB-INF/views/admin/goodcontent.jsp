@@ -10,17 +10,17 @@
 			<form action="/admin/insertgoodcontent" method="post">
 				<table border="1" >
 					<tr>
-					    <td bgcolor="#CCCCCC" align="center">content_no</td>
+						<td bgcolor="#CCCCCC" align="center">타이틀</td>
 						<td bgcolor="#CCCCCC" align="center">멤버번호</td>
 						<td bgcolor="#CCCCCC" align="center">멤버이름</td>
-						<td bgcolor="#CCCCCC" align="center"style="width: 120px">타이틀</td>
+					    <td bgcolor="#CCCCCC" align="center">content_no</td>
 						<td bgcolor="#CCCCCC" align="center">등록</td>
 					</tr>
 					<tr>
 					<td>
-						<select name="content_no" onchange="changeContent(this.value)">
+						<select name="title" onchange="changeContent(this.value)">
 							 <c:forEach var="vo" items="${contentList}">
-							  <option value="${vo.getContent_no()}">${vo.getContent_no()}</option>
+							  <option value="${vo.getTitle()}">${vo.getTitle()}</option>
 							 </c:forEach>
 					  </select> 
 						</td>
@@ -33,7 +33,7 @@
 							
 						</td>
 						<td><input size="10" type="text" id=memberName name="memberName" readonly="readonly"></td>
-						<td><input size="10" type="text" id="title" name="title" readonly="readonly"></td>
+						<td><input size="10" type="text" id="content_no" name="content_no" readonly="readonly"></td>
 						<td><input type="submit" value="등록"></td>
 					</tr>
 				</table>
@@ -79,13 +79,13 @@
 	    function changeContent(val){
 	 	   $.ajax({
 	 		   type :'get',
-	 		   url  :'/admin/getTitle',
+	 		   url  :'/admin/getcontent_no',
 	 		   data :{
-	 			   content_no:val
+	 			   title:val
 	 		   },
 	 		   dataType:'json',
 	 		   success:function(response){
-	 			   $("#title").val(response.title);
+	 			   $("#content_no").val(response.content_no);
 	 		   }
 	 	   })
 	    }

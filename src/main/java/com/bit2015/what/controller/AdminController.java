@@ -2,6 +2,8 @@ package com.bit2015.what.controller;
 
 import java.util.List;
 
+import javafx.scene.AmbientLight;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -399,6 +401,26 @@ public class AdminController {
 
 		ContentVo contentVo = adminService.getContent_no(title);
 		return contentVo;
+
+	}
+	
+	// plan_no를 선택하면 planName이 나옴 
+	@RequestMapping("/getplanname")
+	@ResponseBody
+	public PlanVo getPlanName(@RequestParam(required = false) long plan_no) {
+
+		PlanVo planVo = adminService.getPlanName(plan_no);
+		return planVo;
+
+	}
+	
+	// themeBox_no를 선택하면 themeName이 나옴 
+	@RequestMapping("/getthemename")
+	@ResponseBody
+	public ThemeVo getThemeName(@RequestParam(required = false) long theme_no) {
+
+		ThemeVo themeVo = adminService.getThemeName(theme_no);
+		return themeVo;
 
 	}
 }

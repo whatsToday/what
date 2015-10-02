@@ -26,7 +26,7 @@
     					<td>
     					    <select name="content_no">
     					       <c:forEach var="vo" items="${contentList }">
-    					         <option value="${vo.getContent_no() }">${vo.getContent_no() }</option>
+    					         <option value="${vo.getContent_no() }">${vo.getTitle() }</option>
     					       </c:forEach>
     					    </select>
     					</td>

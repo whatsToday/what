@@ -42,5 +42,10 @@
       ]]>
    </update>
    
+     <select id="getPlanName" resultClass="PlanVo" parameterClass="java.lang.Long">
+        <![CDATA[
+           SELECT * FROM plan WHERE plan_no=#plan_no#
+        ]]>
+    </select>
    
 </sqlMap>

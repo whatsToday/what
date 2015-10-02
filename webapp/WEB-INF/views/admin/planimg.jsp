@@ -17,14 +17,14 @@
 					</tr>
 					<tr>
 						<td>
-						<select name="plan_no" >
+						<select name="plan_no" onchange="changePlan(this.value)">
 							 <c:forEach var="vo" items="${planList}">
 							  <option value="${vo.getPlan_no()}">${vo.getPlan_no()}</option>
 							 </c:forEach>
 					  </select> 
 							
 						</td>
-						<td><input size="10" type="text" name="planName"></td>
+						<td><input size="10" type="text" id="planName" name="planName"></td>
 					    <td><input type="file" name="img"></td>
 						<td><input type="submit" value="등록"></td>
 					</tr>
@@ -60,4 +60,20 @@
 		</td>
 
 	</tr>
+<script type="text/javascript">
+function changePlan(val){
+	$.ajax({
+		type : 'get',
+	    url:'/admin/getplanname',
+	    data : {
+	    	 plan_no : val
+	    },
+	    dataType:'json',
+	    success: function(response){
+	    	$("#planName").val(response.planName);
+	    } 
+	 })
+} 
+
+</script>
 	

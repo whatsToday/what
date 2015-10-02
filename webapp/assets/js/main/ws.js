@@ -1,37 +1,19 @@
-//function changeColor(Obj) {
-//    Obj.style.backgroundColor = '#faced2';
-//    Obj.onmouseout = function(){
-//        Obj.style.backgroundColor = '#FFFFFF';
-//    }
-//}
 
-function themeSearch(Obj) {
-	
-	//var themeName = Obj.id.split("_").pop();
-	var themeName = Obj;
-
-	//$('#theme_Name_'+Obj).className = 'selectedTheme';
-	
-	circle.setMap(null);
-	circle.setPosition(userLocation);
-	//circle.setRadius(distance*1000);
-	circle.setRadius(150);
-	circle.setMap(map);	
-	
-	ps.keywordSearch(themeName, placesSearchCB, {
-	
-		location: userLocation,
-		radius : 150,	
-		sort    : daum.maps.services.SortBy.POPULARITY
-		
-		//daum.maps.services.SortBy.DISTANCE
-		//daum.maps.services.SortBy.POPULARITY 인기순
-		//daum.maps.services.ImageFilter.ONLY 이미지가 있는놈들만	
-		//daum.maps.services.ImageFilter.NOT 이미지가 없는놈들만
-		//daum.maps.services.ImageFilter.ALL 
-	});
-	
-	
+function themeSearch(themeName) {
+//	console.log(placesArray);
+//	console.log(themeName);
+	if(themeName!="showAll"){
+		for (var i = 0; i < placesArray.length; i++) {
+				markers[i].setVisible(true);
+			if(placesArray[i].category.indexOf(themeName) == -1){
+				markers[i].setVisible(false);
+			}
+		}
+	}else{
+		 for (var i = 0; i < markers.length; i++) {
+			 markers[i].setVisible(true);
+		 }  
+	}
 }
 
 
@@ -207,8 +189,6 @@ function placesNear(distance){
 		}
 	}
 	
-	console.log(url);
-	
 	
 	var latlng=map.getCenter();
 	var lvl=map.getLevel();
@@ -227,7 +207,6 @@ function placesNear(distance){
 			distance : distance 
 		  },
 			success : function(response){
-				console.log("placeNear 탐색 완료");
 				if(response.contentList.length!=0){
 					displayPlaces(response.contentList);
 					if(map.getLevel() < lvl){

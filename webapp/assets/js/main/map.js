@@ -12,7 +12,7 @@ var placesArray = [];
 
 var circle = new daum.maps.Circle({
 	strokeWeight: 3, // 선의 두께입니다 
-    strokeColor: '#FDB7C8', // 선의 색깔입니다
+    strokeColor: '#69ABED', // 선의 색깔입니다
     strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
     strokeStyle: 'shortdashdot', // 선의 스타일 입니다
     fillColor: '#FFFAFC', // 채우기 색깔입니다

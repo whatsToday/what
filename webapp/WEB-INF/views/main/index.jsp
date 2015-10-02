@@ -55,7 +55,7 @@
 				<div class="wsTable effect">
 						<table>
 							<tr>
-<!-- 								<td style="color: #fb6f92" onclick="$('#picktheme').click();" onmouseover="changeColor(this)">테마 추가하기</td> -->
+									<td id="theme_${status.index}" class="themeClass" onclick="themeSearch('showAll')">모두 보기</td>
 								<c:forEach var="vo" items="${memberTheme}" varStatus="status">
 									<td id="theme_${status.index}" class="themeClass" onclick="themeSearch('${vo.themeName}')">${vo.themeName}</td>
 								</c:forEach>
@@ -73,11 +73,9 @@
 				</div>
 				<hr>
 	</div><!-- 	end container -->
-
 <c:import url="/WEB-INF/views/include/footer.jsp"/>
 </div><!-- end wrapper -->
 </body>
-
 <!-- script가 위에 있으면 안될때가 많다 js파일 다운로드 속도 땜에...-->
 <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=c12b4d88c8259cf4652b89c1f64db8e8&libraries=services"></script>
 <script type="text/javascript" src="/assets/js/main/ws.js"></script>

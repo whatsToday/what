@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.bit2015.what.dao.CommentsDao;
 import com.bit2015.what.dao.ContentBoxDao;
 import com.bit2015.what.dao.ContentDao;
+import com.bit2015.what.dao.EventDao;
 import com.bit2015.what.dao.FollowDao;
 import com.bit2015.what.dao.GoodContentDao;
 import com.bit2015.what.dao.GoodPlanDao;
@@ -25,6 +26,7 @@ import com.bit2015.what.util.FileUploader;
 import com.bit2015.what.vo.CommentsVo;
 import com.bit2015.what.vo.ContentBoxVo;
 import com.bit2015.what.vo.ContentVo;
+import com.bit2015.what.vo.EventVo;
 import com.bit2015.what.vo.FollowVo;
 import com.bit2015.what.vo.GoodContentVo;
 import com.bit2015.what.vo.GoodPlanVo;
@@ -64,6 +66,8 @@ public class AdminService {
     ContentBoxDao contentBoxDao;
     @Autowired
     PlanImgDao planImgDao;
+    @Autowired
+    EventDao eventDao;
     
     
 	// 파일올리는거야
@@ -275,6 +279,22 @@ public class AdminService {
     // onchange title할때 ajax를 사용하기 위해하거야 
 	public ContentVo getTitle(Long content_no) {
 		ContentVo contentVo = contentDao.getContentVo(content_no);
+		return contentVo;
+	}
+	
+	public List<EventVo> selectEvent(){
+		List<EventVo> selectEvent = eventDao.selectAll();
+        return selectEvent;
+	}
+	public void insertEvent(EventVo eventVo){
+		eventDao.insert(eventVo);
+	}
+	public void deleteEvent(@RequestParam Long event_no){
+		eventDao.delete(event_no);
+	}
+	
+	public ContentVo getContent_no(String title){
+		ContentVo contentVo = contentDao.getContent_no(title);
 		return contentVo;
 	}
 }

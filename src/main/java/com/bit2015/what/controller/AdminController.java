@@ -15,6 +15,7 @@ import com.bit2015.what.service.AdminService;
 import com.bit2015.what.vo.CommentsVo;
 import com.bit2015.what.vo.ContentBoxVo;
 import com.bit2015.what.vo.ContentVo;
+import com.bit2015.what.vo.EventVo;
 import com.bit2015.what.vo.FollowVo;
 import com.bit2015.what.vo.GoodContentVo;
 import com.bit2015.what.vo.GoodPlanVo;
@@ -93,15 +94,18 @@ public class AdminController {
 
 	@RequestMapping("/getMemberName")
 	@ResponseBody
-	public MemberVo getMemberName(@RequestParam(required=false) Long member_no, @RequestParam(required=false) Long followNum) {
-			if(member_no==null){
-				MemberVo memberVo = adminService.getMemberName(followNum);
-				return memberVo;
-			}else{
-				MemberVo memberVo = adminService.getMemberName(member_no);
-				return memberVo;
-			}
+	public MemberVo getMemberName(
+			@RequestParam(required = false) Long member_no,
+			@RequestParam(required = false) Long followNum) {
+		if (member_no == null) {
+			MemberVo memberVo = adminService.getMemberName(followNum);
+			return memberVo;
+		} else {
+			MemberVo memberVo = adminService.getMemberName(member_no);
+			return memberVo;
 		}
+	}
+
 	@RequestMapping("/theme")
 	public String themeList(Model model) {
 		List<ThemeVo> themeList = adminService.selectTheme();
@@ -153,8 +157,10 @@ public class AdminController {
 	}
 
 	@RequestMapping("/insertcontent")
-	public String insertContent(ContentVo contentVo,@RequestParam(required = false) MultipartFile img ) {
-		adminService.insertContent(contentVo, img);;
+	public String insertContent(ContentVo contentVo,
+			@RequestParam(required = false) MultipartFile img) {
+		adminService.insertContent(contentVo, img);
+		;
 		return "redirect:/admin/content";
 	}
 
@@ -167,13 +173,13 @@ public class AdminController {
 	@RequestMapping("/comments")
 	public String commentsList(Model model) {
 		List<MemberVo> memberList = adminService.selectMember();
-		List<ContentVo> contentList= adminService.selectContent();
- 		List<CommentsVo> commentsList = adminService.selectComments();
-		
- 		model.addAttribute("memberList",memberList);
- 		model.addAttribute("contentList",contentList);
- 		model.addAttribute("commentsList", commentsList);
-		
+		List<ContentVo> contentList = adminService.selectContent();
+		List<CommentsVo> commentsList = adminService.selectComments();
+
+		model.addAttribute("memberList", memberList);
+		model.addAttribute("contentList", contentList);
+		model.addAttribute("commentsList", commentsList);
+
 		return "/admin/comments";
 	}
 
@@ -188,157 +194,211 @@ public class AdminController {
 		adminService.deleteComments(comments_no);
 		return "redirect:/admin/comments";
 	}
+
 	@RequestMapping("/follow")
-	public String followList(Model model){
+	public String followList(Model model) {
 		List<MemberVo> memberList = adminService.selectMember();
 		List<FollowVo> followList = adminService.selectFollow();
-		
-		model.addAttribute("memberList",memberList);
-		model.addAttribute("followList",followList);
+
+		model.addAttribute("memberList", memberList);
+		model.addAttribute("followList", followList);
 		return "/admin/follow";
 	}
-    @RequestMapping("/insertfollow")
-    public String insertFollow(FollowVo followVo){
-    	adminService.insertFollow(followVo);
-    	return "redirect:/admin/follow";
-    }
-    @RequestMapping("/deletefollow")
-    public String deleteFollow(@RequestParam Long follow_no){
-    	adminService.deleteFollow(follow_no);
-    	return "redirect:/admin/follow";
-    }
-    
-    @RequestMapping("/searchlist")
-    public String searchList(Model model){
-    	List<MemberVo> memberList = adminService.selectMember();
-    	List<SearchListVo> searchList=adminService.selectSerchList();
-    	model.addAttribute("memberList",memberList); 
-    	model.addAttribute("searchList",searchList);
-    	return "/admin/searchlist";
-    }
-    @RequestMapping("/insertsearchlist")
-    public String insertSearchList(SearchListVo searchListVo){
-    	adminService.insertSearchList(searchListVo);
-    	return "redirect:/admin/searchlist";
-    }
-    @RequestMapping("/deletesearchlist")
-    public String deleteSearchList(@RequestParam Long searchList_no){
-    	adminService.deleteSearchList(searchList_no);
-    	return "redirect:/admin/searchlist";
-    }
-    
-    @RequestMapping("/plancomments")
-    public String planCommentsList(Model model){
-    	List<MemberVo> memberList = adminService.selectMember();
-    	List<PlanVo> planList = adminService.selectPlan();
-    	List<PlanCommentsVo> planCommentsList = adminService.selectPlanComments();
-    	
-        model.addAttribute("memberList",memberList);
-        model.addAttribute("planList",planList);
-        model.addAttribute("planCommentsList",planCommentsList);
-        return "/admin/plancomments";
-    }
-    @RequestMapping("/insertplancomments")
-    public String insertPlanComments(PlanCommentsVo planCommentsVo){
-    	adminService.insertPlanComments(planCommentsVo);
-    	return"redirect:/admin/plancomments";
-    }
-    @RequestMapping("/deleteplancomments")
-    public String deletePalnComments(@RequestParam Long planComments_no){
-    	adminService.deletePlanComments(planComments_no);
-    	return "redirect:/admin/plancomments";
-    }
-    @RequestMapping("/goodplan")
-    public String goodPlanList(Model model){
-    	List<GoodPlanVo> goodPlanList=adminService.selectGoodPlan();
-    	List<MemberVo>   memberList = adminService.selectMember();
-    	List<PlanVo>     planList = adminService.selectPlan();
-    	
-    	model.addAttribute("memberList",memberList);
-    	model.addAttribute("planList",planList);
-    	model.addAttribute("goodPlanList",goodPlanList);
-    	
-    	return "/admin/goodplan";
-    }
-    @RequestMapping("/insertgoodplan")
-    public String insertGoodPlan(GoodPlanVo goodPlanVo){
-    	adminService.insertGoodPlan(goodPlanVo);
-    	return "redirect:/admin/goodplan";
-    }
-    @RequestMapping("/deletegoodplan")
-    public String deleteGoodPlan(@RequestParam Long goodPlan_no){
-    	adminService.deleteGoodPlan(goodPlan_no);
-    	return"redirect:/admin/goodplan";
-    }
-    @RequestMapping("/goodcontent")
-    public String goodContentList(Model model){
-    	List<ContentVo> contentList = adminService.selectContent();
-    	List<MemberVo> memberList = adminService.selectMember();
-    	List<GoodContentVo> goodContentList = adminService.selectGoodContent();
-    	model.addAttribute("goodContentList",goodContentList);
-    	model.addAttribute("memberList", memberList);
-    	model.addAttribute("contentList", contentList);
-    	return "/admin/goodcontent";
-    }
-    @RequestMapping("/insertgoodcontent")
-    public String insertGoodContent(GoodContentVo goodContentVo){
-    	adminService.insertGoodContent(goodContentVo);
-    	return "redirect:/admin/goodcontent";
-    }
-    @RequestMapping("/deletegoodcontent")
-                     
-    public String deleteGoodContent(@RequestParam Long goodContent_no){
-    	adminService.deleteGoodContent(goodContent_no);
-    	return "redirect:/admin/goodcontent";
-    }
-    @RequestMapping("/contentbox")
-    public String contentBoxList(Model model){
-    	List<PlanVo> planList = adminService.selectPlan();
-    	List<ContentVo> contentList = adminService.selectContent();
-    	List<ContentBoxVo> contentBoxList = adminService.selectContentBox();
-    	
-    	model.addAttribute("planList",planList);
-    	model.addAttribute("contentList",contentList);
-    	model.addAttribute("contentBoxList", contentBoxList);
-    	return "/admin/contentbox";
-    }
-    @RequestMapping("/insertcontentbox")
-    public String insertContentBox(ContentBoxVo contentBoxVo){
-    	adminService.insertContentBox(contentBoxVo);
-    	return "redirect:/admin/contentbox";
-    }
-    @RequestMapping("/deletecontentbox")
-    public String deleteContentBox(@RequestParam Long contentBox_no){
-    	adminService.deleteContentBox(contentBox_no);
-    	return "redirect:/admin/contentbox";
-    }
-    @RequestMapping("/planimg")
-    public String planImgList(Model model){
-    	List<PlanVo> planList = adminService.selectPlan();
-    	List<PlanImgVo> planImgList = adminService.selectPlanImg();
-    	
-    	model.addAttribute("planList",planList);
-    	model.addAttribute("planImgList",planImgList);
-    	return "/admin/planimg";
-    }
-    @RequestMapping("/insertplanimg")
-    public String insertPlanImg(PlanImgVo planImgVo,@RequestParam(required = false) MultipartFile img ){
-    	adminService.insertPlanImg(planImgVo, img);
-    	return "redirect:/admin/planimg";
-    }
-    @RequestMapping("/deleteplanimg")
-    public String deletePlanImg(@RequestParam Long planImg_no){
-    	adminService.deletePlanImg(planImg_no);
-    	return "redirect:/admin/planimg";
-    }
-    
-    @RequestMapping("/getTitle")
+
+	@RequestMapping("/insertfollow")
+	public String insertFollow(FollowVo followVo) {
+		adminService.insertFollow(followVo);
+		return "redirect:/admin/follow";
+	}
+
+	@RequestMapping("/deletefollow")
+	public String deleteFollow(@RequestParam Long follow_no) {
+		adminService.deleteFollow(follow_no);
+		return "redirect:/admin/follow";
+	}
+
+	@RequestMapping("/searchlist")
+	public String searchList(Model model) {
+		List<MemberVo> memberList = adminService.selectMember();
+		List<SearchListVo> searchList = adminService.selectSerchList();
+		model.addAttribute("memberList", memberList);
+		model.addAttribute("searchList", searchList);
+		return "/admin/searchlist";
+	}
+
+	@RequestMapping("/insertsearchlist")
+	public String insertSearchList(SearchListVo searchListVo) {
+		adminService.insertSearchList(searchListVo);
+		return "redirect:/admin/searchlist";
+	}
+
+	@RequestMapping("/deletesearchlist")
+	public String deleteSearchList(@RequestParam Long searchList_no) {
+		adminService.deleteSearchList(searchList_no);
+		return "redirect:/admin/searchlist";
+	}
+
+	@RequestMapping("/plancomments")
+	public String planCommentsList(Model model) {
+		List<MemberVo> memberList = adminService.selectMember();
+		List<PlanVo> planList = adminService.selectPlan();
+		List<PlanCommentsVo> planCommentsList = adminService
+				.selectPlanComments();
+
+		model.addAttribute("memberList", memberList);
+		model.addAttribute("planList", planList);
+		model.addAttribute("planCommentsList", planCommentsList);
+		return "/admin/plancomments";
+	}
+
+	@RequestMapping("/insertplancomments")
+	public String insertPlanComments(PlanCommentsVo planCommentsVo) {
+		adminService.insertPlanComments(planCommentsVo);
+		return "redirect:/admin/plancomments";
+	}
+
+	@RequestMapping("/deleteplancomments")
+	public String deletePalnComments(@RequestParam Long planComments_no) {
+		adminService.deletePlanComments(planComments_no);
+		return "redirect:/admin/plancomments";
+	}
+
+	@RequestMapping("/goodplan")
+	public String goodPlanList(Model model) {
+		List<GoodPlanVo> goodPlanList = adminService.selectGoodPlan();
+		List<MemberVo> memberList = adminService.selectMember();
+		List<PlanVo> planList = adminService.selectPlan();
+
+		model.addAttribute("memberList", memberList);
+		model.addAttribute("planList", planList);
+		model.addAttribute("goodPlanList", goodPlanList);
+
+		return "/admin/goodplan";
+	}
+
+	@RequestMapping("/insertgoodplan")
+	public String insertGoodPlan(GoodPlanVo goodPlanVo) {
+		adminService.insertGoodPlan(goodPlanVo);
+		return "redirect:/admin/goodplan";
+	}
+
+	@RequestMapping("/deletegoodplan")
+	public String deleteGoodPlan(@RequestParam Long goodPlan_no) {
+		adminService.deleteGoodPlan(goodPlan_no);
+		return "redirect:/admin/goodplan";
+	}
+
+	@RequestMapping("/goodcontent")
+	public String goodContentList(Model model) {
+		List<ContentVo> contentList = adminService.selectContent();
+		List<MemberVo> memberList = adminService.selectMember();
+		List<GoodContentVo> goodContentList = adminService.selectGoodContent();
+		model.addAttribute("goodContentList", goodContentList);
+		model.addAttribute("memberList", memberList);
+		model.addAttribute("contentList", contentList);
+		return "/admin/goodcontent";
+	}
+
+	@RequestMapping("/insertgoodcontent")
+	public String insertGoodContent(GoodContentVo goodContentVo) {
+		adminService.insertGoodContent(goodContentVo);
+		return "redirect:/admin/goodcontent";
+	}
+
+	@RequestMapping("/deletegoodcontent")
+	public String deleteGoodContent(@RequestParam Long goodContent_no) {
+		adminService.deleteGoodContent(goodContent_no);
+		return "redirect:/admin/goodcontent";
+	}
+
+	@RequestMapping("/contentbox")
+	public String contentBoxList(Model model) {
+		List<PlanVo> planList = adminService.selectPlan();
+		List<ContentVo> contentList = adminService.selectContent();
+		List<ContentBoxVo> contentBoxList = adminService.selectContentBox();
+
+		model.addAttribute("planList", planList);
+		model.addAttribute("contentList", contentList);
+		model.addAttribute("contentBoxList", contentBoxList);
+		return "/admin/contentbox";
+	}
+
+	@RequestMapping("/insertcontentbox")
+	public String insertContentBox(ContentBoxVo contentBoxVo) {
+		adminService.insertContentBox(contentBoxVo);
+		return "redirect:/admin/contentbox";
+	}
+
+	@RequestMapping("/deletecontentbox")
+	public String deleteContentBox(@RequestParam Long contentBox_no) {
+		adminService.deleteContentBox(contentBox_no);
+		return "redirect:/admin/contentbox";
+	}
+
+	@RequestMapping("/planimg")
+	public String planImgList(Model model) {
+		List<PlanVo> planList = adminService.selectPlan();
+		List<PlanImgVo> planImgList = adminService.selectPlanImg();
+
+		model.addAttribute("planList", planList);
+		model.addAttribute("planImgList", planImgList);
+		return "/admin/planimg";
+	}
+
+	@RequestMapping("/insertplanimg")
+	public String insertPlanImg(PlanImgVo planImgVo,
+			@RequestParam(required = false) MultipartFile img) {
+		adminService.insertPlanImg(planImgVo, img);
+		return "redirect:/admin/planimg";
+	}
+
+	@RequestMapping("/deleteplanimg")
+	public String deletePlanImg(@RequestParam Long planImg_no) {
+		adminService.deletePlanImg(planImg_no);
+		return "redirect:/admin/planimg";
+	}
+
+	
+	// plan_no를 선택하면 타이틀이 나옴 
+	@RequestMapping("/getTitle")
 	@ResponseBody
-	public ContentVo getTitle(@RequestParam(required=false) Long content_no) {
-			
-    	ContentVo contentVo = adminService.getTitle(content_no);
-				return contentVo;
-			
-			
-			}
+	public ContentVo getTitle(@RequestParam(required = false) Long content_no) {
+
+		ContentVo contentVo = adminService.getTitle(content_no);
+		return contentVo;
+
+	}
+	
+	@RequestMapping("/event")
+	public String eventList(Model model){
+		List<ContentVo> contentList = adminService.selectContent();
+		List<EventVo> eventList = adminService.selectEvent();
+		
+		model.addAttribute("contentList",contentList);
+		model.addAttribute("eventList",eventList);
+		return "/admin/event";
+	}
+	
+	@RequestMapping("/insertevent")
+	public String insertEvent(EventVo eventVo){
+		System.out.println("제발좀여"+eventVo);
+		adminService.insertEvent(eventVo);
+		return "redirect:/admin/event";
+	}
+	
+	@RequestMapping("/deleteevent")
+	public String deleteEvent(@RequestParam Long event_no){
+		adminService.deleteEvent(event_no);
+		return "redirect:/admin/event";
+	}
+   
+	// title를 선택하면 content_no이 나옴 
+	@RequestMapping("/getcontent_no")
+	@ResponseBody
+	public ContentVo getContent_no(@RequestParam(required = false) String title) {
+
+		ContentVo contentVo = adminService.getContent_no(title);
+		return contentVo;
+
+	}
 }

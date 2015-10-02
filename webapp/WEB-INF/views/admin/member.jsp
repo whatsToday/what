@@ -8,7 +8,6 @@
 		<h1> Member 등록</h1>
 				<table border="1" >
 					<tr>
-						<td bgcolor="#CCCCCC" align="center">아이디</td>
 						<td bgcolor="#CCCCCC" align="center">이름</td>
 						<td bgcolor="#CCCCCC" align="center">이메일</td>
 						<td bgcolor="#CCCCCC" align="center">패스워드</td>
@@ -16,12 +15,11 @@
 						<td bgcolor="#CCCCCC" align="center">권한</td>
 						<td bgcolor="#CCCCCC" align="center"><b>등록</b></td>
 					</tr>
-			<form action="/admin/insertmember" method="post" enctype="multipart/form-data">
+			<form id=insert action="/admin/insertmember" method="post" enctype="multipart/form-data">
 					<tr>
-						<td><input size="10" type="text" name="memberId"></td>
-						<td><input size="10" type="text" name="memberName"></td>
-						<td><input size="10" type="text" name="email"></td>
-						<td><input size="10" type="password" name="password"></td>
+						<td><input size="10" type="text" id="memberName"  name="memberName"></td>
+						<td><input size="10" type="text" id="email" name="email"></td>
+						<td><input size="10" type="password" id=password name="password"></td>
 						<td><input size="10" type="file" name="img"></td>
 						<td><select name="memberGrade">
 							  <option value="Admin">Admin</option>
@@ -51,7 +49,7 @@
 						<td>${vo.password }</td>
 						<td><c:choose>
 								<c:when test="${not empty vo.imageUrl }">
-				<img src="${vo.imageUrl }" style="width:150px">
+				<img src="${vo.imageUrl }" width="150px" height="150px">
 								</c:when>
 								<c:otherwise>
 								고객의 사진이 없습니다.								
@@ -64,3 +62,25 @@
 				</table>
 		</td>
 	</tr>
+
+	<script>
+	    $(function(){
+	    	$("#insert").submit(function(){
+	    	   //1. 이름
+	    		var $memberName = $("#memberName");
+	    		var memberName = $memberName.val();
+	    		if(memberName==""){
+	    			alert("이름을 입력하세요");
+	    			return false;
+	    		}
+	    	   //2. 이메일
+	    	   var $email = $("email");
+	    	   var email = $email.val();
+	    	   if(email==""){
+	    		   alert("이메일을 입력하세요");
+	    		   ale
+	    	   }
+	    	   
+	    	});
+	    });
+	</script>

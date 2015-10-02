@@ -21,5 +21,6 @@
  	<sqlMap resource="planComments.xml"/>
  	<sqlMap resource="goodplan.xml"/>
  	<sqlMap resource="planImg.xml"/>
+ 	<sqlMap resource="event.xml"/>
  	
 </sqlMapConfig>

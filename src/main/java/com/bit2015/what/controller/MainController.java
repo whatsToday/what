@@ -152,5 +152,24 @@ public class MainController {
 		
 		return map;
 	}
+	@RequestMapping("/insertKey")
+	@ResponseBody
+	public Map<String, Object> insertKey(HttpSession session,@RequestParam String keyword,  @RequestParam Double lat, @RequestParam Double lng, @RequestParam(required=false, defaultValue="5") Double distance) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		mainService.insertKey(map,session, keyword, lat, lng, distance);
+		
+		return map;
+	}
+	
+	@RequestMapping("/showHotKey")
+	@ResponseBody
+	public Map<String, Object> showHotKey(@RequestParam Double lat, @RequestParam Double lng, @RequestParam(required=false, defaultValue="10") Double distance) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		mainService.showHotKey(map, lat, lng, distance);
+		
+		return map;
+	}
 	
 }

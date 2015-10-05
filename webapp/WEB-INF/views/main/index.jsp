@@ -36,11 +36,9 @@
 				    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 				    <div id="menu_wrap" class="bg_white">
 				        <div class="option">
-				            <p>
-				                <form onsubmit="searchPlaces(); return false;"> 
-							                키워드 : <input type="text" value="" placeholder="오늘 뭐하지?" id="keyword" size="15">
-				                <button type="submit">검색하기</button> 
-				            </p>
+							    <input type="text" value="" placeholder="오늘 뭐하지?" id="keyword" size="15">
+				                <button onclick="searchPlaces(); return false;">전체 검색</button>
+				                <button onclick="searchPlaces2(); return false;">주변 검색</button> 
 				        </div>
 				        <hr>
 				        <ul id="placesList"></ul>
@@ -66,6 +64,8 @@
 						</tr>
 					</table>
 				</div>
+				<hr>
+				<div id="showHot"  class="wsTable wsBox"></div>
 				<hr>
 	</div><!-- 	end container -->
 <c:import url="/WEB-INF/views/include/footer.jsp"/>
@@ -110,5 +110,6 @@ $('#picktheme').click();
 }
 //이미 등록된 테마는 check 표시해줌
 checkThemeBox();
+
 </script>
 </html>

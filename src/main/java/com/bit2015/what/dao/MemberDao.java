@@ -1,6 +1,8 @@
 package com.bit2015.what.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
@@ -33,8 +35,17 @@ public class MemberDao {
 public MemberVo checkMember(MemberVo memberVo) {
 	MemberVo testVo = (MemberVo) sqlMapClientTemplate.queryForObject("member.checkMember", memberVo);
 	return testVo;
-	
+
 	
 }
-	
+public void facebookJoin(String email, String memberName) {
+	Map<String, Object> map= new HashMap<String, Object>();
+	map.put("email", email);
+	map.put("memberName", memberName);
+	sqlMapClientTemplate.insert("member.facebookinsert",map);
+}
+public MemberVo checkEmail(String email) {
+	MemberVo testVo2 = (MemberVo) sqlMapClientTemplate.queryForObject("member.checkEmail", email);
+	return testVo2;
+}
 }

@@ -15,6 +15,7 @@ import com.bit2015.what.service.ContentService;
 import com.bit2015.what.vo.CommentsVo;
 import com.bit2015.what.vo.ContentVo;
 import com.bit2015.what.vo.GoodContentVo;
+import com.bit2015.what.vo.MemberVo;
 
 @Controller
 @RequestMapping
@@ -84,4 +85,12 @@ public class ContentController {
 	  public String test2(){
 		  return "/content/test2";
 	  }	  
+	  
+	  @RequestMapping("/facebook")
+	  public String facebook(HttpSession session,MemberVo memberVo ,@RequestParam String email, @RequestParam String memberName ){
+		  contentService.facebookJoin(memberVo, email, memberName);
+		  contentService.facebookLogin(session, email);
+		  return "/content/test";
+		  
+	  }
 }

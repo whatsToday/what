@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import com.bit2015.what.dao.CommentsDao;
 import com.bit2015.what.dao.ContentDao;
 import com.bit2015.what.dao.GoodContentDao;
+import com.bit2015.what.dao.MemberDao;
 import com.bit2015.what.vo.CommentsVo;
 import com.bit2015.what.vo.ContentVo;
 import com.bit2015.what.vo.GoodContentVo;
@@ -26,6 +27,8 @@ public class ContentService {
 	CommentsDao commentsDao;
 	@Autowired
 	GoodContentDao goodContentDao;
+	@Autowired
+	MemberDao memberDao;
 	
 	
 	public ContentVo getContent(Model model, Long content_no){
@@ -93,4 +96,20 @@ public class ContentService {
 		contentBoxVo.setContent_no(content_no);
 		contentBoxDao.insert(contentBoxVo);*/
 	}
+
+	public void facebookJoin(MemberVo memberVo, String email, String memberName) {
+		if(memberDao.checkEmail(email)!=null){
+			System.out.println("아이디 있음 아이디:"+email);
+		}else{
+			memberDao.facebookJoin(email, memberName);	
+		}
+	}
+
+	public void facebookLogin(HttpSession session, String email) {
+		MemberVo vo = memberDao.checkEmail(email);
+		session.setAttribute("authUser", vo);
+	}
+	
+	
+	
 }

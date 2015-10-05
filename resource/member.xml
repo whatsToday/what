@@ -9,6 +9,13 @@
            INSERT INTO MEMBER VALUES(member_no_seq.nextval, #memberName#, #email#, #password#, #imageUrl#, #memberGrade#)
         ]]>
     </insert>
+    
+    <insert id="facebookinsert" parameterClass="map">
+        <![CDATA[
+           INSERT INTO MEMBER (member_no, memberName, email) VALUES(member_no_seq.nextval, #memberName#, #email#)
+        ]]>
+    </insert>
+    
     <select id="selectAll" resultClass="MemberVo">
         <![CDATA[
            SELECT * FROM MEMBER
@@ -29,4 +36,14 @@
 		SELECT * from MEMBER where email=#email# and password=#password#
 		]]>
 	</select>
+	<select id="checkEmail" resultClass="MemberVo" parameterClass="java.lang.String">
+	<![CDATA[
+		SELECT * from MEMBER where email=#email#
+		]]>
+	</select>
+   <select id="memberlist" parameterClass="MemberVo" resultClass="int">
+      <![CDATA[
+      SELECT * FROM (select rownum rnum,member_no,memberName,email,password,imageUrl,memberGrade FROM (select * from member order by member_no desc)) WHERE rnum>=#startPage# AND rnum<=#endPage#
+         ]]>
+   </select>
 </sqlMap>

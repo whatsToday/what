@@ -67,21 +67,40 @@
 		 
 	    //페이스북 로그인 버튼을 눌렀을 때의 루틴.  
 	  FB.login(function(response) {  
-	    var fbname;  
 	    var accessToken = response.authResponse.accessToken;  
 	    FB.api('/me', function(response) {
-	    	var path="http://www.mymarket.com/user/loginBySns";
+	    	var path="/facebook";
 	    	var name = response.name;
 	    	var email = response.id;
 	    	var method="post";
+			
+
 	    	
-	    	console.log(response.name);
-	    	console.log(response.id);
-	    	
-	    	post_to_url(path,name,email,null,null,method);
-	    	
-	    	
-	    	
+	    	function post(path, params, method) {
+	    	    method = method || "post"; 
+	    	    
+	    	    var form = document.createElement("form");
+	    	    form.setAttribute("method", method);
+	    	    form.setAttribute("action", path);
+
+	    	    for(var key in params) {
+	    	        if(params.hasOwnProperty(key)) {
+	    	            var hiddenField = document.createElement("input");
+	    	            hiddenField.setAttribute("type", "hidden");
+	    	            hiddenField.setAttribute("name", key);
+	    	            hiddenField.setAttribute("value", params[key]);
+
+	    	            form.appendChild(hiddenField);
+	    	         }
+	    	    }
+
+	    	    document.body.appendChild(form);
+	    	    form.submit();
+	    	}
+
+	    	post('/facebook', {email: email, memberName:name});
+
+			console.log(response.name);
 	    });   
 	  });  
 	}  
@@ -90,7 +109,7 @@
 		  FB.logout(function(response){});
    }
    
-
+   
 </script>
 
 
@@ -103,7 +122,7 @@ Facebook 계정으로 로그인
 Facebook 계정 로그아웃
 </button>
 
-<div ></div>
+<div id="status"></div>
 
 </body>
 </html>

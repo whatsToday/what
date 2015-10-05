@@ -3,9 +3,15 @@
 <sqlMap namespace="event">
    <typeAlias alias="EventVo" type="com.bit2015.what.vo.EventVo"/>
    
-      <select id="selectAll" resultClass="EventVo">
+   <select id="selectAll" resultClass="EventVo">
     <![CDATA[
        select * from EVENT 
+    ]]>
+   </select>
+   
+    <select id="selectVoByCno" parameterClass="java.lang.Long" resultClass="EventVo">
+    <![CDATA[
+       select * from EVENT where content_no = #content_no#
     ]]>
    </select>
 

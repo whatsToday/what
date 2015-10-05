@@ -23,8 +23,11 @@
 			<div class="wsTable effect">
 				<table>
 					<tr>
-						<td>팔로우</td>
-						<td onclick="$('#picktheme').click();">테마 추가하기</td>
+						<td id="showAll" class="even" onclick="themeSearch('showAll');">후기글만 보기</td>
+						<td class="even">팔로우</td>
+						<td id="otherLoc" class="even" onclick="changeLocation(); placesNear();">현재 위치로 내 위치 설정</td>
+						<td id="userLoc" class="even" onclick="navigator.geolocation.getCurrentPosition(success, error, options);">내 위치 </td>
+						<td class="even" onclick="$('#picktheme').click();">테마 추가하기</td>
 					</tr>
 				</table>
 			</div>
@@ -35,14 +38,7 @@
 				        <div class="option">
 				            <p>
 				                <form onsubmit="searchPlaces(); return false;"> 
-							       		<c:choose>
-							       		<c:when test="${not empty memberTheme }">
-							                키워드 : <input type="text" value="${memberTheme.get(0).getThemeName()}" id="keyword" size="15"> 
-							        	</c:when>
-							        	<c:otherwise>
-							                키워드 : <input type="text" value="강남역 맛집" id="keyword" size="15">
-							          </c:otherwise>
-									</c:choose>
+							                키워드 : <input type="text" value="" placeholder="오늘 뭐하지?" id="keyword" size="15">
 				                <button type="submit">검색하기</button> 
 				            </p>
 				        </div>
@@ -55,9 +51,8 @@
 				<div class="wsTable effect">
 						<table>
 							<tr>
-									<td id="theme_${status.index}" class="themeClass" onclick="themeSearch('showAll')">모두 보기</td>
 								<c:forEach var="vo" items="${memberTheme}" varStatus="status">
-									<td id="theme_${status.index}" class="themeClass" onclick="themeSearch('${vo.themeName}')">${vo.themeName}</td>
+									<td id="theme_${status.index}" class="themeClass even" onclick="themeSearch('${vo.themeName}')">${vo.themeName}</td>
 								</c:forEach>
 							</tr>
 						</table>
@@ -81,6 +76,30 @@
 <script type="text/javascript" src="/assets/js/main/ws.js"></script>
 <script type="text/javascript" src="/assets/js/main/map.js"></script>
 <script>
+var nearOn = false;
+var myLoc =false;
+function checkOnOff(){
+		var sa = document.getElementById('showAll');
+		var ua = document.getElementById('userLoc');
+		var oa = document.getElementById('otherLoc');
+		
+	if(nearOn){
+		sa.style.backgroundColor="#69ABED";
+	}else{
+		sa.style.backgroundColor="#fff";
+	}
+	
+// 	if(myLoc){
+// 		ua.style.backgroundColor="#69ABED";
+// 		oa.style.backgroundColor="#fff";
+// 	}else{
+// 		oa.style.backgroundColor="#69ABED";
+// 		ua.style.backgroundColor="#fff";
+// 	}
+	
+	
+}
+
 //planlist부름
 getMyPlan();
 
@@ -91,6 +110,5 @@ $('#picktheme').click();
 }
 //이미 등록된 테마는 check 표시해줌
 checkThemeBox();
-
 </script>
 </html>

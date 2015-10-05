@@ -41,9 +41,9 @@
 		SELECT * from MEMBER where email=#email#
 		]]>
 	</select>
-   <select id="memberlist" parameterClass="MemberVo" resultClass="int">
+<!--    <select id="memberlist" parameterClass="MemberVo" resultClass="int">
       <![CDATA[
       SELECT * FROM (select rownum rnum,member_no,memberName,email,password,imageUrl,memberGrade FROM (select * from member order by member_no desc)) WHERE rnum>=#startPage# AND rnum<=#endPage#
          ]]>
-   </select>
+   </select> -->
 </sqlMap>

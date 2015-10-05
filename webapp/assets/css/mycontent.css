@@ -3,7 +3,7 @@
 .omu {margin-top:20px}
 
 /* mycontent */
-.mycontent {width:1000px;border:solid 1px #000;margin-top:10px;margin-bottom:50px;margin-left:auto;margin-right:auto}
+.mycontent {width:1000px;margin-top:10px;margin-bottom:50px;margin-left:auto;margin-right:auto}
 .image_pro{width:200px;height:200px;border-radius:100px;overflow:hidden}
 
 /* top */
@@ -20,7 +20,7 @@
 .top .pro_name {margin-top:220px;width:200px;text-align:center; font-size:20px; font-weight: bold; }
 .top .pro_modi a{font-weight: bold; color:#fff; text-decoration: none; font-size:16px; line-height:30px}
 .top ul#followingList,.top ul#followerList{display:none; position:fixed; background-color:#fff; width: 150px; max-height:250px; margin-left:50px; font-size:12px; color:#69ABED; font-weight: bold;  overflow-y:scroll;margin-top:0px;}
-.top ul#followingList li,.top ul#followerList li {padding:10px;}
+.top ul#followingList li,.top ul#fo llowerList li {padding:10px;}
 .top ul#followingList li img,.top ul#followerList li img {margin-left:0px;width: 35px; height: 35px; border-radius:25px; margin-right:20px;}
 .top ul#followingList p,.top ul#followerList p{ height:20px;font-size:16px; padding-top:0;padding-bottom:20px; background-color:#69ABED; color:#fff;}
 
@@ -37,10 +37,19 @@
 .content ul.squares {float:left; width:312px;height:250px;border:solid 1px #ededed;margin:10px;}
 .content ul.squares li img{ width: 310px; height: 248px;}
 
-.content ul.menuView { display:none; width:98%;height:400px;border:solid 1px #000;margin:10px;}
-.content ul.menuView li{margin-left:520px; border:solid 1px #000;}
-.content ul.menuView li#comment{margin-top:300px; border:solid 1px #000;}
-.content ul.menuView img{float:left; width: 500px; height: 390px;}
+.content div.menuView { display:none; width:98%;height:400px;border:solid 1px #ededed;margin:10px;}
+.content div.menuView div#menuTitleImage{margin:5px 5px;width: 480px; height:400px; float:left}
+.content div.menuView div#menuTitleImage img{width: 100%;}
+.content div.menuView div#menuContext{margin-left:500px; border:solid 1px #ededed;height:390px; padding:3px;}
+.content div.menuView div#menuName{margin-top:10px; border-bottom:solid 1px #ededed; background-color:#69ABED; color:#Fff;}
+.content div.menuView div#menuMessage{margin-top:10px; border:solid 1px #ededed; height: 180px;}
+.content div.menuView div#menuPhoto{margin-top:10px; border:solid 1px #ededed; height: 100px; padding-left:35px; background-color:#69ABED;}
+.content div.menuView div#menuPhoto div#menuImages{border:solid 1px #ededed;width: 70px; height: 40px; margin:5px 5px; float: left; background-color:#fff;}
+.content div.menuView div#menuComment{border:solid 1px #ededed; margin-top:10px; background-color:#69ABED;}
+.content div.menuView div#menuComment span#goods{margin-left:20px;}
+.content div.menuView div#menuComment span#reply{margin-left:20px;}
+.content div.menuView div#menuComment a{color:#fff; text-decoration: none; font-weight: bold; cursor: pointer; }
+.content div.menuView img{float:left; width: 500px; height: 390px;}
 
 div#info{padding: 5px; width:250px; height: 122px; font-size:12px; }
 div#info img{border:1px solid #000; width: 100px; height: 111px;  float:left; margin-right:10px;}
@@ -62,5 +71,5 @@ div#info div#goToPlan a{
 		 	font-weight:bold;
 		 	line-height: 40px;
 }
-div#map {width: 98%; height: 600px; margin:10px 10px;}
+div#map {width: 98%; height: 600px; margin:20px 10px;}
 /* bottom */

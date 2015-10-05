@@ -14,79 +14,245 @@
 <script type="text/javascript" src="/assets/js/board/jquery-1.9.1.min.js"></script>
 <!-- css -->
 <style type="text/css">
-* { margin:0; padding:0;}
-div {
-		padding:10px;
-}
-div#container{
-			   background-color : #ededed;
-			   margin:7% 20%;
-			   width: 50%;
-			   height: 900px;
-			   position: relative;
+div.container{
+			margin-top : 5%;
+			border: 1px solid #000;
+			width:1000px;
 }
 div#photo {
+			margin-top:20px;
+			width: 150px;
+			height: 150px;
 			float:left;
-			width: 30%;
-			height: 80px;
+			border: 1px solid #000;
+			border-radius:150px;
 }
 div#photo img{
-			width: 100%;
+				width:100%;
+				height:100%;
+				border-radius:150px;
 }
-div#title {
-			height: 80px;
-			width: 65%;
-			margin-left: 32%;
+div#title {	
+			margin-top:80px;
+			margin-left: 200px;	
+			width:700px;
+			border: 1px solid #000;
+			height:  30px;
 }
-div#title input{
-				margin-top:58px;
-				width: 100%;
-				height: 30px;
+div#title strong{
+			 background-color: #69ABED;
+			 font-size : 50px;
 }
+div#title input[type=text] {
+				width:698px;
+				height:28px;
+				font-size:15px;
+				line-height: 28px;
+				
+}
+#planName::-webkit-input-placeholder,#msg::-webkit-input-placeholder { color:#69ABED; }
 div#selectPlan{
-				height: 50px;
+			margin-top:20px;
+			margin-left: 200px;	
+			border: 1px solid #69ABED;
+			width:200px;
+			height: 30px;
+			line-height: 30px;
+			background-color:#69ABED;
 }
 div#selectPlan a{
-				text-decoration: none;
-				color:#000;
+			margin-left: 5px;
+			text-decoration: none;
+			font-size:15px;
+			font-weight: bold;
+			color:#fff;
 }
+div#map {
+		margin-top:20px;
+		margin-left: 200px;
+		border: 1px solid #000;
+		width:700px;
+		height: 400px;
+		z-index: 0;
+}
+div#cmtWrite, div#cmtView{
+		border:1px solid #000;
+		border-bottom:none;
+		margin-top:10px;
+		margin-left:auto;
+		margin-right:auto;
+		width: 1000px;
+		height :40px;
+		line-height:40px;
+		text-align:center;
+		background-color:#69ABED;
+		color:#fff;
 
-div#selectPlan ul#planList{
-			display:none;
-			list-style: none;
 }
-
-div#map{
-			width: 96.5%;
-			height: 350px;
+div#comment{
+		margin-left:auto;
+		margin-right:auto;
+		width: 1000px;
 }
-div#message {
-			width:96.5%;
-			height: 300px;
+div#comment div#viewComment{
+		border: 1px solid #000;
+		height: 40px;
 }
-div#message textarea {
-			width:100%;
-			height: 100%;
-			resize:none;
+div#comment div#writeComment{
+		border: 1px solid #000;
+		height: 60px;
+}
+div#comment div#writeComment button{
+		height: 58px;
+		width:68px;
+		margin-top:-58px;
+		float: right;
+ 		border: 1px solid #69ABED;
+ 		padding : 5px;
+ 		background-color:#69ABED;
+		font-weight: bold;
+		color:#fff;
+}
+div#comment div#writeComment div#userName{
+		margin-left:10px;
+		height: 60px;
+		line-height:60px;
+		width: 150px;
+		font-size:16px;
+		font-weight: bold;
+}
+div#comment div#writeComment div#userName img{
+				width:45px;
+				height:45px;
+				border-radius:45px;
+}
+div#comment div#writeComment div#userName span{
+				margin-left:20px;
+}
+div#comment div#writeComment div#commentText{
+			border-left:1px solid #000;
+			margin-top:-60px;
+			margin-left:150px;
+			width: 847px;
+			height: 58px;
+}
+div#comment div#writeComment div#commentText textarea{
+			width: 780px;
+			height: 58px;
+}
+div#comment div#viewComment div#userName{
+		margin-left:10px;
+		height: 40px;
+		line-height:30px;
+		padding:3px;
+		width: 150px;
+		font-size:16px;
+		font-weight: bold;
+}
+div#comment div#viewComment div#userName img{
+				width:30px;
+				height:30px;
+				border-radius:30px;
+}
+div#comment div#viewComment div#userName span{
+				margin-left:20px;
+}
+div#comment div#viewComment div#commentText{
+			border-left:1px solid #000;
+			margin-top:-40px;
+			margin-left:150px;
+			width: 847px;
+			height: 38px;
 }
 div#submit{
-			float:right;
+		margin-left:auto;
+		margin-right:auto;
+		width: 1000px;
+}
+div#submit button{
+			margin-top:10px;
+			margin-left:20px;
+			margin-bottom:20px;
+ 			border: 1px solid #69ABED;
+ 			float : right;
+ 			padding : 15px;
+ 			background-color:#69ABED;
+			font-weight: bold;
+			color:#fff;
+ 			
+ }
+div#selectPlan ul{
+		z-index: 5;
+		position: relative;
+		list-style: none;
+		background-color: #ededed;
+		margin-top:10px;
+		width: 200px;
+		overflow-x:hidden;
+		overflow-y: scroll;
+		height: 100px;
+		display:none;
+}
+div#selectPlan ul li{
+						margin:10px;
+						
+}
+div#selectPlan ul li a{
+						text-decoration: none;
+						color:#000;
+}
+div#message {
+				margin-top:20px;
+				margin-left:200px;
+				width:700px;
+				height: 200px;
+				border: 1px solid #000;
+}
+div.container textarea{
+					width:100%;
+					height: 100%;
+					resize:none;
+					
+}
+div#contentPhoto{
+				border: 1px solid #000;
+				padding:10px;
+}
+div#msgPhoto {
+			margin-left:180px;
+}
+div#images{
+			border: 1px solid #000;
+			margin-top:20px;
+			margin-left: 20px;
+			margin-bottom:20px;
+			width: 220px;
+			height: 220px;
+			float : left;
 }
 </style>
 </head>
 <body>
 <!-- header -->
+<div id="wrapper">
 <c:import url="/WEB-INF/views/include/header.jsp"/>
 <!-- container -->
-<div id="container">
-<div id="photo"><img src="${planBoard.titleImage}"/></div>
+<div class="container">
+<div id="photo"><img src="${planBoard.titleImage}"></div>
 <div id="title">${planBoard.planName}</div>
-<div id="map">Map</div>
-<div id="message"><textarea id="msg" readonly="readonly">${planBoard.message}</textarea></div>
-<div id="comment">댓글</div>
-<div>댓글내용</div>
+<div id="map"></div>
+<div id="message">${planBoard.message}</div>
+<div id="msgPhoto"><div id="images">포토</div></div>
 </div>
+<div id="comment">
+<div id="cmtWrite">댓글쓰기</div>
+<div id="writeComment"><div id="userName"><img src="${authUser.imageUrl}"><span>${authUser.memberName}</span></div><div id="commentText"><textarea></textarea></div><button>댓글달기</button></div>
+<div id="cmtView">댓글보기</div>
+<div id="viewComment"><div id="userName"><a href="/mycontent?member_no="><img src="${authUser.imageUrl}"><span>${authUser.memberName}</span></a></div><div id="commentText"></div></div>
+</div>
+<div id="submit"><button>수정</button><button>삭제</button></div>
 <!-- footer -->
+</div>
 </body>
 <script>
 //마커를 담을 배열입니다
@@ -100,5 +266,39 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 
 // 지도를 생성합니다    
 var map = new daum.maps.Map(mapContainer, mapOption); 
+</script>
+<script>
+function removeMarker() {
+    for ( var i = 0; i < markers.length; i++ ) {
+        markers[i].setMap(null);
+    }   
+    markers = [];
+}
+</script>
+<script>
+removeMarker();
+var lat;
+var lng;
+$.ajax({
+	type : 'get',
+    url:'/board/getPlan',
+    data : {
+    	 plan_no : "${param.plan_no}"
+    },
+    dataType:'json',
+    success: function(response){
+		for(var i=0; i<response.length; i++){
+			lat = response[i].latitude;
+			lng = response[i].longitude;
+		    	markers[i] = new daum.maps.Marker({
+					position : new daum.maps.LatLng(response[i].latitude ,response[i].longitude)
+				});
+				markers[i].setMap(map);
+		    	}
+		    	var moveLatLon = new daum.maps.LatLng(lat, lng);
+				map.setCenter(moveLatLon);
+				map.setLevel(5);
+		}
+ })
 </script>
 </html>

@@ -16,58 +16,74 @@
 <style type="text/css">
 div.container{
 			margin-top : 5%;
-}
-div#board{
-			margin : 3% 17% 0% 17%;
-			width:65%;
-			background-color: #ddd;
-			position: relative;
+			border: 1px solid #000;
+			width:1000px;
 }
 div#photo {
-			width: 20%;
-			height: 40px;
+			margin-top:20px;
+			width: 150px;
+			height: 150px;
 			float:left;
 			border: 1px solid #000;
+			border-radius:150px;
 }
 div#photo img{
-				max-width:100%;
-				max-height:100%;
-				margin-left: 33%;
+				width:100%;
+				height:100%;
+				border-radius:150px;
 }
 div#title {	
+			margin-top:80px;
+			margin-left: 200px;	
+			width:700px;
 			border: 1px solid #000;
-			height: 40px;
+			height:  30px;
+}
+div#title strong{
+			 background-color: #69ABED;
+			 font-size : 50px;
 }
 div#title input[type=text] {
-				width:79.2%;
-				height:20px;
-				margin-top: 8px;
+				width:698px;
+				height:28px;
+				font-size:15px;
+				line-height: 28px;
 				
 }
+#planName::-webkit-input-placeholder,#msg::-webkit-input-placeholder { color:#69ABED; }
 div#selectPlan{
-			border: 1px solid #000;
+			margin-top:20px;
+			margin-left: 200px;	
+			border: 1px solid #69ABED;;
+			width:200px;
 			height: 30px;
+			line-height: 30px;
+			background-color:#69ABED;
 }
-div#selectPlan a#select{
-			border: 1px solid #000;
-			background-color: #fff;
+div#selectPlan a{
+			margin-left: 5px;
 			text-decoration: none;
-			color:#000;
-			padding:0 150px;
+			font-size:15px;
+			font-weight: bold;
+			color:#fff;
 }
 div#map {
+		margin-top:20px;
+		margin-left: 200px;
 		border: 1px solid #000;
+		width:700px;
 		height: 400px;
 		z-index: 0;
 }
-div#submit{
-		border: 1px solid #000;
-}
 div#submit button{
- 			border: 1px solid #000;
+			margin-right: 80px;
+			margin-bottom:20px;
+ 			border: 1px solid #69ABED;
  			float : right;
- 			background-color: #fdfdfd;
  			padding : 15px;
+ 			background-color:#69ABED;
+			font-weight: bold;
+			color:#fff;
  			
  }
 div#selectPlan ul{
@@ -76,20 +92,26 @@ div#selectPlan ul{
 		list-style: none;
 		background-color: #ededed;
 		margin-top:10px;
-		width: 365px;
+		width: 200px;
 		overflow-x:hidden;
 		overflow-y: scroll;
 		height: 100px;
+		display:none;
 }
 div#selectPlan ul li{
 						margin:10px;
+						
 }
 div#selectPlan ul li a{
 						text-decoration: none;
 						color:#000;
 }
 div#message {
+				margin-top:20px;
+				margin-left:200px;
+				width:700px;
 				height: 200px;
+				border: 1px solid #000;
 }
 div.container textarea{
 					width:100%;
@@ -103,6 +125,14 @@ div#contentPhoto{
 }
 span:hover{
 			cursor: pointer;
+}
+div#msgPhoto .msgPt{
+			margin : 20px 20px 20px 200px;
+ 			border: 1px solid #69ABED;
+ 			padding : 15px;
+ 			background-color:#69ABED;
+			font-weight: bold;
+			color:#fff;
 }		
 </style>
 </head>
@@ -112,8 +142,8 @@ span:hover{
 <c:import url="/WEB-INF/views/include/header.jsp"/>
 <!-- container -->
 <div class="container">
-<div id="photo">사진<button onclick="upload(1)">사진선택</button><input type="file" name="img" id="uploadMainPhoto" style="display:none;"></div>
-<div id="title"><input type="text" id="planName"></div>
+<div id="photo"><a href="javascript:upload(1)"><img src="/assets/img/noimage.jpg"></a><input type="file" name="img" id="uploadMainPhoto" style="display:none;"></div>
+<div id="title"><input type="text" id="planName" placeholder="제목을 입력하세요."></div>
 <div id="selectPlan"><a href="javascript:showPlan();">플랜선택</a>
 	<ul id="planList">
 		<c:forEach var="i" items="${planList}" varStatus="status">
@@ -122,8 +152,8 @@ span:hover{
 	</ul>
 </div>
 <div id="map">Map</div>
-<div id="message"><textarea id="msg"></textarea></div>
-<div id="msgPhoto"><button onclick="upload(2)">사진선택</button><input type="file" name="img1" id="uploadPhoto" style="display:none;"><a href="javascript:testss()">+</a></div>
+<div id="message"><textarea id="msg" placeholder="내용을 입락하세요."></textarea></div>
+<div id="msgPhoto"><button class="msgPt" onclick="upload(2)">사진선택</button><input type="file" name="img1" id="uploadPhoto" style="display:none;"><a href="javascript:testss()">+</a></div>
 <div id="submit"></div>
 </div>
 <!-- footer -->
@@ -154,7 +184,7 @@ function upload(num){
 		$('#uploadMainPhoto').click();
 	}
 	if(num==2){
-		$('#uploadPhoto').click();	
+		$('#uploadPhoto').click();
 	}
 }
 function getPlan(plan_no){
@@ -214,5 +244,7 @@ function removeMarker() {
     }   
     markers = [];
 }
+</script>
+<script>
 </script>
 </html>

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.bit2015.what.service.BoardService;
+import com.bit2015.what.vo.ContentVo;
 import com.bit2015.what.vo.MemberVo;
 import com.bit2015.what.vo.PlanVo;
 
@@ -39,8 +40,8 @@ public class BoardController {
 	}
 	@RequestMapping("/getPlan")
 	@ResponseBody
-	public Object[] getPlan(@RequestParam Long plan_no){
-		Object[] contentVo =  boardService.getPlan(plan_no);
+	public List<ContentVo> getPlan(@RequestParam Long plan_no){
+		List<ContentVo> contentVo =  boardService.getPlan(plan_no);
 		return contentVo;
 	}
 	@RequestMapping("/addPlan")

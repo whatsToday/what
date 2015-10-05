@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bit2015.what.service.BoardService;
 import com.bit2015.what.service.MyContentService;
-import com.bit2015.what.vo.FollowVo;
+import com.bit2015.what.vo.ContentVo;
 import com.bit2015.what.vo.MemberVo;
 import com.bit2015.what.vo.PlanVo;
 
@@ -51,5 +52,23 @@ public class MyContentController {
 	public String follow(@RequestParam Long following, @RequestParam Long follower, @RequestParam Long member_no){
 		myContentService.follow(following, follower);
 		return "redirect:/mycontent?member_no="+member_no;
+	}
+	@RequestMapping("/allPlan")
+	@ResponseBody
+	public List<ContentVo> allPlanList(@RequestParam Long member_no){
+		List<ContentVo> contentVo = myContentService.allPlan(member_no);
+		return contentVo;
+	}
+	@RequestMapping("/getContent")
+	@ResponseBody
+	public ContentVo getContent(@RequestParam String id, @RequestParam Long member_no){
+		ContentVo contentVo = myContentService.getContent(id, member_no);
+		return contentVo;
+	}
+	@RequestMapping("/getContentPlan")
+	@ResponseBody
+	public PlanVo getContentPlan(@RequestParam String id, @RequestParam Long member_no){
+		PlanVo plantVo = myContentService.getContentPlan(id, member_no);
+		return plantVo;
 	}
 }

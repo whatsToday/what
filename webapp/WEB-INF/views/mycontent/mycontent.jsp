@@ -21,7 +21,6 @@
 	<div id="wrapper">
 		<c:import url="/WEB-INF/views/include/header.jsp"/> 
 	<div class="container">
-			<div class="omu"><img src="/assets/img/omu.jpg"></div>
 		<div class="mycontent" >
 				<div class="top">
 				<div class="pro"><img class="image_pro" src="${memberVo.imageUrl}"/></div>
@@ -136,8 +135,6 @@ function viewFollower(num){
 	$("#followerList").toggle();
 }
 function unFollow(following, follower){
-	console.log(following);
-	console.log(follower);
 	if (confirm('언팔로우하시겠습니까??')) {
 		location.href="/mycontent/unFollow?following="+following+"&follower="+follower+"&member_no="+${param.member_no};
 	} else {
@@ -158,13 +155,101 @@ var markers = [];
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
-        center: new daum.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+        center: new daum.maps.LatLng(37.49398759519894, 127.02826109205249), // 지도의 중심좌표
         level: 2 // 지도의 확대 레벨
     };  
 
 // 지도를 생성합니다    
 var map = new daum.maps.Map(mapContainer, mapOption); 
-
 </script>
+<script>
+function info(marker,id){
+	$.ajax({
+		type : 'get',
+	    url:'/mycontent/getContent',
+	    data : {
+	    	id : id,
+	    	member_no : "${param.member_no}"
+	    },
+	    dataType:'json',
+	    success: function(response){
+	    	 var title =response.title;
+	    	 var imageUrl;
+	    	 if(response.imageUrl ==null){
+	    	 imageUrl = "/assets/img/noimg.png"; 
+	    	 }
+	    	 else{
+	    	 imageUrl = response.imageUrl;
+	    	 }
+	    	 var phone = response.phone;
+	    	 $.ajax({
+	    			type : 'get',
+	    		    url:'/mycontent/getContentPlan',
+	    		    data : {
+	    		    	id : id,
+	    		    	member_no : "${param.member_no}"
+	    		    },
+	    		    dataType:'json',
+	    		    success: function(response1){
+	    		    	var plan_no = response1.plan_no;
+	    		    	var iwContent = '<div id="info"><img src="'+imageUrl+'"><div><div id="tl">'+title+'</div></br>'+phone+'</br><div id="goToPlan"><a href="/board?plan_no='+plan_no+'">Go!</a></div></div></div>', 
+	    		        iwRemoveable = true; 
 
+	    		  		var infowindow = new daum.maps.InfoWindow({
+	    		        content : iwContent,
+	    		        removable : iwRemoveable
+	    		    });
+
+	    		    daum.maps.event.addListener(marker, 'click', function() {
+	    		          // 마커 위에 인포윈도우를 표시합니다
+	    		          infowindow.open(map, marker);  
+	    		    });
+	    				}
+	    	});
+	    	
+			}
+	})
+}
+</script>
+<script>
+function removeMarker() {
+    for ( var i = 0; i < markers.length; i++ ) {
+        markers[i].setMap(null);
+    }   
+    markers = [];
+}
+</script>
+<script>
+if("${planList.size()}" !=0){
+removeMarker();
+var lat;
+var lng;
+var id;
+$.ajax({
+	type : 'get',
+    url:'/mycontent/allPlan',
+    data : {
+    	 member_no : "${param.member_no}"
+    },
+    dataType:'json',
+    success: function(response){
+    	for(var i=0; i<response.length; i++){
+			lat = response[0].latitude;
+			lng = response[0].longitude;
+			console.log(lat + ":"+ lng);
+			id = response[i].id;
+		    markers[i] = new daum.maps.Marker({
+					position : new daum.maps.LatLng(response[i].latitude ,response[i].longitude)
+				});
+		    markers[i].setMap(map);
+		    info(markers[i],id);
+		    
+		 }
+    	var moveLatLon = new daum.maps.LatLng(lat, lng);
+    	map.setCenter(moveLatLon);
+		map.setLevel(7);
+	}
+})
+}
+</script>
 </html>

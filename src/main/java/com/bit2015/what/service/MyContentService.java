@@ -8,9 +8,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bit2015.what.dao.ContentBoxDao;
+import com.bit2015.what.dao.ContentDao;
 import com.bit2015.what.dao.FollowDao;
 import com.bit2015.what.dao.MemberDao;
 import com.bit2015.what.dao.PlanDao;
+import com.bit2015.what.vo.ContentBoxVo;
+import com.bit2015.what.vo.ContentVo;
 import com.bit2015.what.vo.FollowVo;
 import com.bit2015.what.vo.MemberVo;
 import com.bit2015.what.vo.PlanVo;
@@ -24,6 +28,10 @@ public class MyContentService {
 	MemberDao memberDao;
 	@Autowired
 	FollowDao followDao;
+	@Autowired
+	ContentDao contentDao;
+	@Autowired
+	ContentBoxDao contentBoxDao;
 	
 	public List<PlanVo> userPlan(Long member_no){
 		List<PlanVo> list = planDao.getUserPlan(member_no);
@@ -79,5 +87,40 @@ public class MyContentService {
 		followVo.setFollowName(followName);
 		followDao.insert(followVo);
 	}
-
+	public List<ContentVo> allPlan(Long member_no){
+		List<PlanVo> list = planDao.getUserPlan(member_no);
+		List<ContentVo> cntVo = new ArrayList<ContentVo>();
+		for(int i=0; i<list.size(); i++){
+			PlanVo planVo = list.get(i);
+			if(planVo.getMessage() != null){
+				List<ContentBoxVo> list1 = contentBoxDao.selectAllByPno(planVo.getPlan_no());
+				for(int q=0; q<list1.size(); q++){
+					ContentBoxVo contentBoxVo = list1.get(q);
+					cntVo.add(contentDao.selectVo(contentBoxVo.getContent_no()));
+				}
+			}
+		}
+		return cntVo;
+	}
+	public ContentVo getContent(String id, Long member_no){
+		ContentVo contentVo = contentDao.selectVoById(id);
+		return contentVo;
+	}
+	public PlanVo getContentPlan(String id, Long member_no){
+		ContentVo contentVo = contentDao.selectVoById(id);
+		List<ContentBoxVo> list = contentBoxDao.selectAllById(contentVo.getContent_no());
+		PlanVo pnVo = new PlanVo();
+		for(int i=0; i<list.size(); i++){
+			ContentBoxVo contentBoxVo = list.get(i);
+			List<PlanVo> list1 =planDao.getUserPlan(member_no);
+			for(int q=0; q<list1.size(); q++){
+			PlanVo planVo = list1.get(q);
+			if(planVo.getPlan_no() == contentBoxVo.getPlan_no()){
+				pnVo = planVo;
+				System.out.println(pnVo);
+			}
+			}
+		}
+		return pnVo;
+	}
 }

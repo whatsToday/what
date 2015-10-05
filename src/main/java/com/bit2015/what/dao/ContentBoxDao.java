@@ -30,8 +30,6 @@ public class ContentBoxDao {
 		List<ContentBoxVo> list= sqlMapClientTemplate.queryForList("contentBox.selectAllByPno",plan_no);
 		return list;
 	}
-	
-	
 	public List<ContentBoxVo> selectAllById(Long content_no){
 		List<ContentBoxVo> list= sqlMapClientTemplate.queryForList("contentBox.selectAllByCno",content_no);
 		return list;

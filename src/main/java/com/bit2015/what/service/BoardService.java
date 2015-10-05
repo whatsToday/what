@@ -1,16 +1,17 @@
 package com.bit2015.what.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.bit2015.what.dao.ContentBoxDao;
 import com.bit2015.what.dao.ContentDao;
 import com.bit2015.what.dao.PlanDao;
 import com.bit2015.what.util.FileUploader;
 import com.bit2015.what.vo.ContentBoxVo;
+import com.bit2015.what.vo.ContentVo;
 import com.bit2015.what.vo.PlanVo;
 
 @Service
@@ -28,16 +29,24 @@ public class BoardService {
 	
 	public List<PlanVo> userPlan(Long member_no){
 		List<PlanVo> list = planDao.getUserPlan(member_no);
-		return list;
+		List<PlanVo> list1 = new ArrayList<PlanVo>();
+		for(int i=0; i<list.size(); i++){
+			PlanVo planVo = list.get(i);
+			System.out.println(planVo);
+			if(planVo.getMessage() == null){
+				list1.add(planVo);
+				System.out.println(planVo);
+			}
+		}
+		return list1;
 	}
-	public Object[] getPlan(Long plan_no){
+	public List<ContentVo> getPlan(Long plan_no){
 		List<ContentBoxVo> list = contentBoxDao.selectAllByPno(plan_no);
 		ContentBoxVo contentBoxVo = new ContentBoxVo();
-		Object[] cntVo = new Object[list.size()];
+		List<ContentVo> cntVo = new ArrayList<ContentVo>();
 		for( int i=0; i<list.size(); i++){
 			contentBoxVo = list.get(i);
-			cntVo[i] = contentDao.selectVo(contentBoxVo.getContent_no());
-			System.out.println(cntVo[i]);
+			cntVo.add(contentDao.selectVo(contentBoxVo.getContent_no()));
 		}
 		return cntVo;
 	}

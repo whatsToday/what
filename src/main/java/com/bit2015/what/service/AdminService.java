@@ -79,6 +79,20 @@ public class AdminService {
 		System.out.println("지금 가입한사람" + memberList);
 		return memberList;
 	}
+	
+	public List<MemberVo> selectMember1(int page, int limit) {
+		List<MemberVo> memberList1 = memberDao.select(page, limit);
+		
+		return memberList1;
+		
+	}
+	public int memberCountList(){
+		int count = 0;
+		count =	memberDao.memberCountList();
+		return count;
+	}
+	
+
 
 	// 회원가입 추가
 	public void insertMember(MemberVo memberVo, MultipartFile img) {

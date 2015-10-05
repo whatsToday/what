@@ -42,10 +42,11 @@ public void facebookJoin(String email, String memberName) {
 	Map<String, Object> map= new HashMap<String, Object>();
 	map.put("email", email);
 	map.put("memberName", memberName);
+	System.out.println(map);
 	sqlMapClientTemplate.insert("member.facebookinsert",map);
 }
 public MemberVo checkEmail(String email) {
-	MemberVo testVo2 = (MemberVo) sqlMapClientTemplate.queryForObject("member.checkEmail", email);
-	return testVo2;
+	MemberVo vo = (MemberVo) sqlMapClientTemplate.queryForObject("member.checkEmail", email);
+	return vo;
 }
 }

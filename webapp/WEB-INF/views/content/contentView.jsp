@@ -50,7 +50,7 @@
 				<span style="font-weight:bold">${authUser.memberName }</span>
 				</c:otherwise>
 				</c:choose>
-				<span style="margin-left:15px"><textarea name="message" cols=112 rows=3></textarea></span>
+				<span style="margin-left:15px"><textarea name="message" cols=105 rows=3></textarea></span>
 				<span style="margin-left:20px"><input style="width:60px;height:60px" type="submit" value="덧글등록"></span>
 			</div>	
 		</form>

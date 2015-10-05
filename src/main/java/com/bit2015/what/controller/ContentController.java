@@ -90,7 +90,7 @@ public class ContentController {
 	  public String facebook(HttpSession session,MemberVo memberVo ,@RequestParam String email, @RequestParam String memberName ){
 		  contentService.facebookJoin(memberVo, email, memberName);
 		  contentService.facebookLogin(session, email);
-		  return "/content/test";
+		  return "/main/index";
 		  
 	  }
 }

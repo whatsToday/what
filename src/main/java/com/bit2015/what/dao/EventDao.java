@@ -25,5 +25,14 @@ public class EventDao {
 	public void delete(long event_no) {
 		sqlMapClientTemplate.delete("event.delete", event_no);
 	}
+	
+	public boolean checkEvents(Long content_no){
+		List<EventVo> list =  sqlMapClientTemplate.queryForList("event.selectVoByCno", content_no);
+		if(list.isEmpty()){
+			return false;
+		}else{
+			return true;
+		}
+	}
 
 }

@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.bit2015.what.dao.CommentsDao;
 import com.bit2015.what.dao.ContentBoxDao;
 import com.bit2015.what.dao.ContentDao;
+import com.bit2015.what.dao.EventDao;
 import com.bit2015.what.dao.GoodContentDao;
 import com.bit2015.what.dao.MemberDao;
 import com.bit2015.what.dao.PlanDao;
@@ -34,6 +35,7 @@ import com.bit2015.what.dao.planCommentsDao;
 import com.bit2015.what.util.FileUploader;
 import com.bit2015.what.vo.ContentBoxVo;
 import com.bit2015.what.vo.ContentVo;
+import com.bit2015.what.vo.EventVo;
 import com.bit2015.what.vo.GoodContentVo;
 import com.bit2015.what.vo.MemberVo;
 import com.bit2015.what.vo.PlanVo;
@@ -62,6 +64,8 @@ public class MainService {
 	GoodContentDao goodContentDao;
 	@Autowired
 	CommentsDao commentsDao;
+	@Autowired
+	EventDao eventDao;
 	
 	FileUploader ful = new FileUploader();
 
@@ -123,11 +127,12 @@ public class MainService {
 	}
 
 	public void getInfo(Map<String, Object> map, String id) {
-
+		
 		// 후기 수집
 		List<PlanVo> planList = new ArrayList<PlanVo>();
 		long good = 0; 
 		long comments = 0 ;
+		boolean event = false;
 
 		if (contentDao.selectVoById(id) == null) {
 			System.out.println("해당 id로 아무것도 검색되지 않았습니다.");
@@ -142,6 +147,8 @@ public class MainService {
 					planList.add(tempVo);
 				}
 			}
+			//event 가져오기
+			if(eventDao.checkEvents(content_no)) event=true;
 			
 			// 좋아요
 			//good 갯수
@@ -154,6 +161,7 @@ public class MainService {
 			
 		}
 		
+		map.put("event", event);
 		map.put("comments", comments);
 		map.put("good", good);
 		map.put("planList", planList);
@@ -220,9 +228,6 @@ public class MainService {
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		Date today = Calendar.getInstance().getTime();
 		String planDate = df.format(today);
-		System.out.println("MyPlanList.get(0).getPlanDate() == " + MyPlanList.get(0).getPlanDate());
-		System.out.println("planDate =" + planDate);
-		System.out.println(!MyPlanList.get(0).getPlanDate().equals(planDate));
 		if(MyPlanList.get(0) == null || !MyPlanList.get(0).getPlanDate().equals(planDate)){
 			PlanVo addVo = new PlanVo();
 			addVo.setPlan_no(-1);
@@ -309,14 +314,12 @@ public class MainService {
 	}
 
 	public void placesNear(Map<String, Object> map, String[] themeName, Double lat, Double lng, Double distance) {
-		System.out.println("사용자가 고른 관심사와 관련된 message가 있는 후기글(plan)들을 가지고 있는 content를 가져옵니다");
+//		System.out.println("사용자가 고른 관심사와 관련된 message가 있는 후기글(plan)들을 가지고 있는 content를 가져옵니다");
 		List<ContentVo> ctList = new ArrayList<ContentVo>();
 		
 		for (int i = 0; i < themeName.length; i++) {
-			System.out.println(themeName[i]);
 			ctList.addAll(contentDao.selectAllNearWithTheme(themeName[i], lat, lng, distance));
 		}
-		System.out.println("ctList.toString() ="+ctList.toString());
 		
 		map.put("contentList", ctList);
 		

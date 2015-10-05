@@ -17,6 +17,7 @@ var circle = new daum.maps.Circle({
     strokeStyle: 'shortdashdot', // 선의 스타일 입니다
     fillColor: '#FFFAFC', // 채우기 색깔입니다
     fillOpacity: 0.2  // 채우기 불투명도 입니다  
+//    radius : 150
 });
 
 
@@ -30,16 +31,17 @@ function searchPlaces() {
         return false;
     }
     
-    circle.setMap(null);
-	circle.setPosition(userLocation);
-	//circle.setRadius(distance*1000);
-	circle.setRadius(150);
-	circle.setMap(map);	
+    //이렇게 해버리면 강남역에서 양재역 주변 볼려고 양재역치면 강남역으로 돌아옴. setlocation때문에..
+//    circle.setMap(null);
+////	circle.setPosition(userLocation);
+////	//circle.setRadius(distance*1000);
+////	circle.setRadius(150);
+//	circle.setMap(map);	
 	
     ps.keywordSearch( keyword, placesSearchCB, {
 	
-		location: map.getCenter(),
-		radius : 150,	
+//		location: map.getCenter(),
+//		radius : cirecle.getRadius(),	
 		sort    : daum.maps.services.SortBy.POPULARITY
 		
 		//daum.maps.services.SortBy.DISTANCE
@@ -55,11 +57,23 @@ function placesSearchCB(status, data, pagination) {
     	
         displayPlaces(data.places);
         displayPagination(pagination);
-        console.log(pagination);
     } else if (status === daum.maps.services.Status.ZERO_RESULT) {  alert('지도 검색 결과가 존재하지 않습니다.');   return;
     } else if (status === daum.maps.services.Status.ERROR) {   alert('지도 검색 결과 중 오류가 발생했습니다.');  return;
     }
 }
+
+//var drawPlaces = [];
+//function placesDrawCB(status, data, pagination) {
+//    if (status === daum.maps.services.Status.OK) {
+//    	for (var i = 0; i < 3; i++) {
+//    		drawPlaces += data.places[i];
+//		}
+//    	console.log(drawPlaces[2].title);
+//    	
+//    } else if (status === daum.maps.services.Status.ZERO_RESULT) { /* alert('지도 검색 결과가 존재하지 않습니다.');*/   return;
+//    } else if (status === daum.maps.services.Status.ERROR) {   alert('지도 검색 결과 중 오류가 발생했습니다.');  return;
+//    }
+//}
 
 function displayPlaces(places) {
 	placesArray = places;
@@ -218,15 +232,15 @@ function displayInfowindow(marker, items) {
 function displayInfowindow2(marker, items, index) {
 	var content = '<div class="wsTable effect" style="width:200px;"><table><tr><th class="wshd" colspan="2">'+items.title+'</th></tr>';
 	
-	//상세 정보 페이지, 찜하기 페이지
-	if(items.placeUrl==""){
-		content += '<tr><td><a href="#" onclick="alert(); return false;">상세 정보</a></td>';
-	}else{
-		content += '<tr><td><a href="'+items.placeUrl+'">상세 정보</a></td>';
-	}
-	
+//	//상세 정보 페이지, 찜하기 페이지
+//	if(items.placeUrl==""){
+//		content += '<tr><td><a href="#" onclick="alert(); return false;">상세 정보</a></td>';
+//	}else{
+//		content += '<tr><td><a href="'+items.placeUrl+'">상세 정보</a></td>';
+//	}
+//	
 	//찜하기
-	content += '<td onclick="insertPlan('+index+');"> 찜하기 </td>';
+	content += '<tr><td onclick="insertPlan('+index+');"> 찜하기 </td>';
 	
 	
 		//좋아요, 갯글, 플랜
@@ -237,36 +251,49 @@ function displayInfowindow2(marker, items, index) {
 					id : items.id
 				},
 				success: function(response){
+					//event 유무 확인
+					if(response.event){
+						console.log("event 있습니다");
+						content += '<td>상세 정보<img src="/assets/img/sale.png"/></td></tr>';
+					}else{
+						content += '<td>상세 정보</td></tr>';
+					}
+					
+					
 					//좋아요 갯수, 댓글 갯수 
 					content += '<tr><td>'+'&hearts; = '+response.good+'</td><td> 댓글 = '+response.comments+'</td></tr>';
 					
 					//플랜 수집
-					content += '<tr><th class="wshd" colspan="2">후기 게시판</th></tr>';
+					content += '<tr><th class="wshd" colspan="2">후기 게시판</th></tr></table><div class="scrollist"><table>';
+					
 					
 						if(response.planList.length!=0){
-							if(response.planList.length%2==0){
-								for ( var i in response.planList) {
-											if(i%2==0){
-											content += '<tr><td id="'+response.planList[i].plan_no+'" onclick="showplan(this)"><b>'+response.planList[i].plan_no+'</b> 번 후기</td>';
-											}else{
-												content += '<td id="'+response.planList[i].plan_no+'" onclick="showplan(this)"><b>'+response.planList[i].plan_no+'</b> 번 후기</td></tr>';
-											}
-								}
-							}else{
-								for ( var i in response.planList) {
-											if(i%2==0){
-											content += '<tr><td id="'+response.planList[i].plan_no+'" onclick="showplan(this)"><b>'+response.planList[i].plan_no+'</b> 번 후기</td>';
-											}else{
-												content += '<td id="'+response.planList[i].plan_no+'" onclick="showplan(this)"><b>'+response.planList[i].plan_no+'</b> 번 후기</td></tr>';
-											}
-								}
-									content += '</tr>';
+							for ( var i in response.planList) {
+								content += '<tr><td id="'+response.planList[i].plan_no+'" onclick="showplan(this)"><img width="15px" src="/assets/img/button/twitter.png"/>  '+response.planList[i].memberName+'님의 <b>'+response.planList[i].plan_no+'</b> 번 후기   <img width="15px" src="/assets/img/button/twitter.png"/></td></tr>';
 							}
+//							if(response.planList.length%2==0){
+//								for ( var i in response.planList) {
+//											if(i%2==0){
+//											content += '<tr><td id="'+response.planList[i].plan_no+'" onclick="showplan(this)"><b>'+response.planList[i].plan_no+'</b> 번 후기</td>';
+//											}else{
+//												content += '<td id="'+response.planList[i].plan_no+'" onclick="showplan(this)"><b>'+response.planList[i].plan_no+'</b> 번 후기</td></tr>';
+//											}
+//								}
+//							}else{
+//								for ( var i in response.planList) {
+//											if(i%2==0){
+//											content += '<tr><td id="'+response.planList[i].plan_no+'" onclick="showplan(this)"><b>'+response.planList[i].plan_no+'</b> 번 후기</td>';
+//											}else{
+//												content += '<td id="'+response.planList[i].plan_no+'" onclick="showplan(this)"><b>'+response.planList[i].plan_no+'</b> 번 후기</td></tr>';
+//											}
+//								}
+//									content += '</tr>';
+//							}
 						}else{
 							content += '<tr><td colspan="2">후기가 없습니다</td></tr>';
 						}
 							
-						content+='</table><hr style="border:none;border:1px double #69ABED;"></div>';
+						content+='</table></div></div>';
 						
 						infowindow2.setContent(content);
 						infowindow2.open(map, marker);

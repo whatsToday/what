@@ -1,22 +1,57 @@
 
 function themeSearch(themeName) {
-//	console.log(placesArray);
-//	console.log(themeName);
-	if(themeName!="showAll"){
-		for (var i = 0; i < placesArray.length; i++) {
-				markers[i].setVisible(true);
-			if(placesArray[i].category.indexOf(themeName) == -1){
-				markers[i].setVisible(false);
+		//	console.log(placesArray);
+		//	console.log(themeName);
+			if(themeName!="showAll"){
+		//		if(emti){
+		//			placesNear();
+		//			emti=false;
+		//		}
+				
+				//후기글이 없으면?
+				var k = 0 ;
+				for (var i = 0; i < placesArray.length; i++) {
+					markers[i].setVisible(false);
+					if(placesArray[i].category.indexOf(themeName) != -1){
+						k++;
+						markers[i].setVisible(true);
+					}
+				}
+					if(k==0){
+						//아무런 후기글이 없을시 
+		//				alert("0 개의 후기글이 검색되었습니다. \n\n 자동검색으로 대체합니다");
+						alert("0 개의 후기글이 검색되었습니다.");
+		//				
+		//			    ps.keywordSearch( themeName, placesSearchCB, {
+		//					location: userLocation,
+		//					radius : circle.getRadius(),	
+		//					sort    : daum.maps.services.SortBy.POPULARITY
+		//				}); 
+		//			    emti=true;	
+					}
+			}else{
+				//userLocation = map.getCenter();
+				placesNear();
+				 for (var i = 0; i < markers.length; i++) {
+					 markers[i].setVisible(true);
+				 }  
 			}
-		}
-	}else{
-		 for (var i = 0; i < markers.length; i++) {
-			 markers[i].setVisible(true);
-		 }  
-	}
 }
 
+function changeLocation(){
+	myLoc=false;
+	
+	  userLocation=map.getCenter();
+	  map.setCenter(userLocation);
+	  
+	  circle.setMap(null);
+	  circle.setPosition(userLocation);
+	  circle.setMap(map);	
 
+//		var lvl=map.getLevel();
+//		circle.setRadius(150);
+//	  placesNear(1);
+}
 //user Location
 
 //var userLocation =  new daum.maps.LatLng(37.566826, 126.9786567);
@@ -31,14 +66,31 @@ var userLocation;
 
 		function success(pos) {
 		  var crd = pos.coords;
+		  myLoc = true;
+		  
 		  userLocation=new daum.maps.LatLng(crd.latitude, crd.longitude);
 		  map.setCenter(userLocation);
-
-//searchPlaces();
-		  placesNear(5);
-		  //주변 3km내에 있는 content getcha! 		  
-		//placesNear(1);
+		  
+		  //circle
+		  circle.setMap(null);
+			circle.setPosition(userLocation);
+			circle.setRadius(500);//meter 단위
+			circle.setMap(map);	
 			
+			//places near
+		  placesNear();
+		  
+		//전부 다 보기
+//			var themeList = document.getElementsByClassName("themeClass");
+//			console.log(themeList);
+			
+//				for (var i = 1; i < themeList.length; i++) {
+//					ps.keywordSearch(themeList[i].textContent, placesDrawCB, {
+//						location : userLocation,
+//						radius : circle.getRadius(),
+//						sort : daum.maps.services.SortBy.POPULARITY
+//					}); 
+//				}
 		};
 
 		function error(err) {
@@ -53,9 +105,6 @@ function getMyPlan() {
 	$.ajax({
 		type : "Post",
 		url : "/getMyPlan",
-		data : {
-
-		},
 		success : function(response) {
 
 			var se = document.getElementById('plan_no');
@@ -175,11 +224,10 @@ function callContents(plan_no){
 }
 
 
-///////////////
-
-function placesNear(distance){
+function placesNear(){
+	
 	var themeList = document.getElementsByClassName("themeClass");
-	var theme = [] ;
+//	var theme = [] ;
 	var url = "/placesNear";
 	
 	if(themeList.length >= 1){
@@ -188,23 +236,14 @@ function placesNear(distance){
 			url +="&themeName="+themeList[i].textContent;
 		}
 	}
-	
-	
-	var latlng=map.getCenter();
+	//후기글 가져오기
 	var lvl=map.getLevel();
-	
-	circle.setMap(null);
-	circle.setPosition(latlng);
-	circle.setRadius(distance*1000);
-	circle.setMap(map);	
-	
-	//여기에 theme list추가하면 될듯
 	$.ajax({
 		  url: url,
 		  data: {
-			lat : map.getCenter().getLat(),
-			lng : map.getCenter().getLng(),
-			distance : distance 
+			lat : userLocation.getLat(),
+			lng : userLocation.getLng(),
+			distance : circle.getRadius()/1000 
 		  },
 			success : function(response){
 				if(response.contentList.length!=0){
@@ -212,9 +251,17 @@ function placesNear(distance){
 					if(map.getLevel() < lvl){
 						map.setLevel(lvl);
 					}
+					nearOn=true;
 				}else{
-					alert("선택 범위안에 후기글이 없습니다. \n\n\t 다시선택해주세요");
+					alert("선택 범위안에 후기글이 없습니다. \n\n"+"첫 번째 관심사를 자동검색합니다.");
+					 ps.keywordSearch( themeList[1].textContent, placesSearchCB, {
+							location: userLocation,
+							radius : circle.getRadius(),	
+							sort    : daum.maps.services.SortBy.POPULARITY
+					}); 
+					 nearOn=false;
 				}
+				checkOnOff();
 			},
 			error: function (xhr, textStatus, errorThrown) { console.log(errorThrown); }
 		});

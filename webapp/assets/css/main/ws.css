@@ -55,6 +55,14 @@ border : 2px solid #4396E8;
 	background : #FED4DE;
 }
 
+.effect td.even:hover { 
+    background-color: skyblue;
+    cursor: pointer;
+}
+.effect td.even:active{ 
+    background-color: #fff;
+    cursor: pointer;
+}
 .effect td:hover { 
     background-color: skyblue;
     cursor: pointer;
@@ -63,7 +71,6 @@ border : 2px solid #4396E8;
     background-color: #fff;
     cursor: pointer;
 }
-
 .themeBox{
 	height:160px; 
 	background-repeat:no-repeat; 
@@ -119,4 +126,24 @@ border : 2px solid #4396E8;
 	font-weight: bold;
 	cursor: pointer;
 }
+.scrollist{
+	height:70px;
+}
+.scrollist{
+/* overflow:auto; */
+overflow:scroll;
+overflow-x: hidden;
+/* scrollbar-3dlight-color:gold; */
+/* scrollbar-arrow-color:#E0F5FF; */
+/* scrollbar-face-color &#58; #000000; */
+/* scrollbar-highlight-color &#58; #000000; */
+/* scrollbar-3dlight-color &#58; #000000; */
+/* scrollbar-shadow-color &#58; #000000; */
+/* scrollbar-darkshadow-color &#58; #000000; */
+/* scrollbar-track-color &#58; #000000; */
+/* scrollbar-arrow-color &#58; #000000; */
+}
 
+.events {
+	background-color : #8533FF;
+}

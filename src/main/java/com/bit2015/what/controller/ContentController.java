@@ -84,7 +84,7 @@ public class ContentController {
 
 	  @RequestMapping("/test2")
 	  public String test2(){
-		  return "/content/test2";
+		  return "/content/test2";  
 	  }	  
 	  
 	  @RequestMapping("/facebook")

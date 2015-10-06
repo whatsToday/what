@@ -47,5 +47,19 @@
            SELECT * FROM plan WHERE plan_no=#plan_no#
         ]]>
     </select>
+    
+                 	<!-- 페이징처리 -->
+	
+<!-- 	    <select id="planList" parameterClass="java.util.Map" resultClass="PlanVo">
+      <![CDATA[
+      SELECT * FROM (select rownum rnum,plan_no,member_no,titleImage,planName,memberName,message,planDate FROM (select * from plan order by plan_no asc)) WHERE rnum>=#startpage# AND rnum<=#endpage#
+         ]]>
+   </select> 
+
+	   <select id="planCountList" parameterClass="PlanVo" resultClass="int">
+		<![CDATA[
+		 select count(*) as x from plan
+			]]>
+	</select> -->
    
 </sqlMap>

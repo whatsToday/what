@@ -46,4 +46,18 @@
 		]]>
 	</select>
 	
+		                 	<!-- 페이징처리 -->
+	
+	<!--     <select id="goodContentList" parameterClass="java.util.Map" resultClass="GoodContentVo">
+      <![CDATA[
+      SELECT * FROM (select rownum rnum,goodContent_no,content_no,member_no,memberName,title FROM (select * from goodContent order by goodContent_no asc)) WHERE rnum>=#startpage# AND rnum<=#endpage#
+         ]]>
+   </select> 
+
+	   <select id="goodContentCountList" parameterClass="GoodContentVo" resultClass="int">
+		<![CDATA[
+		 select count(*) as x from goodContent
+			]]>
+	</select> -->
+	
 </sqlMap>

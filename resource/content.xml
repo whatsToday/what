@@ -89,4 +89,20 @@
            SELECT * FROM content WHERE title=#title#
         ]]>
     </select>
+    	
+    	
+	<!-- 페이징처리 -->
+	
+<!-- 	    <select id="contentList" parameterClass="java.util.Map" resultClass="ContentVo">
+      <![CDATA[
+      SELECT * FROM (select rownum rnum,content_no,phone,newAddress,imageUrl,direction,zipcode,placeUrl,id,title,category,address,longitude,latitude,addressBCode FROM (select * from content order by contnet_no asc)) WHERE rnum>=#startpage# AND rnum<=#endpage#
+         ]]>
+   </select> 
+
+	   <select id="contentCountList" parameterClass="ContentVo" resultClass="int">
+		<![CDATA[
+		 select count(*) as x from content
+			]]>
+	</select>  -->
+	
 </sqlMap>

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.bit2015.what.service.MainService;
+import com.bit2015.what.service.HeaderService;
 import com.bit2015.what.vo.MemberVo;
 
 @Controller
@@ -15,33 +15,28 @@ import com.bit2015.what.vo.MemberVo;
 public class HeaderController {
 
 	@Autowired
-	MainService mainService;
+	HeaderService headerService;
+	
 	
 	@RequestMapping("/join")
 	public String join(HttpSession session, MemberVo memberVo) {
-		
-		mainService.join(session, memberVo);
-		
+		headerService.join(session, memberVo);
 		return "redirect:/";
 	}
 	
 	@RequestMapping("/login")
 	public String login(HttpSession session, MemberVo memberVo) {
 		System.out.println(memberVo.toString());
-		
-		mainService.login(session, memberVo);
-		
-		boolean Bo = mainService.login(session, memberVo);
+		headerService.login(session, memberVo);
+		boolean Bo = headerService.login(session, memberVo);
 		if(Bo){
 //			System.out.println("로그인 되었습니다.");
 			return "redirect:/";
 		}else{
 //			System.out.println("등록된 회원이 없습니다.");
 			return "redirect:/?a=error";
-			
 		}
 	}
-	
 	
 	@RequestMapping("/logout")
 	public String logout(HttpSession session, @ModelAttribute MemberVo memberVo){

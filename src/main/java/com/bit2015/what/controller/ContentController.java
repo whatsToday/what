@@ -26,7 +26,8 @@ public class ContentController {
 	ContentService contentService;
 	
 	@RequestMapping("/contentview")
-	public String contentView(Model model, HttpSession session, @RequestParam Long content_no) {
+	public String contentView(Model model, HttpSession session, ContentVo contentVo) {
+		Long content_no = contentVo.getContent_no();
 		contentService.getContent(model, content_no);
 		contentService.getComments(model);
 		contentService.selectCntNo(model, content_no);

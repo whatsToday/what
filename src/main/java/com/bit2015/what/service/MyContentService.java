@@ -117,7 +117,6 @@ public class MyContentService {
 			PlanVo planVo = list1.get(q);
 			if(planVo.getPlan_no() == contentBoxVo.getPlan_no()){
 				pnVo = planVo;
-				System.out.println(pnVo);
 			}
 			}
 		}

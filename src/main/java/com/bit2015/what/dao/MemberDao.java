@@ -20,6 +20,28 @@ public class MemberDao {
 	  List<MemberVo> list = sqlMapClientTemplate.queryForList("member.selectAll");
 	  return list;
  }
+  public List<MemberVo> select(int page, int limit) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		int startRow = (page - 1) * limit + 1; 
+		int endRow = startRow + limit - 1; 
+		map.put("startpage", startRow);
+		map.put("endpage", endRow);
+		List<MemberVo> list =sqlMapClientTemplate.queryForList("member.memberList",map);
+		System.out.println("리스트"+list);
+		System.out.println("맵"+map);
+		return list;
+	}
+  
+  public int memberCountList() {
+		int count = 0;
+		count = (Integer) sqlMapClientTemplate.queryForObject("memeber.memberCountList");
+
+
+		return count;
+	}
+
+  
+  
   public MemberVo getMemberVo(Long member_no){
 	  MemberVo memberVo = (MemberVo)sqlMapClientTemplate.queryForObject("member.getMember", member_no);
 	  return memberVo;

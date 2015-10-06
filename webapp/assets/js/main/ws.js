@@ -1,4 +1,56 @@
-
+	
+function showHotKey(){
+	var sH = document.getElementById('showHot');
+	
+	$.ajax({
+		url: "/showHotKey",
+		data:{
+			lat : userLocation.getLat(),
+			lng : userLocation.getLng(),
+			distance : circle.getRadius()/10*2 
+		},
+		success: function(response){
+			console.log("showHotKey");
+			console.log(response.searchList);
+			
+			var keys = "<table><tr><th colspan='5' class='wshd'>이 주변 핫 키워드</th></tr>";
+			
+			for (var i = 0; i < response.searchList.length; i++) {
+				keys += "<tr><td>"+(i+1)+"</td><td colspan='4'>"+response.searchList[i]+"</td></tr>";
+			}
+			keys +="</tr></table>"; 
+			
+			sH.innerHTML= keys;
+			
+		},
+		error:function(jqXHR, textStatus, errorThrown){
+            alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
+            self.close();
+        }//end ajax
+	});
+}
+	
+function insertKey(keyword){
+console.log(keyword);	
+	$.ajax({
+		url: "/insertKey",
+		data:{
+			keyword : keyword,
+			lat : userLocation.getLat(),
+			lng : userLocation.getLng()
+		},
+		success: function(response){
+			console.log("insertKey");
+			
+		},
+		error:function(jqXHR, textStatus, errorThrown){
+            alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
+            self.close();
+        }//end ajax
+		
+	});//end display window 2
+	
+}
 function themeSearch(themeName) {
 		//	console.log(placesArray);
 		//	console.log(themeName);
@@ -70,7 +122,7 @@ var userLocation;
 		  
 		  userLocation=new daum.maps.LatLng(crd.latitude, crd.longitude);
 		  map.setCenter(userLocation);
-		  
+		  showHotKey();
 		  //circle
 		  circle.setMap(null);
 			circle.setPosition(userLocation);

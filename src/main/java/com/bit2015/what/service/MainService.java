@@ -29,6 +29,7 @@ import com.bit2015.what.dao.EventDao;
 import com.bit2015.what.dao.GoodContentDao;
 import com.bit2015.what.dao.MemberDao;
 import com.bit2015.what.dao.PlanDao;
+import com.bit2015.what.dao.SearchListDao;
 import com.bit2015.what.dao.ThemeBoxDao;
 import com.bit2015.what.dao.ThemeDao;
 import com.bit2015.what.dao.planCommentsDao;
@@ -39,6 +40,7 @@ import com.bit2015.what.vo.EventVo;
 import com.bit2015.what.vo.GoodContentVo;
 import com.bit2015.what.vo.MemberVo;
 import com.bit2015.what.vo.PlanVo;
+import com.bit2015.what.vo.SearchListVo;
 import com.bit2015.what.vo.ThemeBoxVo;
 import com.bit2015.what.vo.ThemeVo;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -66,6 +68,8 @@ public class MainService {
 	CommentsDao commentsDao;
 	@Autowired
 	EventDao eventDao;
+	@Autowired
+	SearchListDao searchListDao;
 	
 	FileUploader ful = new FileUploader();
 
@@ -323,6 +327,32 @@ public class MainService {
 		
 		map.put("contentList", ctList);
 		
+	}
+
+	public void insertKey(Map<String, Object> map, HttpSession session, String keyword, Double lat, Double lng,
+			Double distance) {
+		MemberVo memberVo =new MemberVo();
+		SearchListVo searchListVo = new SearchListVo();
+		
+		if(session.getAttribute("authUser")!=null){
+			memberVo = (MemberVo) session.getAttribute("authUser");
+		}else{
+			memberVo = memberDao.getMemberVo((long) 99999);
+		}
+		searchListVo.setMember_no(memberVo.getMember_no());
+		searchListVo.setMemberName(memberVo.getMemberName());
+		searchListVo.setSearch(keyword);
+		searchListVo.setLatitude(String.valueOf(lat));
+		searchListVo.setLongitude(String.valueOf(lng));
+		
+		searchListDao.insert(searchListVo);
+	}
+
+	public void showHotKey(Map<String, Object> map, Double lat,
+			Double lng, Double distance) {
+		
+		List<String> searchList = searchListDao.selectHotKey(lat,lng,distance);
+		map.put("searchList", searchList);
 	}
 	
 }// main Service

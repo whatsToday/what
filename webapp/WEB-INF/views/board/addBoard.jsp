@@ -133,7 +133,27 @@ div#msgPhoto .msgPt{
  			background-color:#69ABED;
 			font-weight: bold;
 			color:#fff;
-}		
+}
+div#info{padding: 5px; width:250px; height: 122px; font-size:12px; }
+div#info img{border:1px solid #000; width: 100px; height: 111px;  float:left; margin-right:10px;}
+div#info div#tl{width:120px; margin-left:110px;height: 25px; line-height: 25px; font-size: 95%; font-weight: bold; text-align: center; color:#69ABED}
+div#info div#delContent {	
+			border: 1px solid #69ABED;
+			background-color:#69ABED;
+			margin-top:20px;
+			margin-right:-3px;
+			float:right;
+			width: 50px;
+			height: 40px;
+}
+div#info div#delContent a{
+			margin-left:10px;
+		 	text-decoration: none;
+		 	color:#fff;
+		 	font-size:15px;
+		 	font-weight:bold;
+		 	line-height: 40px;
+}	
 </style>
 </head>
 <body>
@@ -173,6 +193,59 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 var map = new daum.maps.Map(mapContainer, mapOption); 
 </script>
 <script>
+function info(marker,id){
+	$.ajax({
+		type : 'get',
+	    url:'/mycontent/getContent',
+	    data : {
+	    	id : id,
+	    	member_no : "${authUser.member_no}"
+	    },
+	    dataType:'json',
+	    success: function(response){
+	    	 var title =response.title;
+	    	 var imageUrl;
+	    	 if(response.imageUrl ==null){
+	    	 imageUrl = "/assets/img/noimg.png"; 
+	    	 }
+	    	 else{
+	    	 imageUrl = response.imageUrl;
+	    	 }
+	    	 var content_no = response.content_no;
+	    	 var phone = response.phone;
+	    	 $.ajax({
+	    			type : 'get',
+	    		    url:'/mycontent/getContentPlan',
+	    		    data : {
+	    		    	id : id,
+	    		    	member_no : "${authUser.member_no}"
+	    		    },
+	    		    dataType:'json',
+	    		    success: function(response1){
+	    		    	var plan_no = response1.plan_no;
+	    		    	var iwContent = '<div id="info"><img src="'+imageUrl+'"><div><div id="tl">'+title+'</div></br>'+phone+'</br><div id="delContent"><a href="javascript:deleteContent('+content_no+','+plan_no+')">삭제</a></div></div></div>', 
+	    		        iwRemoveable = true; 
+
+	    		  		var infowindow = new daum.maps.InfoWindow({
+	    		        content : iwContent,
+	    		        removable : iwRemoveable
+	    		    });
+
+	    		    daum.maps.event.addListener(marker, 'click', function() {
+	    		          // 마커 위에 인포윈도우를 표시합니다
+	    		          infowindow.open(map, marker);  
+	    		    });
+	    		    daum.maps.event.addListener(map, 'click', function() {
+	    		    	 infowindow.close();  
+	    		    });
+	    				}
+	    	});
+	    	
+			}
+	})
+}
+</script>
+<script>
 function testss(){
 	$("#msgPhoto").append('<button onclick="upload(2)">사진선택</button><input type="file" name="img1" id="uploadPhoto" style="display:none;"><a href="javascript:testss()">+</a>');
 }
@@ -191,6 +264,7 @@ function getPlan(plan_no){
 	removeMarker();
 	var lat;
 	var lng;
+	var id;
 	$.ajax({
 		type : 'get',
 	    url:'/board/getPlan',
@@ -199,17 +273,24 @@ function getPlan(plan_no){
 	    },
 	    dataType:'json',
 	    success: function(response){
+	    	if(response.length==0){
+	    		alert("이 플랜에 정보가 없습니다!")
+	    	}if(response.length!=0){
+	    		
 			for(var i=0; i<response.length; i++){
 				lat = response[i].latitude;
 				lng = response[i].longitude;
+				id = response[i].id;
 			    	markers[i] = new daum.maps.Marker({
 						position : new daum.maps.LatLng(response[i].latitude ,response[i].longitude)
 					});
 					markers[i].setMap(map);
+					info(markers[i],id);
 			    	}
 			    	var moveLatLon = new daum.maps.LatLng(lat, lng);
 					map.setCenter(moveLatLon);
 					map.setLevel(2);
+	    	}
 			}
 	 })
 	    $("#planList").hide();
@@ -235,6 +316,38 @@ function addPlan(plan_no){
 		 location.href="/mycontent?member_no="+member_no;
 		}
 	 })
+}
+function deleteContent(content_no, plan_no){
+	removeMarker();
+	var lat;
+	var lng;
+	var id;
+	 $.ajax({
+		type : 'get',
+	    url:'/board/deleteContent',
+	    data : {
+	    	 content_no : content_no,
+	    	 plan_no : plan_no,
+	    },
+	    dataType:'json',
+	    success: function(response){
+	    	for(var i=0; i<response.length; i++){
+				lat = response[i].latitude;
+				lng = response[i].longitude;
+				
+				id = response[i].id;
+			    	markers[i] = new daum.maps.Marker({
+						position : new daum.maps.LatLng(response[i].latitude ,response[i].longitude)
+					});
+					markers[i].setMap(map);
+					info(markers[i],id);
+			    	}
+			    	var moveLatLon = new daum.maps.LatLng(lat, lng);
+					map.setCenter(moveLatLon);
+					map.setLevel(2);
+		}
+	 })
+	 
 }
 </script>
 <script>

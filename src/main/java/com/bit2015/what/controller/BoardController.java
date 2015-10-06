@@ -52,4 +52,24 @@ public class BoardController {
 		boardService.updatePlan(title, message, plan_no);
 		return member_no;
 	}
+	@RequestMapping("/deletePlan")
+	public String deletePlan(@RequestParam Long plan_no,@RequestParam Long member_no){
+		String planName = "";
+		String message = "";
+		boardService.updatePlan(planName, message, plan_no);
+		return "redirect:/mycontent?member_no="+member_no;
+	}
+	@RequestMapping("/deleteContent")
+	@ResponseBody
+	public List<ContentVo> deleteContent(@RequestParam Long plan_no,@RequestParam Long content_no){
+		boardService.deleteContent(content_no, plan_no);
+		List<ContentVo> contentVo =  boardService.getPlan(plan_no);
+		return contentVo;
+	}
+	@RequestMapping("/getContentVo")
+	@ResponseBody
+	public ContentVo getContentVo(@RequestParam Long content_no){
+		ContentVo contentVo =  boardService.getContentVo(content_no);
+		return contentVo;
+	}
 }

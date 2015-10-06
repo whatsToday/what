@@ -31,25 +31,42 @@ function searchPlaces() {
         return false;
     }
     
-    //이렇게 해버리면 강남역에서 양재역 주변 볼려고 양재역치면 강남역으로 돌아옴. setlocation때문에..
-//    circle.setMap(null);
-////	circle.setPosition(userLocation);
-////	//circle.setRadius(distance*1000);
-////	circle.setRadius(150);
-//	circle.setMap(map);	
-	
     ps.keywordSearch( keyword, placesSearchCB, {
 	
 //		location: map.getCenter(),
 //		radius : cirecle.getRadius(),	
-		sort    : daum.maps.services.SortBy.POPULARITY
+		sort    : daum.maps.services.SortBy.ACCURACY
 		
+		//daum.maps.services.SortBy.ACCURACY 
 		//daum.maps.services.SortBy.DISTANCE
 		//daum.maps.services.SortBy.POPULARITY 인기순
 		//daum.maps.services.ImageFilter.ONLY 이미지가 있는놈들만	
 		//daum.maps.services.ImageFilter.NOT 이미지가 없는놈들만
 		//daum.maps.services.ImageFilter.ALL 
 	}); 
+    insertKey(keyword); 
+}
+function searchPlaces2() {
+    var keyword = document.getElementById('keyword').value;
+    if (!keyword.replace(/^\s+|\s+$/g, '')) {
+        alert('키워드를 입력해주세요!');
+        return false;
+    }
+    
+    ps.keywordSearch( keyword, placesSearchCB, {
+	
+		location: circle.getPosition(),
+		radius : circle.getRadius(),	
+		sort    : daum.maps.services.SortBy.ACCURACY
+		
+		//daum.maps.services.SortBy.ACCURACY 
+		//daum.maps.services.SortBy.DISTANCE
+		//daum.maps.services.SortBy.POPULARITY 인기순
+		//daum.maps.services.ImageFilter.ONLY 이미지가 있는놈들만	
+		//daum.maps.services.ImageFilter.NOT 이미지가 없는놈들만
+		//daum.maps.services.ImageFilter.ALL 
+	}); 
+    insertKey(keyword); 
 }
 
 function placesSearchCB(status, data, pagination) {
@@ -61,19 +78,6 @@ function placesSearchCB(status, data, pagination) {
     } else if (status === daum.maps.services.Status.ERROR) {   alert('지도 검색 결과 중 오류가 발생했습니다.');  return;
     }
 }
-
-//var drawPlaces = [];
-//function placesDrawCB(status, data, pagination) {
-//    if (status === daum.maps.services.Status.OK) {
-//    	for (var i = 0; i < 3; i++) {
-//    		drawPlaces += data.places[i];
-//		}
-//    	console.log(drawPlaces[2].title);
-//    	
-//    } else if (status === daum.maps.services.Status.ZERO_RESULT) { /* alert('지도 검색 결과가 존재하지 않습니다.');*/   return;
-//    } else if (status === daum.maps.services.Status.ERROR) {   alert('지도 검색 결과 중 오류가 발생했습니다.');  return;
-//    }
-//}
 
 function displayPlaces(places) {
 	placesArray = places;
@@ -264,7 +268,7 @@ function displayInfowindow2(marker, items, index) {
 					content += '<tr><td>'+'&hearts; = '+response.good+'</td><td> 댓글 = '+response.comments+'</td></tr>';
 					
 					//플랜 수집
-					content += '<tr><th class="wshd" colspan="2">후기 게시판</th></tr></table><div class="scrollist"><table>';
+					content += '<tr><th class="wshd" colspan="2">블로그 후기</th></tr></table><div class="scrollist"><table>';
 					
 					
 						if(response.planList.length!=0){

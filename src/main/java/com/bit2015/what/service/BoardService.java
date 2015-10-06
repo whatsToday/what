@@ -57,4 +57,11 @@ public class BoardService {
 		PlanVo planVo = planDao.selectVo(plan_no);
 		return planVo;
 	}
+	public void deleteContent(Long content_no, Long plan_no){
+		contentBoxDao.deleteContent(content_no, plan_no);
+	}
+	public ContentVo getContentVo(Long content_no){
+		ContentVo contentVo = contentDao.selectVo(content_no);
+		return contentVo;
+	}
 }

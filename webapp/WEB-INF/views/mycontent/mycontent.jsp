@@ -12,7 +12,6 @@
 <script type="text/javascript" src="/assets/js/board/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=c12b4d88c8259cf4652b89c1f64db8e8&libraries=services"></script>
 <script type="text/javascript" charset="utf-8" src="/assets/js/jquery.leanModal.min.js"></script>
-
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>오늘 뭐하지?</title>
@@ -61,12 +60,15 @@
 				</c:forEach>
 				
 				<c:forEach var="i" items="${planList}">
-				<ul class="menuView">
-				<img src="${i.titleImage}"/>
-				<li>${i.planName}</li>
-				<li>${i.message}</li>
-				<li id="comment"><a>종아요</a>&nbsp&nbsp<a>댓글</a></li>
-				</ul>
+				<div class="menuView">
+				<div id="menuTitleImage"><img src="${i.titleImage}"/></div>
+				<div id="menuContext">
+				<div id="menuName">${i.planName}</div>
+				<div id="menuMessage">${i.message}</div>
+				<div id="menuPhoto"><div id="menuImages"></div></div>
+				<div id="menuComment"><span id="goods"><a>종아요</a></span>&nbsp&nbsp<span id="reply"><a>댓글</a></span></div>
+				</div>
+				</div>
 				</c:forEach>
 				<div id="map" style="display:none"></div>
 				</div>
@@ -115,6 +117,40 @@ function getMap(){
 	$("#map").show();
 	map.relayout();
 	
+	if("${planList.size()}" != 0){
+		removeMarker();
+		var lat;
+		var lng;
+		var id;
+
+		$.ajax({
+			type : 'get',
+		    url:'/mycontent/allPlan',
+		    data : {
+		    	 member_no : "${param.member_no}"
+		    },
+		    dataType:'json',
+		    success: function(response){
+		    	for(var i=0; i<response.length; i++){
+					lat = response[0].latitude;
+					lng = response[0].longitude;
+					console.log(lat + ":"+ lng);
+					id = response[i].id;
+				    markers[i] = new daum.maps.Marker({
+							position : new daum.maps.LatLng(response[i].latitude ,response[i].longitude)
+						});
+		 		    markers[i].setMap(map);
+		  			info(markers[i],id);
+				    
+				 }
+		    	var moveLatLon = new daum.maps.LatLng(lat, lng);
+		     	map.setCenter(moveLatLon);
+				map.setLevel(8);
+				console.log(map.getCenter());
+			}
+		})
+		}
+	
 }
 function mainPhoto(){
 	$("#mainPhoto").click();
@@ -155,7 +191,7 @@ var markers = [];
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
-        center: new daum.maps.LatLng(37.49398759519894, 127.02826109205249), // 지도의 중심좌표
+        center: new daum.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
         level: 2 // 지도의 확대 레벨
     };  
 
@@ -217,39 +253,6 @@ function removeMarker() {
         markers[i].setMap(null);
     }   
     markers = [];
-}
-</script>
-<script>
-if("${planList.size()}" !=0){
-removeMarker();
-var lat;
-var lng;
-var id;
-$.ajax({
-	type : 'get',
-    url:'/mycontent/allPlan',
-    data : {
-    	 member_no : "${param.member_no}"
-    },
-    dataType:'json',
-    success: function(response){
-    	for(var i=0; i<response.length; i++){
-			lat = response[0].latitude;
-			lng = response[0].longitude;
-			console.log(lat + ":"+ lng);
-			id = response[i].id;
-		    markers[i] = new daum.maps.Marker({
-					position : new daum.maps.LatLng(response[i].latitude ,response[i].longitude)
-				});
-		    markers[i].setMap(map);
-		    info(markers[i],id);
-		    
-		 }
-    	var moveLatLon = new daum.maps.LatLng(lat, lng);
-    	map.setCenter(moveLatLon);
-		map.setLevel(7);
-	}
-})
 }
 </script>
 </html>

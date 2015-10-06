@@ -50,6 +50,13 @@ public class ContentBoxDao {
 	public void delete(Long contentBox_no) {
 		sqlMapClientTemplate.delete("contentBox.delete", contentBox_no);
 	}
+	public void deleteContent(Long content_no, Long plan_no) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("content_no", content_no);
+		map.put("plan_no", plan_no);
+		
+		sqlMapClientTemplate.delete("contentBox.deleteContent", map);
+	}
 	
 	public void update(ContentBoxVo contentBoxVo) {
 		sqlMapClientTemplate.update("contentBox.update", contentBoxVo);

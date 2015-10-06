@@ -39,9 +39,19 @@ border : 2px solid #4396E8;
 	color: #fff;
  	background: #69ABED;
 }
+
+
+
 .wshd select{
 	width:100%;
 	color:#aaa;
+}
+.wsBox {
+	width:20%;
+	border : 2px solid #4396E8;
+}
+#showHot.wsTable.wsBox table tbody tr td:first-child{
+	width:10%;
 }
 .wsButton {
 	background-color:#FEE8EE;

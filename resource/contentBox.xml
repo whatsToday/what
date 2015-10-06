@@ -44,6 +44,11 @@
 			delete from contentBox where contentBox_no=#contentBox_no#
 		]]>
 	</delete>
+	<delete id="deleteContent" parameterClass="java.util.Map">
+		<![CDATA[
+			delete from contentBox where content_no=#content_no# and plan_no=#plan_no#
+		]]>
+	</delete>
 	
 	<update id="update" parameterClass="ContentBoxVo">
 		<![CDATA[

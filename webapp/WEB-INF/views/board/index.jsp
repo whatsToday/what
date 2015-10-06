@@ -230,6 +230,18 @@ div#images{
 			height: 220px;
 			float : left;
 }
+div#info{padding: 5px; width:250px; height: 122px; font-size:12px; }
+div#info img{border:1px solid #000; width: 100px; height: 111px;  float:left; margin-right:10px;}
+div#info div#tl{width:120px; margin-left:110px;height: 25px; line-height: 25px; font-size: 95%; font-weight: bold; text-align: center; color:#69ABED}
+div#info div#goToPlan {	
+			border: 1px solid #69ABED;
+			background-color:#69ABED;
+			margin-top:20px;
+			margin-right:-3px;
+			float:right;
+			width: 50px;
+			height: 40px;
+}
 </style>
 </head>
 <body>
@@ -250,10 +262,25 @@ div#images{
 <div id="cmtView">댓글보기</div>
 <div id="viewComment"><div id="userName"><a href="/mycontent?member_no="><img src="${authUser.imageUrl}"><span>${authUser.memberName}</span></a></div><div id="commentText"></div></div>
 </div>
-<div id="submit"><button>수정</button><button>삭제</button></div>
+<c:if test="${authUser.member_no==planBoard.member_no}">
+<div id="submit"><button onclick="modifyPlan(${planBoard.plan_no},${planBoard.member_no});">수정</button><button onclick="deletePlan(${planBoard.plan_no},${planBoard.member_no});">삭제</button></div>
+</c:if>
 <!-- footer -->
 </div>
 </body>
+<script>
+function modifyPlan(){
+	
+}
+function deletePlan(plan_no,member_no){
+	if (confirm('이 플랜을 삭제하시겠습니까?')) {
+		location.href="/board/deletePlan?plan_no="+plan_no+"&member_no="+member_no;
+	} else {
+		alert('취소되었습니다.');
+		location.reload();
+	}
+}
+</script>
 <script>
 //마커를 담을 배열입니다
 var markers = [];
@@ -276,9 +303,45 @@ function removeMarker() {
 }
 </script>
 <script>
+function info(marker,id){
+	$.ajax({
+		type : 'get',
+	    url:'/mycontent/getContent',
+	    data : {
+	    	id : id,
+	    	member_no : "${param.member_no}"
+	    },
+	    dataType:'json',
+	    success: function(response){
+	    	 var title =response.title;
+	    	 var imageUrl;
+	    	 if(response.imageUrl ==null){
+	    	 imageUrl = "/assets/img/noimg.png"; 
+	    	 }
+	    	 else{
+	    	 imageUrl = response.imageUrl;
+	    	 }
+	    	 var phone = response.phone;
+	         var iwContent = '<div id="info"><img src="'+imageUrl+'"><div><div id="tl">'+title+'</div></br>'+phone+'</br></div></div>', 
+	    	 iwRemoveable = true; 
+	    		  		var infowindow = new daum.maps.InfoWindow({
+	    		        content : iwContent,
+	    		        removable : iwRemoveable
+	    		    });
+
+	    		    daum.maps.event.addListener(marker, 'click', function() {
+	    		          // 마커 위에 인포윈도우를 표시합니다
+	    		          infowindow.open(map, marker);  
+	    		    });
+	   		 }
+	    });
+}
+</script>
+<script>
 removeMarker();
 var lat;
 var lng;
+var id;
 $.ajax({
 	type : 'get',
     url:'/board/getPlan',
@@ -290,10 +353,12 @@ $.ajax({
 		for(var i=0; i<response.length; i++){
 			lat = response[i].latitude;
 			lng = response[i].longitude;
+			id = response[i].id;
 		    	markers[i] = new daum.maps.Marker({
 					position : new daum.maps.LatLng(response[i].latitude ,response[i].longitude)
 				});
 				markers[i].setMap(map);
+				info(markers[i],id);
 		    	}
 		    	var moveLatLon = new daum.maps.LatLng(lat, lng);
 				map.setCenter(moveLatLon);

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.bit2015.what.dao.FollowDao;
+import com.bit2015.what.dao.MemberDao;
 import com.bit2015.what.service.AdminService;
 import com.bit2015.what.vo.CommentsVo;
 import com.bit2015.what.vo.ContentBoxVo;
@@ -37,18 +38,58 @@ public class AdminController {
 	@Autowired
 	AdminService adminService;
 
+	@Autowired
+	MemberDao memberDao;
+	
 	@RequestMapping()
 	public String index() {
 		return "/admin/index";
 	}
 
 	// member조회
-	@RequestMapping("/member")
+	@RequestMapping("/member12")
 	public String memberList(Model model) {
 		List<MemberVo> memberList = adminService.selectMember();
 		model.addAttribute("memberList", memberList);
 		return "/admin/member";
 	}
+	
+	
+	@RequestMapping("/member")
+	public String memberList(@RequestParam( required=false, defaultValue="1") int page, Model model) {
+	 	int limit=5; 
+		
+	      
+
+	 	List<MemberVo> memberList = adminService.selectMember();
+	 	int listcount = memberList.size();
+	 	System.out.println("listcount"+listcount);
+	 	System.out.println("페이지"+page);
+	 	System.out.println("리밋"+limit);
+        List<MemberVo> list=adminService.selectMember1(page, limit); 
+        int maxpage=(int)((double)listcount/limit+0.95);
+
+        int startpage=(((int)((double)page/10+0.9))-1)*10+1;
+  
+        int endpage=maxpage;
+        if(endpage>startpage+10-1){
+        	endpage=startpage+10-1;
+        }
+        model.addAttribute("nowpage", page);
+        model.addAttribute("maxpage", maxpage);
+        model.addAttribute("startpage", startpage);
+        model.addAttribute("endpage", endpage);
+        model.addAttribute("memberList", list);
+        model.addAttribute("listcount", listcount);
+		/*model.addAttribute("memberList", memberList);*/
+        System.out.println(list);
+    	
+		//List<BoardVo> list = boardDao.getBoardList(page,limit);
+		//model.addAttribute("list",list);
+		//model.addAttribute(list);
+	  	return "/admin/member";
+}
+
 
 	// member등록
 	@RequestMapping("/insertmember")

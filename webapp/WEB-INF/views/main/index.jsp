@@ -25,7 +25,7 @@
 					<tr>
 						<td id="showAll" class="even" onclick="themeSearch('showAll');">후기글만 보기</td>
 						<td class="even">팔로우</td>
-						<td id="otherLoc" class="even" onclick="changeLocation(); placesNear();">현재 위치로 내 위치 설정</td>
+						<td id="otherLoc" class="even" onclick="changeLocation(); placesNear();">현재 중심좌표로 설정</td>
 						<td id="userLoc" class="even" onclick="navigator.geolocation.getCurrentPosition(success, error, options);">내 위치 </td>
 						<td class="even" onclick="$('#picktheme').click();">테마 추가하기</td>
 					</tr>
@@ -61,6 +61,13 @@
 							<th class="wshd">
 								<select id="plan_no" onchange="callContents(this.value);"></select>
 							</th>
+						</tr>
+					</table>
+				</div>
+				<div class="wsTable effect">
+					<table>
+						<tr>
+							<td class="wshd">새 일정 추가하기</td><td class="wshd">일정 삭제하기</td>
 						</tr>
 					</table>
 				</div>

@@ -177,7 +177,16 @@ public class MainController {
 	public Map<String, Object> markerColor(HttpSession session ,@RequestParam String id) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		String color = mainService.markerColor(map, session, id);
+		mainService.markerColor(map, session, id);
+		
+		return map;
+	}
+	@RequestMapping("/insertContent")
+	@ResponseBody
+	public Map<String, Object> insertContent(ContentVo contentVo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		mainService.insertContent(map, contentVo);
 		
 		return map;
 	}

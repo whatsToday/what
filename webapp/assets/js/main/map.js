@@ -108,13 +108,10 @@ function displayPlaces(places) {
         			id : places[i].id
         		},
         		success : function(response){
-        			console.log("markerColor 성공"+i);
         			if(response.color=='purple'){
-        				console.log("purple");
         				purpleMarker(marker, i);
         			}
         			if(response.color=='green'){
-        				console.log("green");
         				greenMarker(marker, i);
         			}
         		},
@@ -144,8 +141,7 @@ function displayPlaces(places) {
             };
             
             //click
-            daum.maps.event.addListener(marker, 'click',
-            		function(){
+            daum.maps.event.addListener(marker, 'click', function(){
             	infowindow.close();
             	displayInfowindow2(marker, items, num);
             });
@@ -153,7 +149,8 @@ function displayPlaces(places) {
             itemEl.onclick = function(){
             	map.setLevel(4);
             	map.setCenter(new daum.maps.LatLng(items.latitude, items.longitude));
-            	displayInfowindow2(marker, items);//index추가할까
+            	infowindow.close();
+            	displayInfowindow2(marker, items, num);//index추가할까
             };
             
             daum.maps.event.addListener(map, 'click',
@@ -267,13 +264,6 @@ function displayInfowindow(marker, items) {
 function displayInfowindow2(marker, items, index) {
 	var content = '<div class="wsTable effect" style="width:200px;"><table><tr><th class="wshd" colspan="2">'+items.title+'</th></tr>';
 	
-//	//상세 정보 페이지, 찜하기 페이지
-//	if(items.placeUrl==""){
-//		content += '<tr><td><a href="#" onclick="alert(); return false;">상세 정보</a></td>';
-//	}else{
-//		content += '<tr><td><a href="'+items.placeUrl+'">상세 정보</a></td>';
-//	}
-//	
 	//찜하기
 	content += '<tr><td onclick="insertPlan('+index+');"> 찜하기 </td>';
 	
@@ -289,33 +279,33 @@ function displayInfowindow2(marker, items, index) {
 					
 					//event 유무 확인
 					if(response.event){
-						console.log("event 있습니다");
-						content += '<td>상세 정보<img src="/assets/img/sale.png"/></td></tr>';
+						content += '<td onclick="contentView('+index+');">상세 정보<img width="20px" src="/assets/img/sale.png"/></td></tr>';
 					}else{
-						content += '<td>상세 정보</td></tr>';
+						content += '<td onclick="contentView('+index+');">상세 정보</td></tr>';
 					}
-					
 					
 					//좋아요 갯수, 댓글 갯수 
 					content += '<tr><td>'+'&hearts; = '+response.good+'</td><td> 댓글 = '+response.comments+'</td></tr>';
 					
-					//플랜 수집
+					//플랜 수집3223
 					content += '<tr><th class="wshd" colspan="2">블로그 후기</th></tr></table><div class="scrollist"><table>';
 					
 						if(response.planList.length!=0){
 							for ( var i in response.planList) {
 								//follow
-//								for ( var j in response.followList) {									
-//									if(response.followList[j].followNum==response.planList[i].member_no){
-//										content += '<tr><td id="'+response.planList[i].plan_no+'" onclick="showplan(this)"><img width="15px" src="/assets/img/button/twitter.png"/>  ';
-//									}else{
-										content += '<tr><td id="'+response.planList[i].plan_no+'" onclick="showplan(this)"><img width="15px" src="/assets/img/button/twitter.png"/>  ';
-//									}
-//								}
-								content += response.planList[i].memberName+'님의 <b>'+response.planList[i].plan_no+'</b> 번 후기   ';
-								content += '<img width="15px" src="/assets/img/button/twitter.png"/></td></tr>';
-								
-//							console.log(response.followList[0].followName);
+								var followw = false;
+								for ( var j in response.followList) {
+									if(response.followList[j].followNum==response.planList[i].member_no){
+										followw = true;
+									}
+								}
+								if(followw){
+									content += '<tr><td colspan="2" id="'+response.planList[i].plan_no+'" onclick="showplan(this)">';
+									content += response.planList[i].memberName+'님의 <b>'+response.planList[i].plan_no+'</b> 번 후기   <img width="20px" src="/assets/img/follow.png"/></td></tr>';
+								}else{
+									content += '<tr><td colspan="2" id="'+response.planList[i].plan_no+'" onclick="showplan(this)">';
+									content += response.planList[i].memberName+'님의 <b>'+response.planList[i].plan_no+'</b> 번 후기   </td></tr>';
+								}
 							}
 							
 						}else{
@@ -326,6 +316,8 @@ function displayInfowindow2(marker, items, index) {
 						
 						infowindow2.setContent(content);
 						infowindow2.open(map, marker);
+						
+						
 				},
 				error:function(jqXHR, textStatus, errorThrown){
 		            alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);

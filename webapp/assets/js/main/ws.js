@@ -1,7 +1,6 @@
-	
 function showHotKey(){
 	var sH = document.getElementById('showHot');
-	console.log(circle.getRadius()/1000);
+	
 	$.ajax({
 		url: "/showHotKey",
 		data:{
@@ -10,8 +9,6 @@ function showHotKey(){
 			distance : circle.getRadius()/1000
 		},
 		success: function(response){
-			console.log("showHotKey");
-			console.log(response.searchList);
 			
 			var keys = "<table><tr><th colspan='5' class='wshd'>이 주변 핫 키워드</th></tr>";
 			
@@ -72,13 +69,14 @@ function themeSearch(themeName) {
 					if(k==0){
 						//아무런 후기글이 없을시 
 		//				alert("0 개의 후기글이 검색되었습니다. \n\n 자동검색으로 대체합니다");
-						alert("0 개의 후기글이 검색되었습니다.");
+//						alert("0 개의 후기글이 검색되었습니다.");
 		//				
-		//			    ps.keywordSearch( themeName, placesSearchCB, {
-		//					location: userLocation,
-		//					radius : circle.getRadius(),	
-		//					sort    : daum.maps.services.SortBy.POPULARITY
-		//				}); 
+						console.log("선택 범위안에 후기글이 없습니다. \n\n"+"첫 번째 관심사를 자동검색합니다.");
+					    ps.keywordSearch( themeName, placesSearchCB, {
+							location: userLocation,
+							radius : circle.getRadius(),	
+							sort    : daum.maps.services.SortBy.POPULARITY
+						}); 
 		//			    emti=true;	
 					}
 			}else{
@@ -188,7 +186,7 @@ function getMyPlan() {
 // insertPlan
 function insertPlan(index){
 	plan_no = document.getElementById('plan_no').value;
-	
+	console.log(plan_no);
 	items=placesArray[index];
 	
 	$.ajax({
@@ -211,10 +209,8 @@ function insertPlan(index){
 			addressBCode : items.addressBCode
 		},
 		success: function(response){
-			console.log(document.getElementById('plan_no').value);
-			console.log("insertPlan 성공");
-			console.log(response.plan_no);
-			if(plan_no="-1"){
+			//오늘 일정을 넣을때
+			if(plan_no=="-1"){
 				var se = document.getElementById('plan_no');
 				//se 초기화
 				while (se.firstChild) {
@@ -222,7 +218,10 @@ function insertPlan(index){
 				}
 				getMyPlan();
 			}else{
-				callContents(response.plan_no);
+				//일정을 선택해있었을때
+				callContents(plan_no);
+				console.log(plan_no);
+				console.log(response.plan_no);
 			}
 
 		},
@@ -234,7 +233,38 @@ function insertPlan(index){
 	});//end ajax1
 	
 }
-
+function contentView(index){
+	
+items=placesArray[index];
+	
+	$.ajax({
+		url: "/insertContent",
+		data:{
+			phone : items.phone,
+			newAddress : items.newAddress,
+			imageUrl : items.imageUrl,
+			direction : items.direction,
+			zipcode : items.zipcode,
+			placeUrl : items.placeUrl,
+			id  : items.id,
+			title : items.title,
+			category : items.category,
+			address  : items.address,
+			longitude : items.longitude,
+			latitude  : items.latitude,
+			addressBCode : items.addressBCode
+		},
+		success: function(response){
+			console.log("진입");
+			location.href = "/contentview?content_no="+response.contentVo.content_no;
+		},
+		error:function(jqXHR, textStatus, errorThrown){
+            alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
+            self.close();
+        }
+		
+	});//end ajax1
+}
 
 function callContents(plan_no){
 	$.ajax({
@@ -307,8 +337,8 @@ function placesNear(){
 					}
 					nearOn=true;
 				}else{
-					alert("선택 범위안에 후기글이 없습니다. \n\n"+"첫 번째 관심사를 자동검색합니다.");
-					 ps.keywordSearch( themeList[1].textContent, placesSearchCB, {
+					console.log("선택 범위안에 후기글이 없습니다. \n\n"+"첫 번째 관심사를 자동검색합니다.");
+					 ps.keywordSearch( themeList[0].textContent, placesSearchCB, {
 							location: userLocation,
 							radius : circle.getRadius(),	
 							sort    : daum.maps.services.SortBy.POPULARITY
@@ -323,7 +353,6 @@ function placesNear(){
 }
 
 function purpleMarker(marker,index){
-	console.log(index+"__purpleMarker_"+marker.getImage());
 	
     var imageSrc = '/assets/img/marker/purple.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
     imageSize = new daum.maps.Size(36, 37),  // 마커 이미지의 크기
@@ -336,7 +365,6 @@ function purpleMarker(marker,index){
     marker.setImage(markerImage);
 }
 function greenMarker(marker,index){
-	console.log(index+"__greenMarker_"+marker.getImage());
 	
     var imageSrc = '/assets/img/marker/blue_green.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
     imageSize = new daum.maps.Size(36, 37),  // 마커 이미지의 크기

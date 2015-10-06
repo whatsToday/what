@@ -194,12 +194,10 @@ public class MainService {
 			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 			Date today=Calendar.getInstance().getTime();
 			String planDate=df.format(today);
-			System.out.println(planDate);
 			pvo.setPlanDate(planDate);
 			planDao.insert(pvo);
 			
 			List<PlanVo> planList = planDao.selectTodayList(memberVo.getMember_no());
-			System.out.println(planList.toString());
 			planVo = planList.get(0);
 			plan_no = planVo.getPlan_no();
 		}
@@ -362,27 +360,33 @@ public class MainService {
 		map.put("searchList", searchList);
 	}
 
-	public String markerColor(Map<String, Object> map, HttpSession session,
+	public void markerColor(Map<String, Object> map, HttpSession session,
 			String id) {
 		String color = "";
 		
-		List<EventVo> eventList =eventDao.selectAllById(id);
-		if(eventList.size()!=0)	color="purple";
-		
-		long content_no =contentDao.selectVoById(id).getContent_no();
-		if(session.getAttribute("authUser")!=null){
-			MemberVo memberVo = (MemberVo)session.getAttribute("authUser");
-			List<PlanVo> planList = planDao.selectFollowerPlanById(content_no,memberVo.getMember_no());
-			if(planList.size()!=0) color="green";
+		if(contentDao.selectVoById(id)!=null){
+			
+			List<EventVo> eventList =eventDao.selectAllById(id);
+			if(eventList.size()!=0)	color="purple";
+			
+			long content_no =contentDao.selectVoById(id).getContent_no();
+			if(session.getAttribute("authUser")!=null){
+				MemberVo memberVo = (MemberVo)session.getAttribute("authUser");
+				List<PlanVo> planList = planDao.selectFollowerPlanById(content_no,memberVo.getMember_no());
+				if(planList.size()!=0) color="green";
+			}
 		}
 		
 		map.put("color", color);
 		
 		//green follow
 		
-		
-		
-		return color;
+	}
+
+	public void insertContent(Map<String, Object> map, ContentVo cvo) {
+		contentDao.insert(cvo);
+		ContentVo contentVo = contentDao.selectVoById(cvo.getId());
+		map.put("contentVo", contentVo);
 	}
 	
 }// main Service

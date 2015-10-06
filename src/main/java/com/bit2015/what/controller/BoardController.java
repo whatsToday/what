@@ -45,18 +45,19 @@ public class BoardController {
 		return contentVo;
 	}
 	@RequestMapping("/addPlan")
-	@ResponseBody
-	public Long updatePlan(@RequestParam String title, @RequestParam String message, @RequestParam Long plan_no,HttpSession session){
+	public String updatePlan(@RequestParam String planName, @RequestParam String msg, @RequestParam Long plan_no, HttpSession session, MultipartFile titleImage){
+		System.out.println("!");
 		MemberVo memberVo = (MemberVo)session.getAttribute("authUser");
 		Long member_no = memberVo.getMember_no();
-		boardService.updatePlan(title, message, plan_no);
-		return member_no;
+		boardService.updatePlan(planName, msg, plan_no, titleImage);
+		return "redirect:/mycontent?member_no="+member_no;
 	}
 	@RequestMapping("/deletePlan")
 	public String deletePlan(@RequestParam Long plan_no,@RequestParam Long member_no){
 		String planName = "";
 		String message = "";
-		boardService.updatePlan(planName, message, plan_no);
+		String titleImage ="";
+		boardService.deletePlan(planName, message, plan_no, titleImage);
 		return "redirect:/mycontent?member_no="+member_no;
 	}
 	@RequestMapping("/deleteContent")

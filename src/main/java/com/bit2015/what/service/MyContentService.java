@@ -56,6 +56,10 @@ public class MyContentService {
 			}
 		return follower;
 	}
+	public List<FollowVo> selectFollow(Long followNum, Long member_no){
+		List<FollowVo> list = followDao.selectFollow(followNum, member_no);
+		return list;
+	}
 	public List<Object> following(Long followNum){
 		List<Object> follower = new ArrayList<Object>();
 		List<FollowVo> list = followDao.selectMe(followNum);

@@ -75,7 +75,7 @@ div#map {
 		height: 400px;
 		z-index: 0;
 }
-div#submit button{
+div#submit input[type=submit]{
 			margin-right: 80px;
 			margin-bottom:20px;
  			border: 1px solid #69ABED;
@@ -126,11 +126,19 @@ div#contentPhoto{
 span:hover{
 			cursor: pointer;
 }
-div#msgPhoto .msgPt{
-			margin : 20px 20px 20px 200px;
+div#msgPhoto{
+			margin-top:20px;
+			height: 50px;
+			width:  700px;
+			margin-left:200px;
+			padding:10px;
+			
+	}
+div#msgPhoto a{
  			border: 1px solid #69ABED;
  			padding : 15px;
  			background-color:#69ABED;
+ 			text-decoration:none;
 			font-weight: bold;
 			color:#fff;
 }
@@ -153,7 +161,66 @@ div#info div#delContent a{
 		 	font-size:15px;
 		 	font-weight:bold;
 		 	line-height: 40px;
-}	
+}
+div#viewPhoto{
+			display:none;
+			background-color:#ededed;
+			height: 100px;
+			width:  700px;
+			margin-top:20px;
+			margin-left:200px;
+			margin-bottom: 20px;
+			}
+div#viewImages{
+			margin-left:10px;
+			float:left;
+			border: 1px solid #000;
+			width: 100px;
+			height: 100px;
+}
+div#viewImages img{
+			width: 100px;
+			height: 100px;
+}
+div#viewImagesName{
+			padding:10px;
+			margin-top:20px;
+			margin-left:50px;
+			float:left;
+			border: 1px solid #000;
+			width: 325px;
+			height: 70px;
+			line-height: 70px;
+}
+div#viewImagesModify{
+			float:left;
+			margin-top:20px;
+			margin-left:50px;
+			border: 1px solid #69ABED;
+			background-color: #69ABED;
+			width: 70px;
+			height: 70px;
+			color:#fff;
+			line-height: 70px;
+			text-align: center;
+}
+div#viewImagesDelete{
+			float:right;
+			margin-top:20px;
+			margin-right:10px;
+			border: 1px solid #69ABED;
+			background-color: #69ABED;
+			width: 70px;
+			height: 70px;
+			color:#fff;
+			line-height: 70px;
+			text-align: center;
+}
+div#viewImagesModify a,div#viewImagesDelete a{
+			color:#fff;
+			text-decoration: none;
+			font-weight: bold;
+}
 </style>
 </head>
 <body>
@@ -162,8 +229,10 @@ div#info div#delContent a{
 <c:import url="/WEB-INF/views/include/header.jsp"/>
 <!-- container -->
 <div class="container">
-<div id="photo"><a href="javascript:upload(1)"><img src="/assets/img/noimage.jpg"></a><input type="file" name="img" id="uploadMainPhoto" style="display:none;"></div>
-<div id="title"><input type="text" id="planName" placeholder="제목을 입력하세요."></div>
+<form id="addForm" method="post" enctype="multipart/form-data" action="/board/addPlan">
+<input type="hidden" id="plan_no" name="plan_no" value="">
+<div id="photo"><a href="javascript:upload(1)"><img id="mainPhoto" src="/assets/img/noimage.jpg"></a><input type="file" name="titleImage" id="uploadMainPhoto" style="display:none;"></div>
+<div id="title"><input type="text" name ="planName" id="planName" placeholder="제목을 입력하세요."></div>
 <div id="selectPlan"><a href="javascript:showPlan();">플랜선택</a>
 	<ul id="planList">
 		<c:forEach var="i" items="${planList}" varStatus="status">
@@ -172,9 +241,11 @@ div#info div#delContent a{
 	</ul>
 </div>
 <div id="map">Map</div>
-<div id="message"><textarea id="msg" placeholder="내용을 입락하세요."></textarea></div>
-<div id="msgPhoto"><button class="msgPt" onclick="upload(2)">사진선택</button><input type="file" name="img1" id="uploadPhoto" style="display:none;"><a href="javascript:testss()">+</a></div>
+<div id="message"><textarea name="msg" id="msg" placeholder="내용을 입락하세요."></textarea></div>
+<div id="msgPhoto"><a href="javascript:upload(2)">사진선택</a><input type="file" name="img1" id="uploadPhoto" ></div>
+<div id="viewPhoto"></div>
 <div id="submit"></div>
+</form>
 </div>
 <!-- footer -->
 </div>
@@ -246,9 +317,28 @@ function info(marker,id){
 }
 </script>
 <script>
-function testss(){
-	$("#msgPhoto").append('<button onclick="upload(2)">사진선택</button><input type="file" name="img1" id="uploadPhoto" style="display:none;"><a href="javascript:testss()">+</a>');
+var countImages=1;
+function readURL(input) {
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#viewImage').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
 }
+
+$("#uploadMainPhoto").change(function(){
+    readURL(this);
+});
+$(function(){
+	$("#uploadPhoto").change(function(){
+		$("#viewPhoto").show();
+		})
+})
 function showPlan(){
 	$("#planList").toggle();
 }
@@ -257,7 +347,24 @@ function upload(num){
 		$('#uploadMainPhoto').click();
 	}
 	if(num==2){
-		$('#uploadPhoto').click();
+		/* $('#uploadPhoto').click(); */
+		console.log(countImages)
+		$('#msgPhoto').append('<input type="file" name="img'+countImages+'" id="uploadPhoto'+countImages+'" >');
+		countImages ++;
+		console.log(countImages)
+		
+		/* $("#uploadPhoto").change(function(){
+			readURL(this);
+			var pt =$('#uploadPhoto').val();
+			var pht = pt.split("fakepath")[1];
+			var photo =pht.substring(1,pht.length)
+			console.log(photo);
+			var data = '<div id="viewImages"><img id="viewImage" src=""></div><div id="viewImagesName">'+photo+'</div><div id="viewImagesModify"><a>바꾸기</a></div><div id="viewImagesDelete"><a>삭제</a></div>';
+			$("#viewPhoto").append(data);
+			
+			})
+		 */
+		
 	}
 }
 function getPlan(plan_no){
@@ -274,7 +381,7 @@ function getPlan(plan_no){
 	    dataType:'json',
 	    success: function(response){
 	    	if(response.length==0){
-	    		alert("이 플랜에 정보가 없습니다!")
+	    		alert("이 플랜에 정보가 없습니다!");
 	    	}if(response.length!=0){
 	    		
 			for(var i=0; i<response.length; i++){
@@ -289,33 +396,14 @@ function getPlan(plan_no){
 			    	}
 			    	var moveLatLon = new daum.maps.LatLng(lat, lng);
 					map.setCenter(moveLatLon);
-					map.setLevel(2);
+					map.setLevel(5);
+						 $("#planList").hide();
+						$("#submit").html('<input type="submit" value="등록">');
+						$("#plan_no").val(plan_no);
 	    	}
 			}
 	 })
-	    $("#planList").hide();
-		$("#submit").html('<button onclick="addPlan('+plan_no+');">등록</button>');
 	
-}
-function addPlan(plan_no){
-	var title = $("#planName").val();
-	var message = $("#msg").val();
-	var member_no;
-	 
-	$.ajax({
-		type : 'get',
-	    url:'/board/addPlan',
-	    data : {
-	    	 title : title,
-	    	 message : message,
-	    	 plan_no : plan_no,
-	    },
-	    dataType:'json',
-	    success: function(response){
-	    	member_no = response;
-		 location.href="/mycontent?member_no="+member_no;
-		}
-	 })
 }
 function deleteContent(content_no, plan_no){
 	removeMarker();

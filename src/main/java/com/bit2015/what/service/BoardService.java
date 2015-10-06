@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.bit2015.what.dao.ContentBoxDao;
 import com.bit2015.what.dao.ContentDao;
@@ -50,9 +51,13 @@ public class BoardService {
 		}
 		return cntVo;
 	}
-	public void updatePlan(String planName, String message, Long plan_no){
-		planDao.update(planName, message, plan_no );
+	public void updatePlan(String planName, String message, Long plan_no, MultipartFile titleImage){
+			String member_img_url = ful.upload(titleImage);
+			planDao.update(planName, message, plan_no, member_img_url);
 	}
+	public void deletePlan(String planName, String message, Long plan_no, String titleImage){
+		planDao.update(planName, message, plan_no, titleImage);
+}
 	public PlanVo getPlanVo(Long plan_no){
 		PlanVo planVo = planDao.selectVo(plan_no);
 		return planVo;

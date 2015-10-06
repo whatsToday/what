@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.bit2015.what.vo.MemberVo;
 import com.bit2015.what.vo.PlanVo;
@@ -47,8 +48,9 @@ public class PlanDao {
 		sqlMapClientTemplate.delete("plan.delete", plan_no);
 	}
 	
-	public void update(String planName, String message, Long plan_no) {
+	public void update(String planName, String message, Long plan_no,String member_img_url) {
 		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("titleImage", member_img_url);
 		map.put("planName", planName);
 		map.put("message", message);
 		map.put("plan_no", plan_no);

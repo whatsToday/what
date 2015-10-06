@@ -39,10 +39,10 @@
 					<a href="/jjim?content_no=${param.content_no}" id="jjim" ><img src="/assets/img/jjim.jpg" style="width:70px;margin:10px 0 0 10px"></a>
 					</div>
 			</div>
-			
+<!-- 이벤트 -->			
 			<c:forEach var="event" items="${eventList}" varStatus="status">
 			<div style="float:left;width:1000px;text-align:center;font-weight:bold">진행중인 이벤트</div>
-			<div style="float:left;background-color:#69ABED;width:1000px;color:#fff;font-weight:bold;text-align:center">
+			<div style="float:left;background-color:#188fff;width:1000px;color:#fff;font-weight:bold;text-align:center">
 				<span>${event.message}　</span>
 				<span>${event.regDate}</span>~<span>${event.dueDate}</span>
 			</div>

@@ -65,7 +65,7 @@ $(function(){
 						<li><a href="/"  style="margin:15px 0 0 -15px;width:150px"><img style="width:150px;margin-left:-15px" src="/assets/img/logo.jpg"></a></li> 
 						<li style="margin-left:10px"><a href="javascript:planner(2)">일정짜기</a></li>
 						<li><a href="/review">게시판</a></li>
-						<li style="float:right;margin-right:220px"><a class="pink" href="/member/logout" >Logout</a></li>
+						<li style="float:right;margin-right:220px"><a class="pink" href="/logout" >Logout</a></li>
 		            	<li style="float:right"><a class="pink" href="/mycontent?member_no=${authUser.member_no}" >MyPage</a></li>
 		            	<c:choose>
 		            	<c:when test="${not empty themeList }">

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,7 +24,8 @@ public class ContentController {
 	
 	@Autowired
 	ContentService contentService;
-
+	
+	
 	@RequestMapping("/contentview")
 	public String contentView(Model model, HttpSession session, @RequestParam Long content_no) {
 		contentService.getContent(model, content_no);
@@ -92,6 +94,7 @@ public class ContentController {
 		  contentService.facebookJoin(memberVo, email, memberName, imageUrl);
 		  contentService.facebookLogin(session, email);
 		  return "/main/index";
-		  
 	  }
+	  
+	  
 }

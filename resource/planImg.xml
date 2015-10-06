@@ -15,11 +15,21 @@
 			select * from PLANIMG 
 		]]>
 	</select>
+	<select id="selectPlan" resultClass="PlanImgVo" parameterClass="java.lang.Long">
+		<![CDATA[
+			select * from PLANIMG where plan_no=#plan_no# 
+		]]>
+	</select>
 	
 	
 	<delete id="delete" parameterClass="java.lang.Long">
 		<![CDATA[
 			delete from PLANIMG where planImg_no=#planImg_no#
+		]]>
+	</delete>
+	<delete id="deletePlanImg" parameterClass="java.lang.Long">
+		<![CDATA[
+			delete from PLANIMG where plan_no=#plan_no#
 		]]>
 	</delete>
 

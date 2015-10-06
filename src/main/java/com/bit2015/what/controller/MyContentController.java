@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import jdk.internal.org.objectweb.asm.tree.IntInsnNode;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,7 @@ import com.bit2015.what.service.MyContentService;
 import com.bit2015.what.vo.ContentVo;
 import com.bit2015.what.vo.FollowVo;
 import com.bit2015.what.vo.MemberVo;
+import com.bit2015.what.vo.PlanImgVo;
 import com.bit2015.what.vo.PlanVo;
 
 @Controller
@@ -35,13 +38,14 @@ public class MyContentController {
 			PlanVo planVo = list.get(i);
 			if(planVo.getMessage() != null){
 				list1.add(planVo);
+				Long pnt = planVo.getPlan_no();
+				List<PlanImgVo> list5 =  myContentService.selectPlan(planVo.getPlan_no());
+				model.addAttribute("planImgList"+pnt, list5);
 			}
 		}
 		List<Object> list2 = myContentService.following(member_no);
 		List<Object> list3 = myContentService.follower(member_no);
 		List<FollowVo> list4 =myContentService.selectFollow( member_no, authUserVo.getMember_no());
-		System.out.println(list2);
-		System.out.println(list3);
 		model.addAttribute("planList", list1);
 		model.addAttribute("followerList", list2);
 		model.addAttribute("followingList", list3);

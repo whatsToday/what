@@ -13,10 +13,12 @@ import com.bit2015.what.dao.ContentDao;
 import com.bit2015.what.dao.FollowDao;
 import com.bit2015.what.dao.MemberDao;
 import com.bit2015.what.dao.PlanDao;
+import com.bit2015.what.dao.PlanImgDao;
 import com.bit2015.what.vo.ContentBoxVo;
 import com.bit2015.what.vo.ContentVo;
 import com.bit2015.what.vo.FollowVo;
 import com.bit2015.what.vo.MemberVo;
+import com.bit2015.what.vo.PlanImgVo;
 import com.bit2015.what.vo.PlanVo;
 
 @Service
@@ -32,6 +34,8 @@ public class MyContentService {
 	ContentDao contentDao;
 	@Autowired
 	ContentBoxDao contentBoxDao;
+	@Autowired
+	PlanImgDao planImgDao;
 	
 	public List<PlanVo> userPlan(Long member_no){
 		List<PlanVo> list = planDao.getUserPlan(member_no);
@@ -125,5 +129,9 @@ public class MyContentService {
 			}
 		}
 		return pnVo;
+	}
+	public List<PlanImgVo> selectPlan(Long plan_no){
+		List<PlanImgVo> list = planImgDao.selectPlan(plan_no);
+		return list;
 	}
 }

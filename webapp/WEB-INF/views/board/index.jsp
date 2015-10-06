@@ -36,12 +36,8 @@ div#title {
 			margin-top:80px;
 			margin-left: 200px;	
 			width:700px;
-			border: 1px solid #000;
 			height:  30px;
-}
-div#title strong{
-			 background-color: #69ABED;
-			 font-size : 50px;
+			font-size:30px;
 }
 div#title input[type=text] {
 				width:698px;
@@ -221,7 +217,7 @@ div#contentPhoto{
 div#msgPhoto {
 			margin-left:180px;
 }
-div#images{
+div.images{
 			border: 1px solid #000;
 			margin-top:20px;
 			margin-left: 20px;
@@ -229,6 +225,10 @@ div#images{
 			width: 220px;
 			height: 220px;
 			float : left;
+}
+div.images img{
+			width: 100%;
+			height: 100%;
 }
 div#info{padding: 5px; width:250px; height: 122px; font-size:12px; }
 div#info img{border:1px solid #000; width: 100px; height: 111px;  float:left; margin-right:10px;}
@@ -254,7 +254,9 @@ div#info div#goToPlan {
 <div id="title">${planBoard.planName}</div>
 <div id="map"></div>
 <div id="message">${planBoard.message}</div>
-<div id="msgPhoto"><div id="images">포토</div></div>
+<div id="msgPhoto">
+<c:forEach var="i" items="${planImg}"><div class="images"><img src="${i.imageUrl}"></div></c:forEach>
+</div>
 </div>
 <div id="comment">
 <div id="cmtWrite">댓글쓰기</div>
@@ -263,7 +265,10 @@ div#info div#goToPlan {
 <div id="viewComment"><div id="userName"><a href="/mycontent?member_no="><img src="${authUser.imageUrl}"><span>${authUser.memberName}</span></a></div><div id="commentText"></div></div>
 </div>
 <c:if test="${authUser.member_no==planBoard.member_no}">
-<div id="submit"><button onclick="modifyPlan(${planBoard.plan_no},${planBoard.member_no});">수정</button><button onclick="deletePlan(${planBoard.plan_no},${planBoard.member_no});">삭제</button></div>
+<div id="submit">
+	<button onclick="modifyPlan(${planBoard.plan_no},${planBoard.member_no})">수정</button>
+	<button onclick="deletePlan(${planBoard.plan_no},${planBoard.member_no})">삭제</button>
+</div>
 </c:if>
 <!-- footer -->
 </div>

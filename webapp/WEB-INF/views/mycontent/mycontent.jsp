@@ -63,9 +63,14 @@
 				<div class="menuView">
 				<div id="menuTitleImage"><img src="${i.titleImage}"/></div>
 				<div id="menuContext">
-				<div id="menuName">${i.planName}</div>
+				<div id="menuName">${i.planName}&nbsp&nbsp${i.plan_no}</div>
 				<div id="menuMessage">${i.message}</div>
-				<div id="menuPhoto"><div id="menuImages"></div></div>
+				
+				<div id="menuPhoto">
+				<c:forEach var="q" items="${planImgList34}"><div id="menuImages"><img src="${q.imageUrl}"></div>
+				</c:forEach>
+				</div>
+				
 				<div id="menuComment"><span id="goods"><a>종아요</a></span>&nbsp&nbsp<span id="reply"><a>댓글</a></span></div>
 				</div>
 				</div>

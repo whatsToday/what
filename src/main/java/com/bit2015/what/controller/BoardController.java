@@ -1,5 +1,6 @@
 package com.bit2015.what.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.bit2015.what.service.BoardService;
 import com.bit2015.what.vo.ContentVo;
 import com.bit2015.what.vo.MemberVo;
+import com.bit2015.what.vo.PlanImgVo;
 import com.bit2015.what.vo.PlanVo;
 
 @Controller
@@ -27,7 +29,9 @@ public class BoardController {
 	@RequestMapping()
 	public String index(@RequestParam Long plan_no, Model model){
 		PlanVo planVo = boardService.getPlanVo(plan_no);
+		List<PlanImgVo> list = boardService.selectPlan(plan_no);
 		model.addAttribute("planBoard", planVo);
+		model.addAttribute("planImg", list);
 		return "/board/index";
 	}
 	@RequestMapping("/addBoard")
@@ -45,10 +49,43 @@ public class BoardController {
 		return contentVo;
 	}
 	@RequestMapping("/addPlan")
-	public String updatePlan(@RequestParam String planName, @RequestParam String msg, @RequestParam Long plan_no, HttpSession session, MultipartFile titleImage){
-		System.out.println("!");
+	public String updatePlan(@RequestParam String planName, @RequestParam String msg, @RequestParam Long plan_no, HttpSession session, MultipartFile titleImage, MultipartFile img1, MultipartFile img2,MultipartFile img3,MultipartFile img4,MultipartFile img5,MultipartFile img6,MultipartFile img7,MultipartFile img8,MultipartFile img9, MultipartFile img10){
+		List<MultipartFile> fileList = new ArrayList<MultipartFile>();
+		System.out.println(img1);
+		if(img1 !=null){
+			fileList.add(img1);
+		}
+		if(img2 !=null){
+			fileList.add(img2);
+		}
+		if(img3 !=null){
+			fileList.add(img3);
+		}
+		if(img4 !=null){
+			fileList.add(img4);
+		}
+		if(img5 !=null){
+			fileList.add(img5);
+		}
+		if(img6 !=null){
+			fileList.add(img6);
+		}
+		if(img7 !=null){
+			fileList.add(img7);
+		}
+		if(img8 !=null){
+			fileList.add(img8);
+		}
+		if(img9 !=null){
+			fileList.add(img9);
+		}
+		if(img10 !=null){
+			fileList.add(img10);
+		}
+		System.out.println(fileList.size());
 		MemberVo memberVo = (MemberVo)session.getAttribute("authUser");
 		Long member_no = memberVo.getMember_no();
+		boardService.insertImage(plan_no, fileList);
 		boardService.updatePlan(planName, msg, plan_no, titleImage);
 		return "redirect:/mycontent?member_no="+member_no;
 	}

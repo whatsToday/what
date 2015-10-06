@@ -45,6 +45,7 @@
 .content div.menuView div#menuMessage{margin-top:10px; border:solid 1px #ededed; height: 180px;}
 .content div.menuView div#menuPhoto{margin-top:10px; border:solid 1px #ededed; height: 100px; padding-left:35px; background-color:#69ABED;}
 .content div.menuView div#menuPhoto div#menuImages{border:solid 1px #ededed;width: 70px; height: 40px; margin:5px 5px; float: left; background-color:#fff;}
+.content div.menuView div#menuPhoto div#menuImages img{width:100%;height: 100%;}
 .content div.menuView div#menuComment{border:solid 1px #ededed; margin-top:10px; background-color:#69ABED;}
 .content div.menuView div#menuComment span#goods{margin-left:20px;}
 .content div.menuView div#menuComment span#reply{margin-left:20px;}

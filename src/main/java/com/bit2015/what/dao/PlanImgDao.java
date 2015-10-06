@@ -23,4 +23,11 @@ public class PlanImgDao {
   public void delete(long planImg_no){
 	  sqlMapClientTemplate.delete("planImg.delete",planImg_no);
   }
+  public void deletePlanImg(long plan_no){
+	  sqlMapClientTemplate.delete("planImg.deletePlanImg",plan_no);
+  }
+  public List<PlanImgVo> selectPlan(Long plan_no){
+	  List<PlanImgVo> list = sqlMapClientTemplate.queryForList("planImg.selectPlan", plan_no);
+	  return list;
+  }
 }

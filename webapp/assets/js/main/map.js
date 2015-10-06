@@ -106,7 +106,9 @@ function displayPlaces(places) {
     		},
     		success : function(response){
     			console.log("markerColor 성공");
-    			purpleMarker(marker,i);
+    			if(response.color=='green')console.log("green");
+    			if(response.color=='purple')console.log("purple");
+//    			purpleMarker(marker,i);
     			
     		},
     		error: function (xhr, textStatus, errorThrown) { console.log(errorThrown); },
@@ -277,7 +279,6 @@ function displayInfowindow2(marker, items, index) {
 					if(response.event){
 						console.log("event 있습니다");
 						content += '<td>상세 정보<img src="/assets/img/sale.png"/></td></tr>';
-						purpleMarker(marker,index);
 					}else{
 						content += '<td>상세 정보</td></tr>';
 					}
@@ -292,13 +293,13 @@ function displayInfowindow2(marker, items, index) {
 						if(response.planList.length!=0){
 							for ( var i in response.planList) {
 								//follow
-								for ( var j in response.followList) {									
-									if(response.followList[j].followNum==response.planList[i].member_no){
+//								for ( var j in response.followList) {									
+//									if(response.followList[j].followNum==response.planList[i].member_no){
+//										content += '<tr><td id="'+response.planList[i].plan_no+'" onclick="showplan(this)"><img width="15px" src="/assets/img/button/twitter.png"/>  ';
+//									}else{
 										content += '<tr><td id="'+response.planList[i].plan_no+'" onclick="showplan(this)"><img width="15px" src="/assets/img/button/twitter.png"/>  ';
-									}else{
-										content += '<tr><td id="'+response.planList[i].plan_no+'" onclick="showplan(this)"><img width="15px" src="/assets/img/button/facebook.png"/>  ';
-									}
-								}
+//									}
+//								}
 								content += response.planList[i].memberName+'님의 <b>'+response.planList[i].plan_no+'</b> 번 후기   ';
 								content += '<img width="15px" src="/assets/img/button/twitter.png"/></td></tr>';
 								

@@ -49,30 +49,30 @@ public class MainController {
 		}
 	}
 	
-	@RequestMapping("/join")
-	public String join(HttpSession session, MemberVo memberVo) {
-		
-		mainService.join(session, memberVo);
-		
-		return "redirect:/";
-	}
-	
-	@RequestMapping("/login")
-	public String login(HttpSession session, MemberVo memberVo) {
-		System.out.println(memberVo.toString());
-		
-		mainService.login(session, memberVo);
-		
-		boolean Bo = mainService.login(session, memberVo);
-		if(Bo){
-//			System.out.println("로그인 되었습니다.");
-			return "redirect:/";
-		}else{
-//			System.out.println("등록된 회원이 없습니다.");
-			return "redirect:/?a=error";
-			
-		}
-	}
+//	@RequestMapping("/join")
+//	public String join(HttpSession session, MemberVo memberVo) {
+//		
+//		mainService.join(session, memberVo);
+//		
+//		return "redirect:/";
+//	}
+//	
+//	@RequestMapping("/login")
+//	public String login(HttpSession session, MemberVo memberVo) {
+//		System.out.println(memberVo.toString());
+//		
+//		mainService.login(session, memberVo);
+//		
+//		boolean Bo = mainService.login(session, memberVo);
+//		if(Bo){
+////			System.out.println("로그인 되었습니다.");
+//			return "redirect:/";
+//		}else{
+////			System.out.println("등록된 회원이 없습니다.");
+//			return "redirect:/?a=error";
+//			
+//		}
+//	}
 
 	@RequestMapping("/getnear")
 	@ResponseBody

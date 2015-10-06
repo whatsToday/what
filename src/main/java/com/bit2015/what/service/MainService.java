@@ -376,6 +376,7 @@ public class MainService {
 			if(planList.size()!=0) color="green";
 		}
 		
+		map.put("color", color);
 		
 		//green follow
 		

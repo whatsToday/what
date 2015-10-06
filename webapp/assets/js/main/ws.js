@@ -323,7 +323,7 @@ function placesNear(){
 }
 
 function purpleMarker(marker,index){
-	console.log(index+"___"+marker.getImage());
+	console.log(index+"__purpleMarker_"+marker.getImage());
 	
     var imageSrc = '/assets/img/marker/purple.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
     imageSize = new daum.maps.Size(36, 37),  // 마커 이미지의 크기
@@ -336,7 +336,7 @@ function purpleMarker(marker,index){
     marker.setImage(markerImage);
 }
 function greenMarker(marker,index){
-	console.log(index+"___"+marker.getImage());
+	console.log(index+"__greenMarker_"+marker.getImage());
 	
     var imageSrc = '/assets/img/marker/green.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
     imageSize = new daum.maps.Size(36, 37),  // 마커 이미지의 크기

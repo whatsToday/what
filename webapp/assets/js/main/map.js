@@ -99,20 +99,32 @@ function displayPlaces(places) {
         
         bounds.extend(placePosition);
 
-        $.ajax({
-    		url:'/markerColor',
-    		data : {
-    			id : places[i].id
-    		},
-    		success : function(response){
-    			console.log("markerColor 성공");
-    			if(response.color=='green')console.log("green");
-    			if(response.color=='purple')console.log("purple");
-//    			purpleMarker(marker,i);
-    			
-    		},
-    		error: function (xhr, textStatus, errorThrown) { console.log(errorThrown); },
-    	});
+        
+        (function(marker, i) {
+
+        	$.ajax({
+        		url:'/markerColor',
+        		data : {
+        			id : places[i].id
+        		},
+        		success : function(response){
+        			console.log("markerColor 성공"+i);
+        			if(response.color=='purple'){
+        				console.log("purple");
+        				purpleMarker(marker, i);
+        			}
+        			if(response.color=='green'){
+        				console.log("green");
+        				greenMarker(marker, i);
+        			}
+        		},
+        		error: function (xhr, textStatus, errorThrown) { console.log(errorThrown); },
+        	});
+        	
+            
+        })(marker, i);
+        
+        
         
         (function(marker, items, num) {
             daum.maps.event.addListener(marker, 'mouseover', function() {

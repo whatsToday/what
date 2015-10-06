@@ -48,6 +48,20 @@
         ]]>
     </select>
     
+     <select id="selectFollowerPlanById" parameterClass="java.util.Map" resultClass="PlanVo">
+        <![CDATA[
+        
+		select 	b.* 
+		from	(select * from follow where member_no = #member_no#) a,
+				(select p.*
+				from	plan p,
+						(select plan_no from contentbox where content_no = #content_no#) c
+				where	p.plan_no = c.plan_no) b
+		where	a.followName = b.memberName
+           
+        ]]>
+    </select>
+    
                  	<!-- 페이징처리 -->
 	
 <!-- 	    <select id="planList" parameterClass="java.util.Map" resultClass="PlanVo">

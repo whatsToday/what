@@ -27,6 +27,17 @@
      ]]>
    </delete>
    
+   <select id="selectAllById" resultClass="EventVo">
+    <![CDATA[
+          	select 	* 
+			from 	(select content_no from content where id = #id# ) a,
+					(select* from event) b
+			where 	a.content_no = b.content_no
+				and	sysdate between regdate and duedate
+    ]]>
+   </select>
+
+   
   	<!-- 페이징처리 -->
 	
 	   <!--  <select id="eventList" parameterClass="java.util.Map" resultClass="EventVo">

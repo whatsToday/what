@@ -38,7 +38,6 @@
            delete from FOLLOW WHERE FOLLOWNUM=#following# and member_no=#follower#
         ]]>
     </delete>
-
             	<!-- 페이징처리 -->
 	
 <!-- 	    <select id="followList" parameterClass="java.util.Map" resultClass="FollowVo">

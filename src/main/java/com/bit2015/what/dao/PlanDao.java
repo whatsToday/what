@@ -61,4 +61,12 @@ public class PlanDao {
 		 PlanVo planVo = (PlanVo)sqlMapClientTemplate.queryForObject("plan.getPlanName", plan_no);
 		  return planVo;
 	  }
+	 public List<PlanVo> selectFollowerPlanById(Long content_no, Long member_no){
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("content_no", content_no);
+			map.put("member_no", member_no);
+			
+			List<PlanVo> list= sqlMapClientTemplate.queryForList("plan.selectFollowerPlanById",map);
+			return list;
+		}
 }

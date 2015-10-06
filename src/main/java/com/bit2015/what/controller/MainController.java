@@ -91,11 +91,11 @@ public class MainController {
 
 	@RequestMapping("/getInfo")
 	@ResponseBody
-	public Map<String, Object> callPlanList(@RequestParam String id) {
+	public Map<String, Object> callPlanList(HttpSession session, @RequestParam String id) {
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		// ajax-jason
-		mainService.getInfo(map, id);
+		mainService.getInfo(session, map, id);
 
 		return map;
 	}
@@ -168,6 +168,16 @@ public class MainController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		mainService.showHotKey(map, lat, lng, distance);
+		
+		return map;
+	}
+	
+	@RequestMapping("/markerColor")
+	@ResponseBody
+	public Map<String, Object> markerColor(HttpSession session ,@RequestParam String id) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		String color = mainService.markerColor(map, session, id);
 		
 		return map;
 	}

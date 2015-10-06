@@ -99,6 +99,19 @@ function displayPlaces(places) {
         
         bounds.extend(placePosition);
 
+        $.ajax({
+    		url:'/markerColor',
+    		data : {
+    			id : places[i].id
+    		},
+    		success : function(response){
+    			console.log("markerColor 성공");
+    			purpleMarker(marker,i);
+    			
+    		},
+    		error: function (xhr, textStatus, errorThrown) { console.log(errorThrown); },
+    	});
+        
         (function(marker, items, num) {
             daum.maps.event.addListener(marker, 'mouseover', function() {
                 displayInfowindow(marker, items);
@@ -139,6 +152,10 @@ function displayPlaces(places) {
         })(marker, places[i], i);
 
         fragment.appendChild(itemEl);
+        
+        
+        
+       
     }
 
     listEl.appendChild(fragment);
@@ -255,10 +272,12 @@ function displayInfowindow2(marker, items, index) {
 					id : items.id
 				},
 				success: function(response){
+					
 					//event 유무 확인
 					if(response.event){
 						console.log("event 있습니다");
 						content += '<td>상세 정보<img src="/assets/img/sale.png"/></td></tr>';
+						purpleMarker(marker,index);
 					}else{
 						content += '<td>상세 정보</td></tr>';
 					}
@@ -270,29 +289,22 @@ function displayInfowindow2(marker, items, index) {
 					//플랜 수집
 					content += '<tr><th class="wshd" colspan="2">블로그 후기</th></tr></table><div class="scrollist"><table>';
 					
-					
 						if(response.planList.length!=0){
 							for ( var i in response.planList) {
-								content += '<tr><td id="'+response.planList[i].plan_no+'" onclick="showplan(this)"><img width="15px" src="/assets/img/button/twitter.png"/>  '+response.planList[i].memberName+'님의 <b>'+response.planList[i].plan_no+'</b> 번 후기   <img width="15px" src="/assets/img/button/twitter.png"/></td></tr>';
+								//follow
+								for ( var j in response.followList) {									
+									if(response.followList[j].followNum==response.planList[i].member_no){
+										content += '<tr><td id="'+response.planList[i].plan_no+'" onclick="showplan(this)"><img width="15px" src="/assets/img/button/twitter.png"/>  ';
+									}else{
+										content += '<tr><td id="'+response.planList[i].plan_no+'" onclick="showplan(this)"><img width="15px" src="/assets/img/button/facebook.png"/>  ';
+									}
+								}
+								content += response.planList[i].memberName+'님의 <b>'+response.planList[i].plan_no+'</b> 번 후기   ';
+								content += '<img width="15px" src="/assets/img/button/twitter.png"/></td></tr>';
+								
+//							console.log(response.followList[0].followName);
 							}
-//							if(response.planList.length%2==0){
-//								for ( var i in response.planList) {
-//											if(i%2==0){
-//											content += '<tr><td id="'+response.planList[i].plan_no+'" onclick="showplan(this)"><b>'+response.planList[i].plan_no+'</b> 번 후기</td>';
-//											}else{
-//												content += '<td id="'+response.planList[i].plan_no+'" onclick="showplan(this)"><b>'+response.planList[i].plan_no+'</b> 번 후기</td></tr>';
-//											}
-//								}
-//							}else{
-//								for ( var i in response.planList) {
-//											if(i%2==0){
-//											content += '<tr><td id="'+response.planList[i].plan_no+'" onclick="showplan(this)"><b>'+response.planList[i].plan_no+'</b> 번 후기</td>';
-//											}else{
-//												content += '<td id="'+response.planList[i].plan_no+'" onclick="showplan(this)"><b>'+response.planList[i].plan_no+'</b> 번 후기</td></tr>';
-//											}
-//								}
-//									content += '</tr>';
-//							}
+							
 						}else{
 							content += '<tr><td colspan="2">후기가 없습니다</td></tr>';
 						}

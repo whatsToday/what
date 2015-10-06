@@ -26,6 +26,7 @@ import com.bit2015.what.dao.CommentsDao;
 import com.bit2015.what.dao.ContentBoxDao;
 import com.bit2015.what.dao.ContentDao;
 import com.bit2015.what.dao.EventDao;
+import com.bit2015.what.dao.FollowDao;
 import com.bit2015.what.dao.GoodContentDao;
 import com.bit2015.what.dao.MemberDao;
 import com.bit2015.what.dao.PlanDao;
@@ -37,6 +38,7 @@ import com.bit2015.what.util.FileUploader;
 import com.bit2015.what.vo.ContentBoxVo;
 import com.bit2015.what.vo.ContentVo;
 import com.bit2015.what.vo.EventVo;
+import com.bit2015.what.vo.FollowVo;
 import com.bit2015.what.vo.GoodContentVo;
 import com.bit2015.what.vo.MemberVo;
 import com.bit2015.what.vo.PlanVo;
@@ -70,6 +72,8 @@ public class MainService {
 	EventDao eventDao;
 	@Autowired
 	SearchListDao searchListDao;
+	@Autowired
+	FollowDao followDao;
 	
 	FileUploader ful = new FileUploader();
 
@@ -130,10 +134,11 @@ public class MainService {
 		model.addAttribute("memberTheme", memberTheme);
 	}
 
-	public void getInfo(Map<String, Object> map, String id) {
+	public void getInfo(HttpSession session, Map<String, Object> map, String id) {
 		
 		// 후기 수집
 		List<PlanVo> planList = new ArrayList<PlanVo>();
+		List<FollowVo> followList = new ArrayList<FollowVo>();
 		long good = 0; 
 		long comments = 0 ;
 		boolean event = false;
@@ -160,11 +165,13 @@ public class MainService {
 			// 댓글
 			comments = commentsDao.selectAllByCno(content_no).size();
 			
-			//eventDao.selectVo(id);
-			
+			if(session.getAttribute("authUser")!=null){
+				MemberVo memberVo = (MemberVo) session.getAttribute("authUser"); 
+				followList = followDao.selectUser(memberVo.getMember_no());
+			}
 			
 		}
-		
+		map.put("followList", followList);
 		map.put("event", event);
 		map.put("comments", comments);
 		map.put("good", good);
@@ -353,6 +360,28 @@ public class MainService {
 		
 		List<String> searchList = searchListDao.selectHotKey(lat,lng,distance);
 		map.put("searchList", searchList);
+	}
+
+	public String markerColor(Map<String, Object> map, HttpSession session,
+			String id) {
+		String color = "";
+		
+		List<EventVo> eventList =eventDao.selectAllById(id);
+		if(eventList.size()!=0)	color="purple";
+		
+		long content_no =contentDao.selectVoById(id).getContent_no();
+		if(session.getAttribute("authUser")!=null){
+			MemberVo memberVo = (MemberVo)session.getAttribute("authUser");
+			List<PlanVo> planList = planDao.selectFollowerPlanById(content_no,memberVo.getMember_no());
+			if(planList.size()!=0) color="green";
+		}
+		
+		
+		//green follow
+		
+		
+		
+		return color;
 	}
 	
 }// main Service

@@ -39,5 +39,10 @@ public class EventDao {
 		List<EventVo> eventList =  sqlMapClientTemplate.queryForList("event.selectVoByCno", content_no);
 		return eventList;
 	}
+	
+	public List<EventVo> selectAllById(String id) {
+		List<EventVo> eventList =  sqlMapClientTemplate.queryForList("event.selectAllById", id);
+		return eventList;
+	}
 
 }

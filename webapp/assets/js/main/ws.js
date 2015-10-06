@@ -317,9 +317,34 @@ function placesNear(){
 				}
 				checkOnOff();
 			},
-			error: function (xhr, textStatus, errorThrown) { console.log(errorThrown); }
+			error: function (xhr, textStatus, errorThrown) { console.log(errorThrown); },
 		});
 	
 }
 
-
+function purpleMarker(marker,index){
+	console.log(index+"___"+marker.getImage());
+	
+    var imageSrc = '/assets/img/marker/purple.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+    imageSize = new daum.maps.Size(36, 37),  // 마커 이미지의 크기
+    imgOptions =  {
+        spriteSize : new daum.maps.Size(36, 691), // 스프라이트 이미지의 크기
+        spriteOrigin : new daum.maps.Point(0, ((index-1)*46)+10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
+        offset: new daum.maps.Point(13, 37) // 마커 좌표에 일치시킬 이미지 내에서의 좌표
+    },
+    markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imgOptions);
+    marker.setImage(markerImage);
+}
+function greenMarker(marker,index){
+	console.log(index+"___"+marker.getImage());
+	
+    var imageSrc = '/assets/img/marker/green.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+    imageSize = new daum.maps.Size(36, 37),  // 마커 이미지의 크기
+    imgOptions =  {
+        spriteSize : new daum.maps.Size(36, 691), // 스프라이트 이미지의 크기
+        spriteOrigin : new daum.maps.Point(0, ((index-1)*46)+10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
+        offset: new daum.maps.Point(13, 37) // 마커 좌표에 일치시킬 이미지 내에서의 좌표
+    },
+    markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imgOptions);
+    marker.setImage(markerImage);
+}

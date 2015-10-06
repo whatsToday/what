@@ -24,4 +24,18 @@
 	</delete>
 
 	
+	                 	<!-- 페이징처리 -->
+	
+<!-- 	    <select id="planImgList" parameterClass="java.util.Map" resultClass="PlanImgVo">
+      <![CDATA[
+      SELECT * FROM (select rownum rnum,planImg_no,plan_no,planName,imageUrl FROM (select * from planImg order by planImg_no asc)) WHERE rnum>=#startpage# AND rnum<=#endpage#
+         ]]>
+   </select> 
+
+	   <select id="planImgCountList" parameterClass="PlanImgVo" resultClass="int">
+		<![CDATA[
+		 select count(*) as x from planImg
+			]]>
+	</select> -->
+	
 </sqlMap>

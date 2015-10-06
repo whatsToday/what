@@ -34,4 +34,18 @@
         ]]>
     </delete>
 
+            	<!-- 페이징처리 -->
+	
+<!-- 	    <select id="followList" parameterClass="java.util.Map" resultClass="FollowVo">
+      <![CDATA[
+      SELECT * FROM (select rownum rnum,follow_no,member_no,followNum,memberName,followName FROM (select * from follow order by follow_no asc)) WHERE rnum>=#startpage# AND rnum<=#endpage#
+         ]]>
+   </select> 
+
+	   <select id="followCountList" parameterClass="FollowVo" resultClass="int">
+		<![CDATA[
+		 select count(*) as x from follow
+			]]>
+	</select> -->
+    
 </sqlMap>

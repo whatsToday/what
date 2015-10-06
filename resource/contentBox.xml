@@ -59,4 +59,18 @@
 			where contentBox_no=#contentBox_no#
 		]]>
 	</update>
+	
+	<!-- 페이징처리 -->
+	
+<!-- 	    <select id="contentBoxList" parameterClass="java.util.Map" resultClass="ContentBoxVo">
+      <![CDATA[
+      SELECT * FROM (select rownum rnum,contentBox_no,plan_no,content_no,planName FROM (select * from contentBox order by contnetBox_no asc)) WHERE rnum>=#startpage# AND rnum<=#endpage#
+         ]]>
+   </select> 
+
+	   <select id="contentBoxCountList" parameterClass="ContentBoxVo" resultClass="int">
+		<![CDATA[
+		 select count(*) as x from contentBox
+			]]>
+	</select> -->
 </sqlMap>

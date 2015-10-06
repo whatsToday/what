@@ -25,7 +25,6 @@ public class ContentController {
 	@Autowired
 	ContentService contentService;
 	
-	
 	@RequestMapping("/contentview")
 	public String contentView(Model model, HttpSession session, @RequestParam Long content_no) {
 		contentService.getContent(model, content_no);

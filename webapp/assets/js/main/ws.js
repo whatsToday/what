@@ -1,13 +1,13 @@
 	
 function showHotKey(){
 	var sH = document.getElementById('showHot');
-	
+	console.log(circle.getRadius()/1000);
 	$.ajax({
 		url: "/showHotKey",
 		data:{
 			lat : userLocation.getLat(),
 			lng : userLocation.getLng(),
-			distance : circle.getRadius()/10*2 
+			distance : circle.getRadius()/1000
 		},
 		success: function(response){
 			console.log("showHotKey");
@@ -96,13 +96,14 @@ function changeLocation(){
 	  userLocation=map.getCenter();
 	  map.setCenter(userLocation);
 	  
+	  var beforeRadius = circle.getRadius();
 	  circle.setMap(null);
 	  circle.setPosition(userLocation);
+	  circle.setRadius(beforeRadius);
 	  circle.setMap(map);	
 
-//		var lvl=map.getLevel();
-//		circle.setRadius(150);
-//	  placesNear(1);
+	  
+	  showHotKey();
 }
 //user Location
 
@@ -122,13 +123,14 @@ var userLocation;
 		  
 		  userLocation=new daum.maps.LatLng(crd.latitude, crd.longitude);
 		  map.setCenter(userLocation);
-		  showHotKey();
 		  //circle
 		  circle.setMap(null);
 			circle.setPosition(userLocation);
 			circle.setRadius(500);//meter 단위
 			circle.setMap(map);	
 			
+			
+			showHotKey();
 			//places near
 		  placesNear();
 		  

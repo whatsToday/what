@@ -27,12 +27,12 @@
  	select	* 
 	from 	searchlist
 	where 6371 * ACOS(
-	       		COS( 37.566826 * 0.017453293 )
-        		* COS( #lat# * 0.017453293 )
-        		* COS( (#lng# * 0.017453293) - (126.9786567 * 0.017453293))
-        		+ SIN( 37.566826 * 0.017453293 )
-        		* SIN( #lat# * 0.017453293 )
-    	) < #distance#
+	       			COS( #lat# * 0.017453293 )
+					* COS( latitude * 0.017453293 )
+					* COS( ( longitude * 0.017453293) - (#lng# * 0.017453293))
+					+ SIN( #lat# * 0.017453293 )
+					* SIN( latitude * 0.017453293 )
+    	) <= #distance#
 
 
       ]]>
@@ -40,16 +40,16 @@
    
    <select id="selectHotKey" parameterClass="java.util.Map" resultClass="java.lang.String">
       <![CDATA[
-   	select * 
+   	select search 
 	from 	(select search, count(search)as cnt
 		from searchlist
 		where	 	6371 * ACOS(
-					COS( 37.566826 * 0.017453293 )
-					* COS( #lat# * 0.017453293 )
-					* COS( ( #lng# * 0.017453293) - (126.9786567 * 0.017453293))
-					+ SIN( 37.566826 * 0.017453293 )
-					* SIN( #lat# * 0.017453293 )
-			) < #distance#
+					COS( #lat# * 0.017453293 )
+					* COS( latitude * 0.017453293 )
+					* COS( ( longitude * 0.017453293) - (#lng# * 0.017453293))
+					+ SIN( #lat# * 0.017453293 )
+					* SIN( latitude * 0.017453293 )
+			) <= #distance#
 		group by search order by cnt desc) b
 	where rownum<=10
       ]]>

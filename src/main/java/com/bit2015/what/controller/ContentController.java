@@ -73,7 +73,7 @@ public class ContentController {
 //		찜하기 (미구현)
 	  @RequestMapping("/jjim")
 	  public String jjim(HttpSession session, @RequestParam Long content_no){
-		  contentService.saveItem(session, content_no);
+		  contentService.savePlan(session, content_no);
 		  return "redirect:/contentView?content_no="+content_no;
 	  }
 	  

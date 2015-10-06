@@ -29,6 +29,7 @@ public class ContentController {
 		contentService.getContent(model, content_no);
 		contentService.getComments(model);
 		contentService.selectCntNo(model, content_no);
+		contentService.selectVoByCno(model, content_no);
 		return "/content/contentView";
 	}
 	
@@ -42,7 +43,7 @@ public class ContentController {
 	}	
 	 
 	 @RequestMapping("/commentdelete")
-	  	public String delete(long comments_no, Long content_no){
+	  	public String delete(long comments_no,@RequestParam Long content_no){
 		 contentService.delete(comments_no);
 		 return "redirect:/contentView?content_no="+content_no;
 	  }
@@ -87,8 +88,8 @@ public class ContentController {
 	  }	  
 	  
 	  @RequestMapping("/facebook")
-	  public String facebook(HttpSession session,MemberVo memberVo ,@RequestParam String email, @RequestParam String memberName ){
-		  contentService.facebookJoin(memberVo, email, memberName);
+	  public String facebook(HttpSession session,MemberVo memberVo ,@RequestParam String email, @RequestParam String memberName, @RequestParam String imageUrl ){
+		  contentService.facebookJoin(memberVo, email, memberName, imageUrl);
 		  contentService.facebookLogin(session, email);
 		  return "/main/index";
 		  

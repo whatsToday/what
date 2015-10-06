@@ -44,5 +44,17 @@
 			]]>
 	</select>
 
+    <insert id="facebookinsert" parameterClass="map">
+        <![CDATA[
+           INSERT INTO MEMBER (member_no, memberName, email, imageUrl) VALUES(member_no_seq.nextval, #memberName#, #email#, #imageUrl#)
+        ]]>
+    </insert>
+
+    <select id="checkEmail" resultClass="MemberVo" parameterClass="java.lang.String">
+        <![CDATA[
+           SELECT * FROM MEMBER WHERE email=#email#
+        ]]>
+    </select>
+
 	   
 </sqlMap>

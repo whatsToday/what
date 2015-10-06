@@ -67,14 +67,10 @@
 		 
 	    //페이스북 로그인 버튼을 눌렀을 때의 루틴.  
 	  FB.login(function(response) {  
-	    var accessToken = response.authResponse.accessToken;  
 	    FB.api('/me', function(response) {
-	    	var path="/facebook";
 	    	var name = response.name;
 	    	var email = response.id;
-	    	var method="post";
-			
-
+	    	var imageUrl = "http://graph.facebook.com/"+response.id+"/picture?type=large";
 	    	
 	    	function post(path, params, method) {
 	    	    method = method || "post"; 
@@ -98,7 +94,7 @@
 	    	    form.submit();
 	    	}
 
-	    	post('/facebook', {email: email, memberName:name});
+	    	post('/facebook', {email: email, memberName:name, imageUrl:imageUrl});
 
 			console.log(response.name);
 	    });   

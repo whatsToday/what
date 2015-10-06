@@ -60,11 +60,12 @@ public MemberVo checkMember(MemberVo memberVo) {
 
 	
 }
-public void facebookJoin(String email, String memberName) {
+public void facebookJoin(String email, String memberName, String imageUrl) {
 	Map<String, Object> map= new HashMap<String, Object>();
 	map.put("email", email);
 	map.put("memberName", memberName);
-	System.out.println(map);
+	map.put("imageUrl", imageUrl);
+	System.out.println("페북으로 가입후 로그인"+map);
 	sqlMapClientTemplate.insert("member.facebookinsert",map);
 }
 public MemberVo checkEmail(String email) {

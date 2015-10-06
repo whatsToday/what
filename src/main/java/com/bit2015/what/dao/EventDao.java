@@ -35,4 +35,9 @@ public class EventDao {
 		}
 	}
 
+	public List<EventVo> selectVoByCno(Long content_no) {
+		List<EventVo> eventList =  sqlMapClientTemplate.queryForList("event.selectVoByCno", content_no);
+		return eventList;
+	}
+
 }

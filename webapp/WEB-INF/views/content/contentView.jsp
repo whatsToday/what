@@ -2,8 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<script type="text/javascript" src="/assets/js/board/jquery-1.9.1.min.js"></script>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<script type="text/javascript" src="/assets/js/board/jquery-1.9.1.min.js"></script>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -24,7 +24,7 @@
 		<div style="margin:auto;width:1000px;margin-bottom:50px;margin-top:50px">
 		<form method="post" action="/commentwrite">
 			<img src="/assets/img/noimage.jpg" style="width:300px;padding:0px;border:solid 1px #e1e1e1;float:left;margin-bottom:20px">
-			<div style="font-size:15px;float:left;width:630px;margin-left:30px;margin-top:20px;">
+			<div style="font-size:15px;float:left;width:660px;margin-left:30px;margin-top:20px;">
 					<div style="float:left">
 					<h4>title : ${contentVo.title }</h4><img style="width:30px;" src="/assets/img/like2.jpg"><span style="margin-left:-12px;color:#fff;font-weight:bold;margin-top:2px">${goodContent }</span>
 					<div style="margin-top:10px">Category : ${contentVo.category }</div>
@@ -39,9 +39,18 @@
 					<a href="/jjim?content_no=${param.content_no}" id="jjim" ><img src="/assets/img/jjim.jpg" style="width:70px;margin:10px 0 0 10px"></a>
 					</div>
 			</div>
+			
+			<c:forEach var="event" items="${eventList}" varStatus="status">
+			<div style="float:left;width:1000px;text-align:center;font-weight:bold">진행중인 이벤트</div>
+			<div style="float:left;background-color:#69ABED;width:1000px;color:#fff;font-weight:bold;text-align:center">
+				<span>${event.message}　</span>
+				<span>${event.regDate}</span>~<span>${event.dueDate}</span>
+			</div>
+			</c:forEach>
+			
 				<div id="staticMap" style="width:1000px;height:300px;margin-top:80px"></div>
 <!-- 댓글 -->
-			<div style="width:1000px;margin:auto;border:solid 2px #69ABED;padding:15px;margin-top:20px;margin-bottom:20px">
+			<div style="width:1000px;border:solid 2px #69ABED;padding:15px;margin-top:20px;margin-bottom:20px">
 				<c:choose>
 				<c:when test="${empty authUser }">
 				<span style="font-weight:bold">비회원</span>
@@ -87,8 +96,10 @@
 
 
 	 <c:import url="/WEB-INF/views/include/footer.jsp"></c:import> 
-
-<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=bbef91da99f11fe76f4b3b523d3151e9&libraries=services"></script>
+<!-- www API Key -->
+<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=7ecd4e010937f46bf621448fed756f3b"></script>
+<!-- localhost API Key -->
+<!-- <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=c12b4d88c8259cf4652b89c1f64db8e8&libraries=services"></script> -->
 <script>
 var query = window.location.search.substring(1);
 var cnt_no = query.split("=");
@@ -116,7 +127,7 @@ $.ajax({
  				position : new daum.maps.LatLng(lat, lng)
  			});
  			marker.setMap(map);
-    } 
+    }
  })
  
 </script>

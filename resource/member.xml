@@ -30,16 +30,14 @@
 		]]>
 	</select>
 	
-    <select id="memberList" parameterClass="java.util.Map" resultClass="MemberVo">
+
+	<!--  페이징처리 -->
+   <select id="memberList" parameterClass="java.util.Map" resultClass="MemberVo">
       <![CDATA[
       SELECT * FROM (select rownum rnum,member_no,memberName,email,password,imageUrl,memberGrade FROM (select * from member order by member_no asc)) WHERE rnum>=#startpage# AND rnum<=#endpage#
          ]]>
    </select> 
-<!--      <select id="memberList" parameterClass="MemberVo">
-        <![CDATA[
-           SELECT * FROM MEMBER
-        ]]>
-    </select> -->
+
 	   <select id="memberCountList" parameterClass="MemberVo" resultClass="int">
 		<![CDATA[
 		 select count(*) as x from MEMBER

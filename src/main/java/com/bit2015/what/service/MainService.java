@@ -237,7 +237,8 @@ public class MainService {
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		Date today = Calendar.getInstance().getTime();
 		String planDate = df.format(today);
-		if(MyPlanList.get(0) == null || !MyPlanList.get(0).getPlanDate().equals(planDate)){
+		if(MyPlanList.size() == 0 || 
+				!MyPlanList.get(0).getPlanDate().equals(planDate)){
 			PlanVo addVo = new PlanVo();
 			addVo.setPlan_no(-1);
 			addVo.setPlanName("오늘의 일정이 없습니다");

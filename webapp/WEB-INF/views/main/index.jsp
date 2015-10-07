@@ -25,8 +25,6 @@
 					<tr>
 						<td id="showAll" class="even" onclick="themeSearch('showAll');">후기글만 보기</td>
 						<td class="even">팔로우</td>
-						<td id="otherLoc" class="even" onclick="changeLocation(); placesNear();">현재 중심좌표로 설정</td>
-						<td id="userLoc" class="even" onclick="navigator.geolocation.getCurrentPosition(success, error, options);">내 위치 </td>
 						<td class="even" onclick="$('#picktheme').click();">테마 추가하기</td>
 					</tr>
 				</table>
@@ -48,6 +46,10 @@
 <!-- 		테마 -->
 				<div class="wsTable effect">
 						<table>
+							<tr>
+								<td id="otherLoc" class="even" onclick="changeLocation(); placesNear();">현재 중심좌표로 설정</td>
+								<td id="userLoc" class="even" onclick="navigator.geolocation.getCurrentPosition(success, error, options);">내 위치 </td>
+							</tr>
 							<tr>
 								<c:forEach var="vo" items="${memberTheme}" varStatus="status">
 									<td id="theme_${status.index}" class="themeClass even" onclick="themeSearch('${vo.themeName}')">${vo.themeName}</td>

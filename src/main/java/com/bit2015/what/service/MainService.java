@@ -245,7 +245,6 @@ public class MainService {
 			
 			MyPlanList.add(addVo);
 		}
-				
 		return MyPlanList;
 	}
 

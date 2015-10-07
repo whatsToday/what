@@ -31,17 +31,17 @@
 	</delete>
 	
 	<!-- 페이징처리 -->
- <!--   <select id="commentsList" parameterClass="java.util.Map" resultClass="CommentsVo">
+  <select id="commentsList" parameterClass="java.util.Map" resultClass="CommentsVo">
       <![CDATA[
       SELECT * FROM (select rownum rnum,comments_no,member_no,content_no,memberName,message,regDate FROM (select * from comments order by comments_no asc)) WHERE rnum>=#startpage# AND rnum<=#endpage#
          ]]>
    </select> 
 
-	   <select id="commentsCountList" parameterClass="MemberVo" resultClass="int">
+	   <select id="commentsCountList" parameterClass="CommentsVo" resultClass="int">
 		<![CDATA[
 		 select count(*) as x from comments
 			]]>
-	</select>  -->
+	</select> 
 	
 	
 	

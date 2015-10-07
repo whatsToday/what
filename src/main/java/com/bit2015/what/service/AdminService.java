@@ -80,18 +80,33 @@ public class AdminService {
 		return memberList;
 	}
 	
+	/*member페이징*/
 	public List<MemberVo> selectMember1(int page, int limit) {
 		List<MemberVo> memberList1 = memberDao.select(page, limit);
 		
 		return memberList1;
 		
 	}
+	/*member페이징*/
 	public int memberCountList(){
 		int count = 0;
 		count =	memberDao.memberCountList();
 		return count;
 	}
 	
+	/*comments페이징*/
+	public List<CommentsVo> selectComments1(int page, int limit) {
+		List<CommentsVo> commentsList1 = commentsDao.select(page, limit);
+		
+		return commentsList1;
+		
+	}
+	/*comments페이징*/
+	public int commentsCountList(){
+		int count = 0;
+		count =	commentsDao.commentsCountList();
+		return count;
+	}
 
 
 	// 회원가입 추가

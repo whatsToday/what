@@ -213,7 +213,7 @@ public class AdminController {
 		return "redirect:/admin/content";
 	}
 
-	@RequestMapping("/comments")
+  @RequestMapping("/comments1")
 	public String commentsList(Model model) {
 		List<MemberVo> memberList = adminService.selectMember();
 		List<ContentVo> contentList = adminService.selectContent();
@@ -225,6 +225,42 @@ public class AdminController {
 
 		return "/admin/comments";
 	}
+	@RequestMapping("/comments")
+	public String  commentsList(@RequestParam( required=false, defaultValue="1") int page, Model model) {
+	 	int limit=5; 
+	 	List<MemberVo> memberList = adminService.selectMember();
+		List<ContentVo> contentList = adminService.selectContent();
+		List<CommentsVo> commentsList = adminService.selectComments();
+
+		model.addAttribute("memberList", memberList);
+		model.addAttribute("contentList", contentList);
+		model.addAttribute("commentsList", commentsList); 
+
+	 	
+	 	int listcount = commentsList.size();
+        List<CommentsVo> list=adminService.selectComments1(page, limit); 
+        int maxpage=(int)((double)listcount/limit+0.95);
+
+        int startpage=(((int)((double)page/10+0.9))-1)*10+1;
+  
+        int endpage=maxpage;
+        if(endpage>startpage+10-1){
+        	endpage=startpage+10-1;
+        }
+        model.addAttribute("nowpage", page);
+        model.addAttribute("maxpage", maxpage);
+        model.addAttribute("startpage", startpage);
+        model.addAttribute("endpage", endpage);
+        model.addAttribute("commentsList", list);
+        model.addAttribute("listcount", listcount);
+    	
+	  	return "/admin/comments";
+}
+
+	
+	
+	
+	
 
 	@RequestMapping("/insertcomments")
 	public String insertCommentsString(CommentsVo commentsVo) {

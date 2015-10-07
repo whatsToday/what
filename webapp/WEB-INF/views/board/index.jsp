@@ -14,6 +14,9 @@
 <script type="text/javascript" src="/assets/js/board/jquery-1.9.1.min.js"></script>
 <!-- css -->
 <style type="text/css">
+div#wrapper{
+			position:absolute;
+}
 div.container{
 			margin-top : 5%;
 			border: 1px solid #000;
@@ -31,6 +34,28 @@ div#photo img{
 				width:100%;
 				height:100%;
 				border-radius:150px;
+}
+div#goods{
+			width:80px;
+			height: 30px;
+			margin-top: 70px;
+			margin-left: 820px;
+			position: absolute;
+}
+div#viewGoods{
+			width:80px;
+			height: 30px;
+			margin-top: 100px;
+			margin-left: 820px;
+			position: absolute;
+			font-size:16px;
+			font-weight: bold;
+			text-align: center;
+			padding: 5px;
+}
+div#goods img{
+			width:100%;
+			height:100%;
 }
 div#title {	
 			margin-top:80px;
@@ -242,6 +267,19 @@ div#info div#goToPlan {
 			width: 50px;
 			height: 40px;
 }
+div#modalPhoto{
+		display:none;
+		background-color: #ededed;
+		width: 500px;
+		height: 500px;
+		position:absolute;
+		z-index:99999;
+		box-shadow:  rgba(0,0,0,0.8) 0 0 0 9999px;
+}
+div#modalPhoto img{
+		width:100%;
+		height: 100%;
+}
 </style>
 </head>
 <body>
@@ -251,11 +289,13 @@ div#info div#goToPlan {
 <!-- container -->
 <div class="container">
 <div id="photo"><img src="${planBoard.titleImage}"></div>
+<div id="goods"><a href="javascript:goods(${param.plan_no});"><img src="/assets/img/like.jpg"></a></div>
+<div id="viewGoods">${countGood}</div>
 <div id="title">${planBoard.planName}</div>
 <div id="map"></div>
 <div id="message">${planBoard.message}</div>
 <div id="msgPhoto">
-<c:forEach var="i" items="${planImg}"><div class="images"><img src="${i.imageUrl}"></div></c:forEach>
+<c:forEach var="i" items="${planImg}"><div class="images"><a href="javascript:viewBigImage(${i.planImg_no})"><img id="msgPhoto${i.planImg_no}" src="${i.imageUrl}"></a></div></c:forEach>
 </div>
 </div>
 <div id="comment">
@@ -272,10 +312,22 @@ div#info div#goToPlan {
 </c:if>
 <!-- footer -->
 </div>
+<div id="modalPhoto">
+</div>
 </body>
 <script>
-function modifyPlan(){
+$(function(){
+	$('body').click(function(){
+		$("#modalPhoto").hide();
+	})
+})
+function viewBigImage(num){
 	
+	var imageUrl = $("#msgPhoto"+num).attr("src");
+	  $('#modalPhoto').html("<img src="+imageUrl+">")
+	  $('#modalPhoto').show();
+	  $('#modalPhoto').css("top", Math.max(0, (($(window).height() - $('#modalPhoto').outerHeight()) / 2) + $(window).scrollTop()) + "px");
+	  $('#modalPhoto').css("left", Math.max(0, (($(window).width() - $('#modalPhoto').outerWidth()) / 2) + $(window).scrollLeft()) + "px");
 }
 function deletePlan(plan_no,member_no){
 	if (confirm('이 플랜을 삭제하시겠습니까?')) {
@@ -284,6 +336,21 @@ function deletePlan(plan_no,member_no){
 		alert('취소되었습니다.');
 		location.reload();
 	}
+}
+function goods(num){
+	$.ajax({
+		type : 'get',
+	    url:'/board/goodPlan',
+	    data : {
+	    	plan_no : num,
+	    	member_no : "${authUser.member_no}"
+	    },
+	    dataType:'json',
+	    success: function(response){
+	    	console.log(response)
+	   		 }
+	    });
+	
 }
 </script>
 <script>

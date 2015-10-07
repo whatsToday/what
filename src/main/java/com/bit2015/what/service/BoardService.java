@@ -9,11 +9,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.bit2015.what.dao.ContentBoxDao;
 import com.bit2015.what.dao.ContentDao;
+import com.bit2015.what.dao.GoodPlanDao;
 import com.bit2015.what.dao.PlanDao;
 import com.bit2015.what.dao.PlanImgDao;
 import com.bit2015.what.util.FileUploader;
 import com.bit2015.what.vo.ContentBoxVo;
 import com.bit2015.what.vo.ContentVo;
+import com.bit2015.what.vo.GoodPlanVo;
 import com.bit2015.what.vo.PlanImgVo;
 import com.bit2015.what.vo.PlanVo;
 
@@ -28,6 +30,8 @@ public class BoardService {
 	ContentDao contentDao;
 	@Autowired
 	PlanImgDao planImgDao;
+	@Autowired
+	GoodPlanDao goodPlanDao;
 	
 	// 파일올리는거야
 		FileUploader ful = new FileUploader();
@@ -88,5 +92,29 @@ public class BoardService {
 	public List<PlanImgVo> selectPlan(Long plan_no){
 		List<PlanImgVo> list = planImgDao.selectPlan(plan_no);
 		return list;
+	}
+	public int goodPlan(Long plan_no, Long member_no){
+		PlanVo planVo = planDao.selectVo(plan_no);
+		int countGood;
+		System.out.println(goodPlanDao.selectPlanByUser(plan_no, member_no));
+		if(goodPlanDao.selectPlanByUser(plan_no, member_no) == null){
+			
+			String memberName = planVo.getMemberName();
+			String planName = planVo.getPlanName();
+			
+			GoodPlanVo goodPlanVo = new GoodPlanVo();
+			goodPlanVo.setPlan_no(plan_no);
+			goodPlanVo.setMember_no(member_no);
+			goodPlanVo.setMemberName(memberName);
+			goodPlanVo.setPlanName(planName);
+			
+			goodPlanDao.insert(goodPlanVo);
+			countGood = goodPlanDao.selectPlan(plan_no);
+			return countGood;
+			
+		}else{
+			countGood = goodPlanDao.selectPlan(plan_no);
+			return countGood;
+		}
 	}
 }

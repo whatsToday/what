@@ -134,4 +134,8 @@ public class MyContentService {
 		List<PlanImgVo> list = planImgDao.selectPlan(plan_no);
 		return list;
 	}
+	public List<PlanImgVo> allPlanImg(){
+		List<PlanImgVo> list = planImgDao.selectAll();
+		return list;
+	}
 }

@@ -38,14 +38,14 @@ public class MyContentController {
 			PlanVo planVo = list.get(i);
 			if(planVo.getMessage() != null){
 				list1.add(planVo);
-				Long pnt = planVo.getPlan_no();
-				List<PlanImgVo> list5 =  myContentService.selectPlan(planVo.getPlan_no());
-				model.addAttribute("planImgList"+pnt, list5);
 			}
 		}
 		List<Object> list2 = myContentService.following(member_no);
 		List<Object> list3 = myContentService.follower(member_no);
 		List<FollowVo> list4 =myContentService.selectFollow( member_no, authUserVo.getMember_no());
+		List<PlanImgVo> list5 = myContentService.allPlanImg();
+		
+		model.addAttribute("planImgList", list5);
 		model.addAttribute("planList", list1);
 		model.addAttribute("followerList", list2);
 		model.addAttribute("followingList", list3);

@@ -32,6 +32,20 @@ public class GoodPlanDao {
 		System.out.println("맵" + map);
 		return list;
 	}
+	public int selectPlan(Long plan_no) {
+		int count = 0;
+		List<GoodPlanVo> list = sqlMapClientTemplate.queryForList("goodPlan.selectPlan", plan_no);
+		count = list.size();
+		return count;
+	}
+	public GoodPlanVo selectPlanByUser(Long plan_no, Long member_no) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("plan_no", plan_no);
+		map.put("member_no", member_no);
+		System.out.println(map);
+		GoodPlanVo goodPlanVo = (GoodPlanVo)sqlMapClientTemplate.queryForObject("goodPlan.selectPlanByUser", map);
+		return goodPlanVo;
+	}
 
 	public int goodPlanCountList() {
 		int count = 0;
@@ -46,5 +60,4 @@ public class GoodPlanDao {
 	public void delete(Long goodPlan_no) {
 		sqlMapClientTemplate.delete("goodPlan.delete", goodPlan_no);
 	}
-
 }

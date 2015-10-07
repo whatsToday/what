@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="planReply">
+	<typeAlias alias="PlanReplyVo" type="com.bit2015.what.vo.PlanReplyVo"/>
+	<insert id="insert" parameterClass="PlanReplyVo">
+		<![CDATA[
+			INSERT INTO PLANREPLY VALUES(planReply_no_seq.nextval, #member_no#, #planComments_no#, #memberName#, #message#, sysdate)
+		]]>
+	</insert>
+	
+	<select id="selectAll" resultClass="PlanReplyVo">
+		<![CDATA[
+			select * from planReply 
+		]]>
+	</select>
+	<delete id="delete" parameterClass="java.lang.Long">
+		<![CDATA[
+			delete from planReply where planReply_no=#planReply_no#
+		]]>
+	</delete>
+
+	<!-- 페이징처리 -->
+</sqlMap>

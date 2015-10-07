@@ -14,6 +14,16 @@
            SELECT * FROM GOODPLAN
         ]]>
     </select>
+     <select id="selectPlan" resultClass="GoodPlanVo" parameterClass="java.lang.Long">
+        <![CDATA[
+           SELECT * FROM GOODPLAN where plan_no=#plan_no#
+        ]]>
+    </select>
+    <select id="selectPlanByUser" resultClass="GoodPlanVo" parameterClass="java.util.Map">
+        <![CDATA[
+           SELECT * FROM GOODPLAN where plan_no=#plan_no# and member_no=#member_no#
+        ]]>
+    </select>
  
       <delete id="delete" parameterClass="java.lang.Long">
         <![CDATA[

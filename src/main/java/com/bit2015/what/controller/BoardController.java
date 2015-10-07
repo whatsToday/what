@@ -27,11 +27,14 @@ public class BoardController {
 	BoardService boardService;
 	
 	@RequestMapping()
-	public String index(@RequestParam Long plan_no, Model model){
+	public String index(@RequestParam Long plan_no, Model model, HttpSession session){
+		MemberVo memberVo = (MemberVo)session.getAttribute("authUser");
 		PlanVo planVo = boardService.getPlanVo(plan_no);
 		List<PlanImgVo> list = boardService.selectPlan(plan_no);
+		int countGood = boardService.goodPlan(plan_no, memberVo.getMember_no());
 		model.addAttribute("planBoard", planVo);
 		model.addAttribute("planImg", list);
+		model.addAttribute("countGood",countGood);
 		return "/board/index";
 	}
 	@RequestMapping("/addBoard")
@@ -109,5 +112,12 @@ public class BoardController {
 	public ContentVo getContentVo(@RequestParam Long content_no){
 		ContentVo contentVo =  boardService.getContentVo(content_no);
 		return contentVo;
+	}
+	@RequestMapping("/goodPlan")
+	@ResponseBody
+	public int goodPlan(@RequestParam Long plan_no, @RequestParam Long member_no){
+		int countGood = boardService.goodPlan(plan_no, member_no);
+		return countGood;
+		
 	}
 }

@@ -61,16 +61,17 @@
 				
 				<c:forEach var="i" items="${planList}">
 				<div class="menuView">
-				<div id="menuTitleImage"><img src="${i.titleImage}"/></div>
+				<div id="menuTitleImage"><img id="titlePhoto" src="${i.titleImage}"/></div>
 				<div id="menuContext">
 				<div id="menuName">${i.planName}&nbsp&nbsp${i.plan_no}</div>
 				<div id="menuMessage">${i.message}</div>
-				
 				<div id="menuPhoto">
-				<c:forEach var="q" items="${planImgList34}"><div id="menuImages"><img src="${q.imageUrl}"></div>
+				<c:forEach var="q" items="${planImgList}">
+				<c:if test="${i.plan_no == q.plan_no}">
+				<div id="menuImages"><a href="javascript:viewBigPhoto(${q.planImg_no})"><img id="photo${q.planImg_no}" src="${q.imageUrl}"></a></div>
+				</c:if>
 				</c:forEach>
 				</div>
-				
 				<div id="menuComment"><span id="goods"><a>종아요</a></span>&nbsp&nbsp<span id="reply"><a>댓글</a></span></div>
 				</div>
 				</div>
@@ -183,6 +184,12 @@ function unFollow(following, follower){
 }
 function follow(following, follower){
 	location.href="/mycontent/follow?following="+following+"&follower="+follower+"&member_no="+${param.member_no};
+}
+function viewBigPhoto(num){
+	var titleImage = $('#titlePhoto').attr("src");
+	var photo = $('#photo'+num).attr("src");
+	$("#titlePhoto").attr("src" , photo);
+	$("#photo"+num).attr("src" , titleImage);
 }
 </script>
 <script>

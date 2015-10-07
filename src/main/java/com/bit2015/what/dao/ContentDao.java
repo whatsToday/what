@@ -22,6 +22,30 @@ public class ContentDao {
 		List<ContentVo> list= sqlMapClientTemplate.queryForList("content.selectAll");
 		return list;
 	}
+	/*페이징*/
+	
+	public List<ContentVo> select(int page, int limit) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		int startRow = (page - 1) * limit + 1; 
+		int endRow = startRow + limit - 1; 
+		map.put("startpage", startRow);
+		map.put("endpage", endRow);
+		List<ContentVo> list =sqlMapClientTemplate.queryForList("content.contentList",map);
+		System.out.println("리스트"+list);
+		System.out.println("맵"+map);
+		return list;
+	}
+  
+  public int contentCountList() {
+		int count = 0;
+		count = (Integer) sqlMapClientTemplate.queryForObject("content.contentCountList");
+
+
+		return count;
+	}
+
+	
+	
 
 	public ContentVo selectVo(Long content_no ) {
 		ContentVo vo = (ContentVo) sqlMapClientTemplate.queryForObject("content.selectVo",content_no);

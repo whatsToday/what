@@ -107,6 +107,20 @@ public class AdminService {
 		count =	commentsDao.commentsCountList();
 		return count;
 	}
+	
+	/*content페이징*/
+	public List<ContentVo> selectContent1(int page, int limit) {
+		List<ContentVo> contentList1 = contentDao.select(page, limit);
+		
+		return contentList1;
+		
+	}
+	/*content페이징*/
+	public int contentCountList(){
+		int count = 0;
+		count =	contentDao.contentCountList();
+		return count;
+	}
 
 
 	// 회원가입 추가

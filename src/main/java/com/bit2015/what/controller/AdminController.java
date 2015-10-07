@@ -192,13 +192,44 @@ public class AdminController {
 		return "redirect:/admin/themebox";
 	}
 
-	@RequestMapping("/content")
+	@RequestMapping("/content1")
 	public String contentList(Model model) {
 		List<ContentVo> contentList = adminService.selectContent();
 		model.addAttribute("contentList", contentList);
 		return "/admin/content";
 	}
+	
+	@RequestMapping("/content")
+	public String  contentList(@RequestParam( required=false, defaultValue="1") int page, Model model) {
+	 	int limit=5; 
+	 	
+		List<ContentVo> contentList = adminService.selectContent();
 
+		model.addAttribute("contentList", contentList);
+
+	 	
+	 	int listcount = contentList.size();
+        List<ContentVo> list=adminService.selectContent1(page, limit);
+        int maxpage=(int)((double)listcount/limit+0.95);
+
+        int startpage=(((int)((double)page/10+0.9))-1)*10+1;
+  
+        int endpage=maxpage;
+        if(endpage>startpage+10-1){
+        	endpage=startpage+10-1;
+        }
+        model.addAttribute("nowpage", page);
+        model.addAttribute("maxpage", maxpage);
+        model.addAttribute("startpage", startpage);
+        model.addAttribute("endpage", endpage);
+        model.addAttribute("contentList", list);
+        model.addAttribute("listcount", listcount);
+    	
+	  	return "/admin/content";
+}
+	
+	
+	
 	@RequestMapping("/insertcontent")
 	public String insertContent(ContentVo contentVo,
 			@RequestParam(required = false) MultipartFile img) {

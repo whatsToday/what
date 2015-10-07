@@ -93,9 +93,9 @@
     	
 	<!-- 페이징처리 -->
 	
-<!-- 	    <select id="contentList" parameterClass="java.util.Map" resultClass="ContentVo">
+  <select id="contentList" parameterClass="java.util.Map" resultClass="ContentVo">
       <![CDATA[
-      SELECT * FROM (select rownum rnum,content_no,phone,newAddress,imageUrl,direction,zipcode,placeUrl,id,title,category,address,longitude,latitude,addressBCode FROM (select * from content order by contnet_no asc)) WHERE rnum>=#startpage# AND rnum<=#endpage#
+      SELECT * FROM (select rownum rnum,content_no,phone,newAddress,imageUrl,direction,zipcode,placeUrl,id,title,category,address,longitude,latitude,addressBCode FROM (select * from content order by content_no asc)) WHERE rnum>=#startpage# AND rnum<=#endpage#
          ]]>
    </select> 
 
@@ -103,6 +103,6 @@
 		<![CDATA[
 		 select count(*) as x from content
 			]]>
-	</select>  -->
+	</select>
 	
 </sqlMap>

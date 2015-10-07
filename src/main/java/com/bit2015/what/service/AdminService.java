@@ -211,6 +211,33 @@ public class AdminService {
 		count =	planImgDao.planImgCountList();
 		return count;
 	}
+	
+	/*SearchList페이징*/
+	public List<SearchListVo> selectSearchList1 (int page, int limit) {
+		List<SearchListVo> searchList1 = searchListDao.select(page, limit);		
+		return searchList1;
+		
+	}
+	/*SearchList페이징*/
+	public int searchList1(){
+		int count = 0;
+		count =	searchListDao.searchListCountList();
+		return count;
+	}
+	/*plan페이징*/
+	public List<PlanVo> selectplan1 (int page, int limit) {
+		List<PlanVo> plan1 = planDao.select(page, limit);		
+		return plan1;
+		
+	}
+	/*plan페이징*/
+	public int paln1(){
+		int count = 0;
+		count =	planDao.planCountList();
+		return count;
+	}
+	
+	
 
 
 	// 회원가입 추가

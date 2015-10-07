@@ -23,6 +23,27 @@ public class PlanDao {
 		sqlMapClientTemplate.insert("plan.insert", planVo);
 	}
 	
+	  public List<PlanVo> select(int page, int limit) {
+			Map<String, Integer> map = new HashMap<String, Integer>();
+			int startRow = (page - 1) * limit + 1; 
+			int endRow = startRow + limit - 1; 
+			map.put("startpage", startRow);
+			map.put("endpage", endRow);
+			List<PlanVo> list =sqlMapClientTemplate.queryForList("plan.planList",map);
+			System.out.println("리스트"+list);
+			System.out.println("맵"+map);
+			return list;
+		}
+	  
+	  public int planCountList() {
+			int count = 0;
+			count = (Integer) sqlMapClientTemplate.queryForObject("plan.planCountList");
+
+
+			return count;
+		}
+
+	
 	@SuppressWarnings("unchecked")
 	public List<PlanVo> selectAll(){
 		List<PlanVo> list= sqlMapClientTemplate.queryForList("plan.selectAll");

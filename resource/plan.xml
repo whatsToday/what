@@ -64,7 +64,7 @@
     
                  	<!-- 페이징처리 -->
 	
-<!-- 	    <select id="planList" parameterClass="java.util.Map" resultClass="PlanVo">
+    <select id="planList" parameterClass="java.util.Map" resultClass="PlanVo">
       <![CDATA[
       SELECT * FROM (select rownum rnum,plan_no,member_no,titleImage,planName,memberName,message,planDate FROM (select * from plan order by plan_no asc)) WHERE rnum>=#startpage# AND rnum<=#endpage#
          ]]>
@@ -74,6 +74,6 @@
 		<![CDATA[
 		 select count(*) as x from plan
 			]]>
-	</select> -->
+	</select> 
    
 </sqlMap>

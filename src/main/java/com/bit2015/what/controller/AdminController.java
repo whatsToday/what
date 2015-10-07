@@ -101,7 +101,7 @@ public class AdminController {
 
 	// plan 조회
 
-	@RequestMapping("/plan")
+	@RequestMapping("/plan1")
 	public String planList(Model model) {
 		List<MemberVo> memberList = adminService.selectMember();
 		List<PlanVo> planList = adminService.selectPlan();
@@ -109,6 +109,36 @@ public class AdminController {
 		model.addAttribute("planList", planList);
 		return "/admin/plan";
 	}
+	
+@RequestMapping("/plan")
+	
+	public String planList(@RequestParam( required=false, defaultValue="1") int page, Model model) {
+	 	int limit=5; 
+	 	List<MemberVo> memberList = adminService.selectMember();
+		List<PlanVo> planList = adminService.selectPlan();
+		model.addAttribute("memberList", memberList);
+		model.addAttribute("planList", planList);
+		
+	 	int listcount = planList.size();
+        List<PlanVo> list=adminService.selectplan1(page, limit);
+        int maxpage=(int)((double)listcount/limit+0.95);
+
+        int startpage=(((int)((double)page/10+0.9))-1)*10+1;
+  
+        int endpage=maxpage;
+        if(endpage>startpage+10-1){
+        	endpage=startpage+10-1;
+        }
+        model.addAttribute("nowpage", page);
+        model.addAttribute("maxpage", maxpage);
+        model.addAttribute("startpage", startpage);
+        model.addAttribute("endpage", endpage);
+        model.addAttribute("planList", list);
+        model.addAttribute("listcount", listcount);
+        System.out.println(list);
+    	
+	  	return "/admin/plan";
+}
 
 	// plan 등록
 	@RequestMapping("/insertplan")
@@ -351,7 +381,7 @@ public class AdminController {
 		return "redirect:/admin/follow";
 	}
 
-	@RequestMapping("/searchlist")
+	@RequestMapping("/searchlist1")
 	public String searchList(Model model) {
 		List<MemberVo> memberList = adminService.selectMember();
 		List<SearchListVo> searchList = adminService.selectSerchList();
@@ -359,6 +389,36 @@ public class AdminController {
 		model.addAttribute("searchList", searchList);
 		return "/admin/searchlist";
 	}
+	
+	@RequestMapping("/searchlist")
+	
+	public String searchList(@RequestParam( required=false, defaultValue="1") int page, Model model) {
+	 	int limit=5; 
+		List<MemberVo> memberList = adminService.selectMember();
+		List<SearchListVo> searchList = adminService.selectSerchList();
+		model.addAttribute("memberList", memberList);
+		model.addAttribute("searchList", searchList);
+		
+	 	int listcount = searchList.size();
+        List<SearchListVo> list=adminService.selectSearchList1(page, limit);
+        int maxpage=(int)((double)listcount/limit+0.95);
+
+        int startpage=(((int)((double)page/10+0.9))-1)*10+1;
+  
+        int endpage=maxpage;
+        if(endpage>startpage+10-1){
+        	endpage=startpage+10-1;
+        }
+        model.addAttribute("nowpage", page);
+        model.addAttribute("maxpage", maxpage);
+        model.addAttribute("startpage", startpage);
+        model.addAttribute("endpage", endpage);
+        model.addAttribute("searchList", list);
+        model.addAttribute("listcount", listcount);
+        System.out.println(list);
+    	
+	  	return "/admin/searchlist";
+}
 
 	@RequestMapping("/insertsearchlist")
 	public String insertSearchList(SearchListVo searchListVo) {

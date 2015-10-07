@@ -145,8 +145,13 @@ function likeCon( content_no, member_no){
 	    		member_no : member_no,
 	    },	
 	    dataType:'json',
-	    success: function(){
-
+	    success: function(response){
+	    	if(response==1){
+	    		alert("좋아요를 누르셨습니다.")
+	    		location.reload();
+	    	}else{
+	    		alert("이미 좋아요를 누르셨습니다.")
+	    	}
 	    },
 })
 }
@@ -154,9 +159,6 @@ function likeCon( content_no, member_no){
 <script>
 $('#jjim').click(function(){
 	alert("오늘 날짜로 등록되었습니다.");
-});
-$('#likegood').click(function(){
-	alert("좋아요를 누르셨습니다 새로고침하면 적용됩니다.");
 });
 </script>
 

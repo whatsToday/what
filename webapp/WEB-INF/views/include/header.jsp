@@ -139,7 +139,8 @@ $(function(){
 			</div>
 			</div>
 			</div>
-			<script>
+
+<!-- <script>
 			var userTheme_no = [];
 			$.ajax({
 				type : 'get',
@@ -156,7 +157,7 @@ $(function(){
 			    }
 			 })
 			 
-			</script>
+</script>
 			<script>
 			$(function(){
 			    var max = 5;
@@ -167,7 +168,7 @@ $(function(){
 			        checkboxes.filter(':not(:checked)').prop('disabled', current >= max);
 			    });
 			});
-			</script>
+			</script> -->
 
 
 

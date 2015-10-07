@@ -62,13 +62,17 @@ public class ContentController {
 //		좋아요
 	  @RequestMapping("/like")
 	  @ResponseBody
-	  public void like(HttpSession session, @RequestParam Long member_no, @RequestParam Long content_no, Model model){
+	  public int like(HttpSession session, @RequestParam Long member_no, @RequestParam Long content_no, Model model){
 		  GoodContentVo goodVo = contentService.selectMno(member_no, content_no);
 		  if(goodVo == null){
-			  System.out.println("!");
 			  contentService.insertGood(session, content_no, member_no);
 			  List<GoodContentVo> list = contentService.selectCntNo(content_no);
 			  model.addAttribute("good", list.size());
+			  int goods = 1;
+			  return goods;
+		  }else{
+			  int goods = 2;
+			  return goods;
 		  }
 	  }
 	  

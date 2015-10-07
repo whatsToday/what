@@ -8,6 +8,34 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>오늘 뭐하지</title>
 
+<script type="text/javascript">
+	$("#joinForm").submit(function(){
+		var $password = $("#password");
+		var password = $password.val();
+		if(password==""){
+			alert("패스워드를 입력해 주세요");
+			$password.focus();
+			return false;	
+		}
+		
+		var $email = $("#email");
+		var email = $email.val();
+		if(email ==""){
+			alert("이메일을 입력해 주세요");
+			$email.focus();
+			return false;
+		}
+	    var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+		   if( re.test(email)==false){
+				alert("유효한 이메일 형식이 아닙니다");
+				$email.focus();
+				return false;	
+		   }		 
+		return true;
+	});
+</script>
+
+
 <style>
 body{background: #4E535B;font-family: 'Montserrat', Arial;font-size: 1em;}
 h2{text-align: center;color: #F1F2F4;text-shadow: 0 1px 0 #000;}
@@ -300,8 +328,7 @@ function testAPI() {
   console.log('Welcome!  Fetching your information.... ');
   FB.api('/me', function(response) {
     console.log('Successful login for: ' + response.name);
-    document.getElementById('status').innerHTML =
-      '<span style="font-weight:bold">'+response.name + '</span>님으로 페이스북에 로그인 되어있습니다.';
+    document.getElementById('status').innerHTML ='<span style="font-weight:bold">'+response.name+'</span>님으로 페이스북에 로그인 되어있습니다.';
   });
 }
 
@@ -395,7 +422,7 @@ a[rel=leanModal] {
 				<div id="status" style="margin-top:70px;font-size:12px;"></div>
 			</div>
 				  
-			<div style="text-align:right;margin-top:20px;font-family:''맑은 고딕;"><a href="#" onclick="$('#loginModal').hide();$('#join').click();">가입하기</a></div>	  
+			<div style="text-align:right;margin-top:20px;font-family:''맑은 고딕"><a href="#" onclick="$('#loginModal').hide();$('#join').click();">가입하기</a></div>	  
 				  </div>
 					
 
@@ -427,29 +454,6 @@ a[rel=leanModal] {
 $('#logout').click(function(){
 	alert("로그아웃 되었습니다.");
 });
-</script>
-<script type="text/javascript">
-	$("#joinForm").submit(function(){
-
-		var $email = $("#email");
-		var email = $email.val();
-// 		alert(email);
-		console.log(email);
-		if(email ==""){
-			alert("이메일을 입력해 주세요");
-			$email.focus();
-			return false;
-		}
-		 
-		var $password = $("#password");
-		var password = $password.val();
-		if(password==""){
-			alert("패스워드를 입력해 주세요");
-			$password.focus();
-			return false;	
-		}
-		return true;
-	});
 </script>
 </body>
 </html>

@@ -1,0 +1,931 @@
+INSERT INTO PLANIMG (PLANIMG_NO,
+                     PLAN_NO,
+                     PLANNAME,
+                     IMAGEURL)
+     VALUES (14,
+             3,
+             NULL,
+             '/product-images/20159773850516.jpg');
+
+INSERT INTO PLANIMG (PLANIMG_NO,
+                     PLAN_NO,
+                     PLANNAME,
+                     IMAGEURL)
+     VALUES (15,
+             3,
+             NULL,
+             '/product-images/20159773850541.jpg');
+
+INSERT INTO THEME (THEME_NO, THEMENAME, IMAGEURL)
+     VALUES (1, '간식', '/product-images/2015977461850.gif');
+
+INSERT INTO THEME (THEME_NO, THEMENAME, IMAGEURL)
+     VALUES (2, '분식', '/product-images/20159774717260.jpg');
+
+INSERT INTO THEME (THEME_NO, THEMENAME, IMAGEURL)
+     VALUES (3, '부페', '/product-images/20159774738125.jpg');
+
+INSERT INTO THEME (THEME_NO, THEMENAME, IMAGEURL)
+     VALUES (4, '술집', '/product-images/20159774756838.jpg');
+
+INSERT INTO THEME (THEME_NO, THEMENAME, IMAGEURL)
+     VALUES (5, '아시아음식', '/product-images/20159774815982.JPG');
+
+INSERT INTO THEME (THEME_NO, THEMENAME, IMAGEURL)
+     VALUES (6, '한식', '/product-images/20159774826387.gif');
+
+INSERT INTO THEME (THEME_NO, THEMENAME, IMAGEURL)
+     VALUES (7, '양식', '/product-images/20159774834422.jpg');
+
+INSERT INTO THEME (THEME_NO, THEMENAME, IMAGEURL)
+     VALUES (8, '패스트푸드', '/product-images/20159774848700.jpg');
+
+INSERT INTO THEME (THEME_NO, THEMENAME, IMAGEURL)
+     VALUES (9, '피자', '/product-images/20159774859539.jpg');
+
+INSERT INTO THEME (THEME_NO, THEMENAME, IMAGEURL)
+     VALUES (10, '치킨', '/product-images/2015977499195.jpg');
+
+INSERT INTO THEME (THEME_NO, THEMENAME, IMAGEURL)
+     VALUES (11, '음식', '/product-images/20159774956226.jpg');
+
+INSERT INTO THEME (THEME_NO, THEMENAME, IMAGEURL)
+     VALUES (12, '호텔', '/product-images/20159775537688.jpg');
+
+INSERT INTO THEME (THEME_NO, THEMENAME, IMAGEURL)
+     VALUES (13, '모텔', '/product-images/2015977554872.jpg');
+
+INSERT INTO THEME (THEME_NO, THEMENAME, IMAGEURL)
+     VALUES (14, '팬션', '/product-images/20159775557695.jpg');
+
+INSERT INTO THEME (THEME_NO, THEMENAME, IMAGEURL)
+     VALUES (15, '캠핑', '/product-images/20159775623909.jpg');
+
+INSERT INTO THEME (THEME_NO, THEMENAME, IMAGEURL)
+     VALUES (16, '기타숙박', '/product-images/20159775638385.jpg');
+
+INSERT INTO THEME (THEME_NO, THEMENAME, IMAGEURL)
+     VALUES (17, '카페', '/product-images/20159775648143.jpg');
+
+INSERT INTO THEME (THEME_NO, THEMENAME, IMAGEURL)
+     VALUES (18, '영화관', '/product-images/2015977571892.jpg');
+
+INSERT INTO THEME (THEME_NO, THEMENAME, IMAGEURL)
+     VALUES (19, '미술관', '/product-images/20159775718408.jpg');
+
+INSERT INTO THEME (THEME_NO, THEMENAME, IMAGEURL)
+     VALUES (20, '박물관', '/product-images/20159775727826.gif');
+
+INSERT INTO THEME (THEME_NO, THEMENAME, IMAGEURL)
+     VALUES (21, '공연장', '/product-images/2015978031513.jpg');
+
+INSERT INTO THEME (THEME_NO, THEMENAME, IMAGEURL)
+     VALUES (22, '미용실', '/product-images/20159783342997.jpg');
+
+INSERT INTO THEME (THEME_NO, THEMENAME, IMAGEURL)
+     VALUES (23, '주차장', '/product-images/20159783532200.jpg');
+
+INSERT INTO THEME (THEME_NO, THEMENAME, IMAGEURL)
+     VALUES (24, '편의점', '/product-images/2015978354121.jpg');
+
+INSERT INTO THEME (THEME_NO, THEMENAME, IMAGEURL)
+     VALUES (25, '병원', '/product-images/2015978363473.jpg');
+
+INSERT INTO THEME (THEME_NO, THEMENAME, IMAGEURL)
+     VALUES (26, '약국', '/product-images/20159783616183.jpg');
+
+INSERT INTO THEME (THEME_NO, THEMENAME, IMAGEURL)
+     VALUES (27, '주유소', '/product-images/20159783628264.jpg');
+
+INSERT INTO THEME (THEME_NO, THEMENAME, IMAGEURL)
+     VALUES (28, '은행', '/product-images/20159783721624.jpg');
+
+INSERT INTO PLAN (PLAN_NO,
+                  MEMBER_NO,
+                  TITLEIMAGE,
+                  PLANNAME,
+                  MEMBERNAME,
+                  MESSAGE,
+                  PLANDATE)
+     VALUES (3,
+             3,
+             '/product-images/20159773850556.jpg',
+             'ㅂㅈㄷ',
+             '천진한',
+             'ㅂㅈㄷㅂㅈㄷ',
+             TO_DATE ('10/07/2015 00:00:00', 'MM/DD/YYYY HH24:MI:SS'));
+
+INSERT INTO PLAN (PLAN_NO,
+                  MEMBER_NO,
+                  TITLEIMAGE,
+                  PLANNAME,
+                  MEMBERNAME,
+                  MESSAGE,
+                  PLANDATE)
+     VALUES (4,
+             1,
+             NULL,
+             '회원님의 1번째 일정',
+             '회원',
+             NULL,
+             TO_DATE ('10/07/2015 00:00:00', 'MM/DD/YYYY HH24:MI:SS'));
+
+INSERT INTO PLANREPLY (PLANREPLY_NO,
+                       MEMBER_NO,
+                       PLANCOMMENTS_NO,
+                       IMAGEURL,
+                       MEMBERNAME,
+                       MESSAGE,
+                       REGDATE)
+     VALUES (1,
+             3,
+             1,
+             '/product-images/20159772131910.jpg',
+             '천진한',
+             '1111',
+             TO_DATE ('10/07/2015 21:04:32', 'MM/DD/YYYY HH24:MI:SS'));
+
+INSERT INTO PLANREPLY (PLANREPLY_NO,
+                       MEMBER_NO,
+                       PLANCOMMENTS_NO,
+                       IMAGEURL,
+                       MEMBERNAME,
+                       MESSAGE,
+                       REGDATE)
+     VALUES (2,
+             3,
+             1,
+             '/product-images/20159772131910.jpg',
+             '천진한',
+             '123123213',
+             TO_DATE ('10/07/2015 21:05:56', 'MM/DD/YYYY HH24:MI:SS'));
+
+INSERT INTO PLANREPLY (PLANREPLY_NO,
+                       MEMBER_NO,
+                       PLANCOMMENTS_NO,
+                       IMAGEURL,
+                       MEMBERNAME,
+                       MESSAGE,
+                       REGDATE)
+     VALUES (3,
+             3,
+             1,
+             '/product-images/20159772131910.jpg',
+             '천진한',
+             '14241412421',
+             TO_DATE ('10/07/2015 21:06:02', 'MM/DD/YYYY HH24:MI:SS'));
+
+INSERT INTO PLANREPLY (PLANREPLY_NO,
+                       MEMBER_NO,
+                       PLANCOMMENTS_NO,
+                       IMAGEURL,
+                       MEMBERNAME,
+                       MESSAGE,
+                       REGDATE)
+     VALUES (4,
+             3,
+             1,
+             '/product-images/20159772131910.jpg',
+             '천진한',
+             NULL,
+             TO_DATE ('10/07/2015 21:20:01', 'MM/DD/YYYY HH24:MI:SS'));
+
+INSERT INTO PLANREPLY (PLANREPLY_NO,
+                       MEMBER_NO,
+                       PLANCOMMENTS_NO,
+                       IMAGEURL,
+                       MEMBERNAME,
+                       MESSAGE,
+                       REGDATE)
+     VALUES (5,
+             3,
+             1,
+             '/product-images/20159772131910.jpg',
+             '천진한',
+             '1231232133',
+             TO_DATE ('10/07/2015 21:31:54', 'MM/DD/YYYY HH24:MI:SS'));
+
+INSERT INTO PLANREPLY (PLANREPLY_NO,
+                       MEMBER_NO,
+                       PLANCOMMENTS_NO,
+                       IMAGEURL,
+                       MEMBERNAME,
+                       MESSAGE,
+                       REGDATE)
+     VALUES (6,
+             3,
+             1,
+             '/product-images/20159772131910.jpg',
+             '천진한',
+             'qqqqqqqqqqqqqqqq',
+             TO_DATE ('10/07/2015 21:32:01', 'MM/DD/YYYY HH24:MI:SS'));
+
+INSERT INTO PLANREPLY (PLANREPLY_NO,
+                       MEMBER_NO,
+                       PLANCOMMENTS_NO,
+                       IMAGEURL,
+                       MEMBERNAME,
+                       MESSAGE,
+                       REGDATE)
+     VALUES (7,
+             3,
+             1,
+             '/product-images/20159772131910.jpg',
+             '천진한',
+             'zzzz',
+             TO_DATE ('10/07/2015 21:55:33', 'MM/DD/YYYY HH24:MI:SS'));
+
+INSERT INTO MEMBER (MEMBER_NO,
+                    MEMBERNAME,
+                    EMAIL,
+                    PASSWORD,
+                    IMAGEURL,
+                    MEMBERGRADE)
+     VALUES (99999,
+             'jakeChu',
+             'jakeChu',
+             '99999',
+             NULL,
+             'Admin');
+
+INSERT INTO MEMBER (MEMBER_NO,
+                    MEMBERNAME,
+                    EMAIL,
+                    PASSWORD,
+                    IMAGEURL,
+                    MEMBERGRADE)
+     VALUES (1,
+             '회원',
+             'woosungchu@gmail.com',
+             '1',
+             '/product-images/201583023256199.jpg',
+             'Guest');
+
+INSERT INTO MEMBER (MEMBER_NO,
+                    MEMBERNAME,
+                    EMAIL,
+                    PASSWORD,
+                    IMAGEURL,
+                    MEMBERGRADE)
+     VALUES (5,
+             '회원',
+             NULL,
+             NULL,
+             '/product-images/201583023256199.jpg',
+             'Guest');
+
+INSERT INTO MEMBER (MEMBER_NO,
+                    MEMBERNAME,
+                    EMAIL,
+                    PASSWORD,
+                    IMAGEURL,
+                    MEMBERGRADE)
+     VALUES (3,
+             '천진한',
+             'hani_89@naver.com',
+             '1',
+             '/product-images/20159772131910.jpg',
+             'Guest');
+
+INSERT INTO MEMBER (MEMBER_NO,
+                    MEMBERNAME,
+                    EMAIL,
+                    PASSWORD,
+                    IMAGEURL,
+                    MEMBERGRADE)
+     VALUES (4,
+             '박진용',
+             'pjy8742@naver.com',
+             '1',
+             '/product-images/2015977214818.jpg',
+             'Admin');
+
+INSERT INTO MEMBER (MEMBER_NO,
+                    MEMBERNAME,
+                    EMAIL,
+                    PASSWORD,
+                    IMAGEURL,
+                    MEMBERGRADE)
+     VALUES (7,
+             '회원',
+             'onlysungsun@naver.com',
+             '1',
+             '/product-images/201583023256199.jpg',
+             'Guest');
+
+INSERT INTO MEMBER (MEMBER_NO,
+                    MEMBERNAME,
+                    EMAIL,
+                    PASSWORD,
+                    IMAGEURL,
+                    MEMBERGRADE)
+     VALUES (13,
+             'Park Sungkuk',
+             '917788408290754',
+             NULL,
+             'http://graph.facebook.com/917788408290754/picture?type=large',
+             NULL);
+
+INSERT INTO GOODPLAN (GOODPLAN_NO,
+                      PLAN_NO,
+                      MEMBER_NO,
+                      MEMBERNAME,
+                      PLANNAME)
+     VALUES (6,
+             3,
+             3,
+             '천진한',
+             'ㅂㅈㄷ');
+
+INSERT INTO CONTENT (CONTENT_NO,
+                     PHONE,
+                     NEWADDRESS,
+                     IMAGEURL,
+                     DIRECTION,
+                     ZIPCODE,
+                     PLACEURL,
+                     ID,
+                     TITLE,
+                     CATEGORY,
+                     ADDRESS,
+                     LONGITUDE,
+                     LATITUDE,
+                     ADDRESSBCODE)
+     VALUES (1,
+             '02-3474-5005',
+             '서울 서초구 서운로 136',
+             'http://cfile73.uf.daum.net/image/205B0B3D4DAE2B14375F14',
+             '북서',
+             '137857',
+             'http://place.map.daum.net/7937091',
+             '7937091',
+             '서초사리원',
+             '음식점 > 한식 > 육류,고기 > 불고기,두루치기',
+             '서울 서초구 서초2동 1321-7',
+             '127.02515871806055',
+             '37.4956461492967',
+             '1165010800');
+
+INSERT INTO CONTENT (CONTENT_NO,
+                     PHONE,
+                     NEWADDRESS,
+                     IMAGEURL,
+                     DIRECTION,
+                     ZIPCODE,
+                     PLACEURL,
+                     ID,
+                     TITLE,
+                     CATEGORY,
+                     ADDRESS,
+                     LONGITUDE,
+                     LATITUDE,
+                     ADDRESSBCODE)
+     VALUES (2,
+             '02-583-6063',
+             '서울 서초구 서초대로78길 22',
+             'http://cfile172.uf.daum.net/image/205D20354DAB8E77133A20',
+             '북',
+             '137858',
+             'http://place.map.daum.net/8427647',
+             '8427647',
+             '소호정 강남점',
+             '음식점 > 한식 > 국수 > 소호정',
+             '서울 서초구 서초동 1327-1 홍우빌딩 2층',
+             '127.02743403458942',
+             '37.49587990458546',
+             '1165010800');
+
+INSERT INTO CONTENT (CONTENT_NO,
+                     PHONE,
+                     NEWADDRESS,
+                     IMAGEURL,
+                     DIRECTION,
+                     ZIPCODE,
+                     PLACEURL,
+                     ID,
+                     TITLE,
+                     CATEGORY,
+                     ADDRESS,
+                     LONGITUDE,
+                     LATITUDE,
+                     ADDRESSBCODE)
+     VALUES (3,
+             '02-552-1922',
+             '서울 강남구 테헤란로4길 46',
+             'http://cfile73.uf.daum.net/image/120BEC4B4F692B192D33FF',
+             '동',
+             '135935',
+             'http://place.map.daum.net/12418029',
+             '12418029',
+             '을밀대',
+             '음식점 > 한식',
+             '서울 강남구 역삼동 826-37',
+             '127.03074033153436',
+             '37.49524117773157',
+             '1168010100');
+
+INSERT INTO CONTENT (CONTENT_NO,
+                     PHONE,
+                     NEWADDRESS,
+                     IMAGEURL,
+                     DIRECTION,
+                     ZIPCODE,
+                     PLACEURL,
+                     ID,
+                     TITLE,
+                     CATEGORY,
+                     ADDRESS,
+                     LONGITUDE,
+                     LATITUDE,
+                     ADDRESSBCODE)
+     VALUES (4,
+             '02-596-5292',
+             '서울 서초구 서초대로73길 9',
+             'http://cfile175.uf.daum.net/image/1810F43F4F62A22633B8A0',
+             '북서',
+             '137856',
+             'http://place.map.daum.net/10454606',
+             '10454606',
+             '사월에보리밥 강남역점',
+             '음식점 > 한식',
+             '서울 서초구 서초동 1316-29 타임빌딩 3층',
+             '127.02524555531262',
+             '37.498302298127285',
+             '1165010800');
+
+INSERT INTO CONTENT (CONTENT_NO,
+                     PHONE,
+                     NEWADDRESS,
+                     IMAGEURL,
+                     DIRECTION,
+                     ZIPCODE,
+                     PLACEURL,
+                     ID,
+                     TITLE,
+                     CATEGORY,
+                     ADDRESS,
+                     LONGITUDE,
+                     LATITUDE,
+                     ADDRESSBCODE)
+     VALUES (5,
+             '02-3471-9700',
+             '서울 서초구 서운로 133',
+             NULL,
+             '서',
+             '137857',
+             'http://place.map.daum.net/14931936',
+             '14931936',
+             '흑돈가 강남직영점',
+             '음식점 > 한식 > 육류,고기',
+             '서울 서초구 서초2동 1322-12',
+             '127.02470176403351',
+             '37.49534711147133',
+             '1165010800');
+
+INSERT INTO CONTENT (CONTENT_NO,
+                     PHONE,
+                     NEWADDRESS,
+                     IMAGEURL,
+                     DIRECTION,
+                     ZIPCODE,
+                     PLACEURL,
+                     ID,
+                     TITLE,
+                     CATEGORY,
+                     ADDRESS,
+                     LONGITUDE,
+                     LATITUDE,
+                     ADDRESSBCODE)
+     VALUES (6,
+             '02-3481-7267',
+             '서울 강남구 강남대로 368',
+             NULL,
+             '북동',
+             '135935',
+             'http://place.map.daum.net/20373718',
+             '20373718',
+             '비케이알',
+             '음식점 > 패스트푸드',
+             '서울 강남구 역삼동 826-22',
+             '127.02926140880422',
+             '37.49574251307271',
+             '1168010100');
+
+INSERT INTO CONTENT (CONTENT_NO,
+                     PHONE,
+                     NEWADDRESS,
+                     IMAGEURL,
+                     DIRECTION,
+                     ZIPCODE,
+                     PLACEURL,
+                     ID,
+                     TITLE,
+                     CATEGORY,
+                     ADDRESS,
+                     LONGITUDE,
+                     LATITUDE,
+                     ADDRESSBCODE)
+     VALUES (7,
+             '02-535-5227',
+             '서울 서초구 서초대로77길 9',
+             NULL,
+             '북',
+             '137856',
+             'http://place.map.daum.net/25132861',
+             '25132861',
+             '하루 한입',
+             '음식점 > 패스트푸드',
+             '서울 서초구 서초동 1317-11',
+             '127.02622272572079',
+             '37.49858319924092',
+             '1165010800');
+
+INSERT INTO CONTENT (CONTENT_NO,
+                     PHONE,
+                     NEWADDRESS,
+                     IMAGEURL,
+                     DIRECTION,
+                     ZIPCODE,
+                     PLACEURL,
+                     ID,
+                     TITLE,
+                     CATEGORY,
+                     ADDRESS,
+                     LONGITUDE,
+                     LATITUDE,
+                     ADDRESSBCODE)
+     VALUES (8,
+             '02-501-4642',
+             '서울 강남구 강남대로 334',
+             'http://cfile175.uf.daum.net/image/247D6B3D54640F3706EA73',
+             '남동',
+             '135936',
+             'http://place.map.daum.net/17942508',
+             '17942508',
+             '롯데리아 강남우성사거리점',
+             '음식점 > 패스트푸드 > 롯데리아',
+             '서울 강남구 역삼동 832',
+             '127.03042276657362',
+             '37.4929382860548',
+             '1168010100');
+
+INSERT INTO CONTENT (CONTENT_NO,
+                     PHONE,
+                     NEWADDRESS,
+                     IMAGEURL,
+                     DIRECTION,
+                     ZIPCODE,
+                     PLACEURL,
+                     ID,
+                     TITLE,
+                     CATEGORY,
+                     ADDRESS,
+                     LONGITUDE,
+                     LATITUDE,
+                     ADDRESSBCODE)
+     VALUES (9,
+             '02-557-3464',
+             '서울 강남구 테헤란로2길 33',
+             NULL,
+             '북동',
+             '135935',
+             'http://place.map.daum.net/22043495',
+             '22043495',
+             '호텔마레',
+             '여행 > 숙박 > 여관,모텔',
+             '서울 강남구 역삼동 826-45',
+             '127.02990839122833',
+             '37.496109961790715',
+             '1168010100');
+
+INSERT INTO CONTENT (CONTENT_NO,
+                     PHONE,
+                     NEWADDRESS,
+                     IMAGEURL,
+                     DIRECTION,
+                     ZIPCODE,
+                     PLACEURL,
+                     ID,
+                     TITLE,
+                     CATEGORY,
+                     ADDRESS,
+                     LONGITUDE,
+                     LATITUDE,
+                     ADDRESSBCODE)
+     VALUES (10,
+             '02-592-1940',
+             '서울 서초구 서초대로 385',
+             NULL,
+             '북서',
+             '137776',
+             'http://place.map.daum.net/10815326',
+             '10815326',
+             '크리스탈모텔',
+             '여행 > 숙박 > 여관,모텔',
+             '서울 서초구 서초동 1315',
+             '127.02370265721663',
+             '37.49706643690871',
+             '1165010800');
+
+INSERT INTO CONTENT (CONTENT_NO,
+                     PHONE,
+                     NEWADDRESS,
+                     IMAGEURL,
+                     DIRECTION,
+                     ZIPCODE,
+                     PLACEURL,
+                     ID,
+                     TITLE,
+                     CATEGORY,
+                     ADDRESS,
+                     LONGITUDE,
+                     LATITUDE,
+                     ADDRESSBCODE)
+     VALUES (11,
+             '02-565-7042',
+             '서울 강남구 테헤란로10길 5',
+             NULL,
+             '북동',
+             '135933',
+             'http://place.map.daum.net/16039179',
+             '16039179',
+             'M호텔',
+             '여행 > 숙박 > 여관,모텔',
+             '서울 강남구 역삼동 823-43',
+             '127.03252856426501',
+             '37.49876904052031',
+             '1168010100');
+
+INSERT INTO CONTENT (CONTENT_NO,
+                     PHONE,
+                     NEWADDRESS,
+                     IMAGEURL,
+                     DIRECTION,
+                     ZIPCODE,
+                     PLACEURL,
+                     ID,
+                     TITLE,
+                     CATEGORY,
+                     ADDRESS,
+                     LONGITUDE,
+                     LATITUDE,
+                     ADDRESSBCODE)
+     VALUES (12,
+             '02-585-8557',
+             '서울 서초구 효령로79길 28',
+             NULL,
+             '남동',
+             '137860',
+             'http://place.map.daum.net/16705513',
+             '16705513',
+             '비발디',
+             '여행 > 숙박 > 여관,모텔',
+             '서울 서초구 서초동 1337-18',
+             '127.02937311015708',
+             '37.49221414187956',
+             '1165010800');
+
+INSERT INTO CONTENT (CONTENT_NO,
+                     PHONE,
+                     NEWADDRESS,
+                     IMAGEURL,
+                     DIRECTION,
+                     ZIPCODE,
+                     PLACEURL,
+                     ID,
+                     TITLE,
+                     CATEGORY,
+                     ADDRESS,
+                     LONGITUDE,
+                     LATITUDE,
+                     ADDRESSBCODE)
+     VALUES (13,
+             '02-6402-3335',
+             '서울 강남구 강남대로84길 24-4',
+             'http://cfile36.uf.daum.net/image/26226544547ED7F33481EE',
+             '북동',
+             '135935',
+             'http://place.map.daum.net/26341697',
+             '26341697',
+             '달이빛나는밤에',
+             '음식점 > 술집 > 실내포장마차',
+             '서울 강남구 역삼동 827-3 토즈타워 지하1층',
+             '127.03059168310544',
+             '37.49676211563311',
+             '1168010100');
+
+INSERT INTO PLANCOMMENTS (PLANCOMMENTS_NO,
+                          MEMBER_NO,
+                          PLAN_NO,
+                          IMAGEURL,
+                          MEMBERNAME,
+                          PLANNAME,
+                          MESSAGE,
+                          REGDATE)
+     VALUES (1,
+             3,
+             3,
+             '/product-images/20159772131910.jpg',
+             '천진한',
+             'ㅂㅈㄷ',
+             '1111111',
+             TO_DATE ('10/07/2015 19:39:25', 'MM/DD/YYYY HH24:MI:SS'));
+
+INSERT INTO PLANCOMMENTS (PLANCOMMENTS_NO,
+                          MEMBER_NO,
+                          PLAN_NO,
+                          IMAGEURL,
+                          MEMBERNAME,
+                          PLANNAME,
+                          MESSAGE,
+                          REGDATE)
+     VALUES (7,
+             3,
+             3,
+             '/product-images/20159772131910.jpg',
+             '천진한',
+             'ㅂㅈㄷ',
+             '134',
+             TO_DATE ('10/07/2015 21:52:34', 'MM/DD/YYYY HH24:MI:SS'));
+
+INSERT INTO CONTENTBOX (CONTENTBOX_NO,
+                        PLAN_NO,
+                        CONTENT_NO,
+                        PLANNAME)
+     VALUES (13,
+             3,
+             11,
+             NULL);
+
+INSERT INTO CONTENTBOX (CONTENTBOX_NO,
+                        PLAN_NO,
+                        CONTENT_NO,
+                        PLANNAME)
+     VALUES (14,
+             3,
+             12,
+             NULL);
+
+INSERT INTO CONTENTBOX (CONTENTBOX_NO,
+                        PLAN_NO,
+                        CONTENT_NO,
+                        PLANNAME)
+     VALUES (15,
+             4,
+             13,
+             '회원님의 1번째 일정');
+
+INSERT INTO CONTENTBOX (CONTENTBOX_NO,
+                        PLAN_NO,
+                        CONTENT_NO,
+                        PLANNAME)
+     VALUES (11,
+             3,
+             9,
+             '천진한님의 1번째 일정');
+
+INSERT INTO CONTENTBOX (CONTENTBOX_NO,
+                        PLAN_NO,
+                        CONTENT_NO,
+                        PLANNAME)
+     VALUES (12,
+             3,
+             10,
+             NULL);
+
+INSERT INTO THEMEBOX (THEMEBOX_NO,
+                      MEMBER_NO,
+                      THEME_NO,
+                      THEMENAME)
+     VALUES (1,
+             1,
+             28,
+             '은행');
+
+INSERT INTO THEMEBOX (THEMEBOX_NO,
+                      MEMBER_NO,
+                      THEME_NO,
+                      THEMENAME)
+     VALUES (2,
+             1,
+             23,
+             '주차장');
+
+INSERT INTO THEMEBOX (THEMEBOX_NO,
+                      MEMBER_NO,
+                      THEME_NO,
+                      THEMENAME)
+     VALUES (3,
+             1,
+             18,
+             '영화관');
+
+INSERT INTO THEMEBOX (THEMEBOX_NO,
+                      MEMBER_NO,
+                      THEME_NO,
+                      THEMENAME)
+     VALUES (4,
+             1,
+             13,
+             '모텔');
+
+INSERT INTO THEMEBOX (THEMEBOX_NO,
+                      MEMBER_NO,
+                      THEME_NO,
+                      THEMENAME)
+     VALUES (5,
+             1,
+             4,
+             '술집');
+
+INSERT INTO SEARCHLIST (SEARCHLIST_NO,
+                        MEMBER_NO,
+                        MEMBERNAME,
+                        SEARCH,
+                        SEARCHDATE,
+                        LATITUDE,
+                        LONGITUDE)
+     VALUES (7,
+             3,
+             '천진한',
+             '바보',
+             TO_DATE ('10/07/2015 19:24:12', 'MM/DD/YYYY HH24:MI:SS'),
+             '37.494596099999995',
+             '127.02725900000002');
+
+INSERT INTO SEARCHLIST (SEARCHLIST_NO,
+                        MEMBER_NO,
+                        MEMBERNAME,
+                        SEARCH,
+                        SEARCHDATE,
+                        LATITUDE,
+                        LONGITUDE)
+     VALUES (8,
+             3,
+             '천진한',
+             '패스트푸드',
+             TO_DATE ('10/07/2015 19:24:20', 'MM/DD/YYYY HH24:MI:SS'),
+             '37.494596099999995',
+             '127.02725900000002');
+
+INSERT INTO SEARCHLIST (SEARCHLIST_NO,
+                        MEMBER_NO,
+                        MEMBERNAME,
+                        SEARCH,
+                        SEARCHDATE,
+                        LATITUDE,
+                        LONGITUDE)
+     VALUES (9,
+             3,
+             '천진한',
+             '패스트푸드',
+             TO_DATE ('10/07/2015 19:24:22', 'MM/DD/YYYY HH24:MI:SS'),
+             '37.494596099999995',
+             '127.02725900000002');
+
+INSERT INTO SEARCHLIST (SEARCHLIST_NO,
+                        MEMBER_NO,
+                        MEMBERNAME,
+                        SEARCH,
+                        SEARCHDATE,
+                        LATITUDE,
+                        LONGITUDE)
+     VALUES (10,
+             3,
+             '천진한',
+             '모텔',
+             TO_DATE ('10/07/2015 19:25:37', 'MM/DD/YYYY HH24:MI:SS'),
+             '37.4945439',
+             '127.02719639999998');
+
+INSERT INTO SEARCHLIST (SEARCHLIST_NO,
+                        MEMBER_NO,
+                        MEMBERNAME,
+                        SEARCH,
+                        SEARCHDATE,
+                        LATITUDE,
+                        LONGITUDE)
+     VALUES (5,
+             3,
+             '천진한',
+             '한식',
+             TO_DATE ('10/07/2015 19:21:50', 'MM/DD/YYYY HH24:MI:SS'),
+             '37.494574899999996',
+             '127.0272072');
+
+INSERT INTO SEARCHLIST (SEARCHLIST_NO,
+                        MEMBER_NO,
+                        MEMBERNAME,
+                        SEARCH,
+                        SEARCHDATE,
+                        LATITUDE,
+                        LONGITUDE)
+     VALUES (6,
+             3,
+             '천진한',
+             'ㅂ',
+             TO_DATE ('10/07/2015 19:24:08', 'MM/DD/YYYY HH24:MI:SS'),
+             '37.494596099999995',
+             '127.02725900000002');
+
+COMMIT;

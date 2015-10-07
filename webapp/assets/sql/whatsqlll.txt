@@ -176,8 +176,8 @@ imageUrl varchar2(255),
 memberName varchar2(20),
 message varchar2(255),
 regDate Date,
- CONSTRAINT c_planComments_fk FOREIGN KEY (member_no) REFERENCES MEMBER (member_no) ON DELETE CASCADE,
- CONSTRAINT c_planComments_fk2 FOREIGN KEY (planComments_no) REFERENCES planComments (planComments_no) ON DELETE CASCADE
+ CONSTRAINT c_planReply_fk FOREIGN KEY (member_no) REFERENCES MEMBER (member_no) ON DELETE CASCADE,
+ CONSTRAINT c_planReply_fk2 FOREIGN KEY (planComments_no) REFERENCES planComments (planComments_no) ON DELETE CASCADE
 );
 
 create table planImg(

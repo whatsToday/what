@@ -35,4 +35,9 @@ public boolean login(HttpSession session, MemberVo vo) {
 		}
 	}
 
+public MemberVo gradeCheck(HttpSession session, MemberVo memberVo) {
+	MemberVo memberVo2 = memberDao.checkMember(memberVo);
+	return memberVo2;
+}
+
 }

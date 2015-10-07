@@ -2,6 +2,8 @@ package com.bit2015.what.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -78,6 +80,13 @@ public class AdminService {
 		List<MemberVo> memberList = memberDao.selctAll();
 		System.out.println("지금 가입한사람" + memberList);
 		return memberList;
+	}
+	// admin 로그인 
+	
+	public MemberVo login(MemberVo memberVo ){
+		MemberVo vo = memberDao.checkMember(memberVo);
+	     System.out.println("가나다라맏바"+vo);
+		return vo;	
 	}
 	
 	/*member페이징*/

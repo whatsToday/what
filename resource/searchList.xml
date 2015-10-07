@@ -58,7 +58,7 @@
    
    
         	<!--  페이징처리 -->
-<!-- 	<select id="searchList" parameterClass="java.util.Map" resultClass="SearchListVo">
+<!-- <select id="searchList" parameterClass="java.util.Map" resultClass="SearchListVo">
       <![CDATA[
       SELECT * FROM (select rownum rnum,searchList_no,member_no,memberName,search,searchDate,latitude,longitude FROM (select * from searchList order by searchList_no asc)) WHERE rnum>=#startpage# AND rnum<=#endpage#
          ]]>
@@ -68,6 +68,6 @@
 		<![CDATA[
 		 select count(*) as x from searchList
 			]]>
-	</select> -->
+ </select> -->
 	
 </sqlMap>

@@ -9,6 +9,7 @@ import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.bit2015.what.vo.GoodContentVo;
+import com.bit2015.what.vo.MemberVo;
 
 @Repository
 public class GoodContentDao {
@@ -25,6 +26,26 @@ public class GoodContentDao {
 		List<GoodContentVo> list = sqlMapClientTemplate.queryForList("goodContent.selectAll");
 		return list;
 	}
+	  public List<GoodContentVo> select(int page, int limit) {
+			Map<String, Integer> map = new HashMap<String, Integer>();
+			int startRow = (page - 1) * limit + 1; 
+			int endRow = startRow + limit - 1; 
+			map.put("startpage", startRow);
+			map.put("endpage", endRow);
+			List<GoodContentVo> list =sqlMapClientTemplate.queryForList("goodContent.goodContentList",map);
+			System.out.println("리스트"+list);
+			System.out.println("맵"+map);
+			return list;
+		}
+	  
+	  public int goodContentCountList() {
+			int count = 0;
+			count = (Integer) sqlMapClientTemplate.queryForObject("goodContent.goodContentCountList");
+
+
+			return count;
+		}
+	
 	
 	public GoodContentVo selectVoCnoMno(Long content_no, Long member_no){
 		Map<String, Long> map = new HashMap<String, Long>();

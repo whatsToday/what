@@ -46,5 +46,31 @@
 				</table>
 				<h6>삭제하려면 해당 관심사로 등록되어 있는 Content를 먼저 삭제해야 합니다.</h6>
 		</td>
+			<table >			
+<tr>
+   <td>
+      <c:if test="${nowpage<=1}">
+         [이전]&nbsp;
+      </c:if>
+      <c:if test="${nowpage>1}">
+         <a href="/admin/theme?page=${nowpage-1}">[이전]</a>&nbsp;
+      </c:if>
+      <c:forEach var="a" begin="${startpage}"  end="${endpage}">
+             <c:if test="${a==nowpage}">
+                <font color="red">[${a}]</font>
+             </c:if>
+             <c:if test="${a!=nowpage}">
+                <a href="/admin/theme?page=${a}">[${a}]</a>&nbsp;
+             </c:if>    
+      </c:forEach>
+      <c:if test="${nowpage>=maxpage}">
+           [다음]&nbsp;
+      </c:if>
+      <c:if test="${nowpage<maxpage}">
+           <a href="/admin/theme?page=${nowpage+1}">[다음]</a>
+      </c:if>
+   </td>
+</tr>
+</table>
 	</tr>
 				

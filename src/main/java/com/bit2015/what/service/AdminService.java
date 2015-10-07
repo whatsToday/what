@@ -121,6 +121,96 @@ public class AdminService {
 		count =	contentDao.contentCountList();
 		return count;
 	}
+	
+	/*contentBox페이징*/
+	public List<ContentBoxVo> selectContentBox1 (int page, int limit) {
+		List<ContentBoxVo> contentBoxList1 = contentBoxDao.select(page, limit);
+		
+		return contentBoxList1;
+		
+	}
+	/*contentBox페이징*/
+	public int contentBoxCountList(){
+		int count = 0;
+		count =	contentBoxDao.contentBoxCountList();
+		return count;
+	}
+	
+	/*event페이징*/
+	public List<EventVo> selectEvent1 (int page, int limit) {
+		List<EventVo> event1 = eventDao.select(page, limit);		
+		return event1;
+		
+	}
+	/*event페이징*/
+	public int eventBoxCountList(){
+		int count = 0;
+		count =	eventDao.eventCountList();
+		return count;
+	}
+	/*follow페이징*/
+	public List<FollowVo> selectFollow1 (int page, int limit) {
+		List<FollowVo> follow1 = followDao.select(page, limit);		
+		return follow1;
+		
+	}
+	/*follow페이징*/
+	public int followCountList(){
+		int count = 0;
+		count =	followDao.followCountList();
+		return count;
+	}
+	
+	/*goodContent페이징*/
+	public List<GoodContentVo> selectgoodContent1 (int page, int limit) {
+		List<GoodContentVo> goodContent1 = goodContentDao.select(page, limit);		
+		return goodContent1;
+		
+	}
+	/*goodContent페이징*/
+	public int goodContentCountList(){
+		int count = 0;
+		count =	goodContentDao.goodContentCountList();
+		return count;
+	}
+	/*goodplan페이징*/
+	public List<GoodPlanVo> selectgoodPlan1 (int page, int limit) {
+		List<GoodPlanVo> goodPlan1 = goodPlanDao.select(page, limit);		
+		return goodPlan1;
+		
+	}
+	/*goodplan페이징*/
+	public int goodPlanList(){
+		int count = 0;
+		count =	goodPlanDao.goodPlanCountList();
+		return count;
+	}
+
+	/*planComments페이징*/
+	public List<PlanCommentsVo> selectPlanComments1 (int page, int limit) {
+		List<PlanCommentsVo> planComments1 = planCommentsDao.select(page, limit);		
+		return planComments1;
+		
+	}
+	/*planComments페이징*/
+	public int palnCommentsList(){
+		int count = 0;
+		count =	planCommentsDao.planCommentsCountList();
+		return count;
+	}
+	
+	/*planimg페이징*/
+	public List<PlanImgVo> selectPlanImg1 (int page, int limit) {
+		List<PlanImgVo> planImg1 = planImgDao.select(page, limit);		
+		return planImg1;
+		
+	}
+	/*planimg페이징*/
+	public int palnImgList(){
+		int count = 0;
+		count =	planImgDao.planImgCountList();
+		return count;
+	}
 
 
 	// 회원가입 추가

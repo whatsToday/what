@@ -40,7 +40,7 @@
     </delete>
             	<!-- 페이징처리 -->
 	
-<!-- 	    <select id="followList" parameterClass="java.util.Map" resultClass="FollowVo">
+ <select id="followList" parameterClass="java.util.Map" resultClass="FollowVo">
       <![CDATA[
       SELECT * FROM (select rownum rnum,follow_no,member_no,followNum,memberName,followName FROM (select * from follow order by follow_no asc)) WHERE rnum>=#startpage# AND rnum<=#endpage#
          ]]>
@@ -50,6 +50,6 @@
 		<![CDATA[
 		 select count(*) as x from follow
 			]]>
-	</select> -->
+	</select>
     
 </sqlMap>

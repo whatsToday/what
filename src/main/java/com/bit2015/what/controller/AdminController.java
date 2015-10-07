@@ -58,9 +58,6 @@ public class AdminController {
 	@RequestMapping("/member")
 	public String memberList(@RequestParam( required=false, defaultValue="1") int page, Model model) {
 	 	int limit=5; 
-		
-	      
-
 	 	List<MemberVo> memberList = adminService.selectMember();
 	 	int listcount = memberList.size();
 	 	System.out.println("listcount"+listcount);
@@ -81,12 +78,8 @@ public class AdminController {
         model.addAttribute("endpage", endpage);
         model.addAttribute("memberList", list);
         model.addAttribute("listcount", listcount);
-		/*model.addAttribute("memberList", memberList);*/
         System.out.println(list);
     	
-		//List<BoardVo> list = boardDao.getBoardList(page,limit);
-		//model.addAttribute("list",list);
-		//model.addAttribute(list);
 	  	return "/admin/member";
 }
 
@@ -305,7 +298,7 @@ public class AdminController {
 		return "redirect:/admin/comments";
 	}
 
-	@RequestMapping("/follow")
+	@RequestMapping("/follow1")
 	public String followList(Model model) {
 		List<MemberVo> memberList = adminService.selectMember();
 		List<FollowVo> followList = adminService.selectFollow();
@@ -314,6 +307,37 @@ public class AdminController {
 		model.addAttribute("followList", followList);
 		return "/admin/follow";
 	}
+	@RequestMapping("/follow")
+	
+	public String followList(@RequestParam( required=false, defaultValue="1") int page, Model model) {
+	 	int limit=5; 
+		List<MemberVo> memberList = adminService.selectMember();
+		List<FollowVo> followList = adminService.selectFollow();
+
+		model.addAttribute("memberList", memberList);
+		model.addAttribute("followList", followList);
+		
+	 	int listcount = followList.size();
+        List<FollowVo> list=adminService.selectFollow1(page, limit);
+        int maxpage=(int)((double)listcount/limit+0.95);
+
+        int startpage=(((int)((double)page/10+0.9))-1)*10+1;
+  
+        int endpage=maxpage;
+        if(endpage>startpage+10-1){
+        	endpage=startpage+10-1;
+        }
+        model.addAttribute("nowpage", page);
+        model.addAttribute("maxpage", maxpage);
+        model.addAttribute("startpage", startpage);
+        model.addAttribute("endpage", endpage);
+        model.addAttribute("followList", list);
+        model.addAttribute("listcount", listcount);
+        System.out.println(list);
+    	
+	  	return "/admin/follow";
+}
+	
 
 	@RequestMapping("/insertfollow")
 	public String insertFollow(FollowVo followVo) {
@@ -348,18 +372,50 @@ public class AdminController {
 		return "redirect:/admin/searchlist";
 	}
 
-	@RequestMapping("/plancomments")
+	@RequestMapping("/plancomments1")
 	public String planCommentsList(Model model) {
 		List<MemberVo> memberList = adminService.selectMember();
 		List<PlanVo> planList = adminService.selectPlan();
-		List<PlanCommentsVo> planCommentsList = adminService
-				.selectPlanComments();
+		List<PlanCommentsVo> planCommentsList = adminService.selectPlanComments();
 
 		model.addAttribute("memberList", memberList);
 		model.addAttribute("planList", planList);
 		model.addAttribute("planCommentsList", planCommentsList);
 		return "/admin/plancomments";
 	}
+	@RequestMapping("/plancomments")
+	
+	public String planCommentsList(@RequestParam( required=false, defaultValue="1") int page, Model model) {
+	 	int limit=5; 
+	 	List<MemberVo> memberList = adminService.selectMember();
+		List<PlanVo> planList = adminService.selectPlan();
+		List<PlanCommentsVo> planCommentsList = adminService.selectPlanComments();
+
+		model.addAttribute("memberList", memberList);
+		model.addAttribute("planList", planList);
+		model.addAttribute("planCommentsList", planCommentsList);
+		
+	 	int listcount = planCommentsList.size();
+        List<PlanCommentsVo> list=adminService.selectPlanComments1(page, limit);
+        int maxpage=(int)((double)listcount/limit+0.95);
+
+        int startpage=(((int)((double)page/10+0.9))-1)*10+1;
+  
+        int endpage=maxpage;
+        if(endpage>startpage+10-1){
+        	endpage=startpage+10-1;
+        }
+        model.addAttribute("nowpage", page);
+        model.addAttribute("maxpage", maxpage);
+        model.addAttribute("startpage", startpage);
+        model.addAttribute("endpage", endpage);
+        model.addAttribute("planCommentsList", list);
+        model.addAttribute("listcount", listcount);
+        System.out.println(list);
+    	
+	  	return "/admin/plancomments";
+}
+	
 
 	@RequestMapping("/insertplancomments")
 	public String insertPlanComments(PlanCommentsVo planCommentsVo) {
@@ -373,7 +429,7 @@ public class AdminController {
 		return "redirect:/admin/plancomments";
 	}
 
-	@RequestMapping("/goodplan")
+	@RequestMapping("/goodplan1")
 	public String goodPlanList(Model model) {
 		List<GoodPlanVo> goodPlanList = adminService.selectGoodPlan();
 		List<MemberVo> memberList = adminService.selectMember();
@@ -385,6 +441,38 @@ public class AdminController {
 
 		return "/admin/goodplan";
 	}
+	
+	@RequestMapping("/goodplan")
+	
+	public String goodPlanList(@RequestParam( required=false, defaultValue="1") int page, Model model) {
+	 	int limit=5; 
+	 	List<GoodPlanVo> goodPlanList = adminService.selectGoodPlan();
+		List<MemberVo> memberList = adminService.selectMember();
+		List<PlanVo> planList = adminService.selectPlan();
+
+		model.addAttribute("memberList", memberList);
+		model.addAttribute("planList", planList);
+		model.addAttribute("goodPlanList", goodPlanList);
+	 	int listcount = goodPlanList.size();
+        List<GoodPlanVo> list=adminService.selectgoodPlan1(page, limit);
+        int maxpage=(int)((double)listcount/limit+0.95);
+
+        int startpage=(((int)((double)page/10+0.9))-1)*10+1;
+  
+        int endpage=maxpage;
+        if(endpage>startpage+10-1){
+        	endpage=startpage+10-1;
+        }
+        model.addAttribute("nowpage", page);
+        model.addAttribute("maxpage", maxpage);
+        model.addAttribute("startpage", startpage);
+        model.addAttribute("endpage", endpage);
+        model.addAttribute("goodPlanList", list);
+        model.addAttribute("listcount", listcount);
+        System.out.println(list);
+    	
+	  	return "/admin/goodplan";
+}
 
 	@RequestMapping("/insertgoodplan")
 	public String insertGoodPlan(GoodPlanVo goodPlanVo) {
@@ -398,7 +486,7 @@ public class AdminController {
 		return "redirect:/admin/goodplan";
 	}
 
-	@RequestMapping("/goodcontent")
+	@RequestMapping("/goodcontent1")
 	public String goodContentList(Model model) {
 		List<ContentVo> contentList = adminService.selectContent();
 		List<MemberVo> memberList = adminService.selectMember();
@@ -408,6 +496,38 @@ public class AdminController {
 		model.addAttribute("contentList", contentList);
 		return "/admin/goodcontent";
 	}
+	
+	@RequestMapping("/goodcontent")
+	
+	public String goodContentList(@RequestParam( required=false, defaultValue="1") int page, Model model) {
+	 	int limit=5; 
+		List<ContentVo> contentList = adminService.selectContent();
+		List<MemberVo> memberList = adminService.selectMember();
+		List<GoodContentVo> goodContentList = adminService.selectGoodContent();
+		model.addAttribute("goodContentList", goodContentList);
+		model.addAttribute("memberList", memberList);
+		model.addAttribute("contentList", contentList);
+		
+	 	int listcount = goodContentList.size();
+        List<GoodContentVo> list=adminService.selectgoodContent1(page, limit);
+        int maxpage=(int)((double)listcount/limit+0.95);
+
+        int startpage=(((int)((double)page/10+0.9))-1)*10+1;
+  
+        int endpage=maxpage;
+        if(endpage>startpage+10-1){
+        	endpage=startpage+10-1;
+        }
+        model.addAttribute("nowpage", page);
+        model.addAttribute("maxpage", maxpage);
+        model.addAttribute("startpage", startpage);
+        model.addAttribute("endpage", endpage);
+        model.addAttribute("goodContentList", list);
+        model.addAttribute("listcount", listcount);
+        System.out.println(list);
+    	
+	  	return "/admin/goodcontent";
+}
 
 	@RequestMapping("/insertgoodcontent")
 	public String insertGoodContent(GoodContentVo goodContentVo) {
@@ -421,7 +541,7 @@ public class AdminController {
 		return "redirect:/admin/goodcontent";
 	}
 
-	@RequestMapping("/contentbox")
+	@RequestMapping("/contentbox1")
 	public String contentBoxList(Model model) {
 		List<PlanVo> planList = adminService.selectPlan();
 		List<ContentVo> contentList = adminService.selectContent();
@@ -432,6 +552,36 @@ public class AdminController {
 		model.addAttribute("contentBoxList", contentBoxList);
 		return "/admin/contentbox";
 	}
+	@RequestMapping("/contentbox")
+	
+	public String contentBoxList(@RequestParam( required=false, defaultValue="1") int page, Model model) {
+	 	int limit=5; 
+	 	
+		List<PlanVo> planList = adminService.selectPlan();
+		List<ContentVo> contentList = adminService.selectContent();
+		List<ContentBoxVo> contentBoxList = adminService.selectContentBox();
+		
+	 	int listcount = contentBoxList.size();
+        List<ContentBoxVo> list=adminService.selectContentBox1(page, limit);
+        int maxpage=(int)((double)listcount/limit+0.95);
+
+        int startpage=(((int)((double)page/10+0.9))-1)*10+1;
+  
+        int endpage=maxpage;
+        if(endpage>startpage+10-1){
+        	endpage=startpage+10-1;
+        }
+        model.addAttribute("nowpage", page);
+        model.addAttribute("maxpage", maxpage);
+        model.addAttribute("startpage", startpage);
+        model.addAttribute("endpage", endpage);
+        model.addAttribute("contentBoxList", list);
+        model.addAttribute("listcount", listcount);
+        System.out.println(list);
+    	
+	  	return "/admin/contentbox";
+}
+	
 
 	@RequestMapping("/insertcontentbox")
 	public String insertContentBox(ContentBoxVo contentBoxVo) {
@@ -445,7 +595,7 @@ public class AdminController {
 		return "redirect:/admin/contentbox";
 	}
 
-	@RequestMapping("/planimg")
+	@RequestMapping("/planimg1")
 	public String planImgList(Model model) {
 		List<PlanVo> planList = adminService.selectPlan();
 		List<PlanImgVo> planImgList = adminService.selectPlanImg();
@@ -454,6 +604,37 @@ public class AdminController {
 		model.addAttribute("planImgList", planImgList);
 		return "/admin/planimg";
 	}
+	
+	@RequestMapping("/planimg")
+	
+	public String planImgList(@RequestParam( required=false, defaultValue="1") int page, Model model) {
+	 	int limit=5; 
+	 	List<PlanVo> planList = adminService.selectPlan();
+		List<PlanImgVo> planImgList = adminService.selectPlanImg();
+
+		model.addAttribute("planList", planList);
+		model.addAttribute("planImgList", planImgList);
+		
+	 	int listcount = planImgList.size();
+        List<PlanImgVo> list=adminService.selectPlanImg1(page, limit);
+        int maxpage=(int)((double)listcount/limit+0.95);
+
+        int startpage=(((int)((double)page/10+0.9))-1)*10+1;
+  
+        int endpage=maxpage;
+        if(endpage>startpage+10-1){
+        	endpage=startpage+10-1;
+        }
+        model.addAttribute("nowpage", page);
+        model.addAttribute("maxpage", maxpage);
+        model.addAttribute("startpage", startpage);
+        model.addAttribute("endpage", endpage);
+        model.addAttribute("planImgList", list);
+        model.addAttribute("listcount", listcount);
+        System.out.println(list);
+    	
+	  	return "/admin/planimg";
+}
 
 	@RequestMapping("/insertplanimg")
 	public String insertPlanImg(PlanImgVo planImgVo,
@@ -479,7 +660,7 @@ public class AdminController {
 
 	}
 	
-	@RequestMapping("/event")
+	@RequestMapping("/event1")
 	public String eventList(Model model){
 		List<ContentVo> contentList = adminService.selectContent();
 		List<EventVo> eventList = adminService.selectEvent();
@@ -488,6 +669,38 @@ public class AdminController {
 		model.addAttribute("eventList",eventList);
 		return "/admin/event";
 	}
+	
+	@RequestMapping("/event")
+	
+	public String eventList(@RequestParam( required=false, defaultValue="1") int page, Model model) {
+	 	int limit=5; 
+	 	List<ContentVo> contentList = adminService.selectContent();
+		List<EventVo> eventList = adminService.selectEvent();
+		
+		model.addAttribute("contentList",contentList);
+		model.addAttribute("eventList",eventList);
+		
+	 	int listcount = eventList.size();
+        List<EventVo> list=adminService.selectEvent1(page, limit);
+        int maxpage=(int)((double)listcount/limit+0.95);
+
+        int startpage=(((int)((double)page/10+0.9))-1)*10+1;
+  
+        int endpage=maxpage;
+        if(endpage>startpage+10-1){
+        	endpage=startpage+10-1;
+        }
+        model.addAttribute("nowpage", page);
+        model.addAttribute("maxpage", maxpage);
+        model.addAttribute("startpage", startpage);
+        model.addAttribute("endpage", endpage);
+        model.addAttribute("eventList", list);
+        model.addAttribute("listcount", listcount);
+        System.out.println(list);
+    	
+	  	return "/admin/event";
+}
+	
 	
 	@RequestMapping("/insertevent")
 	public String insertEvent(EventVo eventVo){

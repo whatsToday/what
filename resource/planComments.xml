@@ -24,7 +24,7 @@
 	</delete>
 
 	<!-- 페이징처리 -->
-<!-- 	    <select id="planCommentsList" parameterClass="java.util.Map" resultClass="PlanCommentsVo">
+    <select id="planCommentsList" parameterClass="java.util.Map" resultClass="PlanCommentsVo">
       <![CDATA[
       SELECT * FROM (select rownum rnum,planComments_no,member_no,plan_no,memberName,planName,message,regDate FROM (select * from PLANCOMMENTS order by planComments_no asc)) WHERE rnum>=#startpage# AND rnum<=#endpage#
          ]]>
@@ -34,5 +34,5 @@
 		<![CDATA[
 		 select count(*) as x from PLANCOMMENTS
 			]]>
-	</select> -->
+	</select>
 </sqlMap>

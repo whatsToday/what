@@ -63,12 +63,37 @@
 						<td>${vo.message }</td>
 						<td>${vo.regDate }</td>
 						
-						<td><a href="/admin/deleteplancomments?plancomments_no=${vo.planComments_no }">삭제</a></td>
+						<td><a href="/admin/deleteplancomments?planComments_no=${vo.planComments_no }">삭제</a></td>
 					</tr>
 					</c:forEach>
 				</table>
 		</td>
-
+        	<table >			
+<tr>
+   <td>
+      <c:if test="${nowpage<=1}">
+         [이전]&nbsp;
+      </c:if>
+      <c:if test="${nowpage>1}">
+         <a href="/admin/plancomments?page=${nowpage-1}">[이전]</a>&nbsp;
+      </c:if>
+      <c:forEach var="a" begin="${startpage}"  end="${endpage}">
+             <c:if test="${a==nowpage}">
+                <font color="red">[${a}]</font>
+             </c:if>
+             <c:if test="${a!=nowpage}">
+                <a href="/admin/plancomments?page=${a}">[${a}]</a>&nbsp;
+             </c:if>    
+      </c:forEach>
+      <c:if test="${nowpage>=maxpage}">
+           [다음]&nbsp;
+      </c:if>
+      <c:if test="${nowpage<maxpage}">
+           <a href="/admin/plancomments?page=${nowpage+1}">[다음]</a>
+      </c:if>
+   </td>
+</tr>
+</table>
 	</tr>
 	<script>
 	    function changeEvent(val){

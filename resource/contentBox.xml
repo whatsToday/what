@@ -62,9 +62,9 @@
 	
 	<!-- 페이징처리 -->
 	
-<!-- 	    <select id="contentBoxList" parameterClass="java.util.Map" resultClass="ContentBoxVo">
+  <select id="contentBoxList" parameterClass="java.util.Map" resultClass="ContentBoxVo">
       <![CDATA[
-      SELECT * FROM (select rownum rnum,contentBox_no,plan_no,content_no,planName FROM (select * from contentBox order by contnetBox_no asc)) WHERE rnum>=#startpage# AND rnum<=#endpage#
+      SELECT * FROM (select rownum rnum,contentBox_no,plan_no,content_no,planName FROM (select * from contentBox order by contentBox_no asc)) WHERE rnum>=#startpage# AND rnum<=#endpage#
          ]]>
    </select> 
 
@@ -72,5 +72,5 @@
 		<![CDATA[
 		 select count(*) as x from contentBox
 			]]>
-	</select> -->
+	</select> 
 </sqlMap>

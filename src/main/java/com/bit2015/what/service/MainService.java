@@ -385,7 +385,10 @@ public class MainService {
 	}
 
 	public void insertContent(Map<String, Object> map, ContentVo cvo) {
-		contentDao.insert(cvo);
+		//content가 DB에 없으면 새로 넣기
+		if(contentDao.selectVoById(cvo.getId()) == null){
+			contentDao.insert(cvo);
+		}
 		ContentVo contentVo = contentDao.selectVoById(cvo.getId());
 		map.put("contentVo", contentVo);
 	}

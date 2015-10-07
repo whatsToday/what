@@ -21,7 +21,7 @@ function showHotKey(){
 			
 		},
 		error:function(jqXHR, textStatus, errorThrown){
-            alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
+			alertModal('에러 발생~~ \n' + textStatus + " : " + errorThrown);
             self.close();
         }//end ajax
 	});
@@ -41,7 +41,7 @@ console.log(keyword);
 			
 		},
 		error:function(jqXHR, textStatus, errorThrown){
-            alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
+			alertModal('에러 발생~~ \n' + textStatus + " : " + errorThrown);
             self.close();
         }//end ajax
 		
@@ -83,7 +83,7 @@ function themeSearch(themeName) {
 								}
 							}
 								if(k==0){
-									console.log("선택 범위안에 후기글이 없습니다. \n\n"+"첫 번째 관심사를 자동검색합니다.");
+									alertModal('선택 범위안에 후기글이 없습니다. \n \n 첫 번째 관심사를 자동검색합니다.',1500);
 								    ps.keywordSearch( themeName, placesSearchCB, {
 										location: userLocation,
 										radius : circle.getRadius(),	
@@ -175,7 +175,7 @@ function getMyPlan() {
 				}
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
-			alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
+			alertModal('에러 발생~~ \n' + textStatus + " : " + errorThrown);
 			self.close();
 		}
 	});// end ajax1
@@ -224,7 +224,7 @@ function insertPlan(index){
 
 		},
 		error:function(jqXHR, textStatus, errorThrown){
-            alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
+			alertModal('에러 발생~~ \n' + textStatus + " : " + errorThrown);
             self.close();
         }
 		
@@ -257,7 +257,7 @@ items=placesArray[index];
 			location.href = "/contentview?content_no="+response.contentVo.content_no;
 		},
 		error:function(jqXHR, textStatus, errorThrown){
-            alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
+			alertModal('에러 발생~~ \n' + textStatus + " : " + errorThrown);
             self.close();
         }
 		
@@ -297,7 +297,7 @@ function callContents(plan_no){
 
 		},
 		error:function(jqXHR, textStatus, errorThrown){
-            alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
+            alertModal('에러 발생~~ \n' + textStatus + " : " + errorThrown);
             self.close();
         }
 		
@@ -335,7 +335,9 @@ function placesNear(){
 					}
 					nearOn=true;
 				}else{
-					console.log("선택 범위안에 후기글이 없습니다. \n\n"+"첫 번째 관심사를 자동검색합니다.");
+					//alert
+					alertModal('선택 범위안에 후기글이 없습니다');
+					
 					 ps.keywordSearch( themeList[0].textContent, placesSearchCB, {
 							location: userLocation,
 							radius : circle.getRadius(),	
@@ -373,4 +375,12 @@ function greenMarker(marker,index){
     },
     markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imgOptions);
     marker.setImage(markerImage);
+}
+function alertModal(text,time){
+	time = time || 1300; 
+	text = '<b>'+text+'</b>';
+	
+	document.getElementById('alertModal').innerHTML=text;
+	$('#aModal').click();
+	setTimeout(function() {$('#lean_overlay').click();},time);
 }

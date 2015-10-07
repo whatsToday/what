@@ -11,6 +11,9 @@
 // }
 
 </script>
+<a id="aModal" rel="leanModal" href="#alertModal">alertModal</a>
+<div id="alertModal"></div>
+
 <!-- theme modal -->
 <a id="picktheme" rel="leanModal" href="#themeModal">pickTheme</a>
 <div id="themeModal">
@@ -94,6 +97,23 @@ box-shadow: 0px 0px 4px rgba(0,0,0,0.7);
 -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.7);
 -moz-box-shadow: 0 0px 4px rgba(0,0,0,0.7);
 }
+
+#alertModal {
+width: 20%;
+height: 100px;
+line-height : 100px;
+
+display: none; 
+background: #FFF;
+border-radius: 5px;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+box-shadow: 0px 0px 4px rgba(0,0,0,0.7);
+-webkit-box-shadow: 0 0 4px rgba(0,0,0,0.7);
+-moz-box-shadow: 0 0px 4px rgba(0,0,0,0.7);
+
+text-align : center;
+}
 </style>
 	
 
@@ -108,14 +128,14 @@ box-shadow: 0px 0px 4px rgba(0,0,0,0.7);
 //   });
 function checkTm(theme){
 	var checkList =document.getElementsByClassName("checkTm");
-	console.log(checkList);
-	
-	if(theme.className.indexOf("checkTm") > -1 ){
-		theme.className = theme.className.split(' ')[0];
-	}else {
-		theme.className += ' checkTm';	
-	}
-	
+	console.log(checkList.length);
+		if(theme.className.indexOf("checkTm") > -1 ){
+			theme.className = theme.className.split(' ')[0];
+		}else {
+		 	if(checkList.length <= 4){
+				theme.className += ' checkTm';	
+ 			}else{ alertModal("더 고르면 안 예뻐요");}
+		}
 }
   ${ themeBoxList}  
 function checkThemeBox(){

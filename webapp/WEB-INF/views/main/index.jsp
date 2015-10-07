@@ -68,7 +68,7 @@
 						<tr>
 							<td id="showAll" class="even" onclick="themeSearch(this.id);">추천 후기</td>
 	<!-- 						<td id="wholeAll" class="even" onclick="themeSearch('wholeAll');">전체 보기</td> -->
-							<td id="otherLoc" class="even" onclick="changeLocation(); placesNear();">원 위치 변경</td>
+							<td id="otherLoc" class="even" onclick="changeLocation(); placesNear();">Circle 위치 변경</td>
 	<!-- 						<td id="userLoc" class="even" onclick="navigator.geolocation.getCurrentPosition(success, error, options);">내 위치 </td> -->
 						</tr>
 					</table>
@@ -102,6 +102,7 @@
 	</div><!-- 	end container -->
 <c:import url="/WEB-INF/views/include/footer.jsp"/>
 </div><!-- end wrapper -->
+
 </body>
 <!-- script가 위에 있으면 안될때가 많다 js파일 다운로드 속도 땜에...-->
 <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=c12b4d88c8259cf4652b89c1f64db8e8&libraries=services"></script>

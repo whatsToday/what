@@ -237,6 +237,32 @@ public class AdminService {
 		return count;
 	}
 	
+	/*theme페이징*/
+	public List<ThemeVo> selectTheme1 (int page, int limit) {
+		List<ThemeVo> theme1 = themeDao.select(page, limit);		
+		return theme1;
+		
+	}
+	/*theme페이징*/
+	public int theme1(){
+		int count = 0;
+		count =	themeDao.themeCountList();
+		return count;
+	}
+	
+	/*themeBox페이징*/
+	public List<ThemeBoxVo> selectThemeBox1 (int page, int limit) {
+		List<ThemeBoxVo> themeBox1 = themeBoxDao.select(page, limit);		
+		return themeBox1;
+		
+	}
+	/*themeBox페이징*/
+	public int themeBox1(){
+		int count = 0;
+		count =	themeBoxDao.themeBoxCountList();
+		return count;
+	}
+	
 	
 
 

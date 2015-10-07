@@ -1,11 +1,14 @@
 package com.bit2015.what.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.bit2015.what.vo.MemberVo;
 import com.bit2015.what.vo.ThemeBoxVo;
 
 
@@ -24,6 +27,27 @@ public class ThemeBoxDao {
 		List<ThemeBoxVo> list= sqlMapClientTemplate.queryForList("themeBox.selectAll");
 		return list;
 	}
+	
+	  public List<ThemeBoxVo> select(int page, int limit) {
+			Map<String, Integer> map = new HashMap<String, Integer>();
+			int startRow = (page - 1) * limit + 1; 
+			int endRow = startRow + limit - 1; 
+			map.put("startpage", startRow);
+			map.put("endpage", endRow);
+			List<ThemeBoxVo> list =sqlMapClientTemplate.queryForList("themeBox.themeBoxList",map);
+			System.out.println("리스트"+list);
+			System.out.println("맵"+map);
+			return list;
+		}
+	  
+	  public int themeBoxCountList() {
+			int count = 0;
+			count = (Integer) sqlMapClientTemplate.queryForObject("themeBox.themeBoxCountList");
+
+
+			return count;
+		}
+
 	
 	public List<ThemeBoxVo> selectAllByMm(Long member_no){
 		List<ThemeBoxVo> list= sqlMapClientTemplate.queryForList("themeBox.selectAllByMm",member_no);

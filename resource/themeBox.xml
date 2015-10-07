@@ -51,7 +51,7 @@
 	
 	<!-- 페이징처리 -->
 
-<!-- 	<select id="themeBoxList" parameterClass="java.util.Map" resultClass="ThemeBoxVo">
+ 	<select id="themeBoxList" parameterClass="java.util.Map" resultClass="ThemeBoxVo">
       <![CDATA[
       SELECT * FROM (select rownum rnum,themeBox_no,member_no,theme_no,themeName FROM (select * from themeBox order by themeBox_no asc)) WHERE rnum>=#startpage# AND rnum<=#endpage#
          ]]>
@@ -61,6 +61,6 @@
 		<![CDATA[
 		 select count(*) as x from themeBox
 			]]>
-	</select> -->
+	</select> 
 	
 </sqlMap>

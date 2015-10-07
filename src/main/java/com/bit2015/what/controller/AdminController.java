@@ -172,12 +172,40 @@ public class AdminController {
 		}
 	}
 
-	@RequestMapping("/theme")
+	@RequestMapping("/theme1")
 	public String themeList(Model model) {
 		List<ThemeVo> themeList = adminService.selectTheme();
 		model.addAttribute("themeList", themeList);
 		return "/admin/theme";
 	}
+	
+	@RequestMapping("/theme")
+	public String  themeList(@RequestParam( required=false, defaultValue="1") int page, Model model) {
+	 	int limit=5; 
+	 	
+	 	List<ThemeVo> themeList = adminService.selectTheme();
+		model.addAttribute("themeList", themeList);
+
+	 	
+	 	int listcount = themeList.size();
+        List<ThemeVo> list=adminService.selectTheme1(page, limit);
+        int maxpage=(int)((double)listcount/limit+0.95);
+
+        int startpage=(((int)((double)page/10+0.9))-1)*10+1;
+  
+        int endpage=maxpage;
+        if(endpage>startpage+10-1){
+        	endpage=startpage+10-1;
+        }
+        model.addAttribute("nowpage", page);
+        model.addAttribute("maxpage", maxpage);
+        model.addAttribute("startpage", startpage);
+        model.addAttribute("endpage", endpage);
+        model.addAttribute("themeList", list);
+        model.addAttribute("listcount", listcount);
+    	
+	  	return "/admin/theme";
+}
 
 	@RequestMapping("/inserttheme")
 	public String insertTheme(ThemeVo themeVo,
@@ -192,7 +220,7 @@ public class AdminController {
 		return "redirect:/admin/theme";
 	}
 
-	@RequestMapping("/themebox")
+	@RequestMapping("/themebox1")
 	public String themeBoxList(Model model) {
 		List<MemberVo> memberList = adminService.selectMember();
 		List<ThemeVo> themeList = adminService.selectTheme();
@@ -202,6 +230,38 @@ public class AdminController {
 		model.addAttribute("themeBoxList", themeBoxList);
 		return "/admin/themebox";
 	}
+	
+	@RequestMapping("/themebox")
+	public String  themeBoxList(@RequestParam( required=false, defaultValue="1") int page, Model model) {
+	 	int limit=5; 
+	 	
+	 	List<MemberVo> memberList = adminService.selectMember();
+		List<ThemeVo> themeList = adminService.selectTheme();
+		List<ThemeBoxVo> themeBoxList = adminService.selectThemeBox();
+		model.addAttribute("memberList", memberList);
+		model.addAttribute("themeList", themeList);
+		model.addAttribute("themeBoxList", themeBoxList);
+
+	 	
+	 	int listcount = themeBoxList.size();
+        List<ThemeBoxVo> list=adminService.selectThemeBox1(page, limit);
+        int maxpage=(int)((double)listcount/limit+0.95);
+
+        int startpage=(((int)((double)page/10+0.9))-1)*10+1;
+  
+        int endpage=maxpage;
+        if(endpage>startpage+10-1){
+        	endpage=startpage+10-1;
+        }
+        model.addAttribute("nowpage", page);
+        model.addAttribute("maxpage", maxpage);
+        model.addAttribute("startpage", startpage);
+        model.addAttribute("endpage", endpage);
+        model.addAttribute("themeBoxList", list);
+        model.addAttribute("listcount", listcount);
+    	
+	  	return "/admin/themebox";
+}
 
 	@RequestMapping("insertthemebox")
 	public String insertThemeBox(ThemeBoxVo themeBoxVo) {

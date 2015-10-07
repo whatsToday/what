@@ -228,7 +228,7 @@ hr{
 <script type="text/javascript" src="/assets/js/jquery.leanModal.min.js"></script>
 <script>
 if(${param.a}='error'){
-	  alert("로그인 실패!");
+	  alert("아이디와 비밀번호가 틀렸습니다!");
 }
 </script>
 
@@ -377,6 +377,7 @@ a[rel=leanModal] {
 				        <i class="icon-unlock"></i><input type="password" placeholder="Password" name="password">
 				      </div>
 				    </div>
+				    <button id="checkId" onclick="checkIdValid()" style="height:30px;font-size:14px;margin-bottom:-10px">email check</button>
 				    <button type="submit">Sign in</button>
 				  </form>
 			   <div style="text-align:right;margin-top:20px;font-family:''맑은 고딕;"><a href="#" onclick="$('#joinModal').hide();$('#login').click();">로그인</a></div>

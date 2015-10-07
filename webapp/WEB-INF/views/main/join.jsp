@@ -36,6 +36,37 @@
 </script>
 
 
+
+    <script>
+    function checkIdValid(){
+		var $email = $("#email");
+		var email = $email.val();
+		if (memberId == "") {
+			return;
+		}
+		$.ajax({
+			type : 'get',
+			url : '/member/checkId',
+			data : {
+				memberId : memberId
+			},
+			dataType : 'json',
+			success : function(response) {
+				if (response.exist == "exist") {
+					alert("이미 존재합니다.");
+					availId = "no";
+				}
+				if (response.exist == "no exist") {
+					alert("사용가능합니다.");
+					availId = "yes";
+				}
+			}
+		});
+	}
+    </script>
+
+
+
 <style>
 body{background: #4E535B;font-family: 'Montserrat', Arial;font-size: 1em;}
 h2{text-align: center;color: #F1F2F4;text-shadow: 0 1px 0 #000;}

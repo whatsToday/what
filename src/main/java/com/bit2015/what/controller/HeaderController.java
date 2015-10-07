@@ -30,10 +30,10 @@ public class HeaderController {
 		headerService.login(session, memberVo);
 		boolean Bo = headerService.login(session, memberVo);
 		System.out.println(memberVo.getEmail());
-		if(memberVo.getEmail()=="admin"){
+		if(memberVo.getEmail().equals("admin")){
 			return "redirect:/admin/index";
 		}
-		if(Bo){
+		else if(Bo){
 //			System.out.println("로그인 되었습니다.");
 			return "redirect:/";
 		}else{

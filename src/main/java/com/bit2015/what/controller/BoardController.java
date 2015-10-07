@@ -28,12 +28,11 @@ public class BoardController {
 	BoardService boardService;
 	
 	@RequestMapping()
-	public String index(@RequestParam Long plan_no, Model model, HttpSession session){
-		MemberVo memberVo = (MemberVo)session.getAttribute("authUser");
+	public String index(@RequestParam Long plan_no, Model model){
 		PlanVo planVo = boardService.getPlanVo(plan_no);
 		List<PlanImgVo> list = boardService.selectPlan(plan_no);
 		List<PlanCommentsVo> list1 = boardService.selectPlanComments(plan_no);
-		int countGood = boardService.goodPlan(plan_no, memberVo.getMember_no());
+		int countGood = boardService.selectGoodPlan(plan_no);
 		model.addAttribute("planBoard", planVo);
 		model.addAttribute("planImg", list);
 		model.addAttribute("planComments", list1);
@@ -128,6 +127,11 @@ public class BoardController {
 		MemberVo memberVo = (MemberVo)session.getAttribute("authUser");
 		boardService.insertComments(memberVo.getMember_no(), plan_no, message);
 		
+		return "redirect:/board?plan_no="+plan_no;
+	}
+	@RequestMapping("/deleteComments")
+	public String planCommentsDelete(@RequestParam Long planComments_no,@RequestParam Long plan_no){
+		boardService.deleteComments(planComments_no);
 		return "redirect:/board?plan_no="+plan_no;
 	}
 }

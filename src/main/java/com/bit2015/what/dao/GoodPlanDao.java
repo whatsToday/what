@@ -60,4 +60,7 @@ public class GoodPlanDao {
 	public void delete(Long goodPlan_no) {
 		sqlMapClientTemplate.delete("goodPlan.delete", goodPlan_no);
 	}
+	public void deletePlan(Long plan_no) {
+		sqlMapClientTemplate.delete("goodPlan.deletePlan", plan_no);
+	}
 }

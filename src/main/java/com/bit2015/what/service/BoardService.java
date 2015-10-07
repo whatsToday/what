@@ -1,6 +1,10 @@
 package com.bit2015.what.service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +78,7 @@ public class BoardService {
 	public void deletePlan(String planName, String message, Long plan_no, String titleImage){
 		planDao.update(planName, message, plan_no, titleImage);
 		planImgDao.deletePlanImg(plan_no);
+		goodPlanDao.deletePlan(plan_no);
 	}
 	public PlanVo getPlanVo(Long plan_no){
 		PlanVo planVo = planDao.selectVo(plan_no);
@@ -125,15 +130,19 @@ public class BoardService {
 			return countGood;
 		}
 	}
+	public int selectGoodPlan(Long plan_no){
+		int countGood = goodPlanDao.selectPlan(plan_no);
+		return countGood;
+	}
 	public void insertComments(Long member_no, Long plan_no, String message){
 		MemberVo memberVo = memberDao.getMemberVo(member_no);
-//		memberVo.getImageUrl();
 		PlanVo planVo = planDao.selectVo(plan_no);
 		
 		PlanCommentsVo planCommentsVo = new PlanCommentsVo();
 		
 		planCommentsVo.setMember_no(member_no);
 		planCommentsVo.setPlan_no(plan_no);
+		planCommentsVo.setImageUrl(memberVo.getImageUrl());
 		planCommentsVo.setMemberName(memberVo.getMemberName());
 		planCommentsVo.setPlanName(planVo.getPlanName());
 		planCommentsVo.setMessage(message);
@@ -141,7 +150,54 @@ public class BoardService {
 		planCommentsDao.insert(planCommentsVo);
 	}
 	public List<PlanCommentsVo> selectPlanComments(Long plan_no){
+		Date dateNow = new Date();
+		long regDate =0;
 		List<PlanCommentsVo> list = planCommentsDao.selectPlan(plan_no);
-		return list;
+		List<PlanCommentsVo> list1 = new ArrayList<PlanCommentsVo>();
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date xxxx = new Date();
+		for(int i=0;i<list.size();i++){
+			PlanCommentsVo planCommentsVo = list.get(i);
+			String date = planCommentsVo.getRegDate();
+			
+			 try {
+				xxxx =format.parse(date);
+				regDate = xxxx.getTime();
+				Long seconds = (dateNow.getTime() - regDate) / 1000;
+				
+				String interval ="";
+				if(seconds<=60 &&seconds>0){
+					interval= ((seconds) + "초 전");
+				}
+				if(seconds>60 && seconds<=3600){
+					interval = ((seconds / 60)+"분 전");
+				}
+				if(seconds>3600 && seconds<=86400){
+					interval = ((seconds / 86400)+"시간 전");
+				}
+				if(seconds>86400 && seconds<=2592000){
+					interval = ((seconds / 2592000)+"일 전");
+				}
+				if(seconds>2592000 && seconds<=31536000){
+					interval = ((seconds / 31536000)+"달 전");
+				}
+				planCommentsVo.setRegDate(interval);
+				System.out.println(planCommentsVo);
+				list1.add(planCommentsVo);
+			} catch (ParseException e) {			
+				e.printStackTrace();			
+			}
+		}
+		
+		return list1;
+	}
+	public void deleteComments(Long planComments_no){
+		planCommentsDao.delete(planComments_no);
+	}
+	public void insertPlanReply(Long member_no, Long planComments_no, String message){
+		MemberVo memberVo = memberDao.getMemberVo(member_no);
+		String imageUrl = memberVo.getImageUrl();
+		/*String memberName = memberVo.get*/
+		
 	}
 }

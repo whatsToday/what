@@ -18,5 +18,9 @@ public class PlanReplyDao {
 		List<PlanReplyVo> list = sqlMapClientTemplate.queryForList("planReply.selectAll");
 		return list;
 	}
+	public void insertPlanReply(PlanReplyVo planReplyVo){
+		sqlMapClientTemplate.insert("planReply.insert", planReplyVo);
+		
+	}
 
 }

@@ -30,6 +30,11 @@
            delete from GOODPLAN where goodPlan_no=#goodPlan_no#
         ]]>
     </delete>
+          <delete id="deletePlan" parameterClass="java.lang.Long">
+        <![CDATA[
+           delete from GOODPLAN where plan_no=#plan_no#
+        ]]>
+    </delete>
 	
       
         	<!-- 페이징처리 -->

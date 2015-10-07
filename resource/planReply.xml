@@ -4,7 +4,7 @@
 	<typeAlias alias="PlanReplyVo" type="com.bit2015.what.vo.PlanReplyVo"/>
 	<insert id="insert" parameterClass="PlanReplyVo">
 		<![CDATA[
-			INSERT INTO PLANREPLY VALUES(planReply_no_seq.nextval, #member_no#, #planComments_no#, #memberName#, #message#, sysdate)
+			INSERT INTO PLANREPLY VALUES(planReply_no_seq.nextval, #member_no#, #planComments_no#, #imageurl#, #memberName#, #message#, sysdate)
 		]]>
 	</insert>
 	

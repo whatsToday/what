@@ -117,7 +117,7 @@ div#comment{
 }
 div#comment div#viewComment{
 		border: 1px solid #000;
-		height: 40px;
+		height: 70px;
 }
 div#comment div#writeComment{
 		border: 1px solid #000;
@@ -167,8 +167,15 @@ div#comment div#viewComment div#userName{
 		line-height:30px;
 		padding:3px;
 		width: 150px;
+}
+div#comment div#viewComment div#userName a{
+		text-decoration: none;
 		font-size:16px;
 		font-weight: bold;
+		color:#000;
+}
+div#comment div#viewComment div#userName a:hover{
+		color:#69ABED;
 }
 div#comment div#viewComment div#userName img{
 				width:30px;
@@ -182,8 +189,31 @@ div#comment div#viewComment div#commentText{
 			border-left:1px solid #000;
 			margin-top:-40px;
 			margin-left:150px;
-			width: 847px;
-			height: 38px;
+			line-height:38px;
+			width: 800px;
+			height: 68px;
+}
+div#comment div#viewComment div#commentText span#pMessage{
+			margin-left:10px;
+}
+div#comment div#viewComment div#commentText span#pRegDate{
+			float: right;
+}
+div#comment div#viewComment div#commentText span#viewComments, div#comment div#viewComment div#commentText span#writeComments{
+			margin-left:5px;
+			font-size:11px;
+			color: #69ABED;
+}
+div#comment div#viewComment div#commentText span#viewComments a, div#comment div#viewComment div#commentText span#writeComments a{
+			text-decoration: none;
+}
+div#comment div#viewComment div#deleteComments{
+			margin-top:-32px;
+			float:right;
+			margin-right:20px;
+ 			width: 20px;
+ 			height: 38px;
+	
 }
 div#submit{
 		margin-left:auto;
@@ -269,7 +299,6 @@ div#info div#goToPlan {
 }
 div#modalPhoto{
 		display:none;
-		background-color: #ededed;
 		width: 500px;
 		height: 500px;
 		position:absolute;
@@ -279,6 +308,46 @@ div#modalPhoto{
 div#modalPhoto img{
 		width:100%;
 		height: 100%;
+}
+div.commentsReply{
+		background-color: #ededed;
+		margin-top:3px;
+		margin-left:150px;
+		width: 400px;
+		max-height: 500px;
+		display:none;
+		position: absolute;
+		box-shadow:  rgba(0,0,0,0.8) 0 0 0 9999px;
+}
+div.commentsReply div#viewReply{
+		border: 1px solid #000;
+}
+div.commentsReply div#writeReply{
+		padding:10px;
+		height:30px;
+		line-height: 
+}
+div.commentsReply div#writeReply input[type=text]{
+		margin-left:8px;
+		width: 83%;
+		height:20px;
+}
+div.commentsReply div#writeReply div#writeButton{
+		float:right;
+}
+div.commentsReply div#writeReply div#replyPhotoW{
+		width: 40px;
+		height: 40px;
+		float: left;
+}
+div.commentsReply div#writeReply div#replyPhotoW img{
+		width: 100%;
+		height: 100%;
+}
+div.commentsReply div#replyButton{
+		margin-top:1px;
+		margin-right:1px;
+		float:right;
 }
 </style>
 </head>
@@ -303,7 +372,16 @@ div#modalPhoto img{
 <div id="writeComment"><div id="userName"><img src="${authUser.imageUrl}"><span>${authUser.memberName}</span></div><div id="commentText"><textarea id="commentsMessage" name="commentsMessage"></textarea></div><button onclick="insertComments(${param.plan_no})">댓글달기</button></div>
 <div id="cmtView">댓글보기</div>
 <c:forEach var="q" items="${planComments}">
-<div id="viewComment"><div id="userName"><a href="/mycontent?member_no=${q.member_no}"><img src="${authUser.imageUrl}"><span>${q.memberName}</span></a></div><div id="commentText">${q.message}</div></div>
+<div id="viewComment"><div id="userName"><a href="/mycontent?member_no=${q.member_no}"><img src="${q.imageUrl}"><span>${q.memberName}</span></a></div><div id="commentText"><span id="pMessage">${q.message}</span><span id="pRegDate">${q.regDate}</span></br><c:if test="${not empty planReplyList}"><span id="viewComments"><a href="javascript:viewPlanReply(${q.planComments_no})">답글보기</a></span></c:if><span id="writeComments"><a href="javascript:writePlanReply(${q.planComments_no})">답글쓰기</a></span></div>
+<c:if test="${authUser.member_no==q.member_no}">
+<div id="deleteComments"><a href="javascript:deleteComments(${q.planComments_no},${param.plan_no})"><img src="/assets/img/button/trash.png"></a></div>
+<div class="commentsReply" id="commentsReply${q.planComments_no}">
+	<div id="replyButton"><a href="javascript:closeReply(${q.planComments_no})"><img src="/assets/img/button/x.png"></a></div>
+	<div id="viewReply"><span id="replyPhotoV">사진</span><span id="replyName">이름</span><span id="replyMessage">내용</span><span id="replyRegDate">날짜</span></div>
+	<div id="writeReply"><div id="replyPhotoW"><img src="${authUser.imageUrl}"></div><span><input type="text" placeholder="답글달기"></span><div id="writeButton"><a href="javascript:writeReply(${q.planComments_no})"><img src="/assets/img/button/write.png"></a></div></div>
+	</div>
+</c:if>
+</div>
 </c:forEach>
 </div>
 <c:if test="${authUser.member_no==planBoard.member_no}">
@@ -319,14 +397,32 @@ div#modalPhoto img{
 </body>
 <script>
 $(function(){
-	$('body').click(function(){
-		$("#modalPhoto").hide();
-	})
+	$("body").click(function(){
+		$('#modalPhoto').hide();
+	});
 })
 function insertComments(num){
 		var message = $("#commentsMessage").val();
 		location.href="/board/insertComments?plan_no="+num+"&message="+message;
 		}
+function deleteComments(num,num1){
+		location.href="/board/deleteComments?planComments_no="+num+"&plan_no="+num1;
+}
+function viewPlanReply(num){
+	
+}
+function writePlanReply(num){
+	$("#commentsReply"+num).toggle();
+	var overlay = $("<div id='lean_overlay'></div>");
+	$("body").append(overlay);
+	
+}
+function writeReply(num){
+	console.log(num)
+}
+function closeReply(num){
+	$("#commentsReply"+num).hide();
+}
 function viewBigImage(num){
 	
 	var imageUrl = $("#msgPhoto"+num).attr("src");
@@ -353,7 +449,11 @@ function goods(num){
 	    },
 	    dataType:'json',
 	    success: function(response){
-	    	console.log(response)
+	    		var countNum = $("#viewGoods").html();
+	    		if(response == countNum){
+	    			alert("이미 좋아요를 누르셨습니다.")
+	    		}
+	    		$("#viewGoods").html(response)
 	   		 }
 	    });
 	

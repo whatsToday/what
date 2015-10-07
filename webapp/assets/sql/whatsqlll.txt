@@ -182,7 +182,7 @@ regDate Date,
 
 create table planImg(
 planImg_no number(20) primary key,
-plan_no number(20),
+plan_no number(20), 
 planName varchar2(50),
 imageUrl varchar(255),
  CONSTRAINT c_planImg_fk FOREIGN KEY (plan_no) REFERENCES plan (plan_no) ON DELETE CASCADE

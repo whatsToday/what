@@ -1,5 +1,11 @@
 @CHARSET "EUC-KR";
 
+.markTheme {
+	background-color:#9DD4F0;
+}
+.markTheme :hover{
+	background-color:#fff;
+}
 .ivory {
 /* 	padding : auto 5px; */
 	background-color:#F2F2EC;

@@ -30,7 +30,7 @@
 						<table>
 							<tr>
 								<c:forEach var="vo" items="${memberTheme}" varStatus="status">
-									<td id="theme_${status.index}" class="themeClass even" onclick="themeSearch('${vo.themeName}')">${vo.themeName}</td>
+									<td id="theme_${status.index}" class="themeClass" onclick="themeSearch('${vo.themeName}'); markTheme(this);">${vo.themeName}</td>
 								</c:forEach>
 							</tr>
 						</table>
@@ -109,36 +109,6 @@
 <script type="text/javascript" src="/assets/js/main/ws.js"></script>
 <script type="text/javascript" src="/assets/js/main/map.js"></script>
 <script>
-var nearOn = false;
-var myLoc =false;
-function checkOnOff(){
-		var sa = document.getElementById('showAll');
-		var wa = document.getElementById('wholeAll');
-		var ua = document.getElementById('userLoc');
-		var oa = document.getElementById('otherLoc');
-		
-	if(nearOn){
-// 		sa.style.backgroundColor="#69ABED";
-		sa.style.backgroundColor="#fff";
-		sa.id="wholeAll";
-		sa.innerText = "모두 보기";
-	}else{
-		wa.id="showAll";
-		wa.innerText = "추천 후기";
-// 		sa.style.backgroundColor="#fff";
-		wa.style.backgroundColor="#9DD4F0";
-	}
-	
-// 	if(myLoc){
-// 		ua.style.backgroundColor="#69ABED";
-// 		oa.style.backgroundColor="#fff";
-// 	}else{
-// 		oa.style.backgroundColor="#69ABED";
-// 		ua.style.backgroundColor="#fff";
-// 	}
-	
-	
-}
 
 //planlist부름
 getMyPlan();

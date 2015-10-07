@@ -1,3 +1,45 @@
+var nearOn = false;
+var myLoc =false;
+var obefore = "jakechu";
+var userLocation;
+
+$('#showAll').click(function(){
+	console.log("jack");
+	
+});
+
+function checkOnOff(){
+		var sa = document.getElementById('showAll');
+		var wa = document.getElementById('wholeAll');
+	
+	if(nearOn){
+		if(document.getElementById('showAll')){
+			document.getElementById('showAll').innerText = "모두 보기";
+			sa.style.backgroundColor="#fff";
+			sa.id="wholeAll";
+		}
+	}else{
+		if(document.getElementById('wholeAll')){
+			wa.innerText = "추천 후기";
+			wa.style.backgroundColor="#9DD4F0";
+			wa.id="showAll";
+		}
+	}
+}
+
+function markTheme(Obj){
+	var ob = document.getElementById(Obj.id);
+	ob.className += " markTheme";
+
+	if(obefore !="jakechu"){
+		obefore = document.getElementById(obefore);
+		if(obefore.className.indexOf("markTheme") > -1 ){
+			obefore.className = obefore.className.split(' ')[0];
+		}
+	}
+	obefore = Obj.id;
+}
+
 function showHotKey(){
 	var sH = document.getElementById('showHot');
 	
@@ -49,10 +91,7 @@ console.log(keyword);
 	
 }
 function themeSearch(themeName) {
-		//	console.log(placesArray);
-			console.log(themeName);
 			if(themeName=="showAll"){
-				//userLocation = map.getCenter();
 				placesNear();
 				 for (var i = 0; i < markers.length; i++) {
 					 markers[i].setVisible(true);
@@ -100,6 +139,9 @@ function themeSearch(themeName) {
 							radius : circle.getRadius(),	
 							sort    : daum.maps.services.SortBy.POPULARITY
 						}); 
+					    
+					    nearOn=false;
+						checkOnOff();
 					}
 						
 			}
@@ -120,10 +162,8 @@ function changeLocation(){
 	  
 	  showHotKey();
 }
-//user Location
 
-//var userLocation =  new daum.maps.LatLng(37.566826, 126.9786567);
-var userLocation;
+
 
 
 		var options = {

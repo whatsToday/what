@@ -42,9 +42,20 @@
 				    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 				    <div id="menu_wrap" class="bg_white">
 				        <div class="option">
-							    <input type="text" value="" placeholder="오늘 뭐하지?" id="keyword" size="15">
-				                <button onclick="searchPlaces(); return false;">전체 검색</button>
-				                <button onclick="searchPlaces2(); return false;">주변 검색</button> 
+				        		<table>
+				        			<tr>
+				        				<td onclick="searchPlaces(); return false;">
+				                			<button class="wsButton">전국 검색</button> 
+				        				</td>
+				        				<td onclick="searchPlaces2(); return false;">
+				                			<button id="areaSearch" class="wsButton">주변 검색</button> 
+				        				</td>
+				        			</tr>
+				        			<tr>
+				        				<td colspan="2"><input type="text" placeholder="오늘 뭐하지?" id="keyword" size="15"></td>
+				        			</tr>
+				        		</table>
+							    
 				        </div>
 				        <hr>
 				        <ul id="placesList"></ul>
@@ -55,9 +66,9 @@
 				<div class="wsTable effect">
 					<table>
 						<tr>
-							<td id="showAll" class="even" onclick="themeSearch(this.id);">후기글만 보기</td>
+							<td id="showAll" class="even" onclick="themeSearch(this.id);">추천 후기</td>
 	<!-- 						<td id="wholeAll" class="even" onclick="themeSearch('wholeAll');">전체 보기</td> -->
-							<td id="otherLoc" class="even" onclick="changeLocation(); placesNear();">현재 중심좌표로 설정</td>
+							<td id="otherLoc" class="even" onclick="changeLocation(); placesNear();">원 위치 변경</td>
 	<!-- 						<td id="userLoc" class="even" onclick="navigator.geolocation.getCurrentPosition(success, error, options);">내 위치 </td> -->
 						</tr>
 					</table>
@@ -112,7 +123,7 @@ function checkOnOff(){
 		sa.innerText = "모두 보기";
 	}else{
 		wa.id="showAll";
-		wa.innerText = "후기글 보기";
+		wa.innerText = "추천 후기";
 // 		sa.style.backgroundColor="#fff";
 // 		wa.style.backgroundColor="#69ABED";
 	}
@@ -139,5 +150,11 @@ $('#picktheme').click();
 //이미 등록된 테마는 check 표시해줌
 checkThemeBox();
 
+//enterkey 누르면 주변검색
+$("#keyword").keyup(function (e) {
+    if (e.keyCode == 13) {
+    	$("#areaSearch").click();
+    }
+});
 </script>
 </html>

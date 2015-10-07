@@ -64,10 +64,13 @@ border : 2px solid #4396E8;
 }
 
 .wsButton {
-	background-color:#FEE8EE;
-	padding:5px 10px; 
-	margin:3px; 
-	border:2px solid #FDB7C8;
+/* 	background-color:#FEE8EE; */
+/* 	padding:5px 10px;  */
+/* 	margin:3px;  */
+/* 	border:2px solid #FDB7C8; */
+background : #69ABED;
+	color : #fff;
+	width : 100%;
 }
 
 
@@ -76,7 +79,7 @@ border : 2px solid #4396E8;
 }
 
 .effect td.even:hover { 
-    background-color: skyblue;
+    background-color: #9DD4F0;
     cursor: pointer;
 }
 .effect td.even:active{ 
@@ -84,7 +87,7 @@ border : 2px solid #4396E8;
     cursor: pointer;
 }
 .effect td:hover { 
-    background-color: skyblue !important;;
+    background-color: #9DD4F0 !important;;
     cursor: pointer;
 }
 .effect td:active{ 
@@ -123,7 +126,6 @@ border : 2px solid #4396E8;
 }
 
 .themeBox:hover {
-/* 	-webkit-filter : none; */
 	cursor: pointer;
 	 opacity: 0.7;
 }

@@ -30,6 +30,7 @@ function searchPlaces() {
         alert('키워드를 입력해주세요!');
         return false;
     }
+    console.log("1");
     
     ps.keywordSearch( keyword, placesSearchCB, {
 	
@@ -52,7 +53,7 @@ function searchPlaces2() {
         alert('키워드를 입력해주세요!');
         return false;
     }
-    
+    console.log("2");
     ps.keywordSearch( keyword, placesSearchCB, {
 	
 		location: circle.getPosition(),

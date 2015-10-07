@@ -24,8 +24,11 @@
 				<table>
 					<tr>
 						<td id="showAll" class="even" onclick="themeSearch('showAll');">후기글만 보기</td>
-						<td class="even">팔로우</td>
-						<td class="even" onclick="$('#picktheme').click();">테마 추가하기</td>
+						<td id="wholeAll" class="even" onclick="themeSearch('wholeAll');">전체 보기</td>
+					</tr>
+					<tr>
+						<td id="otherLoc" class="even" onclick="changeLocation(); placesNear();">현재 중심좌표로 설정</td>
+						<td id="userLoc" class="even" onclick="navigator.geolocation.getCurrentPosition(success, error, options);">내 위치 </td>
 					</tr>
 				</table>
 			</div>
@@ -47,35 +50,42 @@
 				<div class="wsTable effect">
 						<table>
 							<tr>
-								<td id="otherLoc" class="even" onclick="changeLocation(); placesNear();">현재 중심좌표로 설정</td>
-								<td id="userLoc" class="even" onclick="navigator.geolocation.getCurrentPosition(success, error, options);">내 위치 </td>
-							</tr>
-							<tr>
 								<c:forEach var="vo" items="${memberTheme}" varStatus="status">
 									<td id="theme_${status.index}" class="themeClass even" onclick="themeSearch('${vo.themeName}')">${vo.themeName}</td>
 								</c:forEach>
 							</tr>
 						</table>
+						<table>
+							<tr>
+								<td class="wshd" onclick="$('#picktheme').click();">테마 추가하기</td>
+							</tr>
+						</table>
 				</div>
-				<div class="wsTable">
-					<table id="showPlan">
-						<tr>
-							<th class="wshd">
-								<select id="plan_no" onchange="callContents(this.value);"></select>
-							</th>
-						</tr>
-					</table>
-				</div>
-				<div class="wsTable effect">
-					<table>
-						<tr>
-							<td class="wshd">새 일정 추가하기</td><td class="wshd">일정 삭제하기</td>
-						</tr>
-					</table>
-				</div>
+				<div class="ivory">
 				<hr>
-				<div id="showHot"  class="wsTable wsBox"></div>
+					<div class="wsTable">
+						<table id="showPlan">
+							<tr>
+								<th class="wshd">
+									<select id="plan_no" onchange="callContents(this.value);"></select>
+								</th>
+							</tr>
+						</table>
+					</div>
+					<div class="wsTable effect">
+						<table>
+							<tr>
+								<td class="wshd">새 일정 추가하기</td><td class="wshd">일정 삭제하기</td>
+							</tr>
+						</table>
+					</div>
 				<hr>
+				</div>
+				<div class="ivory">
+					<hr>
+					<div id="showHot"  class="wsTable wsBox"></div>
+					<hr>
+				</div>
 	</div><!-- 	end container -->
 <c:import url="/WEB-INF/views/include/footer.jsp"/>
 </div><!-- end wrapper -->
@@ -89,22 +99,25 @@ var nearOn = false;
 var myLoc =false;
 function checkOnOff(){
 		var sa = document.getElementById('showAll');
+		var wa = document.getElementById('wholeAll');
 		var ua = document.getElementById('userLoc');
 		var oa = document.getElementById('otherLoc');
 		
 	if(nearOn){
 		sa.style.backgroundColor="#69ABED";
+		wa.style.backgroundColor="#fff";
 	}else{
 		sa.style.backgroundColor="#fff";
+		wa.style.backgroundColor="#69ABED";
 	}
 	
-// 	if(myLoc){
-// 		ua.style.backgroundColor="#69ABED";
-// 		oa.style.backgroundColor="#fff";
-// 	}else{
-// 		oa.style.backgroundColor="#69ABED";
-// 		ua.style.backgroundColor="#fff";
-// 	}
+	if(myLoc){
+		ua.style.backgroundColor="#69ABED";
+		oa.style.backgroundColor="#fff";
+	}else{
+		oa.style.backgroundColor="#69ABED";
+		ua.style.backgroundColor="#fff";
+	}
 	
 	
 }

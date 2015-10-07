@@ -1,14 +1,19 @@
 @CHARSET "EUC-KR";
 
+.ivory {
+/* 	padding : auto 5px; */
+	background-color:#F2F2EC;
+/* 	border : 2px solid #4396E8; */
+}
+hr{
+	border-top: 3px double #8c8b8b;
+}
+
 .wsTable {
-/* 	 border : 2px solid #E5D1D6; */
 border : 2px solid #4396E8;
 	 
-	 
-/* 	 width:100%; */
 }
 .wsTable table{
-/* 	padding : 20px 5px; */
 	
 	width:100%;
 	
@@ -51,11 +56,13 @@ border : 2px solid #4396E8;
 }
 .wsBox {
 	width:20%;
-	border : 2px solid #4396E8;
+/* 	border : 2px solid #4396E8; */
 }
-#showHot.wsTable.wsBox table tbody tr td:first-child{
-	width:10%;
+.wsBox table{
+	background : #fff;
+	
 }
+
 .wsButton {
 	background-color:#FEE8EE;
 	padding:5px 10px; 

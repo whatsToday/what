@@ -41,14 +41,14 @@
     function checkIdValid(){
 		var $email = $("#email");
 		var email = $email.val();
-		if (memberId == "") {
+		if (email == "") {
 			return;
 		}
 		$.ajax({
 			type : 'get',
-			url : '/member/checkId',
+			url : '/checkId',
 			data : {
-				memberId : memberId
+				email : email
 			},
 			dataType : 'json',
 			success : function(response) {

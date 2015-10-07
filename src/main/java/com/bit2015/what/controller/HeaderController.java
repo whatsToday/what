@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bit2015.what.service.HeaderService;
 import com.bit2015.what.vo.MemberVo;
@@ -26,16 +27,15 @@ public class HeaderController {
 	
 	@RequestMapping("/login")
 	public String login(HttpSession session, MemberVo memberVo) {
-		System.out.println(memberVo.toString());
-		headerService.login(session, memberVo);
+//		headerService.login(session, memberVo);
 		boolean Bo = headerService.login(session, memberVo);
-		System.out.println(memberVo.getEmail());
-		if(memberVo.getEmail().equals("admin")){
-			return "redirect:/admin/index";
-		}
-		else if(Bo){
-//			System.out.println("로그인 되었습니다.");
-			return "redirect:/";
+		MemberVo memberVo2 = headerService.gradeCheck(session, memberVo);
+		if(Bo){
+				if(memberVo2.getMemberGrade().equals("Admin")){
+					return "redirect:/admin/index"; 
+				}else{
+					return "redirect:/";
+				}
 		}else{
 //			System.out.println("등록된 회원이 없습니다.");
 			return "redirect:/?a=error";
@@ -47,5 +47,12 @@ public class HeaderController {
 		session.removeAttribute( "authUser" );
 		session.invalidate();
 		return "redirect:/";
+	}
+	
+	@RequestMapping("/checkId")
+	@ResponseBody
+	public String checkId(MemberVo memberVo){
+		
+		return null;
 	}
 }

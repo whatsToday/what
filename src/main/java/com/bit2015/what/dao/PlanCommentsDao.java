@@ -19,6 +19,7 @@ public class PlanCommentsDao {
   public List<PlanCommentsVo> selectAll(){
 	  List<PlanCommentsVo> list = sqlMapClientTemplate.queryForList("planComments.selectAll");
 	  return list;
+	  
   }
   public List<PlanCommentsVo> select(int page, int limit) {
 		Map<String, Integer> map = new HashMap<String, Integer>();

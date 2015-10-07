@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.bit2015.what.service.BoardService;
 import com.bit2015.what.vo.ContentVo;
 import com.bit2015.what.vo.MemberVo;
+import com.bit2015.what.vo.PlanCommentsVo;
 import com.bit2015.what.vo.PlanImgVo;
 import com.bit2015.what.vo.PlanVo;
 
@@ -31,9 +32,11 @@ public class BoardController {
 		MemberVo memberVo = (MemberVo)session.getAttribute("authUser");
 		PlanVo planVo = boardService.getPlanVo(plan_no);
 		List<PlanImgVo> list = boardService.selectPlan(plan_no);
+		List<PlanCommentsVo> list1 = boardService.selectPlanComments(plan_no);
 		int countGood = boardService.goodPlan(plan_no, memberVo.getMember_no());
 		model.addAttribute("planBoard", planVo);
 		model.addAttribute("planImg", list);
+		model.addAttribute("planComments", list1);
 		model.addAttribute("countGood",countGood);
 		return "/board/index";
 	}
@@ -119,5 +122,12 @@ public class BoardController {
 		int countGood = boardService.goodPlan(plan_no, member_no);
 		return countGood;
 		
+	}
+	@RequestMapping("/insertComments")
+	public String planCommentsInsert(@RequestParam Long plan_no, HttpSession session, @RequestParam String message){
+		MemberVo memberVo = (MemberVo)session.getAttribute("authUser");
+		boardService.insertComments(memberVo.getMember_no(), plan_no, message);
+		
+		return "redirect:/board?plan_no="+plan_no;
 	}
 }

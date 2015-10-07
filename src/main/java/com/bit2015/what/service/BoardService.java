@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.bit2015.what.dao.ContentBoxDao;
 import com.bit2015.what.dao.ContentDao;
 import com.bit2015.what.dao.GoodPlanDao;
+import com.bit2015.what.dao.MemberDao;
 import com.bit2015.what.dao.PlanCommentsDao;
 import com.bit2015.what.dao.PlanDao;
 import com.bit2015.what.dao.PlanImgDao;
@@ -17,12 +18,16 @@ import com.bit2015.what.util.FileUploader;
 import com.bit2015.what.vo.ContentBoxVo;
 import com.bit2015.what.vo.ContentVo;
 import com.bit2015.what.vo.GoodPlanVo;
+import com.bit2015.what.vo.MemberVo;
+import com.bit2015.what.vo.PlanCommentsVo;
 import com.bit2015.what.vo.PlanImgVo;
 import com.bit2015.what.vo.PlanVo;
 
 @Service
 public class BoardService {
 	
+	@Autowired
+	MemberDao memberDao;
 	@Autowired
 	PlanDao planDao;
 	@Autowired
@@ -121,5 +126,22 @@ public class BoardService {
 		}
 	}
 	public void insertComments(Long member_no, Long plan_no, String message){
+		MemberVo memberVo = memberDao.getMemberVo(member_no);
+//		memberVo.getImageUrl();
+		PlanVo planVo = planDao.selectVo(plan_no);
+		
+		PlanCommentsVo planCommentsVo = new PlanCommentsVo();
+		
+		planCommentsVo.setMember_no(member_no);
+		planCommentsVo.setPlan_no(plan_no);
+		planCommentsVo.setMemberName(memberVo.getMemberName());
+		planCommentsVo.setPlanName(planVo.getPlanName());
+		planCommentsVo.setMessage(message);
+		
+		planCommentsDao.insert(planCommentsVo);
+	}
+	public List<PlanCommentsVo> selectPlanComments(Long plan_no){
+		List<PlanCommentsVo> list = planCommentsDao.selectPlan(plan_no);
+		return list;
 	}
 }

@@ -300,9 +300,11 @@ div#modalPhoto img{
 </div>
 <div id="comment">
 <div id="cmtWrite">댓글쓰기</div>
-<div id="writeComment"><div id="userName"><img src="${authUser.imageUrl}"><span>${authUser.memberName}</span></div><div id="commentText"><textarea></textarea></div><button>댓글달기</button></div>
+<div id="writeComment"><div id="userName"><img src="${authUser.imageUrl}"><span>${authUser.memberName}</span></div><div id="commentText"><textarea id="commentsMessage" name="commentsMessage"></textarea></div><button onclick="insertComments(${param.plan_no})">댓글달기</button></div>
 <div id="cmtView">댓글보기</div>
-<div id="viewComment"><div id="userName"><a href="/mycontent?member_no="><img src="${authUser.imageUrl}"><span>${authUser.memberName}</span></a></div><div id="commentText"></div></div>
+<c:forEach var="q" items="${planComments}">
+<div id="viewComment"><div id="userName"><a href="/mycontent?member_no=${q.member_no}"><img src="${authUser.imageUrl}"><span>${q.memberName}</span></a></div><div id="commentText">${q.message}</div></div>
+</c:forEach>
 </div>
 <c:if test="${authUser.member_no==planBoard.member_no}">
 <div id="submit">
@@ -321,6 +323,10 @@ $(function(){
 		$("#modalPhoto").hide();
 	})
 })
+function insertComments(num){
+		var message = $("#commentsMessage").val();
+		location.href="/board/insertComments?plan_no="+num+"&message="+message;
+		}
 function viewBigImage(num){
 	
 	var imageUrl = $("#msgPhoto"+num).attr("src");

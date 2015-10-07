@@ -15,6 +15,11 @@
 			select * from PLANCOMMENTS 
 		]]>
 	</select>
+	<select id="selectPlan" resultClass="PlanCommentsVo" parameterClass="java.lang.Long">
+		<![CDATA[
+			select * from PLANCOMMENTS where plan_no=#plan_no#
+		]]>
+	</select>
 	
 	
 	<delete id="delete" parameterClass="java.lang.Long">

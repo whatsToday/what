@@ -4,6 +4,7 @@ public class PlanReplyVo {
 	private Long planReply_no;
 	private Long member_no;
 	private Long planComments_no;
+	private String imageUrl;
 	private String memberName;
 	private String message;
 	private String regDate;
@@ -24,6 +25,12 @@ public class PlanReplyVo {
 	}
 	public void setPlanComments_no(Long planComments_no) {
 		this.planComments_no = planComments_no;
+	}
+	public String getImageUrl() {
+		return imageUrl;
+	}
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 	public String getMemberName() {
 		return memberName;
@@ -47,11 +54,9 @@ public class PlanReplyVo {
 	public String toString() {
 		return "PlanReplyVo [planReply_no=" + planReply_no + ", member_no="
 				+ member_no + ", planComments_no=" + planComments_no
-				+ ", memberName=" + memberName + ", message=" + message
-				+ ", regDate=" + regDate + "]";
+				+ ", imageUrl=" + imageUrl + ", memberName=" + memberName
+				+ ", message=" + message + ", regDate=" + regDate + "]";
 	}
-	
-	
 	
 
 }

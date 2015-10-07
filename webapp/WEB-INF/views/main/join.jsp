@@ -25,19 +25,19 @@
 			$email.focus();
 			return false;
 		}
-	    var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+/* 	    var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
 		   if( re.test(email)==false){
 				alert("유효한 이메일 형식이 아닙니다");
 				$email.focus();
 				return false;	
 		   }		 
-		return true;
+ */		return true;
 	});
 </script>
 
 
 
-    <script>
+<!--     <script>
     function checkIdValid(){
 		var $email = $("#email");
 		var email = $email.val();
@@ -63,7 +63,7 @@
 			}
 		});
 	}
-    </script>
+    </script> -->
 
 
 
@@ -383,6 +383,7 @@ a[rel=leanModal] {
 }
 
 #joinModal,#loginModal {
+display: none; 
 }
 </style>
 <body>
@@ -391,7 +392,7 @@ a[rel=leanModal] {
 
   
 	<a id="join" rel="leanModal" href="#joinModal">join header</a>
-	<div id="joinModal" style="margin-left:1400px">
+	<div id="joinModal">
 			   <div class="wsTable" style="border:none; width:100%; height:100%;">
 			   
 			   
@@ -408,7 +409,7 @@ a[rel=leanModal] {
 				        <i class="icon-unlock"></i><input type="password" placeholder="Password" name="password">
 				      </div>
 				    </div>
-				    <button id="checkId" onclick="checkIdValid()" style="height:30px;font-size:14px;margin-bottom:-10px">email check</button>
+				   <!--  <button id="checkId" onclick="checkIdValid()" style="height:30px;font-size:14px;margin-bottom:-10px">email check</button> -->
 				    <button type="submit">Sign in</button>
 				  </form>
 			   <div style="text-align:right;margin-top:20px;font-family:''맑은 고딕;"><a href="#" onclick="$('#joinModal').hide();$('#login').click();">로그인</a></div>
@@ -425,7 +426,7 @@ a[rel=leanModal] {
 	</div>
 	
 		<a id="login" rel="leanModal" href="#loginModal">join header</a>
-	<div id="loginModal" style="margin-left:1400px">
+	<div id="loginModal" >
 			   <div class="wsTable" style="border:none; width:100%; height:100%;">
 <!-- 					<button onclick="$('#picktheme').click();$('#joinModal').hide();">가입</button> -->
 
@@ -458,22 +459,6 @@ a[rel=leanModal] {
 				  </div>
 					
 
-			   
-			   
-
-
-<!--   <hr>
-  <h2>Another way to use the concept ...</h2>
-  <div class="ribbon ior"></div>
-  <div class="login io">
-    <div class="press">CEO <span>Google</span></div>
-    <img src="https://lh3.googleusercontent.com/-Y86IN-vEObo/AAAAAAAAAAI/AAAAAAACk4w/yvxY4GMx_8k/s120-c/photo.jpg" alt="ggIO">
-    <h1>Lawrence Edward Page</h1>
-    <p>CEO of Google</p>
-  </div>
-  <br><br> -->
-			   
-			   
 			   
 			    </div>
 	</div>

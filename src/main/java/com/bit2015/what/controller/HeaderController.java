@@ -1,11 +1,16 @@
 package com.bit2015.what.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bit2015.what.service.HeaderService;
@@ -32,7 +37,7 @@ public class HeaderController {
 		MemberVo memberVo2 = headerService.gradeCheck(session, memberVo);
 		if(Bo){
 				if(memberVo2.getMemberGrade().equals("Admin")){
-					return "redirect:/admin/index"; 
+					return "redirect:/admin/member"; 
 				}else{
 					return "redirect:/";
 				}
@@ -51,8 +56,15 @@ public class HeaderController {
 	
 	@RequestMapping("/checkId")
 	@ResponseBody
-	public String checkId(MemberVo memberVo){
-		
-		return null;
+	public Map checkId(@RequestParam String email){
+		List<MemberVo> list = headerService.selectEmail(email);
+		Map<String, String> map = new HashMap<String, String>();
+		if(list.isEmpty()){
+			map.put("exist", "no exist");
+			return map;
+		}else{
+			map.put("exist" , "exist");
+			return map;
+		}
 	}
 }

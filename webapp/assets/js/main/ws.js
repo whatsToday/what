@@ -73,6 +73,7 @@ function themeSearch(themeName) {
 				 nearOn=false;
 				 checkOnOff();
 			}else{
+					if(nearOn){
 							//후기글이 없으면?
 							var k = 0 ;
 							for (var i = 0; i < placesArray.length; i++) {
@@ -82,17 +83,25 @@ function themeSearch(themeName) {
 									markers[i].setVisible(true);
 								}
 							}
-								if(k==0){
-									alertModal('선택 범위안에 후기글이 없습니다. \n \n 첫 번째 관심사를 자동검색합니다.',1500);
-								    ps.keywordSearch( themeName, placesSearchCB, {
-										location: userLocation,
-										radius : circle.getRadius(),	
-										sort    : daum.maps.services.SortBy.POPULARITY
-									}); 
-								    
-								    nearOn=false;
-									checkOnOff();
-								}
+							if(k==0){
+								alertModal('선택 범위안에 후기글이 없습니다');
+							    ps.keywordSearch( themeName, placesSearchCB, {
+									location: userLocation,
+									radius : circle.getRadius(),	
+									sort    : daum.maps.services.SortBy.POPULARITY
+								}); 
+							    
+							    nearOn=false;
+								checkOnOff();
+							}
+					}else{
+					    ps.keywordSearch( themeName, placesSearchCB, {
+							location: userLocation,
+							radius : circle.getRadius(),	
+							sort    : daum.maps.services.SortBy.POPULARITY
+						}); 
+					}
+						
 			}
 }
 

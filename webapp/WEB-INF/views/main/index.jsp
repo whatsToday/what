@@ -119,14 +119,14 @@ function checkOnOff(){
 		
 	if(nearOn){
 // 		sa.style.backgroundColor="#69ABED";
-// 		wa.style.backgroundColor="#fff";
+		sa.style.backgroundColor="#fff";
 		sa.id="wholeAll";
 		sa.innerText = "모두 보기";
 	}else{
 		wa.id="showAll";
 		wa.innerText = "추천 후기";
 // 		sa.style.backgroundColor="#fff";
-// 		wa.style.backgroundColor="#69ABED";
+		wa.style.backgroundColor="#9DD4F0";
 	}
 	
 // 	if(myLoc){

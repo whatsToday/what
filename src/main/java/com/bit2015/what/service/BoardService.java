@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.bit2015.what.dao.ContentBoxDao;
 import com.bit2015.what.dao.ContentDao;
 import com.bit2015.what.dao.GoodPlanDao;
+import com.bit2015.what.dao.PlanCommentsDao;
 import com.bit2015.what.dao.PlanDao;
 import com.bit2015.what.dao.PlanImgDao;
 import com.bit2015.what.util.FileUploader;
@@ -32,6 +33,8 @@ public class BoardService {
 	PlanImgDao planImgDao;
 	@Autowired
 	GoodPlanDao goodPlanDao;
+	@Autowired
+	PlanCommentsDao planCommentsDao;
 	
 	// 파일올리는거야
 		FileUploader ful = new FileUploader();
@@ -116,5 +119,7 @@ public class BoardService {
 			countGood = goodPlanDao.selectPlan(plan_no);
 			return countGood;
 		}
+	}
+	public void insertComments(Long member_no, Long plan_no, String message){
 	}
 }

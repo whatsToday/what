@@ -21,7 +21,7 @@ import com.bit2015.what.dao.PlanImgDao;
 import com.bit2015.what.dao.SearchListDao;
 import com.bit2015.what.dao.ThemeBoxDao;
 import com.bit2015.what.dao.ThemeDao;
-import com.bit2015.what.dao.planCommentsDao;
+import com.bit2015.what.dao.PlanCommentsDao;
 import com.bit2015.what.util.FileUploader;
 import com.bit2015.what.vo.CommentsVo;
 import com.bit2015.what.vo.ContentBoxVo;
@@ -57,7 +57,7 @@ public class AdminService {
     @Autowired
     SearchListDao searchListDao;
     @Autowired
-    planCommentsDao planCommentsDao;
+    PlanCommentsDao planCommentsDao;
     @Autowired
     GoodPlanDao goodPlanDao;
     @Autowired

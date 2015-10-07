@@ -33,7 +33,7 @@ import com.bit2015.what.dao.PlanDao;
 import com.bit2015.what.dao.SearchListDao;
 import com.bit2015.what.dao.ThemeBoxDao;
 import com.bit2015.what.dao.ThemeDao;
-import com.bit2015.what.dao.planCommentsDao;
+import com.bit2015.what.dao.PlanCommentsDao;
 import com.bit2015.what.util.FileUploader;
 import com.bit2015.what.vo.ContentBoxVo;
 import com.bit2015.what.vo.ContentVo;

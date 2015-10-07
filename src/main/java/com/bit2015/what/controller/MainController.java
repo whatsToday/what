@@ -190,5 +190,16 @@ public class MainController {
 		
 		return map;
 	}
+	@RequestMapping("/textSearch")
+	@ResponseBody
+	public Map<String, Object> textSearch(@RequestParam String text) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		mainService.textSearch(map, text);
+		
+		
+		return map;
+	}
+	
 	
 }

@@ -389,6 +389,11 @@ public class MainService {
 		ContentVo contentVo = contentDao.selectVoById(cvo.getId());
 		map.put("contentVo", contentVo);
 	}
+
+	public void textSearch(Map<String, Object> map, String text) {
+		List<ThemeVo> themeList = themeDao.selectSearch(text);
+		map.put("themeList", themeList);
+	}
 	
 }// main Service
 

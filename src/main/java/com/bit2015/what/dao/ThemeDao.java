@@ -6,6 +6,7 @@ import java.util.List;
 
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import org.springframework.stereotype.Repository;
@@ -49,4 +50,10 @@ public class ThemeDao {
 		 ThemeVo themeVo = (ThemeVo) sqlMapClientTemplate.queryForObject("theme.getThemeName", theme_no);
 		  return themeVo;
 	  }
+
+	public List<ThemeVo> selectSearch(String text) {
+		List<ThemeVo> list= sqlMapClientTemplate.queryForList("theme.selectSearch",text);
+		return list;
+		
+	}
 }

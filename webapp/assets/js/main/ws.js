@@ -50,7 +50,7 @@ console.log(keyword);
 }
 function themeSearch(themeName) {
 		//	console.log(placesArray);
-		//	console.log(themeName);
+			console.log(themeName);
 			if(themeName=="showAll"){
 				//userLocation = map.getCenter();
 				placesNear();
@@ -89,6 +89,9 @@ function themeSearch(themeName) {
 										radius : circle.getRadius(),	
 										sort    : daum.maps.services.SortBy.POPULARITY
 									}); 
+								    
+								    nearOn=false;
+									checkOnOff();
 								}
 			}
 }

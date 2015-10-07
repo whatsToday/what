@@ -43,6 +43,12 @@
         ]]>
     </select>
     
+	<select id="selectSearch" parameterClass="java.lang.String" resultClass="ThemeVo">
+		<![CDATA[
+			select * from theme where themeName like '%'||#text#||'%'
+		]]>
+	</select>
+    
 	     	<!--  페이징처리 -->
 <!-- 	<select id="themeList" parameterClass="java.util.Map" resultClass="ThemeVo">
       <![CDATA[

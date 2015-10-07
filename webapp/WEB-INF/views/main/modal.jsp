@@ -3,32 +3,14 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <link href="/assets/css/main/ws.css" rel="stylesheet" />
-<!-- join  modal -->
-<%-- <c:if test="${not empty authUser }"> --%>
-<!-- <a id="join" rel="leanModal" href="#joinModal">join header</a> -->
-<!-- <div id="joinModal"> -->
-<!-- 		   <div class="wsTable" style="border:none; width:100%; height:100%;"> -->
-<!-- 			     <table> -->
-<!-- 					<tr> -->
-<!-- 						<td style="text-align:right">로그인</td> -->
-<!-- 			     	</tr> -->
-<!-- 			     	<tr> -->
-<!-- 			     		<td>오늘 뭐하지</td> -->
-<!-- 			     	</tr> -->
-<!-- 					<tr> -->
-<!-- 						<td><input type="text" name="email"/></td> -->
-<!-- 					</tr> -->
-<!-- 					<tr> -->
-<!-- 						<td><input type="password" name="password"/></td> -->
-<!-- 					</tr>      -->
-<!-- 					<tr> -->
-<!-- 						<td><button  onclick="$('#picktheme').click();$('#joinModal').hide();">가입</button></td> -->
-<!-- 					</tr> -->
-<!-- 			     </table> -->
-<!-- 		    </div> -->
-<!-- </div> -->
-<%-- </c:if> --%>
+<script>
 
+// function showAgain(){
+// 	var tL = ${themeList[0].themeName};
+// 	console.log(tL);
+// }
+
+</script>
 <!-- theme modal -->
 <a id="picktheme" rel="leanModal" href="#themeModal">pickTheme</a>
 <div id="themeModal">
@@ -43,13 +25,13 @@
 			     	<tr>
 			     		<td height="42px">
 			     			<div class="searchTm">
-			     				<input type="text" placeholder="search..."></input>
+			     				<input id="textSearch" type="text" placeholder="search..."></input>
 			     			</div>
 			     		</td>
 					<tr>
 						<td height="530px">
-							<div style="overflow:scroll; width:100%; heigth:100%;">
-							<table style="border-collapse: separate; border-spacing: 5px;"><tr>
+							<div id="themeDiv" class="ivory">
+							<table id="themeTable"><tr>
 								<c:forEach var="theme" items="${themeList }" varStatus="status">
 									<c:if test="${status.index%5==0 }"><tr></tr></c:if>
 											<td id="theme_no_${theme.getTheme_no()}" class ="themeBox" data-no="${theme.getTheme_no()}" data-name="${theme.getThemeName()}"
@@ -161,37 +143,32 @@ function submitTm(){
 	}
 	location.href=url;
 	
-	
-	//console.log(member_no+','+theme_no+','+themeName);
-	//member_no , theme_no , themeName
-	
-// 	$.ajax({
-// 		type: "Post",
-// 		url: "/insertThemeBox",
-// 		data:{
-// 			member_no : member_no,
-// 			theme_no : theme_no,
-// 			themeName : themeName
-// 		},
-// 		success: function(response){
-// 			console.log("insertThemeBox 성공");
-			
-// 			//다시 테마 해논거 체크유무 설정 해주기.
-// 			checkThemeBox();
-			
-// 			location.reload();
-			
-
-// 		},
-// 		error:function(jqXHR, textStatus, errorThrown){
-//             alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
-//             self.close();
-//         }
-		
-// 	});//end ajax1
-	
-	
 }
+
+$('#textSearch').keyup(function() {
+	var text =$(this).val();
+    var tb  = document.getElementById("themeTable");
+    
+	$.ajax({
+		url:"/textSearch",
+		data:{
+			text : text
+		},
+		success: function(response){
+			var content = '<tr><td colspan="5"></td></tr>';
+			for (var i = 0; i < response.themeList.length; i++) {
+				if(i%5==0 && i != 0) content+='<tr></tr>';
+				content += '<td id="theme_no_'+response.themeList[i].theme_no+'" class ="themeBox" data-no="'+response.themeList[i].theme_no+'" data-name="'+response.themeList[i].themeName+'"onclick="checkTm(this)" background="'+response.themeList[i].imageUrl+'"><span></span><div><strong>'+response.themeList[i].themeName+'</strong></div></td>';
+			}
+			tb.innerHTML = content;
+		},
+		error:function(jqXHR, textStatus, errorThrown){
+    alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
+    self.close();
+}
+	});//end ajax
+    
+});
 </script>
 
 

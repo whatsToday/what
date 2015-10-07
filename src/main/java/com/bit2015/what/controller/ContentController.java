@@ -45,9 +45,9 @@ public class ContentController {
 	}	
 	 
 	 @RequestMapping("/commentdelete")
-	  	public String delete(long comments_no,@RequestParam Long content_no){
+	  	public String delete(ContentVo contentVo, @RequestParam long comments_no){
 		 contentService.delete(comments_no);
-		 return "redirect:/contentView?content_no="+content_no;
+		 return "redirect:/contentview?content_no="+contentVo.getContent_no()+1;
 	  }
 	  
 		

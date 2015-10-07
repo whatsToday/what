@@ -15,11 +15,13 @@ public class HeaderService {
 	MemberDao memberDao;
 	
 	public void join(HttpSession session, MemberVo memberVo) {
+		memberVo.setMemberName("회원");
+		memberVo.setMemberGrade("Guest");
+		memberVo.setImageUrl("/product-images/201583023256199.jpg");
 		memberDao.insert(memberVo);
 		String email = memberVo.getEmail();
 		MemberVo memberVo2 =memberDao.checkEmail(email);
 		session.setAttribute("authUser", memberVo2);
-		System.out.println(memberVo2);
 	}
 	
 public boolean login(HttpSession session, MemberVo vo) {

@@ -16,7 +16,10 @@ public class HeaderService {
 	
 	public void join(HttpSession session, MemberVo memberVo) {
 		memberDao.insert(memberVo);
-		session.setAttribute("authUser", memberVo);
+		String email = memberVo.getEmail();
+		MemberVo memberVo2 =memberDao.checkEmail(email);
+		session.setAttribute("authUser", memberVo2);
+		System.out.println(memberVo2);
 	}
 	
 public boolean login(HttpSession session, MemberVo vo) {

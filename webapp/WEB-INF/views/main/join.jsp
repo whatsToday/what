@@ -197,8 +197,7 @@ background-repeat: no-repeat;
 		<a id="login" rel="leanModal" href="#loginModal">join header</a>
 	<div id="loginModal">
 			   <div class="wsTable" style="border:none; width:100%; height:100%;">
-			   		<div style="text-align:right"><a href="#" onclick="$('#loginModal').hide();$('#join').click();">가입하기</a></div>
-			   		<h4 style="text-align:center">로그인을 하시면 더 많은 기능을 이용하실 수 있습니다</h4>
+			   		<h4 style="text-align:center;margin-top:10px">로그인을 하시면 더 많은 기능을 이용하실 수 있습니다</h4>
 				   <form action="/login" method="post" >
 				     <table>
 						<tr>
@@ -226,6 +225,7 @@ background-repeat: no-repeat;
 			</div>
 					
 					
+				<div style="text-align:right"><a href="#" onclick="$('#loginModal').hide();$('#join').click();">가입하기</a></div>
 			    </div>
 	</div>
 

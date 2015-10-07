@@ -2,17 +2,17 @@ package com.bit2015.what.controller;
 
 import java.util.List;
 
-import javafx.scene.AmbientLight;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.bit2015.what.dao.FollowDao;
 import com.bit2015.what.dao.MemberDao;
 import com.bit2015.what.service.AdminService;
 import com.bit2015.what.vo.CommentsVo;
@@ -29,7 +29,6 @@ import com.bit2015.what.vo.PlanVo;
 import com.bit2015.what.vo.SearchListVo;
 import com.bit2015.what.vo.ThemeBoxVo;
 import com.bit2015.what.vo.ThemeVo;
-import com.sun.java.swing.plaf.motif.resources.motif;
 
 @Controller
 @RequestMapping("/admin")
@@ -44,6 +43,22 @@ public class AdminController {
 	@RequestMapping()
 	public String index() {
 		return "/admin/index";
+	}
+	
+	@RequestMapping("/login")
+	public String login(HttpSession session, @ModelAttribute MemberVo memberVo) {
+		MemberVo vo = adminService.login(memberVo);
+	    System.out.println("rkekekfk"+vo.getMemberGrade());
+		if(vo == null || !vo.getMemberGrade().equals("Admin")){	//로긴실패
+			System.out.println("아무것도 아니야");
+			return "redirect:/admin/index";
+		}else{
+		    System.out.println("니가 어드민이냐 ");
+			//로긴처리
+			
+		session.setAttribute("authUser", vo);
+		return "redirect:/admin/member";
+	}
 	}
 
 /*	// member조회

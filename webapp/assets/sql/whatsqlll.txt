@@ -1,0 +1,211 @@
+DROP TABLE comments CASCADE CONSTRAINTS FORCE ;
+DROP TABLE content CASCADE CONSTRAINTS FORCE ;
+DROP TABLE contentbox CASCADE CONSTRAINTS FORCE ;
+DROP TABLE event CASCADE CONSTRAINTS FORCE ;
+DROP TABLE follow CASCADE CONSTRAINTS FORCE ;
+DROP TABLE goodcontent CASCADE CONSTRAINTS FORCE ;
+DROP TABLE goodplan CASCADE CONSTRAINTS FORCE ;
+DROP TABLE member CASCADE CONSTRAINTS FORCE ;
+DROP TABLE plan CASCADE CONSTRAINTS FORCE ;
+DROP TABLE plancomments CASCADE CONSTRAINTS FORCE ;
+DROP TABLE planimg CASCADE CONSTRAINTS FORCE ;
+DROP TABLE planreply CASCADE CONSTRAINTS FORCE ;
+DROP TABLE searchlist CASCADE CONSTRAINTS FORCE ;
+DROP TABLE theme CASCADE CONSTRAINTS FORCE ;
+DROP TABLE themeBox CASCADE CONSTRAINTS FORCE ;
+
+DROP SEQUENCE member_no_seq;
+DROP SEQUENCE theme_no_seq;
+DROP SEQUENCE content_no_seq;
+DROP SEQUENCE event_no_seq;
+DROP SEQUENCE themeBox_no_seq;
+DROP SEQUENCE comments_no_seq;
+DROP SEQUENCE follow_no_seq;
+DROP SEQUENCE goodcontent_no_seq;
+DROP SEQUENCE plan_no_seq;
+DROP SEQUENCE goodplan_no_seq;
+DROP SEQUENCE contentbox_no_seq;
+DROP SEQUENCE searchlist_no_seq;
+DROP SEQUENCE plancomments_no_seq;
+DROP SEQUENCE planReply_no_seq;
+DROP SEQUENCE planimg_no_seq;
+
+create table member(
+member_no number(20) primary key,
+memberName varchar2(20),
+email varchar2(50),
+password varchar2(50),
+imageUrl   VARCHAR2(255),
+memberGrade varchar2(20)
+);
+
+create TABLE  Theme(
+  theme_no NUMBER(20) PRIMARY KEY ,
+  themeName   VARCHAR2(50),
+  imageUrl varchar2(255)
+);
+
+
+
+create TABLE  content(
+  content_no NUMBER(20) PRIMARY KEY ,
+  phone      VARCHAR2(40),
+  newAddress VARCHAR2(255),
+  imageUrl   VARCHAR2(255),
+  direction  VARCHAR2(20),
+  zipcode    VARCHAR2(30),
+  placeUrl   VARCHAR2(255),
+  id         VARCHAR2(40),
+  title      VARCHAR2(100),
+  category   VARCHAR2(100),
+  address    VARCHAR2(255),
+  longitude  VARCHAR2(100),
+  latitude   VARCHAR2(100),
+  addressBCode VARCHAR2(100)
+);
+
+create TABLE  event(
+  event_no NUMBER(20) PRIMARY KEY ,
+  content_no NUMBER(20),
+  title      VARCHAR2(255),
+  message   VARCHAR2(4000),
+  regDate    date,
+  dueDate  date,
+  eventStatus   VARCHAR2(20),
+  CONSTRAINT c_event_fk FOREIGN KEY (content_no) REFERENCES content (content_no) ON DELETE CASCADE
+);
+
+create table themebox(
+themeBox_no number(20) primary key,
+member_no number(20),
+theme_no number(20),
+themeName varchar2(50),
+ CONSTRAINT c_themebox_fk FOREIGN KEY (member_no) REFERENCES MEMBER (member_no) ON DELETE CASCADE,
+ CONSTRAINT c_themebox_fk2 FOREIGN KEY (theme_no) REFERENCES theme (theme_no) ON DELETE CASCADE 
+);
+
+create table Comments(
+comments_no number(20) primary key,
+member_no number(20),
+content_no number(20),
+memberName varchar2(20),
+message varchar2(255),
+regDate Date,
+ CONSTRAINT c_comments_fk FOREIGN KEY (member_no) REFERENCES MEMBER (member_no) ON DELETE CASCADE,
+ CONSTRAINT c_comments_fk2 FOREIGN KEY (content_no) REFERENCES content (content_no) ON DELETE CASCADE 
+);
+
+create table Follow(
+follow_no number(20) primary key,
+member_no number(20),
+followNum number(20),
+memberName varchar2(20),
+followName varchar2(20),
+ CONSTRAINT c_follow_fk FOREIGN KEY (member_no) REFERENCES MEMBER (member_no) ON DELETE CASCADE
+);
+
+create table GoodContent(
+goodContent_no number(20) primary key,
+content_no number(20),
+member_no number(20),
+memberName varchar2(20),
+title varchar2(100),
+ CONSTRAINT c_goodContent_fk FOREIGN KEY (member_no) REFERENCES MEMBER (member_no) ON DELETE CASCADE,
+ CONSTRAINT c_goodContent_fk2 FOREIGN KEY (content_no) REFERENCES content (content_no) ON DELETE CASCADE
+);
+
+create table Plan(
+plan_no number(20) primary key,
+member_no number(20),
+titleImage varchar2(100),
+planName varchar2(50),
+memberName varchar2(20),
+message varchar2(4000),
+planDate Date,
+ CONSTRAINT c_plan_fk FOREIGN KEY (member_no) REFERENCES MEMBER (member_no) ON DELETE CASCADE
+);
+
+create table GoodPlan(
+goodPlan_no number(20) primary key,
+plan_no number(20),
+member_no number(20),
+memberName varchar2(20),
+planName varchar2(50),
+ CONSTRAINT c_goodPlan_fk FOREIGN KEY (member_no) REFERENCES MEMBER (member_no) ON DELETE CASCADE,
+ CONSTRAINT c_goodPlan_fk2 FOREIGN KEY (plan_no) REFERENCES plan (plan_no) ON DELETE CASCADE
+);
+
+create table contentBox(
+contentBox_no number(20) primary key,
+plan_no number(20),
+content_no number(20),
+planName varchar2(50),
+ CONSTRAINT c_contentBox_fk FOREIGN KEY (content_no) REFERENCES content (content_no) ON DELETE CASCADE,
+ CONSTRAINT c_contentBox_fk2 FOREIGN KEY (plan_no) REFERENCES plan (plan_no) ON DELETE CASCADE
+);
+
+create table searchList(
+searchList_no number(20) primary key,
+member_no number(20),
+memberName varchar2(20),
+search varchar2(50),
+searchDate date,
+latitude varchar2(100),
+longitude varchar2(100),
+ CONSTRAINT c_searchList_fk FOREIGN KEY (member_no) REFERENCES MEMBER (member_no) ON DELETE CASCADE
+);
+
+create table planComments(
+planComments_no number(20) primary key,
+member_no number(20),
+plan_no number(20),
+imageUrl varchar2(255),
+memberName varchar2(20),
+planName varchar2(50),
+message varchar2(255),
+regDate Date,
+ CONSTRAINT c_planComments_fk FOREIGN KEY (member_no) REFERENCES MEMBER (member_no) ON DELETE CASCADE,
+ CONSTRAINT c_planComments_fk2 FOREIGN KEY (plan_no) REFERENCES plan (plan_no) ON DELETE CASCADE
+);
+
+create table planReply(
+planReply_no number(20) primary key,
+member_no number(20),
+planComments_no number(20),
+imageUrl varchar2(255),
+memberName varchar2(20),
+message varchar2(255),
+regDate Date,
+ CONSTRAINT c_planComments_fk FOREIGN KEY (member_no) REFERENCES MEMBER (member_no) ON DELETE CASCADE,
+ CONSTRAINT c_planComments_fk2 FOREIGN KEY (planComments_no) REFERENCES planComments (planComments_no) ON DELETE CASCADE
+);
+
+create table planImg(
+planImg_no number(20) primary key,
+plan_no number(20),
+planName varchar2(50),
+imageUrl varchar(255),
+ CONSTRAINT c_planImg_fk FOREIGN KEY (plan_no) REFERENCES plan (plan_no) ON DELETE CASCADE
+);
+
+ CREATE SEQUENCE member_no_seq START WITH 1 INCREMENT BY 1 MAXVALUE 99999 NOCYCLE NOCACHE  ;
+ CREATE SEQUENCE theme_no_seq START WITH 1 INCREMENT BY 1 MAXVALUE 99999 NOCYCLE NOCACHE  ; 
+ CREATE SEQUENCE content_no_seq START WITH 1 INCREMENT BY 1 MAXVALUE 99999 NOCYCLE NOCACHE  ;
+ CREATE SEQUENCE event_no_seq START WITH 1 INCREMENT BY 1 MAXVALUE 99999 NOCYCLE NOCACHE  ; 
+ CREATE SEQUENCE themeBox_no_seq START WITH 1 INCREMENT BY 1 MAXVALUE 99999 NOCYCLE NOCACHE  ;
+ CREATE SEQUENCE comments_no_seq START WITH 1 INCREMENT BY 1 MAXVALUE 99999 NOCYCLE NOCACHE  ; 
+ CREATE SEQUENCE follow_no_seq START WITH 1 INCREMENT BY 1 MAXVALUE 99999 NOCYCLE NOCACHE  ; 
+ CREATE SEQUENCE goodcontent_no_seq START WITH 1 INCREMENT BY 1 MAXVALUE 99999 NOCYCLE NOCACHE  ; 
+ CREATE SEQUENCE plan_no_seq START WITH 1 INCREMENT BY 1 MAXVALUE 99999 NOCYCLE NOCACHE  ; 
+ CREATE SEQUENCE goodplan_no_seq START WITH 1 INCREMENT BY 1 MAXVALUE 99999 NOCYCLE NOCACHE  ; 
+ CREATE SEQUENCE contentbox_no_seq START WITH 1 INCREMENT BY 1 MAXVALUE 99999 NOCYCLE NOCACHE  ;
+ CREATE SEQUENCE searchlist_no_seq START WITH 1 INCREMENT BY 1 MAXVALUE 99999 NOCYCLE NOCACHE  ;
+ CREATE SEQUENCE plancomments_no_seq START WITH 1 INCREMENT BY 1 MAXVALUE 99999 NOCYCLE NOCACHE  ;
+ CREATE SEQUENCE planReply_no_seq START WITH 1 INCREMENT BY 1 MAXVALUE 99999 NOCYCLE NOCACHE  ; 
+ CREATE SEQUENCE planimg_no_seq START WITH 1 INCREMENT BY 1 MAXVALUE 99999 NOCYCLE NOCACHE  ;
+
+
+insert into member values(99999, 'jakeChu', 'jakeChu', '99999', null, 'Admin'); 
+select * from member;
+
+commit;

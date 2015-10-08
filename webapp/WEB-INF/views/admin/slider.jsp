@@ -7,15 +7,15 @@
 <div id="main-slider" class="flexslider">
             <ul class="slides">
               <li>
-                <img src="assets/admin/img/slides/1.jpg" width="1130px" height="509px" alt="" />
+                <img src="/assets/admin/img/slides/1.jpg" width="1130px" height="509px" alt="" />
                 
               </li>
               <li>
-                <img src="assets/admin/img/slides/2.jpg" width="1130px" height="509px" alt="" />
+                <img src="/assets/admin/img/slides/2.jpg" width="1130px" height="509px" alt="" />
                 
               </li>
               <li>
-                <img src="assets/admin/img/slides/3.jpg" width="1130px" height="509px" alt="" />
+                <img src="/assets/admin/img/slides/3.jpg" width="1130px" height="509px" alt="" />
                 
               </li>
             </ul>

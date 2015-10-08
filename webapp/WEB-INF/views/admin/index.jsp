@@ -10,15 +10,15 @@
 <meta name="description" content="" />
 <meta name="author" content="http://bootstraptaste.com" />
 <!-- css -->
-<link href="assets/admin/css/bootstrap.min.css" rel="stylesheet" />
-<link href="assets/admin/css/fancybox/jquery.fancybox.css" rel="stylesheet">
-<link href="assets/admin/css/jcarousel.css" rel="stylesheet" />
-<link href="assets/admin/css/flexslider.css" rel="stylesheet" />
-<link href="assets/admin/css/style.css" rel="stylesheet" />
+<link href="/assets/admin/css/bootstrap.min.css" rel="stylesheet" />
+<link href="/assets/admin/css/fancybox/jquery.fancybox.css" rel="stylesheet">
+<link href="/assets/admin/css/jcarousel.css" rel="stylesheet" />
+<link href="/assets/admin/css/flexslider.css" rel="stylesheet" />
+<link href="/assets/admin/css/style.css" rel="stylesheet" />
 
 
 <!-- Theme skin -->
-<link href="assets/admin/skins/default.css" rel="stylesheet" />
+<link href="/assets/admin/skins/default.css" rel="stylesheet" />
 
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
@@ -51,7 +51,7 @@
 			<div class="col-lg-12">
 				<div class="big-cta">
 					<div class="cta-text">
-						<h2><img alt="" src="assets/admin/img/whitelogo.jpg"> 관리자 페이지 입니다.</h2>
+						<h2><img alt="" src="/assets/admin/img/whitelogo.jpg"> 관리자 페이지 입니다.</h2>
 					</div>
 				</div>
 			</div>
@@ -100,20 +100,20 @@
 	</section>
 	<c:import url="/WEB-INF/views/admin/footer.jsp"></c:import>
 </div>
-<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
+
 <!-- javascript
     ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="assets/admin/js/jquery.js"></script>
-<script src="assets/admin/js/jquery.easing.1.3.js"></script>
-<script src="assets/admin/js/bootstrap.min.js"></script>
-<script src="assets/admin/js/jquery.fancybox.pack.js"></script>
-<script src="assets/admin/js/jquery.fancybox-media.js"></script>
-<script src="assets/admin/js/google-code-prettify/prettify.js"></script>
-<script src="assets/admin/js/portfolio/jquery.quicksand.js"></script>
-<script src="assets/admin/js/portfolio/setting.js"></script>
-<script src="assets/admin/js/jquery.flexslider.js"></script>
-<script src="assets/admin/js/animate.js"></script>
-<script src="assets/admin/js/custom.js"></script>
+<script src="/assets/admin/js/jquery.js"></script>
+<script src="/assets/admin/js/jquery.easing.1.3.js"></script>
+<script src="/assets/admin/js/bootstrap.min.js"></script>
+<script src="/assets/admin/js/jquery.fancybox.pack.js"></script>
+<script src="/assets/admin/js/jquery.fancybox-media.js"></script>
+<script src="/assets/admin/js/google-code-prettify/prettify.js"></script>
+<script src="/assets/admin/js/portfolio/jquery.quicksand.js"></script>
+<script src="/assets/admin/js/portfolio/setting.js"></script>
+<script src="/assets/admin/js/jquery.flexslider.js"></script>
+<script src="/assets/admin/js/animate.js"></script>
+<script src="/assets/admin/js/custom.js"></script>
 </body>
 </html>

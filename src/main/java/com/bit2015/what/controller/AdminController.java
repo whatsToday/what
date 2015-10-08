@@ -61,13 +61,13 @@ public class AdminController {
 	}
 	}
 
-/*	// member조회
+	// member조회
 	@RequestMapping("/member12")
 	public String memberList(Model model) {
 		List<MemberVo> memberList = adminService.selectMember();
 		model.addAttribute("memberList", memberList);
 		return "/admin/member";
-	}*/
+	}
 	
 	
 	@RequestMapping("/member")
@@ -116,14 +116,14 @@ public class AdminController {
 
 	// plan 조회
 
-/*	@RequestMapping("/plan1")
+	@RequestMapping("/plan1")
 	public String planList(Model model) {
 		List<MemberVo> memberList = adminService.selectMember();
 		List<PlanVo> planList = adminService.selectPlan();
 		model.addAttribute("memberList", memberList);
 		model.addAttribute("planList", planList);
 		return "/admin/plan";
-	}*/
+	}
 	
 @RequestMapping("/plan")
 	
@@ -187,12 +187,12 @@ public class AdminController {
 		}
 	}
 
-/*	@RequestMapping("/theme1")
+	@RequestMapping("/theme1")
 	public String themeList(Model model) {
 		List<ThemeVo> themeList = adminService.selectTheme();
 		model.addAttribute("themeList", themeList);
 		return "/admin/theme";
-	}*/
+	}
 	
 	@RequestMapping("/theme")
 	public String  themeList(@RequestParam( required=false, defaultValue="1") int page, Model model) {
@@ -235,7 +235,7 @@ public class AdminController {
 		return "redirect:/admin/theme";
 	}
 
-/*	@RequestMapping("/themebox1")
+	@RequestMapping("/themebox1")
 	public String themeBoxList(Model model) {
 		List<MemberVo> memberList = adminService.selectMember();
 		List<ThemeVo> themeList = adminService.selectTheme();
@@ -244,7 +244,7 @@ public class AdminController {
 		model.addAttribute("themeList", themeList);
 		model.addAttribute("themeBoxList", themeBoxList);
 		return "/admin/themebox";
-	}*/
+	}
 	
 	@RequestMapping("/themebox")
 	public String  themeBoxList(@RequestParam( required=false, defaultValue="1") int page, Model model) {
@@ -290,12 +290,12 @@ public class AdminController {
 		return "redirect:/admin/themebox";
 	}
 
-	/*@RequestMapping("/content1")
+	@RequestMapping("/content1")
 	public String contentList(Model model) {
 		List<ContentVo> contentList = adminService.selectContent();
 		model.addAttribute("contentList", contentList);
 		return "/admin/content";
-	}*/
+	}
 	
 	@RequestMapping("/content")
 	public String  contentList(@RequestParam( required=false, defaultValue="1") int page, Model model) {
@@ -342,7 +342,7 @@ public class AdminController {
 		return "redirect:/admin/content";
 	}
 
-/*  @RequestMapping("/comments1")
+ @RequestMapping("/comments1")
 	public String commentsList(Model model) {
 		List<MemberVo> memberList = adminService.selectMember();
 		List<ContentVo> contentList = adminService.selectContent();
@@ -353,7 +353,7 @@ public class AdminController {
 		model.addAttribute("commentsList", commentsList);
 
 		return "/admin/comments";
-	}*/
+ }
 	@RequestMapping("/comments")
 	public String  commentsList(@RequestParam( required=false, defaultValue="1") int page, Model model) {
 	 	int limit=5; 
@@ -403,7 +403,7 @@ public class AdminController {
 		return "redirect:/admin/comments";
 	}
 
-/*	@RequestMapping("/follow1")
+	@RequestMapping("/follow1")
 	public String followList(Model model) {
 		List<MemberVo> memberList = adminService.selectMember();
 		List<FollowVo> followList = adminService.selectFollow();
@@ -411,7 +411,7 @@ public class AdminController {
 		model.addAttribute("memberList", memberList);
 		model.addAttribute("followList", followList);
 		return "/admin/follow";
-	}*/
+	}
 	@RequestMapping("/follow")
 	
 	public String followList(@RequestParam( required=false, defaultValue="1") int page, Model model) {
@@ -507,7 +507,7 @@ public class AdminController {
 		return "redirect:/admin/searchlist";
 	}
 
-/*	@RequestMapping("/plancomments1")
+	@RequestMapping("/plancomments1")
 	public String planCommentsList(Model model) {
 		List<MemberVo> memberList = adminService.selectMember();
 		List<PlanVo> planList = adminService.selectPlan();
@@ -517,7 +517,7 @@ public class AdminController {
 		model.addAttribute("planList", planList);
 		model.addAttribute("planCommentsList", planCommentsList);
 		return "/admin/plancomments";
-	}*/
+	}
 	@RequestMapping("/plancomments")
 	
 	public String planCommentsList(@RequestParam( required=false, defaultValue="1") int page, Model model) {
@@ -564,7 +564,7 @@ public class AdminController {
 		return "redirect:/admin/plancomments";
 	}
 
-/*	@RequestMapping("/goodplan1")
+	@RequestMapping("/goodplan1")
 	public String goodPlanList(Model model) {
 		List<GoodPlanVo> goodPlanList = adminService.selectGoodPlan();
 		List<MemberVo> memberList = adminService.selectMember();
@@ -575,7 +575,7 @@ public class AdminController {
 		model.addAttribute("goodPlanList", goodPlanList);
 
 		return "/admin/goodplan";
-	}*/
+	}
 	
 	@RequestMapping("/goodplan")
 	
@@ -621,7 +621,7 @@ public class AdminController {
 		return "redirect:/admin/goodplan";
 	}
 
-/*	@RequestMapping("/goodcontent1")
+	@RequestMapping("/goodcontent1")
 	public String goodContentList(Model model) {
 		List<ContentVo> contentList = adminService.selectContent();
 		List<MemberVo> memberList = adminService.selectMember();
@@ -630,7 +630,7 @@ public class AdminController {
 		model.addAttribute("memberList", memberList);
 		model.addAttribute("contentList", contentList);
 		return "/admin/goodcontent";
-	}*/
+	}
 	
 	@RequestMapping("/goodcontent")
 	
@@ -676,7 +676,7 @@ public class AdminController {
 		return "redirect:/admin/goodcontent";
 	}
 
-/*	@RequestMapping("/contentbox1")
+	@RequestMapping("/contentbox1")
 	public String contentBoxList(Model model) {
 		List<PlanVo> planList = adminService.selectPlan();
 		List<ContentVo> contentList = adminService.selectContent();
@@ -686,7 +686,7 @@ public class AdminController {
 		model.addAttribute("contentList", contentList);
 		model.addAttribute("contentBoxList", contentBoxList);
 		return "/admin/contentbox";
-	}*/
+	}
 	@RequestMapping("/contentbox")
 	
 	public String contentBoxList(@RequestParam( required=false, defaultValue="1") int page, Model model) {
@@ -696,6 +696,9 @@ public class AdminController {
 		List<ContentVo> contentList = adminService.selectContent();
 		List<ContentBoxVo> contentBoxList = adminService.selectContentBox();
 		
+
+		model.addAttribute("planList", planList);
+		model.addAttribute("contentList", contentList);
 	 	int listcount = contentBoxList.size();
         List<ContentBoxVo> list=adminService.selectContentBox1(page, limit);
         int maxpage=(int)((double)listcount/limit+0.95);
@@ -730,7 +733,7 @@ public class AdminController {
 		return "redirect:/admin/contentbox";
 	}
 
-	/*@RequestMapping("/planimg1")
+	@RequestMapping("/planimg1")
 	public String planImgList(Model model) {
 		List<PlanVo> planList = adminService.selectPlan();
 		List<PlanImgVo> planImgList = adminService.selectPlanImg();
@@ -738,7 +741,7 @@ public class AdminController {
 		model.addAttribute("planList", planList);
 		model.addAttribute("planImgList", planImgList);
 		return "/admin/planimg";
-	}*/
+	}
 	
 	@RequestMapping("/planimg")
 	
@@ -795,7 +798,7 @@ public class AdminController {
 
 	}
 	
-	/*@RequestMapping("/event1")
+	@RequestMapping("/event1")
 	public String eventList(Model model){
 		List<ContentVo> contentList = adminService.selectContent();
 		List<EventVo> eventList = adminService.selectEvent();
@@ -803,7 +806,7 @@ public class AdminController {
 		model.addAttribute("contentList",contentList);
 		model.addAttribute("eventList",eventList);
 		return "/admin/event";
-	}*/
+	}
 	
 	@RequestMapping("/event")
 	

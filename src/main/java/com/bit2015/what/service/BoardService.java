@@ -18,6 +18,7 @@ import com.bit2015.what.dao.MemberDao;
 import com.bit2015.what.dao.PlanCommentsDao;
 import com.bit2015.what.dao.PlanDao;
 import com.bit2015.what.dao.PlanImgDao;
+import com.bit2015.what.dao.PlanReplyDao;
 import com.bit2015.what.util.FileUploader;
 import com.bit2015.what.vo.ContentBoxVo;
 import com.bit2015.what.vo.ContentVo;
@@ -25,6 +26,7 @@ import com.bit2015.what.vo.GoodPlanVo;
 import com.bit2015.what.vo.MemberVo;
 import com.bit2015.what.vo.PlanCommentsVo;
 import com.bit2015.what.vo.PlanImgVo;
+import com.bit2015.what.vo.PlanReplyVo;
 import com.bit2015.what.vo.PlanVo;
 
 @Service
@@ -44,6 +46,8 @@ public class BoardService {
 	GoodPlanDao goodPlanDao;
 	@Autowired
 	PlanCommentsDao planCommentsDao;
+	@Autowired
+	PlanReplyDao planReplyDao;
 	
 	// 파일올리는거야
 		FileUploader ful = new FileUploader();
@@ -173,13 +177,14 @@ public class BoardService {
 					interval = ((seconds / 60)+"분 전");
 				}
 				if(seconds>3600 && seconds<=86400){
-					interval = ((seconds / 86400)+"시간 전");
+					interval = ((seconds / 3600)+"시간 전");
+					System.out.println(seconds);
 				}
 				if(seconds>86400 && seconds<=2592000){
-					interval = ((seconds / 2592000)+"일 전");
+					interval = ((seconds / 86400)+"일 전");
 				}
 				if(seconds>2592000 && seconds<=31536000){
-					interval = ((seconds / 31536000)+"달 전");
+					interval = ((seconds / 2592000)+"달 전");
 				}
 				planCommentsVo.setRegDate(interval);
 				System.out.println(planCommentsVo);
@@ -197,7 +202,54 @@ public class BoardService {
 	public void insertPlanReply(Long member_no, Long planComments_no, String message){
 		MemberVo memberVo = memberDao.getMemberVo(member_no);
 		String imageUrl = memberVo.getImageUrl();
-		/*String memberName = memberVo.get*/
+		String memberName = memberVo.getMemberName();
 		
+		PlanReplyVo planReplyVo = new PlanReplyVo();
+		planReplyVo.setMember_no(member_no);
+		planReplyVo.setPlanComments_no(planComments_no);
+		planReplyVo.setImageUrl(imageUrl);
+		planReplyVo.setMemberName(memberName);
+		planReplyVo.setMessage(message);
+		
+		planReplyDao.insertPlanReply(planReplyVo);
+	}
+	public List<PlanReplyVo> selectAllReply(){
+		Date dateNow = new Date();
+		long regDate =0;
+		List<PlanReplyVo> list = planReplyDao.selectAll();
+		List<PlanReplyVo> list1 = new ArrayList<PlanReplyVo>();
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date xxxx = new Date();
+		for(int i=0;i<list.size();i++){
+			PlanReplyVo planReplyVo = list.get(i);
+			String date = planReplyVo.getRegDate();
+			 try {
+				xxxx =format.parse(date);
+				regDate = xxxx.getTime();
+				Long seconds = (dateNow.getTime() - regDate) / 1000;
+				
+				String interval ="";
+				if(seconds<=60 &&seconds>0){
+					interval= ((seconds) + "초 전");
+				}
+				if(seconds>60 && seconds<=3600){
+					interval = ((seconds / 60)+"분 전");
+				}
+				if(seconds>3600 && seconds<=86400){
+					interval = ((seconds / 3600)+"시간 전");
+				}
+				if(seconds>86400 && seconds<=2592000){
+					interval = ((seconds / 86400)+"일 전");
+				}
+				if(seconds>2592000 && seconds<=31536000){
+					interval = ((seconds / 2592000)+"달 전");
+				}
+				planReplyVo.setRegDate(interval);
+				list1.add(planReplyVo);
+			} catch (ParseException e) {			
+				e.printStackTrace();			
+			}
+		}
+		return list1;
 	}
 }

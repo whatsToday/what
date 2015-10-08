@@ -4,13 +4,13 @@
 	<typeAlias alias="PlanReplyVo" type="com.bit2015.what.vo.PlanReplyVo"/>
 	<insert id="insert" parameterClass="PlanReplyVo">
 		<![CDATA[
-			INSERT INTO PLANREPLY VALUES(planReply_no_seq.nextval, #member_no#, #planComments_no#, #imageurl#, #memberName#, #message#, sysdate)
+			INSERT INTO PLANREPLY VALUES(planReply_no_seq.nextval, #member_no#, #planComments_no#, #imageUrl#, #memberName#, #message#, sysdate)
 		]]>
 	</insert>
 	
 	<select id="selectAll" resultClass="PlanReplyVo">
 		<![CDATA[
-			select * from planReply 
+			select * from planReply order by planReply_no asc
 		]]>
 	</select>
 	<delete id="delete" parameterClass="java.lang.Long">

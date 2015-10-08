@@ -319,13 +319,52 @@ div.commentsReply{
 		position: absolute;
 		box-shadow:  rgba(0,0,0,0.8) 0 0 0 9999px;
 }
-div.commentsReply div#viewReply{
+div#viewReplyList{
+		position: relative;
+		margin-left:10px;
+		
+}
+div.commentsReply div.viewReply{
 		border: 1px solid #000;
+		width:370px;
+		height:55px;
+		margin-bottom:2px;
+		margin-left:5px;
+		float: left;
+}
+div.commentsReply div.viewReply div.replyPhotoV{
+		float:left;
+		width:50px;
+		height:50px;
+}
+div.commentsReply div.viewReply div.replyName{
+		float:left;
+		width:60px;
+		height:20px;
+		margin-left:5px;
+		font-size:16px;
+		font-weight:bold;
+		color:#69ABED;
+}
+div.commentsReply div.viewReply div.replyMessage{
+		float:left;
+		width:210px;
+		height:20px;
+}
+div.commentsReply div.viewReply div.replyRegDate{
+		float:left;
+		width:40px;
+		height:20px;
+		font-size:11px;
+		color:#9e9e9e;
+}
+div.commentsReply div.viewReply div.replyPhotoV img{
+		width:100%;
+		height: 100%;
 }
 div.commentsReply div#writeReply{
 		padding:10px;
 		height:30px;
-		line-height: 
 }
 div.commentsReply div#writeReply input[type=text]{
 		margin-left:8px;
@@ -348,6 +387,18 @@ div.commentsReply div#replyButton{
 		margin-top:1px;
 		margin-right:1px;
 		float:right;
+		position: relative;
+}
+div.replyFn{
+		margin-top:30px;
+		margin-left:60px;
+		height: 20px;
+		}
+div.replyFn span{
+		margin-right: 10px;
+		}		
+div.replyFn a{
+		font-size:10px;
 }
 </style>
 </head>
@@ -372,13 +423,19 @@ div.commentsReply div#replyButton{
 <div id="writeComment"><div id="userName"><img src="${authUser.imageUrl}"><span>${authUser.memberName}</span></div><div id="commentText"><textarea id="commentsMessage" name="commentsMessage"></textarea></div><button onclick="insertComments(${param.plan_no})">댓글달기</button></div>
 <div id="cmtView">댓글보기</div>
 <c:forEach var="q" items="${planComments}">
-<div id="viewComment"><div id="userName"><a href="/mycontent?member_no=${q.member_no}"><img src="${q.imageUrl}"><span>${q.memberName}</span></a></div><div id="commentText"><span id="pMessage">${q.message}</span><span id="pRegDate">${q.regDate}</span></br><c:if test="${not empty planReplyList}"><span id="viewComments"><a href="javascript:viewPlanReply(${q.planComments_no})">답글보기</a></span></c:if><span id="writeComments"><a href="javascript:writePlanReply(${q.planComments_no})">답글쓰기</a></span></div>
+<div id="viewComment"><div id="userName"><a href="/mycontent?member_no=${q.member_no}"><img src="${q.imageUrl}"><span>${q.memberName}</span></a></div><div id="commentText"><span id="pMessage">${q.message}</span><span id="pRegDate">${q.regDate}</span></br><c:if test="${not empty planReply}"><span id="viewComments"><a href="javascript:viewPlanReply(${q.planComments_no})">답글보기</a></span></c:if><span id="writeComments"><a href="javascript:writePlanReply(${q.planComments_no})">답글쓰기</a></span></div>
 <c:if test="${authUser.member_no==q.member_no}">
 <div id="deleteComments"><a href="javascript:deleteComments(${q.planComments_no},${param.plan_no})"><img src="/assets/img/button/trash.png"></a></div>
 <div class="commentsReply" id="commentsReply${q.planComments_no}">
 	<div id="replyButton"><a href="javascript:closeReply(${q.planComments_no})"><img src="/assets/img/button/x.png"></a></div>
-	<div id="viewReply"><span id="replyPhotoV">사진</span><span id="replyName">이름</span><span id="replyMessage">내용</span><span id="replyRegDate">날짜</span></div>
-	<div id="writeReply"><div id="replyPhotoW"><img src="${authUser.imageUrl}"></div><span><input type="text" placeholder="답글달기"></span><div id="writeButton"><a href="javascript:writeReply(${q.planComments_no})"><img src="/assets/img/button/write.png"></a></div></div>
+	<div id="viewReplyList">
+	<c:forEach var="k" items="${planReply}">
+	<c:if test="${q.planComments_no == k.planComments_no}">
+	<div class="viewReply"><div class="replyPhotoV"><img src="${k.imageUrl}"></div><div class="replyName">${k.memberName}</div><div class="replyMessage">${k.message}</div><div class="replyRegDate">${k.regDate}</div><div class="replyFn"><span><a>답글달기</a></span><span><a>삭제</a></span></div></div>
+	</c:if>
+	</c:forEach>
+	</div>
+	<div id="writeReply"><div id="replyPhotoW"><img src="${authUser.imageUrl}"></div><span><input id="replyMessage${q.planComments_no}" type="text" placeholder="답글달기"></span><div id="writeButton"><a href="javascript:writeReply(${q.planComments_no})"><img src="/assets/img/button/write.png"></a></div></div>
 	</div>
 </c:if>
 </div>
@@ -409,16 +466,15 @@ function deleteComments(num,num1){
 		location.href="/board/deleteComments?planComments_no="+num+"&plan_no="+num1;
 }
 function viewPlanReply(num){
-	
+	$("#commentsReply"+num).toggle();
 }
 function writePlanReply(num){
 	$("#commentsReply"+num).toggle();
-	var overlay = $("<div id='lean_overlay'></div>");
-	$("body").append(overlay);
-	
 }
 function writeReply(num){
-	console.log(num)
+	var message= $("#replyMessage"+num).val();
+	console.log(message)
+	location.href="/board/insertReply?planComments_no="+num+"&message="+message+"&plan_no="+${param.plan_no};
 }
 function closeReply(num){
 	$("#commentsReply"+num).hide();

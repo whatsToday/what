@@ -18,6 +18,7 @@ import com.bit2015.what.vo.ContentVo;
 import com.bit2015.what.vo.MemberVo;
 import com.bit2015.what.vo.PlanCommentsVo;
 import com.bit2015.what.vo.PlanImgVo;
+import com.bit2015.what.vo.PlanReplyVo;
 import com.bit2015.what.vo.PlanVo;
 
 @Controller
@@ -32,10 +33,12 @@ public class BoardController {
 		PlanVo planVo = boardService.getPlanVo(plan_no);
 		List<PlanImgVo> list = boardService.selectPlan(plan_no);
 		List<PlanCommentsVo> list1 = boardService.selectPlanComments(plan_no);
+		List<PlanReplyVo> list2 = boardService.selectAllReply();
 		int countGood = boardService.selectGoodPlan(plan_no);
 		model.addAttribute("planBoard", planVo);
 		model.addAttribute("planImg", list);
 		model.addAttribute("planComments", list1);
+		model.addAttribute("planReply", list2);
 		model.addAttribute("countGood",countGood);
 		return "/board/index";
 	}
@@ -132,6 +135,13 @@ public class BoardController {
 	@RequestMapping("/deleteComments")
 	public String planCommentsDelete(@RequestParam Long planComments_no,@RequestParam Long plan_no){
 		boardService.deleteComments(planComments_no);
+		return "redirect:/board?plan_no="+plan_no;
+	}
+	@RequestMapping("/insertReply")
+	public String replyInsert(@RequestParam Long planComments_no, HttpSession session, @RequestParam String message, @RequestParam Long plan_no){
+		MemberVo memberVo = (MemberVo)session.getAttribute("authUser");
+		boardService.insertPlanReply(memberVo.getMember_no(), planComments_no, message);
+		
 		return "redirect:/board?plan_no="+plan_no;
 	}
 }

@@ -24,6 +24,7 @@
 <div id="wrapper">
 	<!-- start header -->
 	<c:import url="/WEB-INF/views/admin/header.jsp"></c:import>
+	<c:import url="/WEB-INF/views/admin/admin_header.jsp"></c:import>
 	<!-- end header -->
 	<section id="featured">
 	<!-- start slider -->

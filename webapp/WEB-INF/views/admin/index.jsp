@@ -60,7 +60,7 @@
 	</section>
 	  <form action="/admin/login"> 
 	   <div id="joinTable" align="center" >
-	      <table>
+	 <!--      <table>
 	          <tr>
 	             <td>아이디</td>
 	             <td><input type="text" id="eamil" name="email" value="" placeholder="아이디를 입력하세요" > </td>
@@ -74,7 +74,7 @@
 	                <input type="submit" value="확인" > 
 	             </td>
 	          </tr>
-	      </table>
+	      </table> -->
 	   </div>
 	   </form>
 

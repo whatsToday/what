@@ -57,9 +57,9 @@ public class HeaderController {
 	@RequestMapping("/checkId")
 	@ResponseBody
 	public Map checkId(@RequestParam String email){
-		List<MemberVo> list = headerService.selectEmail(email);
+		MemberVo vo = headerService.selectEmail(email);
 		Map<String, String> map = new HashMap<String, String>();
-		if(list.isEmpty()){
+		if(vo == null){
 			map.put("exist", "no exist");
 			return map;
 		}else{

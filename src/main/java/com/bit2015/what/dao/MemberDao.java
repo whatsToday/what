@@ -70,6 +70,7 @@ public void facebookJoin(String email, String memberName, String imageUrl) {
 }
 public MemberVo checkEmail(String email) {
 	MemberVo vo = (MemberVo) sqlMapClientTemplate.queryForObject("member.checkEmail", email);
+	System.out.println(vo);
 	return vo;
 }
 }

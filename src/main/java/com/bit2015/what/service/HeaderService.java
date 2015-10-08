@@ -1,5 +1,7 @@
 package com.bit2015.what.service;
 
+
+
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -42,10 +44,10 @@ public MemberVo gradeCheck(HttpSession session, MemberVo memberVo) {
 	return memberVo2;
 }
 
-public List<MemberVo> selectEmail(String email) {
-	List<MemberVo> list = (List<MemberVo>) memberDao.checkEmail(email);
-	System.out.println(list);
-	return list;
+public MemberVo selectEmail(String email) {
+	MemberVo vo = memberDao.checkEmail(email);
+	System.out.println(vo);
+	return vo;
 }
 
 }

@@ -7,63 +7,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>오늘 뭐하지</title>
-
-<script type="text/javascript">
-	$("#joinForm").submit(function(){
-		var $password = $("#password");
-		var password = $password.val();
-		if(password==""){
-			alert("패스워드를 입력해 주세요");
-			$password.focus();
-			return false;	
-		}
-		
-		var $email = $("#email");
-		var email = $email.val();
-		if(email ==""){
-			alert("이메일을 입력해 주세요");
-			$email.focus();
-			return false;
-		}
-/* 	    var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-		   if( re.test(email)==false){
-				alert("유효한 이메일 형식이 아닙니다");
-				$email.focus();
-				return false;	
-		   }		 
- */		return true;
-	});
-</script>
-
-
-
-<!--     <script>
-    function checkIdValid(){
-		var $email = $("#email");
-		var email = $email.val();
-		if (email == "") {
-			return;
-		}
-		$.ajax({
-			type : 'get',
-			url : '/checkId',
-			data : {
-				email : email
-			},
-			dataType : 'json',
-			success : function(response) {
-				if (response.exist == "exist") {
-					alert("이미 존재합니다.");
-					availId = "no";
-				}
-				if (response.exist == "no exist") {
-					alert("사용가능합니다.");
-					availId = "yes";
-				}
-			}
-		});
-	}
-    </script> -->
+<link href="/assets/css/main/ws.css" rel="stylesheet" />
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/assets/js/board/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.leanModal.min.js"></script>
 
 
 
@@ -154,6 +101,11 @@ input:focus{
 .blockinput{
   border-bottom: 1px solid #BDBFC2;
   border-top: 1px solid #FFFFFF;
+}
+.blockinput input{
+	width: 100%;
+	height : 50px;
+	text-align : center;
 }
 .blockinput:first-child{
   border-top: 0;
@@ -252,11 +204,6 @@ hr{
 </style>
 
 </head>
-<link href="/assets/css/main/ws.css" rel="stylesheet" />
-
-<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="/assets/js/board/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="/assets/js/jquery.leanModal.min.js"></script>
 <script>
 if(${param.a}='error'){
 	  alert("아이디와 비밀번호가 틀렸습니다!");
@@ -403,13 +350,14 @@ display: none;
 				  <form action="/join" method="post" id="joinForm">
 				    <div class="input">
 				      <div class="blockinput">
-				        <i class="icon-envelope-alt"></i><input type="mail" placeholder="Email" name="email">
+				        <input type="mail" placeholder="Email" name="email" id="email">
 				      </div>
 				      <div class="blockinput">
-				        <i class="icon-unlock"></i><input type="password" placeholder="Password" name="password">
+				        <input type="password" placeholder="Password" name="password" id="password">
 				      </div>
 				    </div>
-				   <!--  <button id="checkId" onclick="checkIdValid()" style="height:30px;font-size:14px;margin-bottom:-10px">email check</button> -->
+				    <input type="button" id="checkId" value="email check" onclick="checkIdValid()">
+					 <!-- <button id="checkId" onclick="checkIdValid()" style="height:30px;font-size:14px;margin-bottom:-10px">email check</button> -->
 				    <button type="submit">Sign in</button>
 				  </form>
 			   <div style="text-align:right;margin-top:20px;font-family:''맑은 고딕;"><a href="#" onclick="$('#joinModal').hide();$('#login').click();">로그인</a></div>
@@ -437,10 +385,10 @@ display: none;
 				  <form action="/login" method="post">
 				    <div class="input">
 				      <div class="blockinput">
-				        <i class="icon-envelope-alt"></i><input type="mail" placeholder="Email" name="email">
+				        <input type="mail" placeholder="Email" name="email">
 				      </div>
 				      <div class="blockinput">
-				        <i class="icon-unlock"></i><input type="password" placeholder="Password" name="password">
+				        <input type="password" placeholder="Password" name="password">
 				      </div>
 				    </div>
 				    <button type="submit">Login</button>
@@ -463,6 +411,66 @@ display: none;
 			    </div>
 	</div>
 
+
+<script type="text/javascript">
+	$("#joinForm").submit(function(){
+		var $password = $("#password");
+		var password = $password.val();
+		if(password==""){
+			alert("패스워드를 입력해 주세요");
+			$password.focus();
+			return false;	
+		}
+		
+		var $email = $("#email");
+		var email = $email.val();
+		if(email ==""){
+			alert("이메일을 입력해 주세요");
+			$email.focus();
+			return false;
+		}
+	    var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+		   if( re.test(email)==false){
+				alert("유효한 이메일 형식이 아닙니다");
+				$email.focus();
+				return false;	
+		   }		 
+		return true;
+	});
+</script>
+    <script>
+    function checkIdValid(){
+		var $email = $("#email");
+		var email = $email.val();
+		if (email == "") {
+			return;
+		}
+		$.ajax({
+			type : 'get',
+			url : '/checkId',
+			data : {
+				email : email
+			},
+			dataType : 'json',
+			success : function(response) {
+				if (response.exist == "exist") {
+					alert("이미 존재합니다.");
+					availId = "no";
+				}
+				if (response.exist == "no exist") {
+					alert("사용가능합니다.");
+					availId = "yes";
+				}
+			}
+		});
+	}
+    </script>
+
+
+
+
+
+
 <script type="text/javascript">
   $('a[rel*=leanModal]').leanModal();
   $("#login").click();
@@ -472,5 +480,7 @@ $('#logout').click(function(){
 	alert("로그아웃 되었습니다.");
 });
 </script>
+
+
 </body>
 </html>

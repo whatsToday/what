@@ -415,6 +415,17 @@ public class MainService {
 		planDao.insert(pvo);
 
 	}
+
+	public void deletePlan(HttpSession session, Long plan_no) {
+		MemberVo memberVo = (MemberVo) session.getAttribute("authUser");
+		long member_no = memberVo.getMember_no();
+		PlanVo planVo =planDao.selectVo(plan_no);
+		
+		if (planVo.getMember_no() == member_no) {
+			planDao.delete(plan_no);
+		}
+		
+	}
 	
 }// main Service
 

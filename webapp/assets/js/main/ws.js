@@ -246,8 +246,38 @@ function createPlan(){
 
 //deletePlan
 function deletePlan(){
+	var $pName = $( "#plan_no option:selected" ).text();
+	var $pNo = $( "#plan_no option:selected" ).val();
 	
-	console.log("getin");
+	var ask = confirm($pName+"(을)를 지우시겠습니까?");
+	
+	if(ask){
+		
+		$.ajax({
+			url : "/deletePlan",
+			data : {
+				plan_no : $pNo,
+			},
+			success : function(){
+				
+				var se = document.getElementById('plan_no');
+				//se 초기화
+				while (se.firstChild) {
+					se.removeChild(se.firstChild);
+				}
+				getMyPlan();
+				
+			},
+			error:function(jqXHR, textStatus, errorThrown){
+				alertModal('에러 발생~~ \n' + textStatus + " : " + errorThrown);
+	            self.close();
+	        }
+		});
+		
+	}else{
+		console.log("취소");
+	}
+	
 	
 }
 

@@ -179,10 +179,12 @@ public class MainController {
 	@RequestMapping("/createPlan")
 	@ResponseBody
 	public void createPlan(HttpSession session) {
-		
 		mainService.createPlan(session);
-		
-		
 	}
 	
+	@RequestMapping("/deletePlan")
+	@ResponseBody
+	public void deletePlan(HttpSession session, @RequestParam Long plan_no) {
+		mainService.deletePlan(session, plan_no);
+	}
 }

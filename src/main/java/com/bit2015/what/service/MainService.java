@@ -266,7 +266,6 @@ public class MainService {
 	}
 
 	public void join(HttpSession session, MemberVo memberVo) {
-		//memberVo.setMemberGrade('guest');
 		
 		memberDao.insert(memberVo);
 		session.setAttribute("authUser", memberVo);
@@ -395,6 +394,26 @@ public class MainService {
 	public void textSearch(Map<String, Object> map, String text) {
 		List<ThemeVo> themeList = themeDao.selectSearch(text);
 		map.put("themeList", themeList);
+	}
+
+	public void createPlan(HttpSession session) {
+
+		MemberVo memberVo = (MemberVo) session.getAttribute("authUser");
+
+		String size = String.valueOf(planDao.getUserPlan(
+				memberVo.getMember_no()).size() + 1);
+
+		PlanVo pvo = new PlanVo();
+		pvo.setMember_no(memberVo.getMember_no());
+		pvo.setPlanName(memberVo.getMemberName() + "님의 " + size + "번째 일정");
+		pvo.setMemberName(memberVo.getMemberName());
+
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		Date today = Calendar.getInstance().getTime();
+		String planDate = df.format(today);
+		pvo.setPlanDate(planDate);
+		planDao.insert(pvo);
+
 	}
 	
 }// main Service

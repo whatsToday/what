@@ -88,7 +88,8 @@
 					<div class="wsTable effect">
 						<table>
 							<tr>
-								<td class="wshd">새 일정 추가하기</td><td class="wshd">일정 삭제하기</td>
+								<td class="wshd" onclick="createPlan();">새 일정 추가하기</td>
+								<td class="wshd" onclick="deletePlan();">일정 삭제하기</td>
 							</tr>
 						</table>
 					</div>

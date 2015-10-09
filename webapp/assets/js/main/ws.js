@@ -3,11 +3,6 @@ var myLoc =false;
 var obefore = "jakechu";
 var userLocation;
 
-$('#showAll').click(function(){
-	console.log("jack");
-	
-});
-
 function checkOnOff(){
 		var sa = document.getElementById('showAll');
 		var wa = document.getElementById('wholeAll');
@@ -70,7 +65,6 @@ function showHotKey(){
 }
 	
 function insertKey(keyword){
-console.log(keyword);	
 	$.ajax({
 		url: "/insertKey",
 		data:{
@@ -79,7 +73,6 @@ console.log(keyword);
 			lng : userLocation.getLng()
 		},
 		success: function(response){
-			console.log("insertKey");
 			
 		},
 		error:function(jqXHR, textStatus, errorThrown){
@@ -101,8 +94,6 @@ function themeSearch(themeName) {
 				
 			}else if(themeName=="wholeAll"){
 				var themeList = document.getElementsByClassName("themeClass");
-				
-				console.log(themeList[0].textContent);
 				
 				 ps.keywordSearch( themeList[0].textContent, placesSearchCB, {
 						location: userLocation,
@@ -193,7 +184,7 @@ function changeLocation(){
 		};
 
 		function error(err) {
-		  console.warn('ERROR(' + err.code + '): ' + err.message);
+			alertModal('에러 발생~~ \n' + textStatus + " : " + errorThrown);
 		};
 		
 		
@@ -217,7 +208,6 @@ function getMyPlan() {
 	
 					se.appendChild(op);
 				}
-//				console.log(se.childNodes.item(0));
 				if(se.value!=-1){
 					se.childNodes.item(0).selected = true;
 					callContents(se.value);
@@ -230,10 +220,41 @@ function getMyPlan() {
 	});// end ajax1
 }
 		
+//createPlan
+function createPlan(){
+		
+	$.ajax({
+		type : "Post",
+		url : "/createPlan",
+		success : function(response) {
+			
+			var se = document.getElementById('plan_no');
+			while (se.firstChild) {
+				se.removeChild(se.firstChild);
+			}
+			getMyPlan();
+			
+		},
+		error : function(jqXHR, textStatus, errorThrown) {
+			alertModal('에러 발생~~ \n' + textStatus + " : " + errorThrown);
+			self.close();
+		}
+	});// end ajax1
+	
+	
+}
+
+//deletePlan
+function deletePlan(){
+	
+	console.log("getin");
+	
+}
+
 // insertPlan
 function insertPlan(index){
-	plan_no = document.getElementById('plan_no').value;
-	console.log(plan_no);
+	var plan_no = document.getElementById('plan_no').value;
+	
 	items=placesArray[index];
 	
 	$.ajax({
@@ -267,9 +288,8 @@ function insertPlan(index){
 			}else{
 				//일정을 선택해있었을때
 				callContents(plan_no);
-				console.log(plan_no);
-				console.log(response.plan_no);
 			}
+			infowindow2.close();
 
 		},
 		error:function(jqXHR, textStatus, errorThrown){
@@ -302,7 +322,6 @@ items=placesArray[index];
 			addressBCode : items.addressBCode
 		},
 		success: function(response){
-			console.log("진입");
 			location.href = "/contentview?content_no="+response.contentVo.content_no;
 		},
 		error:function(jqXHR, textStatus, errorThrown){
@@ -329,7 +348,6 @@ function callContents(plan_no){
 			var last = sP.childNodes.length;
 			for ( var j=last-1 ; j > 1 ;j--){
 				node = sP.childNodes.item(j); 
-				//console.log(node.nodeName);
 				if(node.nodeName=='TR') {
 					sP.removeChild(node);
 				}
@@ -396,7 +414,9 @@ function placesNear(){
 				}
 				checkOnOff();
 			},
-			error: function (xhr, textStatus, errorThrown) { console.log(errorThrown); },
+			error: function (xhr, textStatus, errorThrown) { 
+				alertModal('에러 발생~~ \n' + textStatus + " : " + errorThrown);
+			},
 		});
 	
 }

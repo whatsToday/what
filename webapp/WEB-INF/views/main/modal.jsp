@@ -134,7 +134,7 @@ function checkTm(theme){
 		}else {
 		 	if(checkList.length <= 4){
 				theme.className += ' checkTm';	
- 			}else{ alertModal("더 고르면 안 예뻐요");}
+ 			}else{ alert("5개 이상 더 고르면 안 예뻐요");}
 		}
 }
   ${ themeBoxList}  

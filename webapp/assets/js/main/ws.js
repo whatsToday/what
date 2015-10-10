@@ -382,15 +382,27 @@ function callContents(plan_no){
 					sP.removeChild(node);
 				}
 			}
+//			while (se.firstChild) {
+//				se.removeChild(se.firstChild);
+//			}
 			
-			for (var i in response.contentList) {
-				var planLi = document.createElement('tr');
-				planStr ='<td>'+response.contentList[i].title+'</td>';
-				
-				planLi.innerHTML = planStr;
-				
-				sP.appendChild(planLi);
-			}
+				if(response.contentList.length != 0){
+					console.log("1");
+					for (var i in response.contentList) {
+						var planLi = document.createElement('tr');
+						var planStr ='<td>'+response.contentList[i].title+'</td>';
+						
+						planLi.innerHTML = planStr;
+						sP.appendChild(planLi);
+					}
+				}else{
+					console.log("2");
+						var planLi = document.createElement('tr');
+						var planStr ='<td  height="100px">등록된 일정이 없습니다</td>';
+						
+						planLi.innerHTML = planStr;
+						sP.appendChild(planLi);
+				}
 
 		},
 		error:function(jqXHR, textStatus, errorThrown){

@@ -95,10 +95,10 @@
 					</div>
 				<hr>
 				</div>
-				<div class="ivory">
-					<hr>
-					<div id="showHot"  class="wsTable wsBox"></div>
-					<hr>
+				<div class="ivory wsTable">
+					<div id="showHot" ></div>
+					<div id="showHotToday" ></div>
+					<div id="TodayIssue" ></div>
 				</div>
 	</div><!-- 	end container -->
 <c:import url="/WEB-INF/views/include/footer.jsp"/>
@@ -128,5 +128,7 @@ $("#keyword").keyup(function (e) {
     	$("#areaSearch").click();
     }
 });
+
+
 </script>
 </html>

@@ -146,6 +146,25 @@ public class MainController {
 		
 		return map;
 	}
+	@RequestMapping("/showHotKeyToday")
+	@ResponseBody
+	public Map<String, Object> showHotKeyToday(@RequestParam Double lat, @RequestParam Double lng, @RequestParam(required=false, defaultValue="10") Double distance) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		mainService.showHotKeyToday(map, lat, lng, distance);
+		
+		return map;
+	}
+	
+	@RequestMapping("/TodayIssue")
+	@ResponseBody
+	public Map<String, Object> TodayIssue() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		mainService.TodayIssue(map);
+		
+		return map;
+	}
 	
 	@RequestMapping("/markerColor")
 	@ResponseBody
@@ -186,5 +205,19 @@ public class MainController {
 	@ResponseBody
 	public void deletePlan(HttpSession session, @RequestParam Long plan_no) {
 		mainService.deletePlan(session, plan_no);
+	}
+	
+	@RequestMapping("/testws")
+	public String test(Model model, HttpSession session) {
+		
+		//authUser의 기존 관심사 가져오는중
+		mainService.memberTheme(model, session);
+
+		//선택창에 띄울 테마들 다 가져오는중
+		mainService.callTheme(model);
+		//themeBox 뒤지는 중
+		mainService.checkThemeBox(model,session);
+		
+		return "/main/test";
 	}
 }

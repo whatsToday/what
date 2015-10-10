@@ -3,6 +3,13 @@ var myLoc =false;
 var obefore = "jakechu";
 var userLocation;
 
+function initKey(){
+	
+	showHotKey();
+	showHotKeyToday();
+	TodayIssue();
+}
+
 function checkOnOff(){
 		var sa = document.getElementById('showAll');
 		var wa = document.getElementById('wholeAll');
@@ -63,7 +70,59 @@ function showHotKey(){
         }//end ajax
 	});
 }
+function showHotKeyToday(){
+	var sH = document.getElementById('showHotToday');
 	
+	$.ajax({
+		url: "/showHotKeyToday",
+		data:{
+			lat : userLocation.getLat(),
+			lng : userLocation.getLng(),
+			distance : circle.getRadius()/1000
+		},
+		success: function(response){
+			
+			var keys = "<table><tr><th colspan='5' class='wshd'>주변 오늘 핫 키워드</th></tr>";
+			
+			for (var i = 0; i < response.searchList.length; i++) {
+				keys += "<tr><td>"+(i+1)+"</td><td colspan='4'>"+response.searchList[i]+"</td></tr>";
+			}
+			keys +="</tr></table>"; 
+			
+			sH.innerHTML= keys;
+			
+		},
+		error:function(jqXHR, textStatus, errorThrown){
+			alertModal('에러 발생~~ \n' + textStatus + " : " + errorThrown);
+            self.close();
+        }//end ajax
+	});
+}
+
+function TodayIssue(){
+	var sH = document.getElementById('TodayIssue');
+	
+	$.ajax({
+		url: "/TodayIssue",
+		success: function(response){
+			
+			var keys = "<table><tr><th colspan='5' class='wshd'>전국 오늘 핫 키워드</th></tr>";
+			
+			for (var i = 0; i < response.searchList.length; i++) {
+				keys += "<tr><td>"+(i+1)+"</td><td colspan='4'>"+response.searchList[i]+"</td></tr>";
+			}
+			keys +="</tr></table>"; 
+			
+			sH.innerHTML= keys;
+			
+		},
+		error:function(jqXHR, textStatus, errorThrown){
+			alertModal('에러 발생~~ \n' + textStatus + " : " + errorThrown);
+            self.close();
+        }//end ajax
+	});
+}
+
 function insertKey(keyword){
 	$.ajax({
 		url: "/insertKey",
@@ -151,7 +210,7 @@ function changeLocation(){
 	  circle.setMap(map);	
 
 	  
-	  showHotKey();
+	  initKey();
 }
 
 
@@ -176,7 +235,7 @@ function changeLocation(){
 			circle.setMap(map);	
 			
 			
-			showHotKey();
+			initKey();
 			//places near
 		  placesNear();
 		  

@@ -14,6 +14,13 @@
        SELECT * FROM SEARCHLIST
       ]]>
 	</select>
+	
+	<select id="selectToday" resultClass="java.lang.String">
+      <![CDATA[
+       SELECT search 
+       FROM 	(select * from SEARCHLIST where trunc(searchDate) = trunc(sysdate))
+      ]]>
+	</select>
 
 	<delete id="delete" parameterClass="java.lang.Long">
       <![CDATA[
@@ -56,7 +63,24 @@
 	where rownum<=10
       ]]>
 	</select>
-	<!-- and trunc(searchDate) = trunc(sysdate) -->
+		<select id="selectHotKeyToday" parameterClass="java.util.Map"
+		resultClass="java.lang.String">
+      <![CDATA[
+   	select search 
+	from 	(select search, count(search)as cnt
+		from searchlist
+		where	 	6371 * ACOS(
+					COS( #lat# * 0.017453293 )
+					* COS( latitude * 0.017453293 )
+					* COS( ( longitude * 0.017453293) - (#lng# * 0.017453293))
+					+ SIN( #lat# * 0.017453293 )
+					* SIN( latitude * 0.017453293 )
+			) <= #distance#
+		and trunc(searchDate) = trunc(sysdate)
+		group by search order by cnt desc) b
+	where rownum<=10
+      ]]>
+	</select>
 
 
 	<!-- 페이징처리 -->

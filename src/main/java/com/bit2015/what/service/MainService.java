@@ -358,6 +358,19 @@ public class MainService {
 		List<String> searchList = searchListDao.selectHotKey(lat,lng,distance);
 		map.put("searchList", searchList);
 	}
+	public void showHotKeyToday(Map<String, Object> map, Double lat,
+			Double lng, Double distance) {
+		
+		List<String> searchList = searchListDao.selectHotKeyToday(lat,lng,distance);
+		map.put("searchList", searchList);
+	}
+
+	public void TodayIssue(Map<String, Object> map) {
+		
+		List<String> searchList = searchListDao.selectToday();
+		map.put("searchList", searchList);
+		
+	}
 
 	public void markerColor(Map<String, Object> map, HttpSession session,
 			String id) {
@@ -426,6 +439,7 @@ public class MainService {
 		}
 		
 	}
+
 	
 }// main Service
 

@@ -67,4 +67,18 @@ public class SearchListDao {
 	  return list;
   }
   
+  public List<String> selectHotKeyToday(Double lat, Double lng, Double distance) {
+	  Map<String, Object> map= new HashMap<String, Object>();
+		map.put("lat", lat);
+		map.put("lng", lng);
+		map.put("distance", distance);
+		
+	  List<String> list = sqlMapClientTemplate.queryForList("searchList.selectHotKeyToday", map);
+	  return list;
+  }
+public List<String> selectToday() {
+	 List<String> list = sqlMapClientTemplate.queryForList("searchList.selectToday");
+	return list;
+}
+  
 }

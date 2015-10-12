@@ -463,8 +463,23 @@ function callContents(plan_no){
 				if(response.contentList.length != 0){
 					console.log("1");
 					for (var i in response.contentList) {
+						console.log(response.contentList[i]);
 						var planLi = document.createElement('tr');
-						var planStr ='<td>'+response.contentList[i].title+'</td>';
+						//
+						var planStr ='<td><table><tr><td colspan="2" class="wshd">'+response.contentList[i].title+'</td></tr>';
+						
+							planStr +='<tr><td rowspan="3">';
+							if(response.contentList[i].imagUrl){
+								planStr +='<img height="130px" src="'+response.contentList[i].imagUrl+'" alt="사진이 없습니다"></td>';
+							}else{
+								planStr +='<img height="130px" src="/product-images/20159120531936.png" alt="사진이 없습니다"></td>';
+							}
+							planStr +='<td>'+response.contentList[i].newAddress+'</td></tr>';
+							planStr +='<tr><td>'+response.contentList[i].phone+'</td></tr>';
+							planStr +='<tr><td><a href="'+response.contentList[i].placeUrl+'">홈페이지로 이동</a></td></tr>';
+						
+							planStr +='</table></td>';
+						
 						
 						planLi.innerHTML = planStr;
 						sP.appendChild(planLi);

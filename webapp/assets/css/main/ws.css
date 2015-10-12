@@ -53,12 +53,18 @@ border : 2px solid #4396E8;
 	color: #fff;
  	background: #69ABED;
 }
+.wshd2{
+	background: #9DD4F0;
+}
 
 
 
 .wshd select{
 	width:100%;
 	color:#aaa;
+}
+.wshd table {
+	background : #fff;
 }
 .wsBox {
 	width:20%;

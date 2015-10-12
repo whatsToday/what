@@ -47,15 +47,15 @@ public class SearchListDao {
   public void delete(long searchList_no){
 	  sqlMapClientTemplate.delete("searchList.delete",searchList_no);
   }
-  public List<SearchListVo> selectAllByLoc(Double lat, Double lng, Double distance) {
-	  Map<String, Object> map= new HashMap<String, Object>();
-		map.put("lat", lat);
-		map.put("lng", lng);
-		map.put("distance", distance);
-		
-	  List<SearchListVo> list = sqlMapClientTemplate.queryForList("searchList.selectAllByLoc", map);
-	  return list;
-  }
+//  public List<SearchListVo> selectAllByLoc(Double lat, Double lng, Double distance) {
+//	  Map<String, Object> map= new HashMap<String, Object>();
+//		map.put("lat", lat);
+//		map.put("lng", lng);
+//		map.put("distance", distance);
+//		
+//	  List<SearchListVo> list = sqlMapClientTemplate.queryForList("searchList.selectAllByLoc", map);
+//	  return list;
+//  }
   
   public List<String> selectHotKey(Double lat, Double lng, Double distance) {
 	  Map<String, Object> map= new HashMap<String, Object>();

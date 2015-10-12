@@ -8,13 +8,11 @@
         <div class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+                 
                     <a class="navbar-brand" href="/admin"><img alt="" src="/assets/admin/img/logo.jpg"></a>
                 </div>
+               
+               <%-- <c:when test=""> --%>
                 <div class="navbar-collapse collapse ">
                     <ul class="nav navbar-nav">
                         <li><a href="/admin/member">가입자 명단</a></li>
@@ -46,6 +44,7 @@
                         <li><a href="/admin/event">이벤트</a></li>
                     </ul>
                 </div>
+                <%-- </c:when> --%>
             </div>
         </div>
 	</header>

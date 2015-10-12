@@ -154,21 +154,24 @@ function displayPlaces(places) {
             	displayInfowindow2(marker, items, num);//index추가할까
             };
             
-            daum.maps.event.addListener(map, 'click',
-            		function(){
-            	infowindow.close();
-            	infowindow2.close();
-            });
-            
             
         })(marker, places[i], i);
-
+        
         fragment.appendChild(itemEl);
         
-        
-        
-       
     }
+    
+    daum.maps.event.addListener(map, 'click',
+    		function(){
+    	infowindow.close();
+    	infowindow2.close();
+    });
+    
+    daum.maps.event.addListener(map, 'rightclick', function(mouseEvent) {
+        userLocation = mouseEvent.latLng;
+        changeLocation();
+    });
+    ///////////
 
     listEl.appendChild(fragment);
     menuEl.scrollTop = 0;

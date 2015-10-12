@@ -1,6 +1,6 @@
 var nearOn = false;
 var myLoc =false;
-var obefore = "jakechu";
+var obefore = "";
 var userLocation;
 var TOP10 = 10; 
 
@@ -69,15 +69,11 @@ function checkOnOff(){
 
 function markTheme(Obj){
 	var ob = document.getElementById(Obj.id);
-	ob.className += " markTheme";
-
-	if(obefore !="jakechu"){
-		obefore = document.getElementById(obefore);
-		if(obefore.className.indexOf("markTheme") > -1 ){
-			obefore.className = obefore.className.split(' ')[0];
-		}
+	var themeClass = document.getElementsByClassName('markTheme');
+	for ( var k in themeClass) {
+		themeClass[k].className="themeClass"
 	}
-	obefore = Obj.id;
+	ob.className += " markTheme";
 }
 
 function insertKey(keyword){
@@ -171,9 +167,6 @@ function themeSearch(Obj) {
 }
 
 function changeLocation(){
-	myLoc=false;
-	
-	  userLocation=map.getCenter();
 	  map.setCenter(userLocation);
 	  
 	  var beforeRadius = circle.getRadius();
@@ -184,6 +177,9 @@ function changeLocation(){
 
 	  
 	  initKey();
+	  
+	  placesNear();
+	  
 }
 
 

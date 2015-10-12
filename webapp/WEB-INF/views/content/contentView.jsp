@@ -15,6 +15,29 @@
 <!--css -->
 <link href="/assets/css/common.css" rel="stylesheet" type="text/css" />
 
+
+<style>
+
+button{
+  background: #4291ca;
+  border-radius: 2px;
+  border:0;
+  border-top: 1px solid #9ed2f8;
+  box-shadow: 0 0 0 1px #247ab8, 0 2px 2px #808389;
+  color: #FFFFFF;
+  text-shadow: 0 1px 2px #21756A;
+}
+button:hover{
+ background: linear-gradient(to bottom, #4096d3 0%,#3283be 100%);  
+}
+button:active{
+  box-shadow: inset 0 0 5px #000;
+  background: linear-gradient(to bottom, #3283be 0%,#4096d3 100%); 
+}
+
+</style>
+
+
 </head>
 <body>
 <div id="wrapper">
@@ -23,7 +46,14 @@
 	<div class="container">
 		<div style="margin:auto;width:1000px;margin-bottom:50px;margin-top:50px">
 		<form method="post" action="/commentwrite">
-			<img src="/assets/img/noimage.jpg" style="width:300px;padding:0px;border:solid 1px #e1e1e1;float:left;margin-bottom:20px">
+			<c:choose>
+			<c:when test="${empty contentVo.imageUrl}">
+				<img src="/assets/img/noimage.jpg" style="width:300px;height:250px;padding:0px;border:solid 1px #e1e1e1;float:left;margin-bottom:20px">
+			</c:when>
+			<c:otherwise>
+				<img src="${contentVo.imageUrl }" style="width:300px;height:250px;padding:0px;border:solid 1px #e1e1e1;float:left;margin-bottom:20px">
+			</c:otherwise>
+			</c:choose>
 			<div style="font-size:15px;float:left;width:660px;margin-left:30px;margin-top:20px;">
 					<div style="float:left">
 					<h4>title : ${contentVo.title }</h4><img style="width:30px;" src="/assets/img/like2.jpg"><span style="margin-left:-12px;color:#fff;font-weight:bold;margin-top:2px">${goodContent }</span>
@@ -60,7 +90,7 @@
 				</c:otherwise>
 				</c:choose>
 				<span style="margin-left:15px"><textarea name="message" cols=105 rows=3></textarea></span>
-				<span style="margin-left:20px"><input style="width:60px;height:60px" type="submit" value="덧글등록"></span>
+				<span style="margin-left:10px"><button style="width:65px;height:65px;color:#fff;font-weight:bold" type="submit">덧글등록</button></span>
 			</div>	
 		</form>
 

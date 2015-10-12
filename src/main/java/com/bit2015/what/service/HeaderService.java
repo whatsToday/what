@@ -19,9 +19,8 @@ public class HeaderService {
 	MemberDao memberDao;
 	
 	public void join(HttpSession session, MemberVo memberVo) {
-		memberVo.setMemberName("회원");
 		memberVo.setMemberGrade("Guest");
-		memberVo.setImageUrl("/product-images/201583023256199.jpg");
+		memberVo.setImageUrl("/assets/img/no_img.jpg");
 		memberDao.insert(memberVo);
 		String email = memberVo.getEmail();
 		MemberVo memberVo2 =memberDao.checkEmail(email);
@@ -46,7 +45,6 @@ public MemberVo gradeCheck(HttpSession session, MemberVo memberVo) {
 
 public MemberVo selectEmail(String email) {
 	MemberVo vo = memberDao.checkEmail(email);
-	System.out.println(vo);
 	return vo;
 }
 

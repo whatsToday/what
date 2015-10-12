@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>오늘 뭐하지</title>
 <link href="/assets/css/main/ws.css" rel="stylesheet" />
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -353,10 +353,13 @@ display: none;
 				        <input type="mail" placeholder="Email" name="email" id="email">
 				      </div>
 				      <div class="blockinput">
+				        <input type="text" placeholder="Name" name="memberName" id="memberName">
+				      </div>
+				      <div class="blockinput">
 				        <input type="password" placeholder="Password" name="password" id="password">
 				      </div>
 				    </div>
-				    <input type="button" id="checkId" value="email check" onclick="checkIdValid()">
+				    <span><input style="font-family:''맑은 고딕;color:red" type="button" id="checkId" value="□이메일 중복 체크□" onclick="checkIdValid()"></span><span><input type="button" value="■이메일 체크 완료■" id="email-checked"></span>
 					 <!-- <button id="checkId" onclick="checkIdValid()" style="height:30px;font-size:14px;margin-bottom:-10px">email check</button> -->
 				    <button type="submit">Sign in</button>
 				  </form>
@@ -413,15 +416,8 @@ display: none;
 
 
 <script type="text/javascript">
+
 	$("#joinForm").submit(function(){
-		var $password = $("#password");
-		var password = $password.val();
-		if(password==""){
-			alert("패스워드를 입력해 주세요");
-			$password.focus();
-			return false;	
-		}
-		
 		var $email = $("#email");
 		var email = $email.val();
 		if(email ==""){
@@ -429,12 +425,31 @@ display: none;
 			$email.focus();
 			return false;
 		}
+			var $memberName = $("#memberName");
+			var memberName = $memberName.val();
+			if(memberName==""){
+				alert("이름을 입력해 주세요");
+				$memberName.focus();
+				return false;	
+			}
+			var $password = $("#password");
+			var password = $password.val();
+			if(password==""){
+				alert("패스워드를 입력해 주세요");
+				$password.focus();
+				return false;	
+			}		
+		
+		   if($("#email-checked").is(":visible") == false ){
+				alert("이메일 중복 체크를 눌러주세요");
+				return false;
+				}		
 	    var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
 		   if( re.test(email)==false){
 				alert("유효한 이메일 형식이 아닙니다");
 				$email.focus();
 				return false;	
-		   }		 
+		   }		    
 		return true;
 	});
 </script>
@@ -453,13 +468,22 @@ display: none;
 			},
 			dataType : 'json',
 			success : function(response) {
+			    var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+				   if( re.test(email)==false){
+						alert("유효한 이메일 형식이 아닙니다");
+						$email.focus();
+						return false;	
+				   }		
 				if (response.exist == "exist") {
-					alert("이미 존재합니다.");
+					alert("이미 존재하는 이메일 입니다.");
 					availId = "no";
 				}
 				if (response.exist == "no exist") {
-					alert("사용가능합니다.");
+					alert("사용가능한 이메일 입니다.");
 					availId = "yes";
+					
+					$( "input[type='button']" ).hide();
+					$( "#email-checked" ).show();
 				}
 			}
 		});
@@ -479,8 +503,15 @@ display: none;
 $('#logout').click(function(){
 	alert("로그아웃 되었습니다.");
 });
-</script>
 
+$("#email").change(function(){
+	$("input[type='button']").show();
+	$("#email-checked").hide();		   
+});
+</script>
+<script>
+$("#email-checked").hide();
+</script>
 
 </body>
 </html>

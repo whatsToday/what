@@ -2,12 +2,50 @@ var nearOn = false;
 var myLoc =false;
 var obefore = "jakechu";
 var userLocation;
+var TOP10 = 10; 
 
 function initKey(){
+	var sH = document.getElementById('showHot');
+	var sT = document.getElementById('showHotToday');
+	var tI = document.getElementById('TodayIssue');
 	
-	showHotKey();
-	showHotKeyToday();
-	TodayIssue();
+	$.ajax({
+		url: "/initKey",
+		data:{
+			lat : userLocation.getLat(),
+			lng : userLocation.getLng(),
+			distance : circle.getRadius()/1000
+		},
+		success: function(response){
+			
+			function array(id, title, array){
+				var keys = "<table><tr><th class='wshd' colspan='5'>"+title+"</th></tr>";
+				if(array.length<10){
+					for (var i = array.length; i < TOP10; i++) {
+						array[i]="&middot;";
+					}
+				}
+				for (var i = 0; i < TOP10; i++) {
+					keys += "<tr><td>"+(i+1)+"</td><td colspan='4'>"+array[i]+"</td></tr>";
+				}
+				keys +="</tr></table>"; 
+				
+				id.innerHTML= keys;
+			};
+			
+			//showHotKey
+			array(sH,'이 주변 핫 키워드',response.showHotKey);
+			//showHotToday
+			array(sT,'주변 오늘 핫 키워드',response.showHotToday);
+			//TodayIssue
+			array(tI,'전국 오늘 핫 키워드',response.TodayIssue);
+		},
+		error:function(jqXHR, textStatus, errorThrown){
+			alertModal('에러 발생~~ \n' + textStatus + " : " + errorThrown);
+            self.close();
+        }//end ajax
+	});
+	
 }
 
 function checkOnOff(){
@@ -40,87 +78,6 @@ function markTheme(Obj){
 		}
 	}
 	obefore = Obj.id;
-}
-
-function showHotKey(){
-	var sH = document.getElementById('showHot');
-	
-	$.ajax({
-		url: "/showHotKey",
-		data:{
-			lat : userLocation.getLat(),
-			lng : userLocation.getLng(),
-			distance : circle.getRadius()/1000
-		},
-		success: function(response){
-			
-			var keys = "<table><tr><th colspan='5' class='wshd'>이 주변 핫 키워드</th></tr>";
-			
-			for (var i = 0; i < response.searchList.length; i++) {
-				keys += "<tr><td>"+(i+1)+"</td><td colspan='4'>"+response.searchList[i]+"</td></tr>";
-			}
-			keys +="</tr></table>"; 
-			
-			sH.innerHTML= keys;
-			
-		},
-		error:function(jqXHR, textStatus, errorThrown){
-			alertModal('에러 발생~~ \n' + textStatus + " : " + errorThrown);
-            self.close();
-        }//end ajax
-	});
-}
-function showHotKeyToday(){
-	var sH = document.getElementById('showHotToday');
-	
-	$.ajax({
-		url: "/showHotKeyToday",
-		data:{
-			lat : userLocation.getLat(),
-			lng : userLocation.getLng(),
-			distance : circle.getRadius()/1000
-		},
-		success: function(response){
-			
-			var keys = "<table><tr><th colspan='5' class='wshd'>주변 오늘 핫 키워드</th></tr>";
-			
-			for (var i = 0; i < response.searchList.length; i++) {
-				keys += "<tr><td>"+(i+1)+"</td><td colspan='4'>"+response.searchList[i]+"</td></tr>";
-			}
-			keys +="</tr></table>"; 
-			
-			sH.innerHTML= keys;
-			
-		},
-		error:function(jqXHR, textStatus, errorThrown){
-			alertModal('에러 발생~~ \n' + textStatus + " : " + errorThrown);
-            self.close();
-        }//end ajax
-	});
-}
-
-function TodayIssue(){
-	var sH = document.getElementById('TodayIssue');
-	
-	$.ajax({
-		url: "/TodayIssue",
-		success: function(response){
-			
-			var keys = "<table><tr><th colspan='5' class='wshd'>전국 오늘 핫 키워드</th></tr>";
-			
-			for (var i = 0; i < response.searchList.length; i++) {
-				keys += "<tr><td>"+(i+1)+"</td><td colspan='4'>"+response.searchList[i]+"</td></tr>";
-			}
-			keys +="</tr></table>"; 
-			
-			sH.innerHTML= keys;
-			
-		},
-		error:function(jqXHR, textStatus, errorThrown){
-			alertModal('에러 발생~~ \n' + textStatus + " : " + errorThrown);
-            self.close();
-        }//end ajax
-	});
 }
 
 function insertKey(keyword){

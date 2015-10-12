@@ -138,34 +138,36 @@ public class MainController {
 		return map;
 	}
 	
-	@RequestMapping("/showHotKey")
+	@RequestMapping("/initKey")
 	@ResponseBody
-	public Map<String, Object> showHotKey(@RequestParam Double lat, @RequestParam Double lng, @RequestParam(required=false, defaultValue="10") Double distance) {
+	public Map<String, Object> initKey(@RequestParam Double lat, @RequestParam Double lng, @RequestParam(required=false, defaultValue="10") Double distance) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		mainService.showHotKey(map, lat, lng, distance);
-		
-		return map;
-	}
-	@RequestMapping("/showHotKeyToday")
-	@ResponseBody
-	public Map<String, Object> showHotKeyToday(@RequestParam Double lat, @RequestParam Double lng, @RequestParam(required=false, defaultValue="10") Double distance) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		
 		mainService.showHotKeyToday(map, lat, lng, distance);
-		
-		return map;
-	}
-	
-	@RequestMapping("/TodayIssue")
-	@ResponseBody
-	public Map<String, Object> TodayIssue() {
-		Map<String, Object> map = new HashMap<String, Object>();
-		
 		mainService.TodayIssue(map);
 		
 		return map;
 	}
+//	@RequestMapping("/showHotKeyToday")
+//	@ResponseBody
+//	public Map<String, Object> showHotKeyToday(@RequestParam Double lat, @RequestParam Double lng, @RequestParam(required=false, defaultValue="10") Double distance) {
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		
+//		mainService.showHotKeyToday(map, lat, lng, distance);
+//		
+//		return map;
+//	}
+//	
+//	@RequestMapping("/TodayIssue")
+//	@ResponseBody
+//	public Map<String, Object> TodayIssue() {
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		
+//		mainService.TodayIssue(map);
+//		
+//		return map;
+//	}
 	
 	@RequestMapping("/markerColor")
 	@ResponseBody

@@ -355,20 +355,20 @@ public class MainService {
 	public void showHotKey(Map<String, Object> map, Double lat,
 			Double lng, Double distance) {
 		
-		List<String> searchList = searchListDao.selectHotKey(lat,lng,distance);
-		map.put("searchList", searchList);
+		List<String> showHotKey = searchListDao.selectHotKey(lat,lng,distance);
+		map.put("showHotKey", showHotKey);
 	}
 	public void showHotKeyToday(Map<String, Object> map, Double lat,
 			Double lng, Double distance) {
 		
-		List<String> searchList = searchListDao.selectHotKeyToday(lat,lng,distance);
-		map.put("searchList", searchList);
+		List<String> showHotToday = searchListDao.selectHotKeyToday(lat,lng,distance);
+		map.put("showHotToday", showHotToday);
 	}
 
 	public void TodayIssue(Map<String, Object> map) {
 		
-		List<String> searchList = searchListDao.selectToday();
-		map.put("searchList", searchList);
+		List<String> TodayIssue = searchListDao.selectToday();
+		map.put("TodayIssue", TodayIssue);
 		
 	}
 

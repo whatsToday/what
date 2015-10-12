@@ -36,49 +36,27 @@ $(function(){
 
 <header>
         <div class="navbar navbar-default navbar-static-top">
-<!--             <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/"><span>오늘</span> 뭐하지<span>?</span></a>
-                </div> -->
 
 		<div id="menu_div">
 			<div id="navigation">
 				<div id="menu">
-					<c:choose>
-					<c:when test="${empty authUser }">
-					<ul id="nav">
-						<li><a href="/"  style="margin:15px 0 0 -15px;width:150px"><img style="width:150px;margin-left:-15px" src="/assets/img/logo.jpg"></a></li> 
-						<!-- <li style="margin-left:10px"><a href="javascript:planner(1)">일정짜기</a></li>
-						<li><a href="/review">게시판</a></li> -->
-						<li style="float:right;margin-right:220px"><a class="pink" href="/member/joinForm">Join</a></li>
-						<li style="float:right"><a class="pink" href="#loginmodal"  id="modaltrigger">Login</a></li>
-					</ul>
-					<div style="float:right;margin-top:-55px"><img style="width:45px;height:45px;border-radius:45px;overflow:hidden" src="/assets/img/no_img.jpg"/></div>
-			</c:when>
-			<c:otherwise>
-					<ul id="nav">
-						<li><a href="/"  style="margin:15px 0 0 -15px;width:150px"><img style="width:150px;margin-left:-15px" src="/assets/img/logo.jpg"></a></li> 
-						<!-- <li style="margin-left:10px"><a href="javascript:planner(2)">일정짜기</a></li>
-						<li><a href="/review">게시판</a></li> -->
-						<li style="float:right;margin-right:220px"><a class="pink" href="/logout" >Logout</a></li>
-		            	<li style="float:right"><a class="pink" href="/mycontent?member_no=${authUser.member_no}" >MyPage</a></li>
-		            	<c:choose>
-		            	<c:when test="${not empty themeList }">
-		            	<!-- <li style="float:right"><a class="pink" href="#interset"  id="modaltrigger">Interest</a></li> -->
-		            	</c:when>
-		            	<c:otherwise>
-		            	<li style="float:right"><a class="pink" href="#interset"  id="modaltrigger"></a></li>
-		            	</c:otherwise>
-		            	</c:choose>
-					</ul>
-					<div style="float:right;margin-top:-55px"><img style="width:45px;height:45px;border-radius:45px;overflow:hidden" src="${authUser.imageUrl }"/></div>
-			</c:otherwise>
-			</c:choose>	
+					<div class="masthead">
+											<ul id="nav">
+												<li><a href="/"  style="margin:15px 0 0 -15px;width:150px"><img style="width:150px;margin-left:-15px" src="/assets/img/logo.jpg"></a></li> 
+												<li style="float:right;margin-right:220px"><a class="pink" href="/logout" >Logout</a></li>
+								            	<li style="float:right"><a class="pink" href="/mycontent?member_no=${authUser.member_no}" >MyPage</a></li>
+											</ul>
+<!-- 											<ul class="nav nav-pills pull-right"> -->
+<%-- 									          <li><a href="/mycontent?member_no=${authUser.member_no}" >MyPage</a></li> --%>
+<!-- 									          <li><a href="/logout" >Logout</a></li> -->
+<%-- 									          <li><img style="width:45px;height:45px;border-radius:45px;overflow:hidden" src="${authUser.imageUrl }"/></li> --%>
+<!-- 									        </ul>										 -->
+											
+											
+											<div style="float:right;margin-top:-55px"><img style="width:45px;height:45px;border-radius:45px;overflow:hidden" src="${authUser.imageUrl }"/></div>
+					</div>
+											
+											
 			<!-- Search Form -->
 				<form class="searchform" action="#" style="margin-top:13px;margin-right:45px" > 
 					<input class="searchfield" type="text" value="Search..." onfocus="if (this.value == 'Search...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search...';}" />
@@ -115,62 +93,6 @@ $(function(){
 		<div></div>
 	</c:otherwise>
 </c:choose>
-
-
-
-<!-- 모달팝업 interset -->
-		<div>
-		<div id="interset" style="display:none;">
-			<div style="width:250px;background-color:#fff;color:#2f3238;height:680px;text-align:center;font-size:15px;border-radius:10px;border:solid 6px #FDB7C8">
-				<div style="font-weight:bold;padding:10px;font-size:16px;height:50px;margin-top:10px">${authUser.memberName }님의 관심사</div>
-			<form name ="interest" method="post" action="/interestupdate">
-	<c:forEach var="vo" items="${themeList }" varStatus="status">
-				<input type="hidden" name="member_no" value="${authUser.member_no }">
-<%-- 		<div style="float:left;width:120px;height:100px;margin:10px">
-				<img style="width:120px;height:100px" src="/assets/img/noimage.jpg">
-				<input class="checkTheme" type="checkbox" name="theme_no" value="${vo.theme_no }">${vo.themeName}
-				</div> --%>
-				<div>
-				<input class="checkTheme" type="checkbox" name="theme_no" value="${vo.theme_no }">${vo.themeName}
-				</div>
-	</c:forEach>
-				<input type="submit" value="관심사로검색" style="color:#000;width:150px;height:30px;margin-top:20px" >
-			</form>
-			</div>
-			</div>
-			</div>
-
-<!-- <script>
-			var userTheme_no = [];
-			$.ajax({
-				type : 'get',
-			    url:'/getInterest',
-			    data : {
-			    		member_no : '${authUser.member_no}'
-			    },
-			    dataType:'json',
-			    success: function(response){
-			    	for(var i=0; i<response.length; i++){
-			    		userTheme_no[i]=response[i].theme_no;
-			    	$("input[value="+userTheme_no[i]+"]").attr("checked", true);
-			    	}
-			    }
-			 })
-			 
-</script>
-			<script>
-			$(function(){
-			    var max = 5;
-			    var checkboxes = $('input[type="checkbox"]');
-
-			    checkboxes.change(function(){
-			        var current = checkboxes.filter(':checked').length;
-			        checkboxes.filter(':not(:checked)').prop('disabled', current >= max);
-			    });
-			});
-			</script> -->
-
-
 
 
  <script type="text/javascript">

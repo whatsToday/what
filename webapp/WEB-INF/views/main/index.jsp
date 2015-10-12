@@ -6,18 +6,27 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>키워드로 장소검색하고 목록으로 표출하기</title>
 <link href="/assets/css/main/map.css" rel="stylesheet" />
 <link href="/assets/css/main/ws.css" rel="stylesheet" />
+<!-- boot-->
+<link href="/assets/bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/assets/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="/assets/js/jquery.leanModal.min.js"></script>
+<!-- boot-->
+<script type="text/javascript" src="/assets/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="/assets/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div id="wrapper">
 <c:import url="/WEB-INF/views/include/header.jsp"/>
 <c:import url="/WEB-INF/views/main/modal.jsp"/>
-	<div class="container"><!-- 본문		 -->
+	<div class="container-narrow"><!-- 본문		 -->
 	<hr>
 <!-- 	위 아이콘 -->
 			<!-- 		테마 -->
@@ -36,30 +45,30 @@
 						</table>
 				</div>
 <!-- 			지도 -->
-			<div class="map_wrap">
-				    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-				    <div id="menu_wrap" class="bg_white">
-				        <div class="option">
-				        		<table>
-				        			<tr>
-				        				<td onclick="searchPlaces(); return false;">
-				                			<button class="wsButton">전국 검색</button> 
-				        				</td>
-				        				<td onclick="searchPlaces2(); return false;">
-				                			<button id="areaSearch" class="wsButton">주변 검색</button> 
-				        				</td>
-				        			</tr>
-				        			<tr>
-				        				<td colspan="2"><input type="text" placeholder="오늘 뭐하지?" id="keyword" size="15"></td>
-				        			</tr>
-				        		</table>
-							    
-				        </div>
-				        <hr>
-				        <ul id="placesList"></ul>
-				        <div id="pagination"></div>
-				    </div>
-				</div>
+									<div class="map_wrap">
+									    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+									    <div id="menu_wrap" class="bg_white">
+									        <div class="option">
+									        		<table>
+									        			<tr>
+									        				<td onclick="searchPlaces(); return false;">
+									                			<button class="wsButton">전국 검색</button> 
+									        				</td>
+									        				<td onclick="searchPlaces2(); return false;">
+									                			<button id="areaSearch" class="wsButton">주변 검색</button> 
+									        				</td>
+									        			</tr>
+									        			<tr>
+									        				<td colspan="2"><input type="text" placeholder="오늘 뭐하지?" id="keyword" size="15"></td>
+									        			</tr>
+									        		</table>
+												    
+									        </div>
+									        <hr>
+									        <ul id="placesList"></ul>
+									        <div id="pagination"></div>
+									    </div>
+									</div>
 	<!-- 				후기글 -->
 				<div class="wsTable effect">
 					<table>
@@ -91,11 +100,19 @@
 					</div>
 				<hr>
 				</div>
-				<div class="ivory wsTable">
-					<div id="showHot" ></div>
-					<div id="showHotToday" ></div>
-					<div id="TodayIssue" ></div>
+				<div class="wsTable isss">
+					<table>
+						<tr>
+							<td><div id="showHot" ></div></td>
+							<td><div id="showHotToday" ></div></td>
+							<td><div id="TodayIssue" ></div></td>
+						</tr>
+					</table>
+<!-- 					<div id="showHot" ></div> -->
+<!-- 					<div id="showHotToday" ></div> -->
+<!-- 					<div id="TodayIssue" ></div> -->
 				</div>
+				<hr>
 	</div><!-- 	end container -->
 <c:import url="/WEB-INF/views/include/footer.jsp"/>
 </div><!-- end wrapper -->
@@ -127,4 +144,5 @@ $("#keyword").keyup(function (e) {
 
 
 </script>
+
 </html>

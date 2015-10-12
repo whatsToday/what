@@ -74,11 +74,10 @@
 					<table>
 						<tr>
 							<td id="showAll" class="even" onclick="themeSearch(this);">추천 후기</td>
-							<td id="otherLoc" class="even" onclick="changeLocation(); placesNear();">Circle 위치 변경</td>
+							<td id="otherLoc" class="even" onclick="console.log('없앰')">우 클릭시 Circle 위치 변경</td>
 						</tr>
 					</table>
 				</div>
-				
 				<div class="ivory">
 				<hr>
 					<div class="wsTable">
@@ -93,8 +92,8 @@
 					<div class="wsTable effect">
 						<table>
 							<tr>
-								<td class="wshd" onclick="createPlan();">새 일정 추가하기</td>
-								<td class="wshd" onclick="deletePlan();">일정 삭제하기</td>
+								<td class="wshd" onclick="createPlan();">다른 일정 만들기</td>
+								<td class="wshd" onclick="deletePlan();">이 일정 삭제하기</td>
 							</tr>
 						</table>
 					</div>

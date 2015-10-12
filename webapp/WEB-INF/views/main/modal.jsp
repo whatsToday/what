@@ -50,13 +50,29 @@
 			     </table>
 		    </div>
 </div>
+<div id="messagee"></div>
 <style>
 
 a[rel=leanModal] {
 	visibility: hidden;
 }
 
-
+#messagee {
+	position: fixed;
+    z-index:100;
+	bottom:5%;
+    left: 30%;
+    width:40%;
+    height:100px;
+    line-height:100px;
+    border : 1px solid #69ABED;
+    text-align :center;
+    font-size:20px;
+    opacity : 0.1;
+    
+    background-color : #9DD4F0;
+    
+}
 #lean_overlay {
     position: fixed;
     z-index:100;
@@ -102,7 +118,6 @@ box-shadow: 0px 0px 4px rgba(0,0,0,0.7);
 width: 20%;
 height: 100px;
 line-height : 100px;
-
 display: none; 
 background: #FFF;
 border-radius: 5px;

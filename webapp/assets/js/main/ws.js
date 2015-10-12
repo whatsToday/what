@@ -346,7 +346,7 @@ function insertPlan(index){
 				callContents(plan_no);
 			}
 			infowindow2.close();
-
+			alertModal('찜하기 성공!');
 		},
 		error:function(jqXHR, textStatus, errorThrown){
 			alertModal('에러 발생~~ \n' + textStatus + " : " + errorThrown);
@@ -519,6 +519,10 @@ function placesNear(){
 							sort    : daum.maps.services.SortBy.POPULARITY
 					}); 
 					 
+						if(map.getLevel() < lvl){
+							map.setLevel(lvl);
+						}
+
 					 markTheme(themeList[0]);
 					 nearOn=false;
 				}
@@ -559,7 +563,13 @@ function alertModal(text,time){
 	time = time || 1300; 
 	text = '<b>'+text+'</b>';
 	
-	document.getElementById('alertModal').innerHTML=text;
-	$('#aModal').click();
-	setTimeout(function() {$('#lean_overlay').click();},time);
+//	document.getElementById('alertModal').innerHTML=text;
+//	$('#aModal').click();
+//	setTimeout(function() {$('#lean_overlay').click();},time);
+	document.getElementById('messagee').innerHTML=text;
+	$('#messagee').show();
+	$('#messagee').css('opacity','1');
+	setTimeout(function() {$('#messagee').animate({ opacity: 0 });},time);
+//	setTimeout(function() {$('#messagee').fadeTo( 1000, 0 );},time);
+	
 }

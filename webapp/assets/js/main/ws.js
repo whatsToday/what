@@ -470,7 +470,7 @@ function callContents(plan_no){
 							}
 							planStr +='<td>'+response.contentList[i].newAddress+'</td></tr>';
 							planStr +='<tr><td>'+response.contentList[i].phone+'</td></tr>';
-							planStr +='<tr><td><a href="'+response.contentList[i].placeUrl+'">홈페이지로 이동</a></td></tr>';
+							planStr +='<tr><td><a href="/contentview?content_no='+response.contentList[i].content_no+'">상세 보기 이동</a></td></tr>';
 							planStr +='<tr><td><a href="#" onclick="cancelContents('+response.contentList[i].content_no+'); return false;">선택 취소</a></td></tr>';
 						
 							planStr +='</table></td>';

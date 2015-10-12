@@ -30,13 +30,11 @@
 						<table>
 							<tr>
 								<c:forEach var="vo" items="${memberTheme}" varStatus="status">
-									<td id="theme_${status.index}" class="themeClass" onclick="themeSearch('${vo.themeName}'); markTheme(this);">${vo.themeName}</td>
+									<td id="theme_${status.index}" class="themeClass" onclick="themeSearch(this);">${vo.themeName}</td>
 								</c:forEach>
 							</tr>
 						</table>
-					
 				</div>
-
 <!-- 			지도 -->
 			<div class="map_wrap">
 				    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
@@ -66,10 +64,8 @@
 				<div class="wsTable effect">
 					<table>
 						<tr>
-							<td id="showAll" class="even" onclick="themeSearch(this.id);">추천 후기</td>
-	<!-- 						<td id="wholeAll" class="even" onclick="themeSearch('wholeAll');">전체 보기</td> -->
+							<td id="showAll" class="even" onclick="themeSearch(this);">추천 후기</td>
 							<td id="otherLoc" class="even" onclick="changeLocation(); placesNear();">Circle 위치 변경</td>
-	<!-- 						<td id="userLoc" class="even" onclick="navigator.geolocation.getCurrentPosition(success, error, options);">내 위치 </td> -->
 						</tr>
 					</table>
 				</div>

@@ -142,7 +142,10 @@ function insertKey(keyword){
 	});//end display window 2
 	
 }
-function themeSearch(themeName) {
+function themeSearch(Obj) {
+	
+	var themeName = Obj.id;
+	
 			if(themeName=="showAll"){
 				placesNear();
 				 for (var i = 0; i < markers.length; i++) {
@@ -162,6 +165,8 @@ function themeSearch(themeName) {
 				 nearOn=false;
 				 checkOnOff();
 			}else{
+				themeName=Obj.outerText;
+				
 					if(nearOn){
 							//후기글이 없으면?
 							var k = 0 ;
@@ -182,7 +187,7 @@ function themeSearch(themeName) {
 							    
 							    nearOn=false;
 								checkOnOff();
-							}
+							}else{ markTheme(Obj);}
 					}else{
 					    ps.keywordSearch( themeName, placesSearchCB, {
 							location: userLocation,
@@ -192,6 +197,17 @@ function themeSearch(themeName) {
 					    
 					    nearOn=false;
 						checkOnOff();
+						markTheme(Obj);
+//						 if(ps.keywordSearch( themeName, placesSearchCB, {
+//								location: userLocation,
+//								radius : circle.getRadius(),	
+//								sort    : daum.maps.services.SortBy.POPULARITY
+//							})){
+//						    	
+//						    	nearOn=false;
+//						    	checkOnOff();
+//						    	markTheme(Obj);
+//						    }; 
 					}
 						
 			}
@@ -270,6 +286,8 @@ function getMyPlan() {
 				if(se.value!=-1){
 					se.childNodes.item(0).selected = true;
 					callContents(se.value);
+				}else{
+					defaulContents();
 				}
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
@@ -292,7 +310,7 @@ function createPlan(){
 				se.removeChild(se.firstChild);
 			}
 			getMyPlan();
-			
+			defaulContents();
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
 			alertModal('에러 발생~~ \n' + textStatus + " : " + errorThrown);
@@ -441,9 +459,6 @@ function callContents(plan_no){
 					sP.removeChild(node);
 				}
 			}
-//			while (se.firstChild) {
-//				se.removeChild(se.firstChild);
-//			}
 			
 				if(response.contentList.length != 0){
 					console.log("1");
@@ -455,12 +470,7 @@ function callContents(plan_no){
 						sP.appendChild(planLi);
 					}
 				}else{
-					console.log("2");
-						var planLi = document.createElement('tr');
-						var planStr ='<td  height="100px">등록된 일정이 없습니다</td>';
-						
-						planLi.innerHTML = planStr;
-						sP.appendChild(planLi);
+					defaulContents();
 				}
 
 		},
@@ -471,6 +481,16 @@ function callContents(plan_no){
 		
 	});//end ajax1
 	
+}
+function defaulContents(){
+	
+	var sP =document.getElementById('showPlan');
+	
+	var planLi = document.createElement('tr');
+	var planStr ='<td  height="100px">등록된 일정이 없습니다</td>';
+	
+	planLi.innerHTML = planStr;
+	sP.appendChild(planLi);
 }
 
 
@@ -511,6 +531,8 @@ function placesNear(){
 							radius : circle.getRadius(),	
 							sort    : daum.maps.services.SortBy.POPULARITY
 					}); 
+					 
+					 markTheme(themeList[0]);
 					 nearOn=false;
 				}
 				checkOnOff();

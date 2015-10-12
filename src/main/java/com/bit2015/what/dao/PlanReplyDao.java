@@ -22,5 +22,12 @@ public class PlanReplyDao {
 		sqlMapClientTemplate.insert("planReply.insert", planReplyVo);
 		
 	}
+	public List<Long> selectReplyCount(Long planComments_no){
+		List<Long> list = sqlMapClientTemplate.queryForList("planReply.selectReplyCount", planComments_no);
+		return list;
+	}
+	public void deletePlanReply(Long planReply_no){
+		sqlMapClientTemplate.delete("planReply.delete",planReply_no);
+	}
 
 }

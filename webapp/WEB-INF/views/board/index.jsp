@@ -117,7 +117,6 @@ div#comment{
 }
 div#comment div#viewComment{
 		border: 1px solid #000;
-		height: 70px;
 }
 div#comment div#writeComment{
 		border: 1px solid #000;
@@ -163,9 +162,6 @@ div#comment div#writeComment div#commentText textarea{
 }
 div#comment div#viewComment div#userName{
 		margin-left:10px;
-		height: 40px;
-		line-height:30px;
-		padding:3px;
 		width: 150px;
 }
 div#comment div#viewComment div#userName a{
@@ -187,17 +183,17 @@ div#comment div#viewComment div#userName span{
 }
 div#comment div#viewComment div#commentText{
 			border-left:1px solid #000;
-			margin-top:-40px;
+			margin-top:-30px;
 			margin-left:150px;
-			line-height:38px;
 			width: 800px;
-			height: 68px;
+			min-height:50px;
 }
 div#comment div#viewComment div#commentText span#pMessage{
 			margin-left:10px;
 }
 div#comment div#viewComment div#commentText span#pRegDate{
 			float: right;
+			maring-right:100px;
 }
 div#comment div#viewComment div#commentText span#viewComments, div#comment div#viewComment div#commentText span#writeComments{
 			margin-left:5px;
@@ -208,12 +204,8 @@ div#comment div#viewComment div#commentText span#viewComments a, div#comment div
 			text-decoration: none;
 }
 div#comment div#viewComment div#deleteComments{
-			margin-top:-32px;
-			float:right;
-			margin-right:20px;
- 			width: 20px;
- 			height: 38px;
-	
+	float:right;
+	margin-left:10px;
 }
 div#submit{
 		margin-left:auto;
@@ -309,96 +301,80 @@ div#modalPhoto img{
 		width:100%;
 		height: 100%;
 }
-div.commentsReply{
-		background-color: #ededed;
-		margin-top:3px;
-		margin-left:150px;
-		width: 400px;
-		max-height: 500px;
-		display:none;
-		position: absolute;
-		box-shadow:  rgba(0,0,0,0.8) 0 0 0 9999px;
+div.commentsReply {
+			  display:none;
+		      margin-left:10px;
+			  width:800px;
+			  max-height: 600px;
 }
-div#viewReplyList{
-		position: relative;
-		margin-left:10px;
-		
-}
-div.commentsReply div.viewReply{
-		border: 1px solid #000;
-		width:370px;
-		height:55px;
-		margin-bottom:2px;
-		margin-left:5px;
-		float: left;
-}
-div.commentsReply div.viewReply div.replyPhotoV{
-		float:left;
-		width:50px;
-		height:50px;
-}
-div.commentsReply div.viewReply div.replyName{
-		float:left;
-		width:60px;
-		height:20px;
-		margin-left:5px;
-		font-size:16px;
-		font-weight:bold;
-		color:#69ABED;
-}
-div.commentsReply div.viewReply div.replyMessage{
-		float:left;
-		width:210px;
-		height:20px;
-}
-div.commentsReply div.viewReply div.replyRegDate{
-		float:left;
-		width:40px;
-		height:20px;
-		font-size:11px;
-		color:#9e9e9e;
-}
-div.commentsReply div.viewReply div.replyPhotoV img{
-		width:100%;
-		height: 100%;
+div.commentsReply div#replyButton{
+			float:right;
 }
 div.commentsReply div#writeReply{
-		padding:10px;
-		height:30px;
-}
-div.commentsReply div#writeReply input[type=text]{
-		margin-left:8px;
-		width: 83%;
-		height:20px;
-}
-div.commentsReply div#writeReply div#writeButton{
-		float:right;
+			height: 50px;
 }
 div.commentsReply div#writeReply div#replyPhotoW{
-		width: 40px;
-		height: 40px;
-		float: left;
+			width:50px;
+			height:50px;
+			float:left;
 }
 div.commentsReply div#writeReply div#replyPhotoW img{
+			width:100%;
+			height: 100%;
+}
+div.commentsReply div#writeReply div#reply{
+			width:300px;
+			float:left;
+			line-height: 50px;
+			margin-top:10px;
+			margin-left:10px;
+}
+div.commentsReply div#writeReply div#reply input{
+			width:100%;
+}
+div.commentsReply div#writeReply div#writeButton a img{
+		margin-top:5px;
+}
+div.commentsReply div#viewReplyList{
+		max-height:500px;
+		overflow-y:scroll; 
+}
+div.commentsReply div#viewReplyList div.viewReply{
+		height:50px;
+}
+div.commentsReply div#viewReplyList div.viewReply div.replyPhotoV{
+		width: 50px;
+		height: 50px;
+		float:left;
+}
+div.commentsReply div#viewReplyList div.viewReply div.replyPhotoV img{
 		width: 100%;
 		height: 100%;
 }
-div.commentsReply div#replyButton{
-		margin-top:1px;
-		margin-right:1px;
-		float:right;
-		position: relative;
+div.commentsReply div#viewReplyList div.viewReply div.replyName{
+		width:50px;
+		height: 30px;
+		float:left;
 }
-div.replyFn{
-		margin-top:30px;
-		margin-left:60px;
-		height: 20px;
-		}
-div.replyFn span{
-		margin-right: 10px;
-		}		
-div.replyFn a{
+div.commentsReply div#viewReplyList div.viewReply div.replyMessage{
+		width:600px;
+		height: 30px;
+		float:left;
+}
+div.commentsReply div#viewReplyList div.viewReply div.replyRegDate{
+		width:50px;
+		height: 30px;
+		float:left;
+}
+div.commentsReply div#viewReplyList div.viewReply div.replyFn{
+		float:none;
+		width: 100px;
+		height: 10px;
+		margin-left:100px;
 		font-size:10px;
+}
+div.commentsReply div#viewReplyList div.viewReply div.replyFn span{
+		margin-right:10px;
 }
 </style>
 </head>
@@ -424,21 +400,25 @@ div.replyFn a{
 <div id="writeComment"><div id="userName"><img src="${authUser.imageUrl}"><span>${authUser.memberName}</span></div><div id="commentText"><textarea id="commentsMessage" name="commentsMessage"></textarea></div><button onclick="insertComments(${param.plan_no})">댓글달기</button></div>
 <div id="cmtView">댓글보기</div>
 <c:forEach var="q" items="${planComments}">
-<div id="viewComment"><div id="userName"><a href="/mycontent?member_no=${q.member_no}"><img src="${q.imageUrl}"><span>${q.memberName}</span></a></div><div id="commentText"><span id="pMessage">${q.message}</span><span id="pRegDate">${q.regDate}</span></br><c:if test="${not empty planReply}"><span id="viewComments"><a href="javascript:viewPlanReply(${q.planComments_no})">답글보기</a></span></c:if><span id="writeComments"><a href="javascript:writePlanReply(${q.planComments_no})">답글쓰기</a></span></div>
-<c:if test="${authUser.member_no==q.member_no}">
+<div id="viewComment"><div id="userName"><a href="/mycontent?member_no=${q.member_no}"><img src="${q.imageUrl}"><span>${q.memberName}</span></a></div>
+<div id="commentText"><span id="pMessage">${q.message}</span><c:if test="${authUser.member_no==q.member_no}">
 <div id="deleteComments"><a href="javascript:deleteComments(${q.planComments_no},${param.plan_no})"><img src="/assets/img/button/trash.png"></a></div>
-<div class="commentsReply" id="commentsReply${q.planComments_no}">
+</c:if><span id="pRegDate">${q.regDate}</span></br>
+	<c:if test="${q.replyCount!=0}"><span id="viewComments"><a href="javascript:viewPlanReply(${q.planComments_no})">답글보기[${q.replyCount}]</a></span></c:if>
+	<span id="writeComments"><a href="javascript:writePlanReply(${q.planComments_no})">답글쓰기</a></span>
+	
+	<div class="commentsReply" id="commentsReply${q.planComments_no}">
 	<div id="replyButton"><a href="javascript:closeReply(${q.planComments_no})"><img src="/assets/img/button/x.png"></a></div>
 	<div id="viewReplyList">
 	<c:forEach var="k" items="${planReply}">
 	<c:if test="${q.planComments_no == k.planComments_no}">
-	<div class="viewReply"><div class="replyPhotoV"><img src="${k.imageUrl}"></div><div class="replyName">${k.memberName}</div><div class="replyMessage">${k.message}</div><div class="replyRegDate">${k.regDate}</div><div class="replyFn"><span><a>답글달기</a></span><span><a>삭제</a></span></div></div>
+	<div class="viewReply"><div class="replyPhotoV"><img src="${k.imageUrl}"></div><div class="replyName"><a href="/mycontent?member_no=${k.member_no}">${k.memberName}</a></div><div class="replyMessage">${k.message}</div><div class="replyRegDate">${k.regDate}</div><div class="replyFn"><span><a href="javascript:replyWrite('${k.memberName}','${k.member_no}','${k.planComments_no}')">답글달기</a></span><c:if test="${authUser.member_no==k.member_no}"></c:if><span><a href="javascript:deleteReply(${k.planReply_no})">삭제</a></span></div></div>
 	</c:if>
 	</c:forEach>
 	</div>
-	<div id="writeReply"><div id="replyPhotoW"><img src="${authUser.imageUrl}"></div><span><input id="replyMessage${q.planComments_no}" type="text" placeholder="답글달기"></span><div id="writeButton"><a href="javascript:writeReply(${q.planComments_no})"><img src="/assets/img/button/write.png"></a></div></div>
+	<div id="writeReply"><div id="replyPhotoW"><img src="${authUser.imageUrl}"></div><div id="reply"><input id="replyMessage${q.planComments_no}" type="text" placeholder="답글달기"></div><div id="writeButton"><a href="javascript:writeReply(${q.planComments_no})"><img src="/assets/img/button/write.png"></a></div></div>
 	</div>
-</c:if>
+</div>
 </div>
 </c:forEach>
 </div>
@@ -479,6 +459,20 @@ function writeReply(num){
 }
 function closeReply(num){
 	$("#commentsReply"+num).hide();
+}
+function replyWrite(memberName, member_no, planComments_no){
+	var memberName = memberName;
+	var member_no = member_no;
+	$("#replyMessage"+planComments_no).val(memberName+"   ");
+}
+function deleteReply(planReply_no){
+	var plan_no = ${param.plan_no}
+	if (confirm('이 답글을 삭제하시겠습니까?')) {
+		location.href="/board/deleteReply?plan_no="+plan_no+"&planReply_no="+planReply_no;
+	} else {
+		alert('취소되었습니다.');
+		location.reload();
+	}
 }
 function viewBigImage(num){
 	

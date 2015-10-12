@@ -13,6 +13,11 @@
 			select * from planReply order by planReply_no asc
 		]]>
 	</select>
+	<select id="selectReplyCount" resultClass="java.lang.Long" parameterClass="java.lang.Long">
+		<![CDATA[
+			select count(*) from planreply where plancomments_no=#planComments_no#
+		]]>
+	</select>
 	<delete id="delete" parameterClass="java.lang.Long">
 		<![CDATA[
 			delete from planReply where planReply_no=#planReply_no#

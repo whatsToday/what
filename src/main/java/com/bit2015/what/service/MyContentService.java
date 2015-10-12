@@ -1,6 +1,10 @@
 package com.bit2015.what.service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,13 +15,17 @@ import org.springframework.stereotype.Service;
 import com.bit2015.what.dao.ContentBoxDao;
 import com.bit2015.what.dao.ContentDao;
 import com.bit2015.what.dao.FollowDao;
+import com.bit2015.what.dao.GoodPlanDao;
 import com.bit2015.what.dao.MemberDao;
+import com.bit2015.what.dao.PlanCommentsDao;
 import com.bit2015.what.dao.PlanDao;
 import com.bit2015.what.dao.PlanImgDao;
+import com.bit2015.what.dao.PlanReplyDao;
 import com.bit2015.what.vo.ContentBoxVo;
 import com.bit2015.what.vo.ContentVo;
 import com.bit2015.what.vo.FollowVo;
 import com.bit2015.what.vo.MemberVo;
+import com.bit2015.what.vo.PlanCommentsVo;
 import com.bit2015.what.vo.PlanImgVo;
 import com.bit2015.what.vo.PlanVo;
 
@@ -36,9 +44,35 @@ public class MyContentService {
 	ContentBoxDao contentBoxDao;
 	@Autowired
 	PlanImgDao planImgDao;
+	@Autowired
+	GoodPlanDao goodPlanDao;
+	@Autowired
+	PlanCommentsDao planCommentsDao;
+	@Autowired
+	PlanReplyDao planReplyDao;
 	
-	public List<PlanVo> userPlan(Long member_no){
-		List<PlanVo> list = planDao.getUserPlan(member_no);
+	public List<Object> userPlan(Long member_no){
+		List<Object> list = new ArrayList<Object>();
+		List<PlanVo> list1 = planDao.getUserPlan(member_no);
+		for(int i=0; i<list1.size(); i++){
+			PlanVo planVo = list1.get(i);
+			if(planVo.getMessage() != null){
+			int goodCount = goodPlanDao.selectPlan(planVo.getPlan_no());
+			int commentsCount = planCommentsDao.countPlanComments(planVo.getPlan_no());
+			Map <String, Object> map = new HashMap<String, Object>();
+			map.put("plan_no", planVo.getPlan_no());
+			map.put("member_no", planVo.getMember_no());
+			map.put("planName", planVo.getPlanName());
+			map.put("memberName", planVo.getMemberName());
+			map.put("message", planVo.getMessage());
+			map.put("planDate", planVo.getPlanDate());
+			map.put("titleImage", planVo.getTitleImage());
+			map.put("goodCount", goodCount);
+			map.put("commentsCount", commentsCount);
+			list.add(map);
+			}
+		}
+		System.out.println(list);
 		return list;
 	}
 	public MemberVo getMemberVo(Long member_no){
@@ -137,5 +171,76 @@ public class MyContentService {
 	public List<PlanImgVo> allPlanImg(){
 		List<PlanImgVo> list = planImgDao.selectAll();
 		return list;
+	}
+	public List<PlanCommentsVo> selectPlanComments(Long plan_no){
+		List<PlanCommentsVo> list = planCommentsDao.selectPlan(plan_no);
+		return list;
+	}
+	public List<PlanCommentsVo> selectPlanCommentsAll(){
+		List<PlanCommentsVo> list = planCommentsDao.selectAll();
+		
+		Date dateNow = new Date();
+		long regDate =0;
+		
+		List<PlanCommentsVo> list1 = new ArrayList<PlanCommentsVo>();
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date xxxx = new Date();
+		for(int i=0;i<list.size();i++){
+			PlanCommentsVo planCommentsVo = list.get(i);
+			Long planComments_no = planCommentsVo.getPlanComments_no();
+			List<Long> replyCount = planReplyDao.selectReplyCount(planComments_no);
+			planCommentsVo.setReplyCount(replyCount.get(0));
+			String date = planCommentsVo.getRegDate();
+			
+			 try {
+				xxxx =format.parse(date);
+				regDate = xxxx.getTime();
+				Long seconds = (dateNow.getTime() - regDate) / 1000;
+				
+				String interval ="";
+				if(seconds<=60 &&seconds>0){
+					interval= ((seconds) + "초 전");
+				}
+				if(seconds>60 && seconds<=3600){
+					interval = ((seconds / 60)+"분 전");
+				}
+				if(seconds>3600 && seconds<=86400){
+					interval = ((seconds / 3600)+"시간 전");
+					System.out.println(seconds);
+				}
+				if(seconds>86400 && seconds<=2592000){
+					interval = ((seconds / 86400)+"일 전");
+				}
+				if(seconds>2592000 && seconds<=31536000){
+					interval = ((seconds / 2592000)+"달 전");
+				}
+				planCommentsVo.setRegDate(interval);
+				list1.add(planCommentsVo);
+				System.out.println(list1);
+			} catch (ParseException e) {			
+				e.printStackTrace();			
+			}
+		}
+		
+		return list1;
+	}
+	public void insertComments(Long member_no, Long plan_no, String message){
+		MemberVo memberVo = memberDao.getMemberVo(member_no);
+		PlanVo planVo = planDao.selectVo(plan_no);
+		
+		PlanCommentsVo planCommentsVo = new PlanCommentsVo();
+		
+		planCommentsVo.setMember_no(member_no);
+		planCommentsVo.setPlan_no(plan_no);
+		planCommentsVo.setImageUrl(memberVo.getImageUrl());
+		planCommentsVo.setMemberName(memberVo.getMemberName());
+		planCommentsVo.setPlanName(planVo.getPlanName());
+		planCommentsVo.setMessage(message);
+		
+		System.out.println(planCommentsVo);
+		planCommentsDao.insert(planCommentsVo);
+	}
+	public void deleteComments(Long planComments_no){
+		planCommentsDao.delete(planComments_no);
 	}
 }

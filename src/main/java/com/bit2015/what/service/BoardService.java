@@ -156,6 +156,7 @@ public class BoardService {
 		planCommentsVo.setPlanName(planVo.getPlanName());
 		planCommentsVo.setMessage(message);
 		
+		System.out.println(planCommentsVo);
 		planCommentsDao.insert(planCommentsVo);
 	}
 	public List<PlanCommentsVo> selectPlanComments(Long plan_no){
@@ -167,6 +168,9 @@ public class BoardService {
 		Date xxxx = new Date();
 		for(int i=0;i<list.size();i++){
 			PlanCommentsVo planCommentsVo = list.get(i);
+			Long planComments_no = planCommentsVo.getPlanComments_no();
+			List<Long> replyCount = planReplyDao.selectReplyCount(planComments_no);
+			planCommentsVo.setReplyCount(replyCount.get(0));
 			String date = planCommentsVo.getRegDate();
 			
 			 try {
@@ -256,5 +260,8 @@ public class BoardService {
 			}
 		}
 		return list1;
+	}
+	public void deletePlanReply(Long planReply_no){
+		planReplyDao.deletePlanReply(planReply_no);
 	}
 }

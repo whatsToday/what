@@ -144,4 +144,9 @@ public class BoardController {
 		
 		return "redirect:/board?plan_no="+plan_no;
 	}
+	@RequestMapping("/deleteReply")
+	public String planReplyDelete(@RequestParam Long planReply_no, @RequestParam Long plan_no){
+		boardService.deletePlanReply(planReply_no);
+		return "redirect:/board?plan_no="+plan_no;
+	}
 }

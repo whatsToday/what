@@ -6,7 +6,7 @@
 	
 	<insert id="insert" parameterClass="PlanCommentsVo">
 		<![CDATA[
-			insert into PLANCOMMENTS VALUES(plancomments_no_seq.nextval, #member_no#, #plan_no#, #imageUrl#, #memberName#, #planName#, #message#, regDate, #replyCount#)
+			insert into PLANCOMMENTS VALUES(plancomments_no_seq.nextval, #member_no#, #plan_no#, #imageUrl#, #memberName#, #planName#, #message#, sysdate, #replyCount#)
 		]]>
 	</insert>
 	
@@ -20,8 +20,6 @@
 			select * from PLANCOMMENTS where plan_no=#plan_no# order by planComments_no desc
 		]]>
 	</select>
-	
-	
 	<delete id="delete" parameterClass="java.lang.Long">
 		<![CDATA[
 			delete from PLANCOMMENTS where planComments_no=#planComments_no#

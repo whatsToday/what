@@ -72,7 +72,53 @@
 				</c:if>
 				</c:forEach>
 				</div>
-				<div id="menuComment"><span id="goods"><a>종아요</a></span>&nbsp&nbsp<span id="reply"><a>댓글</a></span></div>
+				<div id="menuComment"><span id="goods"><a href="javascript:goods(${i.plan_no})">종아요[<span id="goodCount${i.plan_no}">${i.goodCount}</span>]</a></span>&nbsp&nbsp<span id="reply"><a href="javascript:viewCommentsList(${i.plan_no})">댓글[${i.commentsCount}]</a></span></div>
+				<div class="menuComments" id="menuComments${i.plan_no}">
+					<div id="viewCommentsList">
+					<c:forEach var="k" items="${planComments}">
+					<c:if test="${i.plan_no == k.plan_no}">
+					<div id="viewComments">
+						<div id="commentsPhotoV"><img src="${k.imageUrl}"></div>
+						<div id="commentsNameV"><a href="/mycontent?member_no=${k.member_no}">${k.memberName}</a></div>
+						<div id="commentsMessageV">${k.message}</div>
+						<div id="commentsRegDate">${k.regDate}</div>
+						<div id="replyFn"><c:if test="${k.replyCount!=0}"><span><a>답글보기[${k.replyCount}]</a></span>&nbsp&nbsp</c:if><span><a href="javascript:writeReply(${k.planComments_no})">답글달기</a></span><c:if test="${k.member_no==authUser.member_no}">&nbsp&nbsp<span><a href="javascript:deleteComments(${k.planComments_no},${k.plan_no})">삭제</a></span></c:if></div>
+							<div class="commentsReply" id="commentsReply${k.planComments_no}">
+								<div id="viewReplyList">
+								<div id="viewReply">
+									<div id="replyPhotoV"><img src="${k.imageUrl}"></div>
+									<div id="replyNameV"><a href="/mycontent?member_no=${k.member_no}">${k.memberName}</a></div>
+									<div id="replyMessageV">${k.message}</div>
+									<div id="replyRegDate">${k.regDate}</div>
+									<div id="replyReplyFn"><c:if test="${k.replyCount!=0}"><span><a>답글보기[${k.replyCount}]</a></span>&nbsp&nbsp</c:if><span><a href="javascript:writeReply(${k.planComments_no})">답글달기</a></span><c:if test="${k.member_no==authUser.member_no}">&nbsp&nbsp<span><a href="javascript:deleteComments(${k.planComments_no},${k.plan_no})">삭제</a></span></c:if></div>
+								</div>
+							</div>
+								<div id="writeReply">
+									<div id="replyUserW">
+										<div id="replyPhotoW"><img src="${authUser.imageUrl}"></div>
+										<div id="replyNameW">${authUser.memberName}</div>
+									</div>
+									<div id="replyContentsW">
+										<div id="replyMessageW"><input type="text" id="relyMessageW${k.planComments_no}" placeholder="답글 입력"></div>
+										<div id="replyWriteButton"><a href="javascript:insertReply(${k.planComments_no})"><img src="/assets/img/button/write.png"></a></div>
+									</div>
+								</div>
+							</div>
+					</div>
+					</c:if>
+					</c:forEach>
+					</div>
+					<div id="writeComments">
+						<div id="commentsUserW">
+							<div id="commentsPhotoW"><img src="${authUser.imageUrl}"></div>
+							<div id="commentsNameW">${authUser.memberName}</div>
+						</div>
+						<div id="commentsContentsW">
+							<div id="commentsMessageW"><input type="text" id="commentsMessageW${i.plan_no}" placeholder="댓글 입력"></div>
+							<div id="writeButton"><a href="javascript:insertComments(${i.plan_no})"><img src="/assets/img/button/write.png"></a></div>
+						</div>
+					</div>
+					</div>
 				</div>
 				</div>
 				</c:forEach>
@@ -98,6 +144,48 @@
 		</div>
 </body>
 <script>
+function goods(num){
+	$.ajax({
+		type : 'get',
+	    url:'/board/goodPlan',
+	    data : {
+	    	plan_no : num,
+	    	member_no : "${authUser.member_no}"
+	    },
+	    dataType:'json',
+	    success: function(response){
+	    		var countNum = $("#goodCount"+num).html();
+	    		if(response == countNum){
+	    			alert("이미 좋아요를 누르셨습니다.")
+	    		}
+	    		$("#goodCount"+num).html(response)
+	   		 }
+	    });
+}
+function viewCommentsList(plan_no){
+	$("#menuComments"+plan_no).toggle();
+}
+function insertComments(num){
+	var message = $("#commentsMessageW"+num).val();
+	location.href="/mycontent/insertComments?plan_no="+num+"&message="+message+"&member_no="+${param.member_no};
+	}
+function deleteComments(num,num1){
+	
+	if (confirm('댓글을 삭제하시겠습니까?')) {
+		location.href="/mycontent/deleteComments?planComments_no="+num+"&plan_no="+num1+"&member_no="+${param.member_no};
+	} else {
+		alert('취소되었습니다.');
+		location.reload();
+	}
+}
+function writeReply(planComments_no){
+		$("#commentsReply"+planComments_no).toggle();
+}
+function insertReply(num){
+	var message= $("#replyMessage"+num).val();
+	console.log(message);
+	location.href="/board/insertReply?planComments_no="+num+"&message="+message+"&plan_no=";
+}
 function squares(){
 	$("#squaresStyle").html('<li><a href="javascript:squares();"><img src="/assets/img/button/squares.png"/></a></li>')
 	$("#menuStyle").html('<li><a href="javascript:menu();"><img src="/assets/img/button/menugray.png"/></a></li>');

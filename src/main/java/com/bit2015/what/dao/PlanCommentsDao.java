@@ -24,7 +24,12 @@ public class PlanCommentsDao {
   public List<PlanCommentsVo> selectPlan(Long plan_no){
 	  List<PlanCommentsVo> list = sqlMapClientTemplate.queryForList("planComments.selectPlan",plan_no);
 	  return list;
-	  
+  }
+  public int countPlanComments(Long plan_no){
+	  int countComments = 0;
+	  List<PlanCommentsVo> list = sqlMapClientTemplate.queryForList("planComments.selectPlan",plan_no);
+	  countComments = list.size();
+	  return countComments;
   }
   public List<PlanCommentsVo> select(int page, int limit) {
 		Map<String, Integer> map = new HashMap<String, Integer>();

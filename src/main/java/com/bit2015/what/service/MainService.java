@@ -440,6 +440,18 @@ public class MainService {
 		
 	}
 
+	public void cancelContents(Map<String, Object> map,
+			ContentBoxVo contentBoxVo) {
+		long content_no = contentBoxVo.getContent_no();
+		long plan_no = contentBoxVo.getPlan_no();
+				
+		contentBoxDao.deleteContent(content_no, plan_no);
+		
+		map.put("plan_no", contentBoxVo.getPlan_no());
+		map.put("content_no", contentBoxVo.getContent_no());
+		
+	}
+
 	
 }// main Service
 

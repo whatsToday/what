@@ -351,11 +351,7 @@ function deletePlan(){
 	        }
 		});
 		
-	}else{
-		console.log("취소");
 	}
-	
-	
 }
 
 // insertPlan
@@ -461,14 +457,12 @@ function callContents(plan_no){
 			}
 			
 				if(response.contentList.length != 0){
-					console.log("1");
 					for (var i in response.contentList) {
-						console.log(response.contentList[i]);
 						var planLi = document.createElement('tr');
 						//
 						var planStr ='<td><table><tr><td colspan="2" class="wshd">'+response.contentList[i].title+'</td></tr>';
 						
-							planStr +='<tr><td rowspan="3">';
+							planStr +='<tr><td rowspan="4">';
 							if(response.contentList[i].imagUrl){
 								planStr +='<img height="130px" src="'+response.contentList[i].imagUrl+'" alt="사진이 없습니다"></td>';
 							}else{
@@ -477,6 +471,7 @@ function callContents(plan_no){
 							planStr +='<td>'+response.contentList[i].newAddress+'</td></tr>';
 							planStr +='<tr><td>'+response.contentList[i].phone+'</td></tr>';
 							planStr +='<tr><td><a href="'+response.contentList[i].placeUrl+'">홈페이지로 이동</a></td></tr>';
+							planStr +='<tr><td><a href="#" onclick="cancelContents('+response.contentList[i].content_no+'); return false;">선택 취소</a></td></tr>';
 						
 							planStr +='</table></td>';
 						
@@ -497,6 +492,30 @@ function callContents(plan_no){
 	});//end ajax1
 	
 }
+
+function cancelContents(content_no){
+	var plan_no = $('#plan_no option:selected').get(0).value;
+	
+	$.ajax({
+		type: "Post",
+		url: "/cancelContents",
+		data:{
+			plan_no : plan_no,
+			content_no : content_no
+		},
+		success: function(response){
+			
+			callContents(plan_no);
+		},
+		error:function(jqXHR, textStatus, errorThrown){
+            alertModal('에러 발생~~ \n' + textStatus + " : " + errorThrown);
+            self.close();
+        }
+		
+	});//end ajax1
+	
+}
+
 function defaulContents(){
 	
 	var sP =document.getElementById('showPlan');

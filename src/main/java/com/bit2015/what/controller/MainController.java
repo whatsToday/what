@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bit2015.what.service.MainService;
+import com.bit2015.what.vo.ContentBoxVo;
 import com.bit2015.what.vo.ContentVo;
 import com.bit2015.what.vo.MemberVo;
 import com.bit2015.what.vo.PlanVo;
@@ -184,6 +185,16 @@ public class MainController {
 		
 		return map;
 	}
+	@RequestMapping("/cancelContents")
+	@ResponseBody
+	public Map<String, Object> cancelContents(ContentBoxVo contentBoxVo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		mainService.cancelContents(map, contentBoxVo);
+		
+		return map;
+	}
+	
 	@RequestMapping("/textSearch")
 	@ResponseBody
 	public Map<String, Object> textSearch(@RequestParam String text) {

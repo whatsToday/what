@@ -164,6 +164,7 @@ memberName varchar2(20),
 planName varchar2(50),
 message varchar2(255),
 regDate Date,
+replyCount Number(20),
  CONSTRAINT c_planComments_fk FOREIGN KEY (member_no) REFERENCES MEMBER (member_no) ON DELETE CASCADE,
  CONSTRAINT c_planComments_fk2 FOREIGN KEY (plan_no) REFERENCES plan (plan_no) ON DELETE CASCADE
 );

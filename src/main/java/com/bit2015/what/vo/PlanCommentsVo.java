@@ -9,6 +9,8 @@ public class PlanCommentsVo {
 	private String planName;
 	private String message;
 	private String regDate;
+	private long replyCount;
+	
 	public long getPlanComments_no() {
 		return planComments_no;
 	}
@@ -57,14 +59,19 @@ public class PlanCommentsVo {
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
+	public long getReplyCount() {
+		return replyCount;
+	}
+	public void setReplyCount(long replyCount) {
+		this.replyCount = replyCount;
+	}
 	@Override
 	public String toString() {
 		return "PlanCommentsVo [planComments_no=" + planComments_no
 				+ ", member_no=" + member_no + ", plan_no=" + plan_no
 				+ ", imageUrl=" + imageUrl + ", memberName=" + memberName
 				+ ", planName=" + planName + ", message=" + message
-				+ ", regDate=" + regDate + "]";
+				+ ", regDate=" + regDate + ", replyCount=" + replyCount + "]";
 	}
-
 	
 }

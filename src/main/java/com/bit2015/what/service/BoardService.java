@@ -86,6 +86,11 @@ public class BoardService {
 	}
 	public PlanVo getPlanVo(Long plan_no){
 		PlanVo planVo = planDao.selectVo(plan_no);
+		String planDate = planVo.getPlanDate();
+		String pd[] = planDate.split("-");
+		String planD = pd[0]+"년"+pd[1]+"월"+pd[2]+"일";
+		planVo.setPlanDate(planD);
+		
 		return planVo;
 	}
 	public void deleteContent(Long content_no, Long plan_no){

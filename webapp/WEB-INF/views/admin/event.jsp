@@ -36,15 +36,15 @@
          
 		<h1> Event 등록</h1>
          <form action="/admin/insertevent" method="post" >
-            <table border="1" >
+            <table class="CSSTableGenerator" >
                <tr>
-                  <td bgcolor="#CCCCCC" align="center">상점이름</td>
-                   <td bgcolor="#CCCCCC" align="center">content_no</td>
-                  <td bgcolor="#CCCCCC" align="center">메세지</td>
-                  <td bgcolor="#CCCCCC" align="center">시작일</td>
-                  <td bgcolor="#CCCCCC" align="center">종료일</td>
-                  <td bgcolor="#CCCCCC" align="center">eventStatus</td>
-                  <td bgcolor="#CCCCCC" align="center">등록</td>
+                  <td >상점이름</td>
+                  <td >content_no</td>
+                  <td >메세지</td>
+                  <td >시작일</td>
+                  <td >종료일</td>
+                  <td >eventStatus</td>
+                  <td >등록</td>
                </tr>
                <tr>
                   <td>
@@ -65,16 +65,16 @@
             </table>
          </form>
             <h1> Event 조회</h1>
-               <table class="selectVo" border="1">
+               <table class="CSSTableGenerator">
                <tr>
-                  <td bgcolor="#CCCCCC" align="center">NO</td>
-                  <td bgcolor="#CCCCCC" align="center">content_no</td>
-                  <td bgcolor="#CCCCCC" align="center">상점이름</td>
-                  <td bgcolor="#CCCCCC" align="center">메세지</td>
-                  <td bgcolor="#CCCCCC" align="center">시작일</td>
-                  <td bgcolor="#CCCCCC" align="center">종료일</td>
-                  <td bgcolor="#CCCCCC" align="center">eventStatus</td>
-                  <td bgcolor="#CCCCCC" align="center">삭제</td>
+                  <td>NO</td>
+                  <td>content_no</td>
+                  <td>상점이름</td>
+                  <td>메세지</td>
+                  <td>시작일</td>
+                  <td>종료일</td>
+                  <td>eventStatus</td>
+                  <td>삭제</td>
                </tr>
                <c:forEach var="vo" items="${eventList}">
                <tr>
@@ -89,8 +89,8 @@
                </tr>
                </c:forEach>
             </table>
-      </td>
-   <table >         
+      
+   <table class="CSSTableGenerator">         
 <tr>
    <td>
       <c:if test="${nowpage<=1}">

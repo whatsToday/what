@@ -35,12 +35,12 @@
 	<!-- Slider -->
          
 		<h1> ThemeBox 등록</h1>
-				<table border="1" >
+				<table class="CSSTableGenerator" >
 					<tr>
-						<td bgcolor="#CCCCCC" align="center">member_no</td>
-						<td bgcolor="#CCCCCC" align="center">theme_no</td>
-						<td bgcolor="#CCCCCC" align="center">themeName</td>
-						<td bgcolor="#CCCCCC" align="center"><b>등록</b></td>
+						<td>member_no</td>
+						<td>theme_no</td>
+						<td>themeName</td>
+						<td><b>등록</b></td>
 					</tr>
 			<form action="/admin/insertthemebox" method="post">
 					<tr>
@@ -66,13 +66,13 @@
 			</form>
 				</table>
 				<h1> ThemeBox 조회</h1>
-					<table class="selectVo" border="1">
+					<table class="CSSTableGenerator">
 					<tr>
-						<td bgcolor="#CCCCCC" align="center">NO</td>
-						<td bgcolor="#CCCCCC" align="center">member_no</td>
-						<td bgcolor="#CCCCCC" align="center">theme_no</td>
-						<td bgcolor="#CCCCCC" align="center">themeName</td>
-						<td bgcolor="#CCCCCC" align="center">삭제</td>
+						<td>NO</td>
+						<td>member_no</td>
+						<td>theme_no</td>
+						<td>themeName</td>
+						<td>삭제</td>
 					</tr>
 					<c:forEach var="vo" items="${themeBoxList}">
 					<tr>
@@ -84,56 +84,33 @@
 					</tr>
 					</c:forEach>
 				</table>
-		</td>
-			<table >			
+		<table class="CSSTableGenerator" >			
 <tr>
    <td>
       <c:if test="${nowpage<=1}">
          [이전]&nbsp;
       </c:if>
       <c:if test="${nowpage>1}">
-         <a href="/admin/themebox?page=${nowpage-1}">[이전]</a>&nbsp;
+         <a href="/admin/theme?page=${nowpage-1}">[이전]</a>&nbsp;
       </c:if>
       <c:forEach var="a" begin="${startpage}"  end="${endpage}">
              <c:if test="${a==nowpage}">
                 <font color="red">[${a}]</font>
              </c:if>
              <c:if test="${a!=nowpage}">
-                <a href="/admin/themebox?page=${a}">[${a}]</a>&nbsp;
+                <a href="/admin/theme?page=${a}">[${a}]</a>&nbsp;
              </c:if>    
       </c:forEach>
       <c:if test="${nowpage>=maxpage}">
            [다음]&nbsp;
       </c:if>
       <c:if test="${nowpage<maxpage}">
-           <a href="/admin/themebox?page=${nowpage+1}">[다음]</a>
+           <a href="/admin/theme?page=${nowpage+1}">[다음]</a>
       </c:if>
    </td>
 </tr>
 </table>
-      <c:if test="${nowpage<=1}">
-         [이전]&nbsp;
-      </c:if>
-      <c:if test="${nowpage>1}">
-         <a href="/admin/member?page=${nowpage-1}">[이전]</a>&nbsp;
-      </c:if>
-      <c:forEach var="a" begin="${startpage}"  end="${endpage}">
-             <c:if test="${a==nowpage}">
-                <font color="red">[${a}]</font>
-             </c:if>
-             <c:if test="${a!=nowpage}">
-                <a href="/admin/member?page=${a}">[${a}]</a>&nbsp;
-             </c:if>    
-      </c:forEach>
-      <c:if test="${nowpage>=maxpage}">
-           [다음]&nbsp;
-      </c:if>
-      <c:if test="${nowpage<maxpage}">
-           <a href="/admin/member?page=${nowpage+1}">[다음]</a>
-      </c:if>
-   </td>
-</tr>
-</table>
+		
 	<!-- end slider -->
 			</div>
 		</div>

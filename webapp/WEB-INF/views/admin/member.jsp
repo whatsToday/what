@@ -16,6 +16,7 @@
 <link href="/assets/admin/css/style.css" rel="stylesheet" />
 
 
+
 <!-- Theme skin -->
 <link href="/assets/admin/skins/default.css" rel="stylesheet" />
 
@@ -36,40 +37,40 @@
 	<!-- Slider -->
          
 		<h1> Member 등록</h1>
-				<table border="1" >
+				<table border="1" class="CSSTableGenerator" >
 					<tr>
-						<td bgcolor="#CCCCCC" align="center">이름</td>
-						<td bgcolor="#CCCCCC" align="center">이메일</td>
-						<td bgcolor="#CCCCCC" align="center">패스워드</td>
-						<td bgcolor="#CCCCCC" align="center">imageUrl</td>
-						<td bgcolor="#CCCCCC" align="center">권한</td>
-						<td bgcolor="#CCCCCC" align="center"><b>등록</b></td>
+						<td>이름</td>
+						<td>이메일</td>
+						<td>패스워드</td>
+						<td>imageUrl</td>
+						<td>권한</td>
+						<td><b>등록</b></td>
 					</tr>
 			<form id=insert action="/admin/insertmember" method="post" enctype="multipart/form-data">
 					<tr>
-						<td><input size="10" type="text" id="memberName"  name="memberName"></td>
-						<td><input size="10" type="text" id="email" name="email"></td>
-						<td><input size="10" type="password" id=password name="password"></td>
-						<td><input size="10" type="file" name="img"></td>
+						<td><input type="text" id="memberName"  name="memberName"></td>
+						<td><input type="text" id="email" name="email"></td>
+						<td><input type="password" id=password name="password"></td>
+						<td><input type="file" name="img"></td>
 						<td><select name="memberGrade">
 							  <option value="Admin">Admin</option>
 							  <option value="Guest">Guest</option>
 							</select>						
 						</td>
-						<td><input size="10" type="submit" value="등록"></td>
+						<td><input type="submit" value="등록"></td>
 					</tr>
 			</form>
 				</table>
 				<h1> Member 조회</h1>
-					<table id="selectMember" border="1">
+					<table class="CSSTableGenerator">
 					<tr>
-						<td bgcolor="#CCCCCC" align="center">No</td>
-						<td bgcolor="#CCCCCC" align="center">이름</td>
-						<td bgcolor="#CCCCCC" align="center">이메일</td>
-						<td bgcolor="#CCCCCC" align="center">패스워드</td>
-						<td bgcolor="#CCCCCC" align="center">imageUrl</td>
-						<td bgcolor="#CCCCCC" align="center">권한</td>
-						<td bgcolor="#CCCCCC" align="center">삭제</td>
+						<td>No</td>
+						<td>이름</td>
+						<td>이메일</td>
+						<td>패스워드</td>
+						<td>imageUrl</td>
+						<td>권한</td>
+						<td>삭제</td>
 					</tr>
 					<c:forEach var="vo" items="${memberList}">
 					<tr>
@@ -92,7 +93,7 @@
 				</table>
 				
 		</td>
-<table >			
+<table class="CSSTableGenerator" >			
 <tr>
    <td>
       <c:if test="${nowpage<=1}">
@@ -130,7 +131,6 @@
 			<div class="col-lg-12">
 				<div class="big-cta">
 					<div class="cta-text">
-						<h2><img alt="" src="assets/admin/img/whitelogo.jpg"> 관리자 페이지 입니다.</h2>
 					</div>
 				</div>
 			</div>

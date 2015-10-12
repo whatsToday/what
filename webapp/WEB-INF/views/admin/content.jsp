@@ -35,60 +35,60 @@
 	<!-- Slider -->
          
 		<h1> Content 등록</h1>
-				<table border="1"  style="table-layout: fixed;" >
+				<table class="CSSTableGenerator"  >
 					<tr>
-						<td bgcolor="#CCCCCC" align="center">phone</td>
-						<td bgcolor="#CCCCCC" align="center">newAddress</td>
-						<td bgcolor="#CCCCCC" align="center">imageUrl</td>
-						<td bgcolor="#CCCCCC" align="center">나침반</td>
-						<td bgcolor="#CCCCCC" align="center">우편번호</td>
-						<td bgcolor="#CCCCCC" align="center">웹주소</td>
-						<td bgcolor="#CCCCCC" align="center">다음번호</td>
-						<td bgcolor="#CCCCCC" align="center">상점이름</td>
-						<td bgcolor="#CCCCCC" align="center">카테고리</td>
-						<td bgcolor="#CCCCCC" align="center">주소</td>
-						<td bgcolor="#CCCCCC" align="center">위도</td>
-						<td bgcolor="#CCCCCC" align="center">경도</td>
-						<td bgcolor="#CCCCCC" align="center">BCode</td>
-						<td bgcolor="#CCCCCC" align="center"><b>등록</b></td>
+						<td>phone</td>
+						<td>newAddress</td>
+						<td>imageUrl</td>
+						<td>나침반</td>
+						<td>우편번호</td>
+						<td>웹주소</td>
+						<td>다음번호</td>
+						<td>상점이름</td>
+						<td>카테고리</td>
+						<td>주소</td>
+						<td>위도</td>
+						<td>경도</td>
+						<td>BCode</td>
+						<td><b>등록</b></td>
 					</tr>
 			<form action="/admin/insertcontent" method="post" enctype="multipart/form-data">
 			 <tr>					
-						<td><input size="10" type="text" name="phone"></td>
-						<td><input size="10" type="text" name="newAddress"></td>
-						<td><input size="10" type="file" name="img"></td>
-						<td><input size="10" type="text" name="direction"></td>
-						<td><input size="10" type="text" name="zipcode"></td>
-						<td><input size="10" type="text" name="placeUrl"></td>
-						<td><input size="10" type="text" name="id"></td>
-						<td><input size="10" type="text" name="title"></td>
-						<td><input size="10" type="text" name="category"></td>
-						<td><input size="10" type="text" name="address"></td>
-						<td><input size="10" type="text" name="longitude"></td>
-						<td><input size="10" type="text" name="latitude"></td>
-						<td><input size="10" type="text" name="addressBCode"></td>
-						<td><input size="10" type="submit" value="등록"></td>
+						<td><input type="text" name="phone"></td>
+						<td><input type="text" name="newAddress"></td>
+						<td><input type="file" name="img"></td>
+						<td><input type="text" name="direction"></td>
+						<td><input type="text" name="zipcode"></td>
+						<td><input type="text" name="placeUrl"></td>
+						<td><input type="text" name="id"></td>
+						<td><input type="text" name="title"></td>
+						<td><input type="text" name="category"></td>
+						<td><input type="text" name="address"></td>
+						<td><input type="text" name="longitude"></td>
+						<td><input type="text" name="latitude"></td>
+						<td><input type="text" name="addressBCode"></td>
+						<td><input type="submit" value="등록"></td>
 					</tr>
 			</form>
-				</table>
+				</table >
 				<h1> Content 조회</h1>
-					<table class="selectVo" border="1" width="1392px" style="text-align:center" >
+					<table class="CSSTableGenerator" class="selectVo" border="1" width="1392px" style="text-align:center" >
 					<tr>
-						<td bgcolor="#CCCCCC" align="center" style="width: 30px">No</td>
-						<td bgcolor="#CCCCCC" align="center">phone</td>
-						<td bgcolor="#CCCCCC" align="center">newAddress</td>
-						<td bgcolor="#CCCCCC" align="center">imageUrl</td>
-						<td width="60px"bgcolor="#CCCCCC" align="center">나침반</td>
-						<td bgcolor="#CCCCCC" align="center">우편번호</td>
-						<td bgcolor="#CCCCCC" align="center">웹주소</td>
-						<td bgcolor="#CCCCCC" align="center">상점key</td>
-						<td bgcolor="#CCCCCC" align="center">상점이름</td>
-						<td bgcolor="#CCCCCC" align="center">카테고리</td>
-						<td bgcolor="#CCCCCC" align="center">주소</td>
-						<td bgcolor="#CCCCCC" align="center">위도</td>
-						<td bgcolor="#CCCCCC" align="center">경도</td>
-						<td bgcolor="#CCCCCC" align="center">BCode</td>
-						<td bgcolor="#CCCCCC" align="center">삭제</td>
+						<td>No</td>
+						<td>phone</td>
+						<td>newAddress</td>
+						<td>imageUrl</td>
+						<td>나침반</td>
+						<td>우편번호</td>
+						<td>웹주소</td>
+						<td>상점key</td>
+						<td>상점이름</td>
+						<td>카테고리</td>
+						<td>주소</td>
+						<td>위도</td>
+						<td>경도</td>
+						<td>BCode</td>
+						<td>삭제</td>
 					</tr>
 					<c:forEach var="vo" items="${contentList}">
 					<tr>
@@ -118,7 +118,7 @@
 					</c:forEach>
 				</table>
 		</td>
-				<table >			
+				<table class="CSSTableGenerator" >			
 <tr>
    <td>
       <c:if test="${nowpage<=1}">

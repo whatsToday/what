@@ -35,13 +35,13 @@
 	<!-- Slider -->
          
 	<h1> Follow 등록</h1>
-				<table border="1" >
+				<table class="CSSTableGenerator" >
 					<tr>
-						<td bgcolor="#CCCCCC" align="center">member_no</td>
-						<td bgcolor="#CCCCCC" align="center">followNum</td>
-						<td bgcolor="#CCCCCC" align="center">memberName</td>
-						<td bgcolor="#CCCCCC" align="center">followName</td>
-						<td bgcolor="#CCCCCC" align="center"><b>등록</b></td>
+						<td>member_no</td>
+						<td>followNum</td>
+						<td>memberName</td>
+						<td>followName</td>
+						<td><b>등록</b></td>
 					</tr>
 					
 			<form action="/admin/insertfollow" method="post">
@@ -75,14 +75,14 @@
 			</form>
 				</table>
 				<h1> follow 조회</h1>
-					<table class="selectVo" border="1">
+					<table class="CSSTableGenerator">
 					<tr>
-						<td bgcolor="#CCCCCC" align="center">NO</td>
-						<td bgcolor="#CCCCCC" align="center">member_no</td>
-						<td bgcolor="#CCCCCC" align="center">followNum</td>
-						<td bgcolor="#CCCCCC" align="center">memberName</td>
-						<td bgcolor="#CCCCCC" align="center">followName</td>
-						<td bgcolor="#CCCCCC" align="center">삭제</td>
+						<td>NO</td>
+						<td>member_no</td>
+						<td>followNum</td>
+						<td>memberName</td>
+						<td>followName</td>
+						<td>삭제</td>
 					</tr>
 					<c:forEach var="vo" items="${followList}">
 					<tr>
@@ -95,8 +95,8 @@
 					</tr>
 					</c:forEach>
 				</table>
-		</td>
-			<table >			
+		
+			<table class="CSSTableGenerator" >			
 <tr>
    <td>
       <c:if test="${nowpage<=1}">

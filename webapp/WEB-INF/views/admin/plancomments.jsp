@@ -36,14 +36,14 @@
          
 	<h1> PlanComments 등록</h1>
 			<form action="/admin/insertplancomments" method="post">
-				<table border="1" >
+				<table class="CSSTableGenerator">
 					<tr>
-					    <td bgcolor="#CCCCCC" align="center">회원번호</td>
-						<td bgcolor="#CCCCCC" align="center">플랜번호</td>
-						<td bgcolor="#CCCCCC" align="center">멤버이름</td>
-						<td bgcolor="#CCCCCC" align="center">플랜이름</td>
-						<td bgcolor="#CCCCCC" align="center">메세지</td>
-						<td bgcolor="#CCCCCC" align="center">등록</td>
+					    <td>회원번호</td>
+						<td>플랜번호</td>
+						<td>멤버이름</td>
+						<td>플랜이름</td>
+						<td>메세지</td>
+						<td>등록</td>
 					</tr>
 					<tr>
 						<td>
@@ -70,16 +70,16 @@
 				</table>
 			</form>
 				<h1> PlanComments 조회</h1>
-					<table class="selectVo" border="1">
+					<table class="CSSTableGenerator">
 					<tr>
-						<td bgcolor="#CCCCCC" align="center">NO</td>
-						<td bgcolor="#CCCCCC" align="center">회원번호</td>
-						<td bgcolor="#CCCCCC" align="center">플랜번호</td>
-						<td bgcolor="#CCCCCC" align="center">멤버이름</td>
-						<td bgcolor="#CCCCCC" align="center">플랜이름</td>
-						<td bgcolor="#CCCCCC" align="center">메세지</td>
-						<td bgcolor="#CCCCCC" align="center">등록일자</td>
-						<td bgcolor="#CCCCCC" align="center">삭제</td>
+						<td>NO</td>
+						<td>회원번호</td>
+						<td>플랜번호</td>
+						<td>멤버이름</td>
+						<td>플랜이름</td>
+						<td>메세지</td>
+						<td>등록일자</td>
+						<td>삭제</td>
 					</tr>
 					<c:forEach var="vo" items="${planCommentsList}">
 					<tr>
@@ -95,8 +95,8 @@
 					</tr>
 					</c:forEach>
 				</table>
-		</td>
-        	<table >			
+		
+        	<table class="CSSTableGenerator" >			
 <tr>
    <td>
       <c:if test="${nowpage<=1}">

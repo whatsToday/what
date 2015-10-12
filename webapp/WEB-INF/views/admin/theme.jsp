@@ -35,11 +35,11 @@
 	<!-- Slider -->
          
 			<h1> Theme 등록</h1>
-				<table border="1" >
+				<table class="CSSTableGenerator">
 					<tr>
-						<td bgcolor="#CCCCCC" align="center">관심사명</td>
-						<td bgcolor="#CCCCCC" align="center">이미지등록</td>
-						<td bgcolor="#CCCCCC" align="center"><b>등록</b></td>
+						<td>관심사명</td>
+						<td>이미지등록</td>
+						<td><b>등록</b></td>
 					</tr>
 			<form action="/admin/inserttheme" method="post" enctype="multipart/form-data">
 					<tr>
@@ -50,12 +50,12 @@
 			</form>
 				</table>
 				<h1> Theme 조회</h1>
-					<table class="selectVo" border="1">
+					<table class="CSSTableGenerator">
 					<tr>
-						<td bgcolor="#CCCCCC" align="center">No</td>
-						<td bgcolor="#CCCCCC" align="center">관심사명</td>
-						<td bgcolor="#CCCCCC" align="center">이미지</td>
-						<td bgcolor="#CCCCCC" align="center"  >삭제</td>
+						<td>No</td>
+						<td>관심사명</td>
+						<td>이미지</td>
+						<td>삭제</td>
 					</tr>
 					<c:forEach var="vo" items="${themeList}">
 					<tr>
@@ -74,9 +74,9 @@
 					</tr>
 					</c:forEach>
 				</table>
-				<h6>삭제하려면 해당 관심사로 등록되어 있는 Content를 먼저 삭제해야 합니다.</h6>
-		</td>
-			<table >			
+				
+		
+			<table class="CSSTableGenerator" >			
 <tr>
    <td>
       <c:if test="${nowpage<=1}">

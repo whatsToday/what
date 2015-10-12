@@ -12,7 +12,7 @@
 	
 	<select id="selectAll" resultClass="PlanImgVo">
 		<![CDATA[
-			select * from PLANIMG 
+			select * from PLANIMG
 		]]>
 	</select>
 	<select id="selectPlan" resultClass="PlanImgVo" parameterClass="java.lang.Long">

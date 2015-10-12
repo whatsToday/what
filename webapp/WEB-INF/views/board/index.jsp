@@ -407,6 +407,7 @@ div.replyFn a{
 <div id="wrapper">
 <c:import url="/WEB-INF/views/include/header.jsp"/>
 <!-- container -->
+
 <div class="container">
 <div id="photo"><img src="${planBoard.titleImage}"></div>
 <div id="goods"><a href="javascript:goods(${param.plan_no});"><img src="/assets/img/like.jpg"></a></div>

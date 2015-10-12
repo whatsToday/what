@@ -6,7 +6,7 @@
 	
 	<insert id="insert" parameterClass="PlanCommentsVo">
 		<![CDATA[
-			INSERT INTO PLANCOMMENTS VALUES(planComments_no_seq.nextval, #member_no#, #plan_no#, #imageUrl#, #memberName#, #planName#, #message#, sysdate)
+			insert into PLANCOMMENTS VALUES(plancomments_no_seq.nextval, #member_no#, #plan_no#, #imageurl#, #membername#, #planname#, #message#, regdate, #replycount#)
 		]]>
 	</insert>
 	

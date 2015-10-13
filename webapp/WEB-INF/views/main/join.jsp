@@ -334,7 +334,7 @@ display: none;
 }
 </style>
 <body>
-	<video src="/assets/img/yoga.mp4" autoplay ></video>
+	<video onclick="$('#login').click();" src="/assets/img/couple.mp4" autoplay loop  width="100%" height="100%" ></video>
 <!-- <iframe width="100%" height="900px" src="https://www.youtube.com/embed/02uiHmFuQaA?autoplay=1" frameborder="0" allowfullscreen autoplay></iframe> -->
 
   

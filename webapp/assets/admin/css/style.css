@@ -1977,7 +1977,7 @@ article img.pull-right, article .align-right{
 
 /* table CSS */
 .CSSTableGenerator {
-	margin:0px;padding:0px;
+	margin:0px auto;padding:0px;
 	width:100%;
 	border:1px solid #000000;
 	

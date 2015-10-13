@@ -452,6 +452,17 @@ public class MainService {
 		
 	}
 
+	public void checkJjim(Map<String, Object> map, Long[] content_no) {
+		
+		List<ContentVo> contentList = new ArrayList<ContentVo>();
+		
+		for (int i = 0; i < content_no.length; i++) {
+			contentList.add(contentDao.selectVo(content_no[i]));
+		}
+		
+		map.put("contentList", contentList);
+	}
+
 	
 }// main Service
 

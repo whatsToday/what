@@ -128,6 +128,15 @@ public class MainController {
 		
 		return map;
 	}
+	@RequestMapping("/checkJjim")
+	@ResponseBody
+	public Map<String, Object> checkJjim(@RequestParam Long[] content_no) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		mainService.checkJjim(map,content_no);
+		
+		return map;
+	}
 	@RequestMapping("/insertKey")
 	@ResponseBody
 	public Map<String, Object> insertKey(HttpSession session,@RequestParam String keyword,  @RequestParam Double lat, @RequestParam Double lng, @RequestParam(required=false, defaultValue="5") Double distance) {

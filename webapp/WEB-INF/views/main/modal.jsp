@@ -51,15 +51,25 @@
 		    </div>
 </div>
 <div id="messagee"></div>
-<a id="staticMap" rel="leanModal" href="#staticMapModal">pickTheme</a>
-<div id="staticMapModal"></div>
+<!-- <a id="staticMap" rel="leanModal" href="#staticMapModal">pickTheme</a> -->
+<!-- <div id="staticMapModal" onclick="$('#lean_overlay').click();"></div> -->
 
 <style>
+/* #staticMapModal { */
+/* width: 716px; */
+/* height: 430px; */
+/* background: #FFF; */
+/* border-radius: 5px; */
+/* -moz-border-radius: 5px; */
+/* -webkit-border-radius: 5px; */
+/* box-shadow: 0px 0px 4px rgba(0,0,0,0.7); */
+/* -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.7); */
+/* -moz-box-shadow: 0 0px 4px rgba(0,0,0,0.7); */
+/* } */
 
 a[rel=leanModal] {
 	visibility: hidden;
 }
-
 #messagee {
 	position: fixed;
     z-index:100;
@@ -89,11 +99,9 @@ a[rel=leanModal] {
     display: none;
 }
 
-#joinModal,#staticMapModal {
+#joinModal {
 width: 716px;
 height: 430px;
-/* width: 600px; */
-/* padding: 30px; */
 display: none; 
 background: #FFF;
 border-radius: 5px;

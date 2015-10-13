@@ -407,14 +407,7 @@ function callContents(plan_no){
 					for (var i in response.contentList) {
 						var planLi = document.createElement('tr');
 						//
-						var planStr ='<td><table onclick="map.setCenter(new daum.maps.LatLng('+response.contentList[i].latitude+','+response.contentList[i].longitude+'))"><tr><td colspan="2" class="wshd2">'+response.contentList[i].title+'</td></tr>';
-						
-//							planStr +='<tr><td rowspan="4">';
-//							if(response.contentList[i].imagUrl){
-//								planStr +='<img height="130px" src="'+response.contentList[i].imagUrl+'" alt="사진이 없습니다"></td>';
-//							}else{
-//								planStr +='<img height="130px" src="/product-images/20159120531936.png" alt="사진이 없습니다"></td>';
-//							}
+						var planStr ='<td><table class="selectedContents" data-no="'+response.contentList[i].content_no+'" ><tr><td colspan="2" class="wshd2">'+response.contentList[i].title+'</td></tr>';
 							planStr +='<tr><td><img src="/assets/img/addresss.png">&nbsp;'+response.contentList[i].newAddress+'</td>';
 							planStr +='<td><img src="/assets/img/calll.png">&nbsp;'+response.contentList[i].phone+'</td></tr>';
 							planStr +='<tr><td><a href="/contentview?content_no='+response.contentList[i].content_no+'">상세 보기 이동</a>&nbsp;<img src="/assets/img/vieww.png"></td>';
@@ -557,35 +550,69 @@ function alertModal(text,time){
 	time = time || 1300; 
 	text = '<b>'+text+'</b>';
 	
-//	document.getElementById('alertModal').innerHTML=text;
-//	$('#aModal').click();
-//	setTimeout(function() {$('#lean_overlay').click();},time);
 	document.getElementById('messagee').innerHTML=text;
 	$('#messagee').show();
 	$('#messagee').css('opacity','1');
 	setTimeout(function() {$('#messagee').animate({ opacity: 0 });},time);
-//	setTimeout(function() {$('#messagee').fadeTo( 1000, 0 );},time);
 	
 }
 
+function checkJjim(){
+	var tables = document.getElementsByClassName('selectedContents');
+	var url = "/checkJjim";
+	
+	if(tables.length!=0){
+		console.log(tables[0].getAttribute('data-no'));
+			url += "?content_no="+tables[0].getAttribute('data-no');
+		for (var k = 1; k < tables.length; k++) {
+			url += "&content_no="+tables[k].getAttribute('data-no');
+		}
+		
+		//후기글 가져오기
+		var lvl=map.getLevel();
 
-///staticMapModal
-function callMap(){
+		$.ajax({
+			  url: url,
+				success : function(response){
+					
+					if(response.contentList.length!=0){
+						displayPlaces(response.contentList);
+						if(map.getLevel() < lvl){
+							map.setLevel(lvl);
+						}
+						
+						displayPlaces(response.contentList);
+						
+						var themeClass = document.getElementsByClassName('markTheme');
+						for ( var k in themeClass) {
+							themeClass[k].className="themeClass"
+						}
+						
+					}else{
+						//alert
+						alertModal('찜하신 내용이 없습니다');
+					}
+					
+				},
+				error: function (xhr, textStatus, errorThrown) { 
+					alertModal('에러 발생~~ \n' + textStatus + " : " + errorThrown);
+				},
+			});
+		
+		
+	}else{alertModal('찜하신 내용이 없습니다');}
 	
-	var markers2 = [{
-		position: new daum.maps.LatLng(33.450701, 126.570667)
-	},{
-		position: new daum.maps.LatLng(33.450001, 126.570467), 
-		text: '텍스트를 표시할 수 있어요!' // text 옵션을 설정하면 마커 위에 텍스트를 함께 표시할 수 있습니다     
-	}
-	];
-	
-	var staticMapContainer  = document.getElementById('staticMapModal'), // 이미지 지도를 표시할 div  
-	staticMapOption = { 
-		center: new daum.maps.LatLng(33.450701, 126.570667), // 이미지 지도의 중심좌표
-		level: 3, // 이미지 지도의 확대 레벨
-		marker: markers2 // 이미지 지도에 표시할 마커 
-	};    
-	
-	var staticMap = new daum.maps.StaticMap(staticMapContainer, staticMapOption);
 }
+/////staticMapModal
+//function callMap(){
+////	$('#staticMapModal').show();
+//	console.log("1");
+//	var staticMapContainer  = document.getElementById('staticMapModal'), // 이미지 지도를 표시할 div  
+//    staticMapOption = { 
+//        center: new daum.maps.LatLng(33.450701, 126.570667), // 이미지 지도의 중심좌표
+//        level: 3 // 이미지 지도의 확대 레벨
+//    };
+//
+//// 이미지 지도를 표시할 div와 옵션으로 이미지 지도를 생성합니다
+//var staticMap = new daum.maps.StaticMap(staticMapContainer, staticMapOption);
+//}

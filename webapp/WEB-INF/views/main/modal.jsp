@@ -51,6 +51,12 @@
 		    </div>
 </div>
 <div id="messagee"></div>
+<a id="miniMap" rel="leanModal" href="#miniMapModal">pickTheme</a>
+<div id="miniMapModal">
+		   <div class="wsTable" style="border:none; width:100%; height:780px; padding:4px 10px;">
+			
+		    </div>
+</div>
 <style>
 
 a[rel=leanModal] {

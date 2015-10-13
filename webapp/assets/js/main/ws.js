@@ -1,5 +1,6 @@
 var nearOn = false;
 var myLoc =false;
+var mapResult =true;
 var obefore = "";
 var userLocation;
 var TOP10 = 10; 
@@ -74,6 +75,7 @@ function markTheme(Obj){
 		themeClass[k].className="themeClass"
 	}
 	ob.className += " markTheme";
+	mapResult=true;
 }
 
 function insertKey(keyword){
@@ -96,7 +98,7 @@ function insertKey(keyword){
 	
 }
 function themeSearch(Obj) {
-	
+	console.log(mapResult);
 	var themeName = Obj.id;
 	
 			if(themeName=="showAll"){
@@ -147,23 +149,15 @@ function themeSearch(Obj) {
 							radius : circle.getRadius(),	
 							sort    : daum.maps.services.SortBy.POPULARITY
 						}); 
-					    
-					    nearOn=false;
-						checkOnOff();
-						markTheme(Obj);
-//						 if(ps.keywordSearch( themeName, placesSearchCB, {
-//								location: userLocation,
-//								radius : circle.getRadius(),	
-//								sort    : daum.maps.services.SortBy.POPULARITY
-//							})){
-//						    	
-//						    	nearOn=false;
-//						    	checkOnOff();
-//						    	markTheme(Obj);
-//						    }; 
+					    if(mapResult){
+					    	nearOn=false;
+					    	checkOnOff();
+					    	markTheme(Obj);
+					    }
 					}
 						
 			}
+	console.log(mapResult);
 }
 
 function changeLocation(){
@@ -177,8 +171,6 @@ function changeLocation(){
 
 	  
 	  initKey();
-	  
-	  placesNear();
 	  
 }
 
@@ -347,6 +339,8 @@ function insertPlan(index){
 			}
 			infowindow2.close();
 			alertModal('찜하기 성공!');
+			userLocation = new daum.maps.LatLng(items.latitude,items.longitude);
+			changeLocation();
 		},
 		error:function(jqXHR, textStatus, errorThrown){
 			alertModal('에러 발생~~ \n' + textStatus + " : " + errorThrown);
@@ -413,18 +407,18 @@ function callContents(plan_no){
 					for (var i in response.contentList) {
 						var planLi = document.createElement('tr');
 						//
-						var planStr ='<td><table><tr><td colspan="2" class="wshd">'+response.contentList[i].title+'</td></tr>';
+						var planStr ='<td><table onclick="map.setCenter(new daum.maps.LatLng('+response.contentList[i].latitude+','+response.contentList[i].longitude+'))"><tr><td colspan="2" class="wshd">'+response.contentList[i].title+'</td></tr>';
 						
-							planStr +='<tr><td rowspan="4">';
-							if(response.contentList[i].imagUrl){
-								planStr +='<img height="130px" src="'+response.contentList[i].imagUrl+'" alt="사진이 없습니다"></td>';
-							}else{
-								planStr +='<img height="130px" src="/product-images/20159120531936.png" alt="사진이 없습니다"></td>';
-							}
-							planStr +='<td>'+response.contentList[i].newAddress+'</td></tr>';
-							planStr +='<tr><td>'+response.contentList[i].phone+'</td></tr>';
-							planStr +='<tr><td><a href="/contentview?content_no='+response.contentList[i].content_no+'">상세 보기 이동</a></td></tr>';
-							planStr +='<tr><td><a href="#" onclick="cancelContents('+response.contentList[i].content_no+'); return false;">선택 취소</a></td></tr>';
+//							planStr +='<tr><td rowspan="4">';
+//							if(response.contentList[i].imagUrl){
+//								planStr +='<img height="130px" src="'+response.contentList[i].imagUrl+'" alt="사진이 없습니다"></td>';
+//							}else{
+//								planStr +='<img height="130px" src="/product-images/20159120531936.png" alt="사진이 없습니다"></td>';
+//							}
+							planStr +='<tr><td>'+response.contentList[i].newAddress+'<img src="/assets/img/addresss.png"></td>';
+							planStr +='<td>'+response.contentList[i].phone+'<img src="/assets/img/calll.png"></td></tr>';
+							planStr +='<tr><td><a href="/contentview?content_no='+response.contentList[i].content_no+'">상세 보기 이동<img src="/assets/img/vieww.png"></a></td>';
+							planStr +='<td><a href="#" onclick="cancelContents('+response.contentList[i].content_no+'); return false;">이 일정에서 빼기<img src="/assets/img/crosss.png"></a></td></tr>';
 						
 							planStr +='</table></td>';
 						
@@ -474,7 +468,7 @@ function defaulContents(){
 	var sP =document.getElementById('showPlan');
 	
 	var planLi = document.createElement('tr');
-	var planStr ='<td  height="100px">등록된 일정이 없습니다</td>';
+	var planStr ='<td  height="100px"><span>지도 우 클릭 <img src="/assets/img/mouse_select_right.png"/> &nbsp; &rightarrow; <b>&nbsp;</b> 마커 클릭 후 찜하기<br><br><b>등록된 일정이 없습니다</b></td>';
 	
 	planLi.innerHTML = planStr;
 	sP.appendChild(planLi);

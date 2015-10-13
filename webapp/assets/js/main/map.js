@@ -75,8 +75,10 @@ function placesSearchCB(status, data, pagination) {
     	
         displayPlaces(data.places);
         displayPagination(pagination);
-    } else if (status === daum.maps.services.Status.ZERO_RESULT) {alertModal('지도 검색 결과가 존재하지 않습니다.');  return;
-    } else if (status === daum.maps.services.Status.ERROR) {   alert('지도 검색 결과 중 오류가 발생했습니다.');  return;
+        
+        mapResult =true;
+    } else if (status === daum.maps.services.Status.ZERO_RESULT) {alertModal('지도 검색 결과가 존재하지 않습니다.'); mapResult =false; return;
+    } else if (status === daum.maps.services.Status.ERROR) {   alert('지도 검색 결과 중 오류가 발생했습니다.');  mapResult =false; return;
     }
 }
 
@@ -167,10 +169,17 @@ function displayPlaces(places) {
     	infowindow2.close();
     });
     
+    $('body').click(function() {
+    	infowindow.close();
+    	infowindow2.close();   
+    });
+    
     daum.maps.event.addListener(map, 'rightclick', function(mouseEvent) {
         userLocation = mouseEvent.latLng;
         changeLocation();
+        placesNear();
     });
+    
     ///////////
 
     listEl.appendChild(fragment);

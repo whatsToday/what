@@ -52,7 +52,7 @@
 									        		<table>
 									        			<tr>
 									        				<td onclick="searchPlaces(); return false;">
-									                			<button class="wsButton">전국 검색</button> 
+									                			<button id="allSearch" class="wsButton">전국 검색</button> 
 									        				</td>
 									        				<td onclick="searchPlaces2(); return false;">
 									                			<button id="areaSearch" class="wsButton">주변 검색</button> 
@@ -80,20 +80,20 @@
 				</div>
 				<div class="ivory">
 				<hr>
+						<div class="wsTable effect">
+						<table>
+							<tr>
+								<td class="wshd" onclick="deletePlan();">이 일정 삭제하기</td>
+								<td class="wshd" onclick="createPlan();">다른 일정 만들기</td>
+							</tr>
+						</table>
+					</div>
 					<div class="wsTable">
 						<table id="showPlan">
 							<tr>
 								<th class="wshd">
 									<select id="plan_no" onchange="callContents(this.value);"></select>
 								</th>
-							</tr>
-						</table>
-					</div>
-					<div class="wsTable effect">
-						<table>
-							<tr>
-								<td class="wshd" onclick="createPlan();">다른 일정 만들기</td>
-								<td class="wshd" onclick="deletePlan();">이 일정 삭제하기</td>
 							</tr>
 						</table>
 					</div>
@@ -137,7 +137,7 @@ checkThemeBox();
 //enterkey 누르면 주변검색
 $("#keyword").keyup(function (e) {
     if (e.keyCode == 13) {
-    	$("#areaSearch").click();
+    	$("#allSearch").click();
     }
 });
 

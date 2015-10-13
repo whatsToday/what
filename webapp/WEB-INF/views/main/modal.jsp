@@ -51,12 +51,9 @@
 		    </div>
 </div>
 <div id="messagee"></div>
-<a id="miniMap" rel="leanModal" href="#miniMapModal">pickTheme</a>
-<div id="miniMapModal">
-		   <div class="wsTable" style="border:none; width:100%; height:780px; padding:4px 10px;">
-			
-		    </div>
-</div>
+<a id="staticMap" rel="leanModal" href="#staticMapModal">pickTheme</a>
+<div id="staticMapModal"></div>
+
 <style>
 
 a[rel=leanModal] {
@@ -66,16 +63,18 @@ a[rel=leanModal] {
 #messagee {
 	position: fixed;
     z-index:100;
-	bottom:5%;
-    left: 30%;
-    width:40%;
-    height:100px;
-    line-height:100px;
+/* 	bottom:7%; */
+    left: 35%; 
+	top:8%;
+/* 	right :30%; */
+    width:30%;
+    height:70px;
+    line-height:70px;
     border : 1px solid #69ABED;
     text-align :center;
-    font-size:20px;
+    font-size:18px;
     opacity : 0.1;
-    
+    border-radius: 5px;
     background-color : #9DD4F0;
     
 }
@@ -90,7 +89,7 @@ a[rel=leanModal] {
     display: none;
 }
 
-#joinModal {
+#joinModal,#staticMapModal {
 width: 716px;
 height: 430px;
 /* width: 600px; */

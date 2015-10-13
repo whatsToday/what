@@ -74,7 +74,7 @@
 					<table>
 						<tr>
 							<td id="showAll" class="even" onclick="themeSearch(this);">추천 후기</td>
-							<td id="otherLoc" class="even" onclick="console.log('없앰')">우 클릭시 Circle 위치 변경</td>
+							<td id="otherLoc" class="even" onclick="callMap();$('#staticMap').click();">확인하기</td>
 						</tr>
 					</table>
 				</div>
@@ -107,9 +107,6 @@
 							<td><div id="TodayIssue" ></div></td>
 						</tr>
 					</table>
-<!-- 					<div id="showHot" ></div> -->
-<!-- 					<div id="showHotToday" ></div> -->
-<!-- 					<div id="TodayIssue" ></div> -->
 				</div>
 				<hr>
 	</div><!-- 	end container -->

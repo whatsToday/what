@@ -407,7 +407,7 @@ function callContents(plan_no){
 					for (var i in response.contentList) {
 						var planLi = document.createElement('tr');
 						//
-						var planStr ='<td><table onclick="map.setCenter(new daum.maps.LatLng('+response.contentList[i].latitude+','+response.contentList[i].longitude+'))"><tr><td colspan="2" class="wshd">'+response.contentList[i].title+'</td></tr>';
+						var planStr ='<td><table onclick="map.setCenter(new daum.maps.LatLng('+response.contentList[i].latitude+','+response.contentList[i].longitude+'))"><tr><td colspan="2" class="wshd2">'+response.contentList[i].title+'</td></tr>';
 						
 //							planStr +='<tr><td rowspan="4">';
 //							if(response.contentList[i].imagUrl){
@@ -415,10 +415,10 @@ function callContents(plan_no){
 //							}else{
 //								planStr +='<img height="130px" src="/product-images/20159120531936.png" alt="사진이 없습니다"></td>';
 //							}
-							planStr +='<tr><td>'+response.contentList[i].newAddress+'<img src="/assets/img/addresss.png"></td>';
-							planStr +='<td>'+response.contentList[i].phone+'<img src="/assets/img/calll.png"></td></tr>';
-							planStr +='<tr><td><a href="/contentview?content_no='+response.contentList[i].content_no+'">상세 보기 이동<img src="/assets/img/vieww.png"></a></td>';
-							planStr +='<td><a href="#" onclick="cancelContents('+response.contentList[i].content_no+'); return false;">이 일정에서 빼기<img src="/assets/img/crosss.png"></a></td></tr>';
+							planStr +='<tr><td><img src="/assets/img/addresss.png">&nbsp;'+response.contentList[i].newAddress+'</td>';
+							planStr +='<td><img src="/assets/img/calll.png">&nbsp;'+response.contentList[i].phone+'</td></tr>';
+							planStr +='<tr><td><a href="/contentview?content_no='+response.contentList[i].content_no+'">상세 보기 이동</a>&nbsp;<img src="/assets/img/vieww.png"></td>';
+							planStr +='<td><a href="#" onclick="cancelContents('+response.contentList[i].content_no+'); return false;">이 일정에서 빼기</a>&nbsp;<img src="/assets/img/crosss.png"></td></tr>';
 						
 							planStr +='</table></td>';
 						
@@ -566,4 +566,26 @@ function alertModal(text,time){
 	setTimeout(function() {$('#messagee').animate({ opacity: 0 });},time);
 //	setTimeout(function() {$('#messagee').fadeTo( 1000, 0 );},time);
 	
+}
+
+
+///staticMapModal
+function callMap(){
+	
+	var markers2 = [{
+		position: new daum.maps.LatLng(33.450701, 126.570667)
+	},{
+		position: new daum.maps.LatLng(33.450001, 126.570467), 
+		text: '텍스트를 표시할 수 있어요!' // text 옵션을 설정하면 마커 위에 텍스트를 함께 표시할 수 있습니다     
+	}
+	];
+	
+	var staticMapContainer  = document.getElementById('staticMapModal'), // 이미지 지도를 표시할 div  
+	staticMapOption = { 
+		center: new daum.maps.LatLng(33.450701, 126.570667), // 이미지 지도의 중심좌표
+		level: 3, // 이미지 지도의 확대 레벨
+		marker: markers2 // 이미지 지도에 표시할 마커 
+	};    
+	
+	var staticMap = new daum.maps.StaticMap(staticMapContainer, staticMapOption);
 }

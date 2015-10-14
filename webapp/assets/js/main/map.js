@@ -31,7 +31,8 @@ var polyline = new daum.maps.Polyline({
     strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
     strokeStyle: 'solid' // 선의 스타일입니다
 });
-
+//////////////////////////////////////////////////////////////
+var dfd = $.Deferred();
 
 
 function searchPlaces() {
@@ -88,12 +89,18 @@ function placesSearchCB(status, data, pagination) {
         displayPagination(pagination);
         
         mapResult =true;
+        console.log("2222222222            Success");
+//        dfd.resolve();
     } else if (status === daum.maps.services.Status.ZERO_RESULT) {
     	alertModal('지도 검색 결과가 존재하지 않습니다.'); 
-    	console.log("EE");
+    	console.log("2222222222            zero-Result");
+//    	clearMarkTheme();
     	mapResult =false; 
     	return;
-    } else if (status === daum.maps.services.Status.ERROR) {   alert('지도 검색 결과 중 오류가 발생했습니다.');  mapResult =false; return;
+    } else if (status === daum.maps.services.Status.ERROR) { 
+    	alert('지도 검색 결과 중 오류가 발생했습니다.');  
+    	mapResult =false; 
+    	return;
     }
 }
 
@@ -152,6 +159,7 @@ function displayPlaces(places) {
             });
 
             itemEl.onmouseover =  function () {
+            	map.setCenter(marker.getPosition());
                 displayInfowindow(marker, items);
             };
 

@@ -26,7 +26,7 @@ function initKey(){
 					}
 				}
 				for (var i = 0; i < TOP10; i++) {
-					keys += "<tr><td>"+(i+1)+"</td><td colspan='4'>"+array[i]+"</td></tr>";
+					keys += "<tr><td>"+(i+1)+"</td><td colspan='4'><a href='#' onclick='searchKeyAll(this.outerText); return false'>"+array[i]+"</a></td></tr>";
 				}
 				keys +="</tr></table>"; 
 				
@@ -86,14 +86,14 @@ function comeBack(){
 }
 
 function markTheme(Obj){
-	console.log(mapResult);
-	if(mapResult){
 		var ob = document.getElementById(Obj.id);
-		var themeClass = document.getElementsByClassName('markTheme');
-		for ( var k in themeClass) {
-			themeClass[k].className="themeClass"
-		}
+		clearMarkTheme();
 		ob.className += " markTheme";
+}
+function clearMarkTheme(){
+	var themeClass = document.getElementsByClassName('markTheme');
+	for ( var k in themeClass) {
+		themeClass[k].className="themeClass"
 	}
 }
 
@@ -132,11 +132,7 @@ function themeSearch(Obj) {
 			}else if(themeName=="wholeAll"){
 				var themeList = document.getElementsByClassName("themeClass");
 				
-				 ps.keywordSearch( themeList[0].textContent, placesSearchCB, {
-						location: userLocation,
-						radius : circle.getRadius(),	
-						sort    : daum.maps.services.SortBy.POPULARITY
-				}); 
+				searchKey(themeList[0].textContent);
 				 nearOn=false;
 				 checkOnOff();
 			}else{
@@ -154,43 +150,33 @@ function themeSearch(Obj) {
 								}
 							}
 							if(k==0){
-								$(function(){
+//								$(function(){
 									console.log("f");
 									alertModal('선택 범위안에 후기글이 없습니다');
-								    ps.keywordSearch( themeName, placesSearchCB, {
-										location: userLocation,
-										radius : circle.getRadius(),	
-										sort    : daum.maps.services.SortBy.POPULARITY
-									});
-								}).done(function(){
+									searchKey(themeName);
+//								}).done(function(){
 
 							    	nearOn=false;
 							    	checkOnOff();
 							    	markTheme(Obj);
-								});
+//								});
 							}
 //							else{ markTheme(Obj);} 2015 10 14 12 38 
 					}else{
-						console.log("2");
-						var dfd = $.Deferred();
-						dfd.resolve();
-						dfd.done(function(){
-							console.log("3");
-						    ps.keywordSearch( themeName, placesSearchCB, {
-								location: userLocation,
-								radius : circle.getRadius(),	
-								sort    : daum.maps.services.SortBy.POPULARITY
-							})
-						}).done(function(){
-							console.log("4");
+						console.log("111111111111111111111                test 시작");
+						
+						
+						searchKey(themeName);
+							
+//						dfd.done(function(){
+							console.log("33333333333       mapResult test="+mapResult);
 							if(mapResult){
-						    	console.log("R");
 						    	nearOn=false;
 						    	checkOnOff();
 						    	markTheme(Obj);
 						    }
 							
-						}); 
+//						}); 
 					    
 					}
 						
@@ -535,12 +521,7 @@ function placesNear(){
 				}else{
 					//alert
 					alertModal('선택 범위안에 후기글이 없습니다');
-					
-					 ps.keywordSearch( themeList[0].textContent, placesSearchCB, {
-							location: userLocation,
-							radius : circle.getRadius(),	
-							sort    : daum.maps.services.SortBy.POPULARITY
-					}); 
+					searchKey(themeList[0].textContent);
 					 
 						if(map.getLevel() < lvl){
 							map.setLevel(lvl);
@@ -690,3 +671,17 @@ function linePath (){
 	
 	
 }
+
+function searchKey(keywordd){
+	 ps.keywordSearch( keywordd, placesSearchCB, {
+			location: userLocation,
+			radius : circle.getRadius(),	
+			sort    : daum.maps.services.SortBy.POPULARITY
+	}); 
+}
+function searchKeyAll(keywordd){
+	 ps.keywordSearch( keywordd, placesSearchCB, {
+			sort    : daum.maps.services.SortBy.POPULARITY
+	}); 
+}
+

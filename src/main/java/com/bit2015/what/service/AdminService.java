@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import sun.net.www.content.text.plain;
+
 import com.bit2015.what.dao.CommentsDao;
 import com.bit2015.what.dao.ContentBoxDao;
 import com.bit2015.what.dao.ContentDao;
@@ -116,6 +118,8 @@ public class AdminService {
 		count =	commentsDao.commentsCountList();
 		return count;
 	}
+	
+	
 	
 	/*content페이징*/
 	public List<ContentVo> selectContent1(int page, int limit) {
@@ -237,14 +241,26 @@ public class AdminService {
 	public List<PlanVo> selectplan1 (int page, int limit) {
 		List<PlanVo> plan1 = planDao.select(page, limit);		
 		return plan1;
-		
 	}
+	
+	public List<PlanVo> selectplan2 (String memberName, int page, int limit) {
+		List<PlanVo> plan2 = planDao.searchPlan(memberName, page, limit);
+		System.out.println("svs"+plan2.size());
+		return plan2;
+	}
+	
 	/*plan페이징*/
-	public int paln1(){
+	public int plan1(){
 		int count = 0;
 		count =	planDao.planCountList();
 		return count;
 	}
+	public int plan2(String memberName){
+		int count = 0;
+		count = planDao.searchPlanCountList(memberName);
+		return count;
+	}
+	
 	
 	/*theme페이징*/
 	public List<ThemeVo> selectTheme1 (int page, int limit) {
@@ -515,5 +531,11 @@ public class AdminService {
 	public ThemeVo getThemeName(long theme_no){
 		ThemeVo themeVo = themeDao.getThemeName(theme_no);
 		return themeVo;
+	}
+	
+	public List<PlanVo> searchPlan (String memberName, int page, int limit){
+		List<PlanVo> searchPlan = planDao.searchPlan(memberName, page, limit);
+		return searchPlan;
+		
 	}
 }

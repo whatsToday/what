@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.bit2015.what.vo.MemberVo;
 import com.bit2015.what.vo.PlanVo;
+import com.sun.org.apache.regexp.internal.recompile;
 
 
 @Repository
@@ -35,13 +36,31 @@ public class PlanDao {
 			return list;
 		}
 	  
+	  public List<PlanVo> searchPlan(String memberName, int page, int limit) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			int startRow = (page - 1) * limit + 1; 
+			int endRow = startRow + limit - 1; 
+			map.put("memberName", memberName);
+			map.put("startpage", startRow);
+			map.put("endpage", endRow);
+			List<PlanVo> list =sqlMapClientTemplate.queryForList("plan.searchPlan",map);
+			System.out.println("dao"+list.size());
+//			System.out.println("맵"+map);
+			return list;
+		}
+	  
 	  public int planCountList() {
 			int count = 0;
 			count = (Integer) sqlMapClientTemplate.queryForObject("plan.planCountList");
-
-
 			return count;
 		}
+	  
+	  public int searchPlanCountList(String memberName) {
+			int count = 0;
+			count = (Integer) sqlMapClientTemplate.queryForObject("plan.searchPlanCountList",memberName);
+			return count;
+		}
+
 
 	
 	@SuppressWarnings("unchecked")
@@ -90,4 +109,8 @@ public class PlanDao {
 			List<PlanVo> list= sqlMapClientTemplate.queryForList("plan.selectFollowerPlanById",map);
 			return list;
 		}
+//	 public List<PlanVo> searchPlan(String memberName){
+//		 List<PlanVo> list = sqlMapClientTemplate.queryForList("plan.searchPlan",memberName);
+//		return list;
+//	 }
 }

@@ -63,15 +63,17 @@
 								</tr>
 							</form>
 						</table>
+						<iframe name="hid_fun" style="display:none"></iframe>
 						<h1>Member 검색</h1>
 						<table class="CSSTableGenerator">
-							<form id=search method="post" action="/admin/searchemail">
+							<form id=search method="post" onsubmit="return save_fr(this)">
 								<tr>
 									<td>아이디입력</td>
-									<td><input type="text" id="email" name="email"></td>
+									<td><input type="text" id="email" name="email" value=""></td>
 									<td><input type="submit" value="확인"></td>
 								</tr>
 							</form>
+							
 						</table>
 						<h1>Member 조회</h1>
 						<table class="CSSTableGenerator">
@@ -166,6 +168,15 @@
 		</section>
 		<c:import url="/WEB-INF/views/admin/footer.jsp"></c:import>
 	</div>
+	
+	<script type="text/javascript">
+	function save_fr(f) {
+        f.target = "hid_fun"
+        f.action = "/admin/searchemail";
+        f.submit();
+        return false;
+}
+	</script>
 
 	<!-- javascript
     ================================================== -->

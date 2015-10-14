@@ -75,5 +75,26 @@
 		 select count(*) as x from plan
 			]]>
 	</select> 
+	
+	   	   <select id="searchPlanCountList" parameterClass="java.lang.String" resultClass="int">
+		<![CDATA[
+		 select count(*) as x from plan where memberName like '%'||#memberName#||'%'
+			]]>
+	</select> 
+	 <select id="searchPlan" parameterClass="java.util.Map" resultClass="PlanVo">
+      <![CDATA[
+      	SELECT 	* 
+      	FROM 	(select rownum rnum,plan_no,member_no,titleImage,planName,memberName,message,planDate 
+      			FROM 	(select * 
+      					from 	plan
+      					WHERE 	memberName like '%'||#memberName#||'%' 
+      					order by plan_no desc)) 
+      			WHERE  rnum>=#startpage# AND rnum<=#endpage#
+      			
+         ]]>
+   </select> 
+	   
+
+	   
    
 </sqlMap>

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import sun.net.www.content.text.plain;
+
 import com.bit2015.what.dao.MemberDao;
 import com.bit2015.what.service.AdminService;
 import com.bit2015.what.vo.CommentsVo;
@@ -60,7 +62,6 @@ public class AdminController {
 		return "redirect:/admin/member";
 	}
 	}
-
 	// member조회
 	@RequestMapping("/member12")
 	public String memberList(Model model) {
@@ -98,6 +99,65 @@ public class AdminController {
 	  	return "/admin/member";
 }
 
+	
+/*	@RequestMapping("/searcheplan")
+    public String searchPlan( Model model, @RequestParam(required = false ,defaultValue="1") int page,String memberName ){
+		int limit=5; 
+		List<PlanVo> searchPlan = adminService.searchPlan(memberName);
+		model.addAttribute("searchPlan", searchPlan);  
+		int listcount = searchPlan.size(); 
+		System.out.println(searchPlan.size()+"sdfsdf");
+		 List<PlanVo> list=adminService.selectplan2(page, limit);
+	        int maxpage=(int)((double)listcount/limit+0.95);
+
+	        int startpage=(((int)((double)page/10+0.9))-1)*10+1;
+	        int endpage=maxpage;
+	        if(endpage>startpage+10-1){
+	        	endpage=startpage+10-1;
+	        }
+	        model.addAttribute("nowpage", page);
+	        model.addAttribute("maxpage", maxpage);
+	        model.addAttribute("startpage", startpage);
+	        model.addAttribute("endpage", endpage);
+	        model.addAttribute("searchPlan", list);
+	        model.addAttribute("listcount", listcount);
+		return "/admin/searchplan";
+    }*/
+	
+/*	@RequestMapping("/searchplan")
+	public String searchPlan(Model model,@RequestParam( required=false ,defaultValue="1") int page, String memberName){
+		int limit=5; 
+		
+		List<PlanVo> searchPlan = adminService.searchPlan(memberName);
+		model.addAttribute("searchPlan", searchPlan);
+	 	int listcount = searchPlan.size();
+	 	System.out.println(searchPlan.size());
+        List<PlanVo> list=adminService.selectplan2(page, limit);
+        int maxpage=(int)((double)listcount/limit+0.95);
+
+        int startpage=(((int)((double)page/10+0.9))-1)*10+1;
+  
+        int endpage=maxpage;
+        if(endpage>startpage+10-1){
+        	endpage=startpage+10-1;
+        }
+        model.addAttribute("nowpage", page);
+        model.addAttribute("maxpage", maxpage);
+        model.addAttribute("startpage", startpage);
+        model.addAttribute("endpage", endpage);
+        model.addAttribute("planList", list);
+        model.addAttribute("listcount", listcount);
+		return "/admin/searchplan";
+	
+	
+	}*/
+	
+/*	@RequestMapping("/searcheplan")
+    public String searchPlan( Model model, @RequestParam(required = false) String memberName ){
+    	 List<PlanVo> searchPlan = adminService.searchPlan(memberName);
+    	 model.addAttribute("planList", searchPlan);  
+		return "/admin/searchplan";
+    }*/
 
 	// member등록
 	@RequestMapping("/insertmember")
@@ -112,13 +172,7 @@ public class AdminController {
 	
 	
 	
-	@RequestMapping("/searchemail")
-    public String searchEmail( Model model, @RequestParam(required = false) String email ){
-    	 List<MemberVo> searchEmail = adminService.searchEmail(email);
-    	 System.out.println(searchEmail);
-    	 model.addAttribute("memberList", searchEmail);  
-		return "/admin/member";
-    }
+
     
 	
 	
@@ -135,28 +189,28 @@ public class AdminController {
 		adminService.deleteMember(member_no);
 		return "redirect:/admin/member";
 	}
-
-	// plan 조회
-
-	@RequestMapping("/plan1")
-	public String planList(Model model) {
-		List<MemberVo> memberList = adminService.selectMember();
-		List<PlanVo> planList = adminService.selectPlan();
-		model.addAttribute("memberList", memberList);
-		model.addAttribute("planList", planList);
-		return "/admin/plan";
-	}
+//
+//	// plan 조회
+//
+//	@RequestMapping("/plan1")
+//	public String planList(Model model) {
+//		List<MemberVo> memberList = adminService.selectMember();
+//		List<PlanVo> planList = adminService.selectPlan();
+//		model.addAttribute("memberList", memberList);
+//		model.addAttribute("planList", planList);
+//		return "/admin/plan";
+//	}
 	
 @RequestMapping("/plan")
 	
 	public String planList(@RequestParam( required=false, defaultValue="1") int page, Model model) {
 	 	int limit=5; 
 	 	List<MemberVo> memberList = adminService.selectMember();
-		List<PlanVo> planList = adminService.selectPlan();
+//		List<PlanVo> planList = adminService.selectPlan();
 		model.addAttribute("memberList", memberList);
-		model.addAttribute("planList", planList);
+//		model.addAttribute("planList", planList);
 		
-	 	int listcount = planList.size();
+	 	int listcount = adminService.selectPlan().size();
         List<PlanVo> list=adminService.selectplan1(page, limit);
         int maxpage=(int)((double)listcount/limit+0.95);
 
@@ -487,7 +541,7 @@ public class AdminController {
 		return "/admin/searchlist";
 	}
 	
-	@RequestMapping("/searchlist")
+	/*@RequestMapping("/searchlist")
 	
 	public String searchList(@RequestParam( required=false, defaultValue="1") int page, Model model) {
 	 	int limit=5; 
@@ -516,7 +570,33 @@ public class AdminController {
     	
 	  	return "/admin/searchlist";
 }
-
+*/
+	
+	@RequestMapping("/searchplan")
+	public String searchPlan(Model model ,@RequestParam(required = false) String memberName,@RequestParam(defaultValue="1") int page){
+		int limit = 5;
+		System.out.println(memberName+","+ page+","+ limit);
+		List<PlanVo> list = adminService.searchPlan(memberName, page, limit);
+		
+	 	int listcount = adminService.plan2(memberName);
+        int maxpage=(int)((double)listcount/limit+0.95);
+        System.out.println(listcount);
+        int startpage=(((int)((double)page/10+0.9))-1)*10+1;
+  
+        int endpage=maxpage;
+        if(endpage>startpage+10-1){
+        	endpage=startpage+10-1;
+        }
+        model.addAttribute("search", memberName);
+        model.addAttribute("nowpage", page);
+        model.addAttribute("maxpage", maxpage);
+        model.addAttribute("startpage", startpage);
+        model.addAttribute("endpage", endpage);
+        model.addAttribute("searchPlan", list);
+        model.addAttribute("listcount", listcount);
+//        System.out.println(list);
+		return "/admin/searchplan";
+	}
 	@RequestMapping("/insertsearchlist")
 	public String insertSearchList(SearchListVo searchListVo) {
 		adminService.insertSearchList(searchListVo);
@@ -904,4 +984,8 @@ public class AdminController {
 		return themeVo;
 
 	}
+
+    
+	
+
 }

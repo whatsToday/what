@@ -33,48 +33,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 	<!-- Slider -->
-         
-	<h1> Plan 등록</h1>
-			<form action="/admin/insertplan" method="post" enctype="multipart/form-data">
-				<table class="CSSTableGenerator" >
-					<tr>
-					    <td>회원번호</td>
-						<td>플랜이미지</td>
-						<td>플랜이름</td>
-						<td>멤버이름</td>
-						<td>메세지</td>
-						<td>플랜 날짜</td>
-						<td>등록</td>
-					</tr>
-					<tr>
-						<td>
-						<select name="member_no" onchange="changeEvent(this.value)">
-							 <c:forEach var="vo" items="${memberList}">
-							  <option style="size=10;" value="${vo.getMember_no()}">${vo.getMemberName()}</option>
-							<%--   <option value="${vo.getMember_no()}">${vo.getMemberName()}</option> --%>
-							 </c:forEach>
-					  </select> 
-							
-						</td>
-					    <td><input type="file" name="img"></td>
-						<td><input size="10" type="text" name="planName"></td>
-						<td><input size="10" type="text" id=memberName name="memberName" readonly="readonly"></td>
-						<td><input size="10" type="text" name="message"></td>
-						<td><input type="Date" name="planDate"></td>
-						<td><input type="submit" value="등록"></td>
-					</tr>
-				</table>
-			</form>
-			<form method="post" action="/admin/searchplan">
-			<table>
-			   <h1>Plan 검색</h1>
-			   <tr>
-			     <td>멤버이름 검색</td>
-			     <td><input type="text" id="memberName" name="memberName" value=""></td>
-			     <td><input type="submit" value="확인"/> </td>
-			   </tr>
-			</table>
-			</form>
+
 				<h1> Plan 조회</h1>
 					<table class="CSSTableGenerator">
 					<tr>
@@ -87,8 +46,8 @@
 						<td>타이틀이미지</td>
 						<td>삭제</td>
 					</tr>
-					<c:forEach var="vo" items="${planList}">
-					<tr>
+					<c:forEach var="vo" items="${searchPlan}">
+					<tr >
 						<td>${vo.plan_no }</td>
 						<td>${vo.member_no }</td>
 						<td>${vo.planName }</td>
@@ -117,21 +76,21 @@
          [이전]&nbsp;
       </c:if>
       <c:if test="${nowpage>1}">
-         <a href="/admin/plan?page=${nowpage-1}">[이전]</a>&nbsp;
+         <a href="/admin/searchplan?page=${nowpage-1}&memberName=${search}">[이전]</a>&nbsp;
       </c:if>
       <c:forEach var="a" begin="${startpage}"  end="${endpage}">
              <c:if test="${a==nowpage}">
                 <font color="red">[${a}]</font>
              </c:if>
              <c:if test="${a!=nowpage}">
-                <a href="/admin/plan?page=${a}">[${a}]</a>&nbsp;
+                <a href="/admin/searchplan?page=${a}&memberName=${search}">[${a}]</a>&nbsp;
              </c:if>    
       </c:forEach>
       <c:if test="${nowpage>=maxpage}">
            [다음]&nbsp;
       </c:if>
       <c:if test="${nowpage<maxpage}">
-           <a href="/admin/plan?page=${nowpage+1}">[다음]</a>
+           <a href="/admin/searchplan?page=${nowpage+1}&memberName=${search}">[다음]</a>
       </c:if>
    </td>
 </tr>
@@ -178,21 +137,7 @@
 	</section>
 	<c:import url="/WEB-INF/views/admin/footer.jsp"></c:import>
 </div>
-	<script>
-	    function changeEvent(val){
-	    	$.ajax({
-				type : 'get',
-			    url:'/admin/getMemberName',
-			    data : {
-			    	 member_no : val
-			    },
-			    dataType:'json',
-			    success: function(response){
-			    	$("#memberName").val(response.memberName);
-			    } 
-			 })
-	    } 
-	</script>
+	
 <!-- javascript
     ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->

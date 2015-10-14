@@ -42,7 +42,7 @@
 	
 	<select id="eventList" parameterClass="java.util.Map" resultClass="EventVo">
       <![CDATA[
-      SELECT * FROM (select rownum rnum,event_no,content_no,title,message,regDate,dueDate,eventStatus FROM (select * from event order by event_no asc)) WHERE rnum>=#startpage# AND rnum<=#endpage#
+      SELECT * FROM (select rownum rnum,event_no,content_no,title,message,regDate,dueDate,eventStatus FROM (select * from event order by event_no desc)) WHERE rnum>=#startpage# AND rnum<=#endpage#
          ]]>
    </select> 
 

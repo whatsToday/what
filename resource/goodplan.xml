@@ -41,7 +41,7 @@
 	
     <select id="goodPlanList" parameterClass="java.util.Map" resultClass="GoodPlanVo">
       <![CDATA[
-      SELECT * FROM (select rownum rnum,goodPlan_no,plan_no,member_no,memberName,planName FROM (select * from goodPlan order by goodPlan_no asc)) WHERE rnum>=#startpage# AND rnum<=#endpage#
+      SELECT * FROM (select rownum rnum,goodPlan_no,plan_no,member_no,memberName,planName FROM (select * from goodPlan order by goodPlan_no desc)) WHERE rnum>=#startpage# AND rnum<=#endpage#
          ]]>
    </select> 
 

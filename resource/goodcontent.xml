@@ -50,7 +50,7 @@
 	
     <select id="goodContentList" parameterClass="java.util.Map" resultClass="GoodContentVo">
       <![CDATA[
-      SELECT * FROM (select rownum rnum,goodContent_no,content_no,member_no,memberName,title FROM (select * from goodContent order by goodContent_no asc)) WHERE rnum>=#startpage# AND rnum<=#endpage#
+      SELECT * FROM (select rownum rnum,goodContent_no,content_no,member_no,memberName,title FROM (select * from goodContent order by goodContent_no desc)) WHERE rnum>=#startpage# AND rnum<=#endpage#
          ]]>
    </select> 
 

@@ -42,7 +42,7 @@
 	
  <select id="followList" parameterClass="java.util.Map" resultClass="FollowVo">
       <![CDATA[
-      SELECT * FROM (select rownum rnum,follow_no,member_no,followNum,memberName,followName FROM (select * from follow order by follow_no asc)) WHERE rnum>=#startpage# AND rnum<=#endpage#
+      SELECT * FROM (select rownum rnum,follow_no,member_no,followNum,memberName,followName FROM (select * from follow order by follow_no desc)) WHERE rnum>=#startpage# AND rnum<=#endpage#
          ]]>
    </select> 
 

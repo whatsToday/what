@@ -52,7 +52,7 @@
 	     	<!--  페이징처리 -->
 	<select id="themeList" parameterClass="java.util.Map" resultClass="ThemeVo">
       <![CDATA[
-      SELECT * FROM (select rownum rnum,theme_no,themeName,imageUrl FROM (select * from theme order by theme_no asc)) WHERE rnum>=#startpage# AND rnum<=#endpage#
+      SELECT * FROM (select rownum rnum,theme_no,themeName,imageUrl FROM (select * from theme order by theme_no desc)) WHERE rnum>=#startpage# AND rnum<=#endpage#
          ]]>
    </select> 
 

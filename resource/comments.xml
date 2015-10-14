@@ -33,7 +33,7 @@
 	<!-- 페이징처리 -->
   <select id="commentsList" parameterClass="java.util.Map" resultClass="CommentsVo">
       <![CDATA[
-      SELECT * FROM (select rownum rnum,comments_no,member_no,content_no,memberName,message,regDate FROM (select * from comments order by comments_no asc)) WHERE rnum>=#startpage# AND rnum<=#endpage#
+      SELECT * FROM (select rownum rnum,comments_no,member_no,content_no,memberName,message,regDate FROM (select * from comments order by comments_no desc)) WHERE rnum>=#startpage# AND rnum<=#endpage#
          ]]>
    </select> 
 

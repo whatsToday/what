@@ -38,7 +38,7 @@
 	
 <select id="planImgList" parameterClass="java.util.Map" resultClass="PlanImgVo">
       <![CDATA[
-      SELECT * FROM (select rownum rnum,planImg_no,plan_no,planName,imageUrl FROM (select * from planImg order by planImg_no asc)) WHERE rnum>=#startpage# AND rnum<=#endpage#
+      SELECT * FROM (select rownum rnum,planImg_no,plan_no,planName,imageUrl FROM (select * from planImg order by planImg_no desc)) WHERE rnum>=#startpage# AND rnum<=#endpage#
          ]]>
    </select> 
 

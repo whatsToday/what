@@ -84,6 +84,12 @@ public class ContentService {
 		goodContentDao.insert(goodContentVo);
 	}
 	
+	public void deleteGood(HttpSession session, Long contnet_no, Long member_no){
+		GoodContentVo vo = goodContentDao.selectVoCnoMno(contnet_no, member_no);
+		long goodContnet_no = vo.getGoodContent_no();
+		goodContentDao.delete(goodContnet_no);
+	}
+	
 	
 	public void savePlan(HttpSession session, Long content_no) {
 		MemberVo memberVo =(MemberVo) session.getAttribute("authUser");
@@ -122,6 +128,11 @@ public class ContentService {
 		List<EventVo> eventList = eventDao.selectVoByCno(content_no);
 		model.addAttribute("eventList", eventList);
 		return null;
+	}
+
+	public GoodContentVo selectAllByCno(Long member_no, Long content_no) {
+		GoodContentVo vo = goodContentDao.selectVoCnoMno(member_no, content_no);
+		return vo;
 	}
 	
 	

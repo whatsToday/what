@@ -40,6 +40,7 @@ button:active{
 
 </head>
 <body>
+
 <div id="wrapper">
 		<c:import url="/WEB-INF/views/include/header.jsp"/> 
 
@@ -64,7 +65,15 @@ button:active{
 					<input type="hidden" name="content_no" value="${contentVo.content_no }">
 					<input type="hidden" name="memberName" value="${authUser.memberName }">
 <!-- 좋아요 -->
+
+					<c:choose>
+					<c:when test="${goodContentVo.member_no eq authUser.member_no }">
+					<a href="javascript:likeCon(${contentVo.content_no },${authUser.member_no })" id="likegood"><img src="/assets/img/like_ch.jpg" style="width:70px;margin:10px 0 0 -5px"></a>
+					</c:when>
+					<c:otherwise>
 					<a href="javascript:likeCon(${contentVo.content_no },${authUser.member_no })" id="likegood"><img src="/assets/img/like.jpg" style="width:70px;margin:10px 0 0 -5px"></a>
+					</c:otherwise>
+					</c:choose>
 <!-- 찜하기 -->
 					<a href="/jjim?content_no=${param.content_no}" id="jjim" ><img src="/assets/img/jjim.jpg" style="width:70px;margin:10px 0 0 10px"></a>
 					</div>
@@ -180,7 +189,8 @@ function likeCon( content_no, member_no){
 	    		alert("좋아요를 누르셨습니다.")
 	    		location.reload();
 	    	}else{
-	    		alert("이미 좋아요를 누르셨습니다.")
+	    		alert("좋아요를 취소하셨습니다.")
+	    		location.reload();
 	    	}
 	    },
 })

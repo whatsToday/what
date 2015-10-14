@@ -26,12 +26,13 @@ public class ContentController {
 	ContentService contentService;
 	
 	@RequestMapping("/contentview")
-	public String contentView(Model model, HttpSession session, ContentVo contentVo) {
+	public String contentView(Model model, HttpSession session, ContentVo contentVo, Long member_no) {
 		Long content_no = contentVo.getContent_no();
 		contentService.getContent(model, content_no);
 		contentService.getComments(model);
 		contentService.selectCntNo(model, content_no);
 		contentService.selectVoByCno(model, content_no);
+		contentService.selectAllByCno(content_no, member_no);
 		return "/content/contentView";
 	}
 	
@@ -72,6 +73,9 @@ public class ContentController {
 			  return goods;
 		  }else{
 			  int goods = 2;
+			  contentService.deleteGood(session, content_no, member_no);
+			  List<GoodContentVo> list = contentService.selectCntNo(content_no);
+			  model.addAttribute("good", list.size());
 			  return goods;
 		  }
 	  }

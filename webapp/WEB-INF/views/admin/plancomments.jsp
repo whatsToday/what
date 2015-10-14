@@ -49,7 +49,7 @@
 						<td>
 						<select name="member_no" onchange="changeEvent(this.value)">
 							 <c:forEach var="vo" items="${memberList}">
-							  <option value="${vo.getMember_no()}">${vo.getMember_no()}</option>
+							  <option value="${vo.getMemberName()}">${vo.getMemberName()}</option>
 							<%--   <option value="${vo.getMember_no()}">${vo.getMemberName()}</option> --%>
 							 </c:forEach>
 					  </select> 
@@ -58,7 +58,7 @@
 							<td>
 						<select name="plan_no" onchange="changePlan(this.value)">
 							 <c:forEach var="vo" items="${planList}">
-							  <option value="${vo.getPlan_no()}">${vo.getPlan_no()}</option>
+							  <option value="${vo.getPlan_no()}">${vo.getMemberName()}의 플랜</option>
 							 </c:forEach>
 					  </select> 
 						</td>
@@ -166,7 +166,7 @@
 </div>
 	<script>
 	    function changeEvent(val){
-	    	$.ajax({
+	    	/* $.ajax({
 				type : 'get',
 			    url:'/admin/getMemberName',
 			    data : {
@@ -176,7 +176,8 @@
 			    success: function(response){
 			    	$("#memberName").val(response.memberName);
 			    } 
-			 })
+			 }) */
+			 $("#memberName").val(val);
 	    } 
 	    
 	    function changePlan(val){

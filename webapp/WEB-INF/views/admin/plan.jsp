@@ -50,7 +50,7 @@
 						<td>
 						<select name="member_no" onchange="changeEvent(this.value)">
 							 <c:forEach var="vo" items="${memberList}">
-							  <option style="size=10;" value="${vo.getMember_no()}">${vo.getMember_no()}</option>
+							  <option style="size=10;" value="${vo.getMember_no()}">${vo.getMemberName()}</option>
 							<%--   <option value="${vo.getMember_no()}">${vo.getMemberName()}</option> --%>
 							 </c:forEach>
 					  </select> 

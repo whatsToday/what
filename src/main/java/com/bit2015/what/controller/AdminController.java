@@ -107,6 +107,28 @@ public class AdminController {
 		return "redirect:/admin/member";
 	}
 
+	
+	
+	
+	
+	
+	@RequestMapping("/searchemail")
+    public String searchEmail( Model model, @RequestParam(required = false) String email ){
+    	 List<MemberVo> searchEmail = adminService.searchEmail(email);
+    	 System.out.println(searchEmail);
+    	 model.addAttribute("memberList", searchEmail);  
+		return "/admin/member";
+    }
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// member 삭제
 	@RequestMapping("/deletemember")
 	public String deleteMember(@RequestParam Long member_no) {

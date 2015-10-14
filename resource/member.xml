@@ -55,6 +55,12 @@
            SELECT * FROM MEMBER WHERE email=#email#
         ]]>
     </select>
+    
+    <select id="searchEmail" resultClass="MemberVo" parameterClass="java.lang.String">
+        <![CDATA[
+           SELECT * FROM MEMBER WHERE email like '%'||#email#||'%'
+        ]]>
+    </select>
 
 	   
 </sqlMap>

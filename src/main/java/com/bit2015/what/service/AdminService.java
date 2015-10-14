@@ -312,7 +312,21 @@ public class AdminService {
 		System.out.println(planVo.toString());
 		planDao.insert(planVo);
 	}
-
+  
+	
+	public List<MemberVo> searchEmail(String email){
+    	List<MemberVo> searchEmail = memberDao.searchEmail(email);
+		return searchEmail;
+    }
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// plan 삭제
 	public void deletePlan(Long plan_no) {
 		planDao.delete(plan_no);

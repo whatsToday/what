@@ -119,6 +119,16 @@
    </td>
 </tr>
 </table>
+
+<table>
+	<form id=search method="post" action="/admin/searchemail">
+       <tr>
+           <td>아이디입력</td>
+           <td><input type="text" id="email" name="email"></td>
+           <td><input type="submit" value="확인" ></td>
+       </tr>
+     </form> 
+</table>
 	<!-- end slider -->
 			</div>
 		</div>

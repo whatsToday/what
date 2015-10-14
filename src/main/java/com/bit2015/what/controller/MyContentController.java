@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.bit2015.what.service.MyContentService;
 import com.bit2015.what.vo.ContentVo;
@@ -92,6 +93,13 @@ public class MyContentController {
 	@RequestMapping("/deleteComments")
 	public String planCommentsDelete(@RequestParam Long planComments_no,@RequestParam Long plan_no,@RequestParam Long member_no){
 		myContentService.deleteComments(planComments_no);
+		return "redirect:/mycontent?member_no="+member_no;
+	}
+	@RequestMapping("/modify")
+	public String modify(@RequestParam String memberName, @RequestParam String password, @RequestParam MultipartFile mainPhoto, HttpSession session){
+		MemberVo memberVo = (MemberVo)session.getAttribute("authUser");
+		Long member_no = memberVo.getMember_no();
+		myContentService.modify(memberName, password, mainPhoto, member_no);
 		return "redirect:/mycontent?member_no="+member_no;
 	}
 }

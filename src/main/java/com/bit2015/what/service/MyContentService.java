@@ -11,6 +11,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.bit2015.what.dao.ContentBoxDao;
 import com.bit2015.what.dao.ContentDao;
@@ -21,6 +22,7 @@ import com.bit2015.what.dao.PlanCommentsDao;
 import com.bit2015.what.dao.PlanDao;
 import com.bit2015.what.dao.PlanImgDao;
 import com.bit2015.what.dao.PlanReplyDao;
+import com.bit2015.what.util.FileUploader;
 import com.bit2015.what.vo.ContentBoxVo;
 import com.bit2015.what.vo.ContentVo;
 import com.bit2015.what.vo.FollowVo;
@@ -50,7 +52,9 @@ public class MyContentService {
 	PlanCommentsDao planCommentsDao;
 	@Autowired
 	PlanReplyDao planReplyDao;
-	
+	// 파일올리는거야
+	FileUploader ful = new FileUploader();
+		
 	public List<Object> userPlan(Long member_no){
 		List<Object> list = new ArrayList<Object>();
 		List<PlanVo> list1 = planDao.getUserPlan(member_no);
@@ -242,5 +246,25 @@ public class MyContentService {
 	}
 	public void deleteComments(Long planComments_no){
 		planCommentsDao.delete(planComments_no);
+	}
+	public void modify(String memberName, String password, MultipartFile imageUrl, Long member_no){
+		MemberVo memberVo = memberDao.getMemberVo(member_no);
+		String mName = memberName;
+		String pass = password;
+		String iUrl;
+		
+		if(mName.equals("")){
+			mName = memberVo.getMemberName();
+		}
+		if(pass.equals("")){
+			pass= memberVo.getPassword();
+		}
+		if(imageUrl.isEmpty()){
+			iUrl = memberVo.getImageUrl();
+		}else{
+			iUrl = ful.upload(imageUrl);
+		}
+		memberDao.modify(mName, pass, iUrl, member_no);
+		
 	}
 }

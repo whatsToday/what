@@ -84,4 +84,12 @@ public class MemberDao {
 	    List<MemberVo> list = sqlMapClientTemplate.queryForList("member.searchEmail",email);
 		return list;
 	}
+	public void modify(String memberName, String password, String imageUrl, Long member_no){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("member_no", member_no);
+		map.put("memberName", memberName);
+		map.put("password", password);
+		map.put("imageUrl", imageUrl);
+		sqlMapClientTemplate.update("member.modify", map);
+	}
 }

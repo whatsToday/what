@@ -15,7 +15,6 @@ public class FileUploader {
 		
 		// 1번째 파일 저장
 		if( file1.isEmpty() == false ) {
-			
 	        String fileOriginalName = file1.getOriginalFilename();
 	        String extName = fileOriginalName.substring( fileOriginalName.lastIndexOf(".") + 1, fileOriginalName.length() );
 	        

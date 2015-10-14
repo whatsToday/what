@@ -320,7 +320,6 @@ div.viewImagesModify a, div.viewImagesDelete a {
 <script>
 //마커를 담을 배열입니다
 var markers = [];
-
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
         center: new daum.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
@@ -329,6 +328,10 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 
 // 지도를 생성합니다    
 var map = new daum.maps.Map(mapContainer, mapOption); 
+
+var infowindow3 = new daum.maps.InfoWindow({
+    removable : true
+});
 </script>
 <script>
 function info(marker,id){
@@ -361,20 +364,18 @@ function info(marker,id){
 	    		    dataType:'json',
 	    		    success: function(response1){
 	    		    	var plan_no = response1.plan_no;
-	    		    	var iwContent = '<div id="info"><img src="'+imageUrl+'"><div><div id="tl">'+title+'</div></br>'+phone+'</br><div id="delContent"><a href="javascript:deleteContent('+content_no+','+plan_no+')">삭제</a></div></div></div>', 
-	    		        iwRemoveable = true; 
-
-	    		  		var infowindow = new daum.maps.InfoWindow({
-	    		        content : iwContent,
-	    		        removable : iwRemoveable
-	    		    });
+	    		    	var iwContent = '<div id="info"><img src="'+imageUrl+'"><div><div id="tl">'+title+'</div></br>'+phone+'</br><div id="delContent"><a href="javascript:deleteContent('+content_no+','+plan_no+');infowindow3.close();">삭제</a></div></div></div>' 
+						
+	    		    	infowindow3.setContent(iwContent);
+	    		    	
+	    		  		
 
 	    		    daum.maps.event.addListener(marker, 'click', function() {
 	    		          // 마커 위에 인포윈도우를 표시합니다
-	    		          infowindow.open(map, marker);  
+	    		          infowindow3.open(map, marker);  
 	    		    });
 	    		    daum.maps.event.addListener(map, 'click', function() {
-	    		    	 infowindow.close();  
+	    		    	 infowindow3.close();  
 	    		    });
 	    				}
 	    	});
@@ -518,7 +519,14 @@ function deleteContent(content_no, plan_no){
 	    },
 	    dataType:'json',
 	    success: function(response){
-	    	for(var i=0; i<response.length; i++){
+	    	if(response.length==0){
+	    		var moveLatLon = new daum.maps.LatLng(37.566826, 126.9786567 );
+				map.setCenter(moveLatLon);
+				map.setLevel(3);
+				$("#submit").hide();
+				alert("이 플랜에 대한 정보가 없습니다.")
+	    	}if(response.length!=0){
+	    		for(var i=0; i<response.length; i++){
 				lat = response[i].latitude;
 				lng = response[i].longitude;
 				
@@ -531,10 +539,10 @@ function deleteContent(content_no, plan_no){
 			    	}
 			    	var moveLatLon = new daum.maps.LatLng(lat, lng);
 					map.setCenter(moveLatLon);
-					map.setLevel(2);
+					map.setLevel(3);
+	    	}
 		}
 	 })
-	 
 }
 </script>
 <script>
@@ -543,7 +551,8 @@ function removeMarker() {
         markers[i].setMap(null);
     }   
     markers = [];
-}
+	}
+
 </script>
 <script>
 </script>

@@ -61,14 +61,14 @@
 				
 				<c:forEach var="i" items="${planList}">
 				<div class="menuView">
-				<div id="menuTitleImage"><img id="titlePhoto" src="${i.titleImage}"/></div>
+				<div id="menuTitleImage"><img id="titlePhoto${i.plan_no}" src="${i.titleImage}"/></div>
 				<div id="menuContext">
-				<div id="menuName">${i.planName}&nbsp&nbsp${i.plan_no}</div>
+				<div id="menuName">${i.planName}</div>
 				<div id="menuMessage">${i.message}</div>
 				<div id="menuPhoto">
 				<c:forEach var="q" items="${planImgList}">
 				<c:if test="${i.plan_no == q.plan_no}">
-				<div id="menuImages"><a href="javascript:viewBigPhoto(${q.planImg_no})"><img id="photo${q.planImg_no}" src="${q.imageUrl}"></a></div>
+				<div id="menuImages"><a href="javascript:viewBigPhoto(${q.planImg_no},${q.plan_no})"><img id="photo${q.planImg_no}" src="${q.imageUrl}"></a></div>
 				</c:if>
 				</c:forEach>
 				</div>
@@ -128,22 +128,36 @@
 		</div>
 	</div>
 	</div>
-	<div id="modifyForm" style="display:none; ">
-				<div style="width:620px;height:300px;background-color:#fff;font-color:#c7c7c7;font-size:15px;padding:10px">
-				<form method="post" action="#">
-					<div style="float:left"><img style="width:300px; height: 250px;" src="${memberVo.imageUrl}"></div><a style="position:fixed;margin-top:260px; margin-left:-300px;"href="javascript:mainPhoto()">사진변경</a><input type="file" id="mainPhoto" style="display:none;">
-					<div>이름</div><input type="text" value="${memberVo.memberName}">
+	<div id="modifyForm" >
+				<div id="modify">
+				<div id="modifyTitle">My Profile</div>
+				<form id="modifyF"method="post" action="/mycontent/modify" enctype="multipart/form-data">
+					<div id="modifyImage"><img id="myPhoto" src="${memberVo.imageUrl}"></div>
+					<a id="modifyPhoto" href="javascript:mainPhoto()">Photo</a><input type="file" name="mainPhoto" id="mainPhoto" style="display:none;">
+					<div id="modifyContent">
+					<div id="modifyName">이름<input type="text" name="memberName" value="${memberVo.memberName}"></div>
 					<div id="checkPass"><a href="javascript:modifyPassword()">비밀번호 변경</a></div>
-					<div id="pass" style="display:none">
-						 비밀번호<input type="password"></br>
-						 비밀번호 확인<input type="password">
+					<div id="pass">
+						 비밀번호<input id="password" name="password" type="password"></br>
+						 비밀번호 확인<input id="checkPassword" type="password">
 					</div>
 					<div><input type="submit" value="수정"></div>
+					</div>
 				</form>
 			</div>
 		</div>
 </body>
 <script>
+$(function(){
+	$("#modifyF").submit(function(){
+		var password = $("#password").val();
+		var checkPassword = $("#checkPassword").val();
+		if(password != checkPassword){
+			alert("비밀번호가 일치하지않습니다.");
+			return false;
+		}
+	})
+})
 function goods(num){
 	$.ajax({
 		type : 'get',
@@ -248,6 +262,20 @@ function getMap(){
 }
 function mainPhoto(){
 	$("#mainPhoto").click();
+	$("#mainPhoto").change(function(){
+		readURL(this);
+	})
+}
+function readURL(input) {
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+
+	        reader.onload = function (e) {
+	            $('#myPhoto').attr('src', e.target.result);
+	        }
+
+	        reader.readAsDataURL(input.files[0]);
+	    	}
 }
 function modifyPassword(){
 	if (confirm('비밀번호를 변경하시겠습니까?')) {
@@ -273,10 +301,10 @@ function unFollow(following, follower){
 function follow(following, follower){
 	location.href="/mycontent/follow?following="+following+"&follower="+follower+"&member_no="+${param.member_no};
 }
-function viewBigPhoto(num){
-	var titleImage = $('#titlePhoto').attr("src");
+function viewBigPhoto(num,num1){
+	var titleImage = $('#titlePhoto'+num1).attr("src");
 	var photo = $('#photo'+num).attr("src");
-	$("#titlePhoto").attr("src" , photo);
+	$("#titlePhoto"+num1).attr("src" , photo);
 	$("#photo"+num).attr("src" , titleImage);
 }
 </script>

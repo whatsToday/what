@@ -34,7 +34,7 @@
 	<!--  페이징처리 -->
    <select id="memberList" parameterClass="java.util.Map" resultClass="MemberVo">
       <![CDATA[
-      SELECT * FROM (select rownum rnum,member_no,memberName,email,password,imageUrl,memberGrade FROM (select * from member order by member_no asc)) WHERE rnum>=#startpage# AND rnum<=#endpage#
+      SELECT * FROM (select rownum rnum,member_no,memberName,email,password,imageUrl,memberGrade FROM (select * from member order by member_no desc)) WHERE rnum>=#startpage# AND rnum<=#endpage#
          ]]>
    </select> 
 
@@ -61,6 +61,9 @@
            SELECT * FROM MEMBER WHERE email like '%'||#email#||'%'
         ]]>
     </select>
+    <update id="modify" parameterClass="java.util.Map">
+        update MEMBER SET MEMBERNAME=#memberName#, Password = #password#, imageUrl=#imageUrl# where member_no=#member_no#
+    </update>
 
 	   
 </sqlMap>

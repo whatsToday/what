@@ -108,7 +108,6 @@ public class BoardService {
 				planImgVo.setImageUrl(ful.upload(fileList.get(i)));
 				planImgDao.insert(planImgVo);
 			}
-			System.out.println(planImgVo);
 		}
 	}
 	public List<PlanImgVo> selectPlan(Long plan_no){
@@ -156,7 +155,6 @@ public class BoardService {
 		planCommentsVo.setPlanName(planVo.getPlanName());
 		planCommentsVo.setMessage(message);
 		
-		System.out.println(planCommentsVo);
 		planCommentsDao.insert(planCommentsVo);
 	}
 	public List<PlanCommentsVo> selectPlanComments(Long plan_no){

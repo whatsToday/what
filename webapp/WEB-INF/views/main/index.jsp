@@ -74,7 +74,7 @@
 					<table>
 						<tr>
 							<td id="showAll" onclick="themeSearch(this);">추천 후기</td>
-							<td id="otherLoc" onclick="checkJjim();$('#staticMap').click()">찜한 곳 다시 보기</td>
+							<td id="checkTd" onclick="checkJjim();$('#staticMap').click()">찜한 곳 보기</td>
 						</tr>
 					</table>
 				</div>

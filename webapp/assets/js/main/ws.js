@@ -1,10 +1,9 @@
 var nearOn = false;
-var myLoc =false;
 var mapResult =true;
 var obefore = "";
 var userLocation;
 var TOP10 = 10; 
-
+var checkBool = false;
 function initKey(){
 	var sH = document.getElementById('showHot');
 	var sT = document.getElementById('showHotToday');
@@ -52,7 +51,8 @@ function initKey(){
 function checkOnOff(){
 		var sa = document.getElementById('showAll');
 		var wa = document.getElementById('wholeAll');
-	
+		var cB = document.getElementById('checkTd');
+//showAll 		
 	if(nearOn){
 		if(document.getElementById('showAll')){
 			document.getElementById('showAll').innerText = "모두 보기";
@@ -66,6 +66,24 @@ function checkOnOff(){
 			wa.id="showAll";
 		}
 	}
+//checkJjim	
+	if(checkBool){
+			cB.innerText = "돌아가기";
+			cB.style.backgroundColor="#9DD4F0";
+	}else{
+			cB.innerText = "찜한 곳 보기";
+			cB.style.backgroundColor="#fff";
+	}
+}
+
+function comeBack(){
+	userLocation = markKeeper.loc;
+	changeLocation();
+	if(markKeeper.theme.length != 0){
+		console.log("in");
+		markTheme(markKeeper.theme);
+	}
+	displayPlaces(markKeeper.marks);
 }
 
 function markTheme(Obj){
@@ -98,7 +116,8 @@ function insertKey(keyword){
 	
 }
 function themeSearch(Obj) {
-	console.log(mapResult);
+	checkBool = false; 
+	  checkOnOff();
 	var themeName = Obj.id;
 	
 			if(themeName=="showAll"){
@@ -142,7 +161,9 @@ function themeSearch(Obj) {
 							    
 							    nearOn=false;
 								checkOnOff();
-							}else{ markTheme(Obj);}
+								markTheme(Obj);
+							}
+//							else{ markTheme(Obj);} 2015 10 14 12 38 
 					}else{
 					    ps.keywordSearch( themeName, placesSearchCB, {
 							location: userLocation,
@@ -157,7 +178,6 @@ function themeSearch(Obj) {
 					}
 						
 			}
-	console.log(mapResult);
 }
 
 function changeLocation(){
@@ -185,7 +205,6 @@ function changeLocation(){
 
 		function success(pos) {
 		  var crd = pos.coords;
-		  myLoc = true;
 		  
 		  userLocation=new daum.maps.LatLng(crd.latitude, crd.longitude);
 		  map.setCenter(userLocation);
@@ -561,58 +580,97 @@ function checkJjim(){
 	var tables = document.getElementsByClassName('selectedContents');
 	var url = "/checkJjim";
 	
-	if(tables.length!=0){
-		console.log(tables[0].getAttribute('data-no'));
-			url += "?content_no="+tables[0].getAttribute('data-no');
-		for (var k = 1; k < tables.length; k++) {
-			url += "&content_no="+tables[k].getAttribute('data-no');
-		}
-		
-		//후기글 가져오기
-		var lvl=map.getLevel();
-
-		$.ajax({
-			  url: url,
-				success : function(response){
-					
-					if(response.contentList.length!=0){
-						displayPlaces(response.contentList);
-						if(map.getLevel() < lvl){
-							map.setLevel(lvl);
+	
+	  if(!checkBool){
+		if(tables.length!=0){
+				url += "?content_no="+tables[0].getAttribute('data-no');
+			for (var k = 1; k < tables.length; k++) {
+				url += "&content_no="+tables[k].getAttribute('data-no');
+			}
+			
+			//후기글 가져오기
+			var lvl=map.getLevel();
+	
+			$.ajax({
+				  url: url,
+					success : function(response){
+						markKeeper.marks = placesArray;
+						markKeeper.loc = userLocation;
+						markKeeper.theme = document.getElementsByClassName('markTheme')[0];
+						console.log(markKeeper.theme);
+						checkBool = true; 
+						var linePath = [];
+						// 지도에 표시할 선을 생성합니다
+						
+						//1개 이상 마커
+						if(response.contentList.length!=0){
+							//마커짓
+							displayPlaces(response.contentList);
+							userLocation = map.getCenter();
+							changeLocation();
+							//시야
+							if(map.getLevel() < lvl){
+								map.setLevel(lvl);
+							}
+							
+							//선 그리기
+							for (var j = 0; j < response.contentList.length; j++) {
+								var latitude = response.contentList[j].latitude;
+								var longitude = response.contentList[j].longitude;
+								
+								linePath.push(new daum.maps.LatLng(latitude, longitude));
+							}
+							
+							//긋기
+							polyline.setPath(linePath);
+							polyline.setMap(map); 
+							
+							//markTheme 초기화
+							var themeClass = document.getElementsByClassName('markTheme');
+							for ( var k in themeClass) {
+								themeClass[k].className="themeClass"
+							}
+						}else{
+							//alert
+							alertModal('찜하신 내용이 없습니다');
 						}
-						
-						displayPlaces(response.contentList);
-						
-						var themeClass = document.getElementsByClassName('markTheme');
-						for ( var k in themeClass) {
-							themeClass[k].className="themeClass"
-						}
-						
-					}else{
-						//alert
-						alertModal('찜하신 내용이 없습니다');
-					}
-					
-				},
-				error: function (xhr, textStatus, errorThrown) { 
-					alertModal('에러 발생~~ \n' + textStatus + " : " + errorThrown);
-				},
-			});
-		
-		
-	}else{alertModal('찜하신 내용이 없습니다');}
+						checkOnOff();
+					},
+					error: function (xhr, textStatus, errorThrown) { 
+						alertModal('에러 발생~~ \n' + textStatus + " : " + errorThrown);
+					},
+				});
+			
+			
+		}else alertModal('찜하신 내용이 없습니다');
+	  }else{
+		  comeBack();
+		  checkBool = false; 
+		  checkOnOff();
+	  }
 	
 }
-/////staticMapModal
-//function callMap(){
-////	$('#staticMapModal').show();
-//	console.log("1");
-//	var staticMapContainer  = document.getElementById('staticMapModal'), // 이미지 지도를 표시할 div  
-//    staticMapOption = { 
-//        center: new daum.maps.LatLng(33.450701, 126.570667), // 이미지 지도의 중심좌표
-//        level: 3 // 이미지 지도의 확대 레벨
-//    };
-//
-//// 이미지 지도를 표시할 div와 옵션으로 이미지 지도를 생성합니다
-//var staticMap = new daum.maps.StaticMap(staticMapContainer, staticMapOption);
-//}
+
+function linePath (){
+	
+	// 선을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 선을 표시합니다
+	var linePath = [
+	    new daum.maps.LatLng(33.452344169439975, 126.56878163224233),
+	    new daum.maps.LatLng(33.452739313807456, 126.5709308145358),
+	    new daum.maps.LatLng(33.45178067090639, 126.5726886938753) 
+	];
+
+	// 지도에 표시할 선을 생성합니다
+	var polyline = new daum.maps.Polyline({
+	    path: linePath, // 선을 구성하는 좌표배열 입니다
+	    strokeWeight: 5, // 선의 두께 입니다
+	    strokeColor: '#FFAE00', // 선의 색깔입니다
+	    strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+	    strokeStyle: 'solid' // 선의 스타일입니다
+	});
+
+	// 지도에 선을 표시합니다 
+	polyline.setMap(map);  
+	
+	
+}

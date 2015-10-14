@@ -146,14 +146,9 @@ text-align : center;
 	
 
 <script type="text/javascript">
-
-
-  //$("#login").leanModal();
   $('a[rel*=leanModal]').leanModal();
   $("#join").click();
   
-//   $("#joinModal").on('hide', function(){
-//   });
 function checkTm(theme){
 	var checkList =document.getElementsByClassName("checkTm");
 	console.log(checkList.length);
@@ -165,25 +160,18 @@ function checkTm(theme){
  			}else{ alert("5개 이상 더 고르면 안 예뻐요");}
 		}
 }
-  ${ themeBoxList}  
 function checkThemeBox(){
 	var themeList =document.getElementsByClassName("themeBox");
  	var $themeBoxList = ${themeBoxList} // $('themeBoxList');
 	
 	for (var i = 0; i < $themeBoxList.length; i++) {
 		document.getElementById('theme_no_'+$themeBoxList[i].theme_no).className  += ' checkTm';	
-		//console.log(document.getElementById('theme_no_'+$themeBoxList[i].theme_no));
 	}
 }
 
 function submitTm(){
 	var checked = document.getElementsByClassName("checkTm");
-	console.log(checked);
 	
-//	var member_no =${authUser.getMember_no()};
-//	var theme_no = checked[0].getAttribute("data-no");
-//	var themeName = checked[0].getAttribute("data-name");;
-
 	var url="/insertThemeBox?param="+checked[0].getAttribute("data-no");
 	
 	for (var i = 1; i < checked.length; i++) {

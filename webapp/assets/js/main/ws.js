@@ -79,21 +79,22 @@ function checkOnOff(){
 function comeBack(){
 	userLocation = markKeeper.loc;
 	changeLocation();
-	if(markKeeper.theme.length != 0){
-		console.log("in");
+	if(markKeeper.theme != undefined){
 		markTheme(markKeeper.theme);
 	}
 	displayPlaces(markKeeper.marks);
 }
 
 function markTheme(Obj){
-	var ob = document.getElementById(Obj.id);
-	var themeClass = document.getElementsByClassName('markTheme');
-	for ( var k in themeClass) {
-		themeClass[k].className="themeClass"
+	console.log(mapResult);
+	if(mapResult){
+		var ob = document.getElementById(Obj.id);
+		var themeClass = document.getElementsByClassName('markTheme');
+		for ( var k in themeClass) {
+			themeClass[k].className="themeClass"
+		}
+		ob.className += " markTheme";
 	}
-	ob.className += " markTheme";
-	mapResult=true;
 }
 
 function insertKey(keyword){
@@ -142,6 +143,7 @@ function themeSearch(Obj) {
 				themeName=Obj.outerText;
 				
 					if(nearOn){
+						console.log("1");
 							//후기글이 없으면?
 							var k = 0 ;
 							for (var i = 0; i < placesArray.length; i++) {
@@ -152,29 +154,44 @@ function themeSearch(Obj) {
 								}
 							}
 							if(k==0){
-								alertModal('선택 범위안에 후기글이 없습니다');
-							    ps.keywordSearch( themeName, placesSearchCB, {
-									location: userLocation,
-									radius : circle.getRadius(),	
-									sort    : daum.maps.services.SortBy.POPULARITY
-								}); 
-							    
-							    nearOn=false;
-								checkOnOff();
-								markTheme(Obj);
+								$(function(){
+									console.log("f");
+									alertModal('선택 범위안에 후기글이 없습니다');
+								    ps.keywordSearch( themeName, placesSearchCB, {
+										location: userLocation,
+										radius : circle.getRadius(),	
+										sort    : daum.maps.services.SortBy.POPULARITY
+									});
+								}).done(function(){
+
+							    	nearOn=false;
+							    	checkOnOff();
+							    	markTheme(Obj);
+								});
 							}
 //							else{ markTheme(Obj);} 2015 10 14 12 38 
 					}else{
-					    ps.keywordSearch( themeName, placesSearchCB, {
-							location: userLocation,
-							radius : circle.getRadius(),	
-							sort    : daum.maps.services.SortBy.POPULARITY
+						console.log("2");
+						var dfd = $.Deferred();
+						dfd.resolve();
+						dfd.done(function(){
+							console.log("3");
+						    ps.keywordSearch( themeName, placesSearchCB, {
+								location: userLocation,
+								radius : circle.getRadius(),	
+								sort    : daum.maps.services.SortBy.POPULARITY
+							})
+						}).done(function(){
+							console.log("4");
+							if(mapResult){
+						    	console.log("R");
+						    	nearOn=false;
+						    	checkOnOff();
+						    	markTheme(Obj);
+						    }
+							
 						}); 
-					    if(mapResult){
-					    	nearOn=false;
-					    	checkOnOff();
-					    	markTheme(Obj);
-					    }
+					    
 					}
 						
 			}
@@ -597,7 +614,6 @@ function checkJjim(){
 						markKeeper.marks = placesArray;
 						markKeeper.loc = userLocation;
 						markKeeper.theme = document.getElementsByClassName('markTheme')[0];
-						console.log(markKeeper.theme);
 						checkBool = true; 
 						var linePath = [];
 						// 지도에 표시할 선을 생성합니다

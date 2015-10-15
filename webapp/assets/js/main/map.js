@@ -346,10 +346,10 @@ function displayInfowindow2(marker, items, index) {
 									}
 								}
 								if(followw){
-									content += '<tr><td colspan="2" id="'+response.planList[i].plan_no+'" onclick="showplan(this)">';
+									content += '<tr><td colspan="2" id="'+response.planList[i].plan_no+'" onclick="showMemberBLog('+response.planList[i].member_no+')">';
 									content += response.planList[i].memberName+'님의 <b>'+response.planList[i].plan_no+'</b> 번 후기   <img width="20px" src="/assets/img/follow.png"/></td></tr>';
 								}else{
-									content += '<tr><td colspan="2" id="'+response.planList[i].plan_no+'" onclick="showplan(this)">';
+									content += '<tr><td colspan="2" id="'+response.planList[i].plan_no+'" onclick="showMemberBLog('+response.planList[i].member_no+')">';
 									content += response.planList[i].memberName+'님의 <b>'+response.planList[i].plan_no+'</b> 번 후기   </td></tr>';
 								}
 							}

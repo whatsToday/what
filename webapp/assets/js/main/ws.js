@@ -696,3 +696,7 @@ function searchKeyAll(keywordd){
 	}); 
 }
 
+function showMemberBLog(member_no){
+	
+	location.href="/mycontent?member_no="+member_no;
+}

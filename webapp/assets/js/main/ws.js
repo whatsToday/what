@@ -4,6 +4,8 @@ var obefore = "";
 var userLocation;
 var TOP10 = 10; 
 var checkBool = false;
+
+
 function initKey(){
 	var sH = document.getElementById('showHot');
 	var sT = document.getElementById('showHotToday');
@@ -620,7 +622,16 @@ function checkJjim(){
 							
 							//긋기
 							polyline.setPath(linePath);
-							polyline.setMap(map); 
+							polyline.setMap(map);
+							
+							//거리 계산
+							var distance = Math.round(polyline.getLength()),
+								content = getTimeHTML(distance);
+							
+							distanceOverlay.setContent(content);
+							distanceOverlay.setPosition(linePath[linePath.length-1]);
+							distanceOverlay.setMap(map);
+							
 							
 							//markTheme 초기화
 							var themeClass = document.getElementsByClassName('markTheme');

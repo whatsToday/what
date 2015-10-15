@@ -216,3 +216,16 @@ body {
 /* .isss table div table tr td:first-child{ */
 /* 	border : 1px solid #aaa; */
 /* } */
+
+.distanceTime {
+	background : #fff;
+	color:#9966FF;
+}
+
+.distanceInfo {position:relative;top:5px;left:5px;list-style:none;margin:0;}
+.distanceInfo .label {
+	display:inline-block;
+	background : #B69FE6;
+}
+.distanceInfo:after {content:none;}
+.number {font-weight:bold;}

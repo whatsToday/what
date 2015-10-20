@@ -1,7 +1,9 @@
 @CHARSET "UTF-8";
 
 .omu {margin-top:20px}
-
+div.container{
+	background-color: azure;
+}
 /* mycontent */
 .mycontent {width:1000px;margin-top:10px;margin-bottom:50px;margin-left:auto;margin-right:auto}
 .image_pro{width:200px;height:200px;border-radius:100px;overflow:hidden}
@@ -19,10 +21,10 @@
 .top .pro_modi1 img{margin-top:-5px;margin-left:20px;}
 .top .pro_name {margin-top:220px;width:200px;text-align:center; font-size:20px; font-weight: bold; }
 .top .pro_modi a{font-weight: bold; color:#fff; text-decoration: none; font-size:16px; line-height:30px}
-.top ul#followingList,.top ul#followerList{display:none; position:fixed; background-color:#fff; width: 150px; max-height:250px; margin-left:50px; font-size:12px; color:#69ABED; font-weight: bold;  overflow-y:scroll;margin-top:0px;}
-.top ul#followingList li,.top ul#fo llowerList li {padding:10px;}
-.top ul#followingList li img,.top ul#followerList li img {margin-left:0px;width: 35px; height: 35px; border-radius:25px; margin-right:20px;}
-.top ul#followingList p,.top ul#followerList p{ height:20px;font-size:16px; padding-top:0;padding-bottom:20px; background-color:#69ABED; color:#fff;}
+.top ul#followingList,.top ul#followerList{padding:2px; display:none; position:absolute; background-color:#fff; width: 150px; max-height:250px; margin-left:50px; font-size:12px; color:#69ABED; font-weight: bold;  overflow-y:scroll;margin-top:0px; overflow-x:none; }
+.top ul#followingList li,.top ul#followerList li {padding:5px; width: 130px; height: 40px; margin-bottom:5px;}
+.top ul#followingList li img,.top ul#followerList li img {width: 35px; height: 35px; border-radius:25px; margin-right:20px; float:left; margin-left:7px;}
+.top ul#followingList div,.top ul#followerList div{height: 30px; float:left; width: 58px; margin-top:10px}
 
 /* menu */ 
 .menu {width:1000px;height:120px;border:solid 1px #000;}
@@ -75,14 +77,14 @@
 .content div.menuView div.menuComments div#writeReply div#replyContentsW div#replyWriteButton{margin-left:5px; margin-top:17px;width: 20px; height:20px; float:left;}
 .content div.menuView div.menuComments div#writeReply div#replyContentsW div#replyWriteButton img{ width: 100%; height:100%;}
 
-.content div.menuView div.menuComments div#viewReplyList{background-color: #ededed; max-height:180px; overflow-y:scroll; padding:5px;}
-.content div.menuView div.menuComments div#viewReplyList div#viewReply div#replyPhotoV{ height: 60px; width: 60px; float:left;}
+.content div.menuView div.menuComments div#viewReplyList{background-color: #ededed; max-height:180px; padding:3px; margin-left:-2px;}
+.content div.menuView div.menuComments div#viewReplyList div#viewReply div#replyPhotoV{ height: 50px; width: 50px; float:left; padding:3px;}
 .content div.menuView div.menuComments div#viewReplyList div#viewReply div#replyPhotoV img{ height: 100%; width: 100%; }
-.content div.menuView div.menuComments div#viewReplyList div#viewReply div#replyNameV{ height: 60px; width: 60px; float:left; line-height: 60px; text-align: center;}
-.content div.menuView div.menuComments div#viewReplyList div#viewReply div#replyMessageV{margin-left: 10px; height: 40px; width: 230px; float:left; line-height: 40px;}
-.content div.menuView div.menuComments div#viewReplyList div#viewReply div#replyRegDate{margin-left: 10px;height: 40px; width: 70px; float:left; font-size:8px;color:#b0b0b0; line-height: 40px;}
-.content div.menuView div.menuComments div#viewReplyList div#viewReply div#replyReplyFn{ margin-left:128px; }
-.content div.menuView div.menuComments div#viewReplyList div#viewReply div#replyreplyFn span a{font-size:8px;}
+.content div.menuView div.menuComments div#viewReplyList div#viewReply div.replyNameV{ height: 50px; width: 50px; float:left; line-height: 50px; text-align: center; font-size:12px;}
+.content div.menuView div.menuComments div#viewReplyList div#viewReply div#replyMessageV{margin-left: 10px; height: 30px; width: 120px; float:left; line-height: 30px; font-size:12px; overflow-y:scroll;}
+.content div.menuView div.menuComments div#viewReplyList div#viewReply div#replyRegDate{margin-left: 10px;height:30px; width: 50px; float:left; font-size:8px;color:#b0b0b0; line-height: 30px;}
+.content div.menuView div.menuComments div#viewReplyList div#viewReply div#replyReplyFn{ margin-left:110px;}
+.content div.menuView div.menuComments div#viewReplyList div#viewReply div#replyReplyFn span a{font-size:10px;}
 
 
 
@@ -96,6 +98,7 @@
 .content div.menuView div.menuComments div#writeComments div#commentsContentsW div#commentsMessageW input{width: 100%;}
 .content div.menuView div.menuComments div#writeComments div#commentsContentsW div#writeButton{ margin-left:10px; margin-top:20px; width: 25px; height:25px; float:left;}
 .content div.menuView div.menuComments div#writeComments div#commentsContentsW div#writeButton img{ width: 100%; height:100%;}
+.content div.menuView div.menuComments div.commentsReply{}
 
 
 div#info{padding: 5px; width:250px; height: 122px; font-size:12px;}

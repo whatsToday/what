@@ -102,4 +102,10 @@ public class MyContentController {
 		myContentService.modify(memberName, password, mainPhoto, member_no);
 		return "redirect:/mycontent?member_no="+member_no;
 	}
+	@RequestMapping("/insertReply")
+	public String replyInsert(@RequestParam Long planComments_no, HttpSession session, @RequestParam String message, @RequestParam Long member_no){
+		MemberVo memberVo = (MemberVo)session.getAttribute("authUser");
+		myContentService.insertPlanReply(memberVo.getMember_no(), planComments_no, message);
+		return "redirect:/mycontent?member_no="+member_no;
+	}
 }

@@ -14,6 +14,9 @@
 <script type="text/javascript" src="/assets/js/board/jquery-1.9.1.min.js"></script>
 <!-- css -->
 <style type="text/css">
+div.container{
+	background-color: azure;
+}
 div#wrapper{
 			position:absolute;
 }
@@ -97,7 +100,7 @@ div#map {
 		z-index: 0;
 }
 div#cmtWrite, div#cmtView{
-		border:1px solid #000;
+		
 		border-bottom:none;
 		margin-top:10px;
 		margin-left:auto;
@@ -116,10 +119,10 @@ div#comment{
 		width: 1000px;
 }
 div#comment div#viewComment{
-		border: 1px solid #000;
+		border: 1px solid #ededed;
 }
 div#comment div#writeComment{
-		border: 1px solid #000;
+		border: 1px solid #ededed;
 		height: 60px;
 }
 div#comment div#writeComment button{
@@ -132,6 +135,7 @@ div#comment div#writeComment button{
  		background-color:#69ABED;
 		font-weight: bold;
 		color:#fff;
+		font-size: 13px;
 }
 div#comment div#writeComment div#userName{
 		margin-left:10px;
@@ -150,7 +154,7 @@ div#comment div#writeComment div#userName span{
 				margin-left:20px;
 }
 div#comment div#writeComment div#commentText{
-			border-left:1px solid #000;
+			border-left:1px solid #ededed;
 			margin-top:-60px;
 			margin-left:150px;
 			width: 847px;
@@ -182,7 +186,7 @@ div#comment div#viewComment div#userName span{
 				margin-left:20px;
 }
 div#comment div#viewComment div#commentText{
-			border-left:1px solid #000;
+			border-left:1px solid #ededed;
 			margin-top:-30px;
 			margin-left:150px;
 			width: 800px;
@@ -311,6 +315,7 @@ div.commentsReply div#replyButton{
 			float:right;
 }
 div.commentsReply div#writeReply{
+			margin-top:5px;
 			height: 50px;
 }
 div.commentsReply div#writeReply div#replyPhotoW{
@@ -336,6 +341,7 @@ div.commentsReply div#writeReply div#writeButton a img{
 		margin-top:5px;
 }
 div.commentsReply div#viewReplyList{
+		margin-top:5px;
 		max-height:500px;
 		overflow-y:scroll; 
 }
@@ -424,7 +430,7 @@ div.commentsReply div#viewReplyList div.viewReply div.replyFn span{
 </div>
 <c:if test="${authUser.member_no==planBoard.member_no}">
 <div id="submit">
-	<button onclick="modifyPlan(${planBoard.plan_no},${planBoard.member_no})">수정</button>
+	<%-- <button onclick="modifyPlan(${planBoard.plan_no},${planBoard.member_no})">수정</button> --%>
 	<button onclick="deletePlan(${planBoard.plan_no},${planBoard.member_no})">삭제</button>
 </div>
 </c:if>

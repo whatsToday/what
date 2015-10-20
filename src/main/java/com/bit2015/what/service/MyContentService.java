@@ -29,6 +29,7 @@ import com.bit2015.what.vo.FollowVo;
 import com.bit2015.what.vo.MemberVo;
 import com.bit2015.what.vo.PlanCommentsVo;
 import com.bit2015.what.vo.PlanImgVo;
+import com.bit2015.what.vo.PlanReplyVo;
 import com.bit2015.what.vo.PlanVo;
 
 @Service
@@ -266,5 +267,19 @@ public class MyContentService {
 		}
 		memberDao.modify(mName, pass, iUrl, member_no);
 		
+	}
+	public void insertPlanReply(Long member_no, Long planComments_no, String message){
+		MemberVo memberVo = memberDao.getMemberVo(member_no);
+		String imageUrl = memberVo.getImageUrl();
+		String memberName = memberVo.getMemberName();
+		
+		PlanReplyVo planReplyVo = new PlanReplyVo();
+		planReplyVo.setMember_no(member_no);
+		planReplyVo.setPlanComments_no(planComments_no);
+		planReplyVo.setImageUrl(imageUrl);
+		planReplyVo.setMemberName(memberName);
+		planReplyVo.setMessage(message);
+		
+		planReplyDao.insertPlanReply(planReplyVo);
 	}
 }

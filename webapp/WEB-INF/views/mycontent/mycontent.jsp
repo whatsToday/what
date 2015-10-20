@@ -23,8 +23,8 @@
 		<div class="mycontent" >
 				<div class="top">
 				<div class="pro"><img class="image_pro" src="${memberVo.imageUrl}"/></div>
-				<ul><li class="soo">${followingList.size()}</li><li class="top_menu">팔로잉</li><li><a href='javascript:viewFollowing("${memberVo.member_no}")'>팔로잉보기</a><ul id="followingList"><c:forEach var="i" items="${followingList}"><a href="/mycontent?member_no=${i.followingNum}"><li><img src="${i.Url}"><span>${i.followingName}</span></li></a></c:forEach></ul></li></ul>
-				<ul><li class="soo">${followerList.size()}</li><li class="top_menu">팔로워</li><li><a href='javascript:viewFollower("${memberVo.member_no}")'>팔로워보기</a><ul id="followerList"><c:forEach var="i" items="${followerList}"><a href="/mycontent?member_no=${i.followerNum}"><li><img src="${i.Url}">${i.followerName}</li></a></c:forEach></ul></li></ul>
+				<ul><li class="soo">${followingList.size()}</li><li class="top_menu">팔로잉</li><li><a href='javascript:viewFollowing("${memberVo.member_no}")'>팔로잉보기</a><ul id="followingList"><c:forEach var="i" items="${followingList}"><a href="/mycontent?member_no=${i.followingNum}"><li><img src="${i.Url}"><div>${i.followingName}</div></li></a></c:forEach></ul></li></ul>
+				<ul><li class="soo">${followerList.size()}</li><li class="top_menu">팔로워</li><li><a href='javascript:viewFollower("${memberVo.member_no}")'>팔로워보기</a><ul id="followerList"><c:forEach var="i" items="${followerList}"><a href="/mycontent?member_no=${i.followerNum}"><li><img src="${i.Url}"><div>${i.followerName}</div></li></a></c:forEach></ul></li></ul>
 				<ul><li class="soo">${planList.size()}</li><li class="top_menu">게시물</li><c:if test="${authUser.member_no == param.member_no }"><li><a href="/board/addBoard">게시물쓰기</a></li></c:if></ul>
 				<c:choose>
 				<c:when test="${authUser.member_no == param.member_no}">
@@ -82,16 +82,16 @@
 						<div id="commentsNameV"><a href="/mycontent?member_no=${k.member_no}">${k.memberName}</a></div>
 						<div id="commentsMessageV">${k.message}</div>
 						<div id="commentsRegDate">${k.regDate}</div>
-						<div id="replyFn"><c:if test="${k.replyCount!=0}"><span><a>답글보기[${k.replyCount}]</a></span>&nbsp&nbsp</c:if><span><a href="javascript:writeReply(${k.planComments_no})">답글달기</a></span><c:if test="${k.member_no==authUser.member_no}">&nbsp&nbsp<span><a href="javascript:deleteComments(${k.planComments_no},${k.plan_no})">삭제</a></span></c:if></div>
+						<div id="replyFn"><c:if test="${k.replyCount!=0}"><span><a href="javascript:viewReplyList(${k.planComments_no})">답글보기[${k.replyCount}]</a></span>&nbsp&nbsp</c:if><span><a href="javascript:writeReply(${k.planComments_no})">답글달기</a></span><c:if test="${k.member_no==authUser.member_no}">&nbsp&nbsp<span><a href="javascript:deleteComments(${k.planComments_no},${k.plan_no})">삭제</a></span></c:if></div>
+							
 							<div class="commentsReply" id="commentsReply${k.planComments_no}">
 								<div id="viewReplyList">
 								<div id="viewReply">
 									<div id="replyPhotoV"><img src="${k.imageUrl}"></div>
-									<div id="replyNameV"><a href="/mycontent?member_no=${k.member_no}">${k.memberName}</a></div>
+									<div class="replyNameV"><a id="replyNameV${k.planComments_no}" href="/mycontent?member_no=${k.member_no}">${k.memberName}</a></div>
 									<div id="replyMessageV">${k.message}</div>
 									<div id="replyRegDate">${k.regDate}</div>
-									<div id="replyReplyFn"><c:if test="${k.replyCount!=0}"><span><a>답글보기[${k.replyCount}]</a></span>&nbsp&nbsp</c:if><span><a href="javascript:writeReply(${k.planComments_no})">답글달기</a></span><c:if test="${k.member_no==authUser.member_no}">&nbsp&nbsp<span><a href="javascript:deleteComments(${k.planComments_no},${k.plan_no})">삭제</a></span></c:if></div>
-								</div>
+									<div id="replyReplyFn"><span><a href="javascript:insertReReply(${k.planComments_no})">답글달기</a></span><c:if test="${k.member_no==authUser.member_no}">&nbsp&nbsp<span><a href="javascript:deleteReply(${k.planComments_no},${k.plan_no})">삭제</a></span></c:if></div>								</div>
 							</div>
 								<div id="writeReply">
 									<div id="replyUserW">
@@ -100,10 +100,11 @@
 									</div>
 									<div id="replyContentsW">
 										<div id="replyMessageW"><input type="text" id="relyMessageW${k.planComments_no}" placeholder="답글 입력"></div>
-										<div id="replyWriteButton"><a href="javascript:insertReply(${k.planComments_no})"><img src="/assets/img/button/write.png"></a></div>
+										<div id="replyWriteButton"><a href="javascript:insertReply(${k.planComments_no},${param.member_no})"><img src="/assets/img/button/write.png"></a></div>
 									</div>
 								</div>
 							</div>
+							
 					</div>
 					</c:if>
 					</c:forEach>
@@ -179,6 +180,9 @@ function goods(num){
 function viewCommentsList(plan_no){
 	$("#menuComments"+plan_no).toggle();
 }
+function viewReplyList(planComments_no){
+	$("#commentsReply"+planComments_no).toggle();
+}
 function insertComments(num){
 	var message = $("#commentsMessageW"+num).val();
 	location.href="/mycontent/insertComments?plan_no="+num+"&message="+message+"&member_no="+${param.member_no};
@@ -195,10 +199,13 @@ function deleteComments(num,num1){
 function writeReply(planComments_no){
 		$("#commentsReply"+planComments_no).toggle();
 }
-function insertReply(num){
-	var message= $("#replyMessage"+num).val();
-	console.log(message);
-	location.href="/board/insertReply?planComments_no="+num+"&message="+message+"&plan_no=";
+function insertReReply(num){
+	var message= $("#replyNameV"+num).html();
+	$("#relyMessageW"+num).val(message+" ");
+}
+function insertReply(num, member_no){
+	var message= $("#relyMessageW"+num).val();
+	location.href="/mycontent/insertReply?planComments_no="+num+"&message="+message+"&member_no="+member_no;
 }
 function squares(){
 	$("#squaresStyle").html('<li><a href="javascript:squares();"><img src="/assets/img/button/squares.png"/></a></li>')

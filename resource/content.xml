@@ -5,12 +5,13 @@
 	
 	<select id="selectAll" resultClass="ContentVo">
 	  <![CDATA[
-	    select * from content order by content_no desc
+	    select * from content order by title
 	  ]]>
 	</select>
 	
 	<select id="selectVo" parameterClass="java.lang.Long" resultClass="ContentVo">
-	  <![CDATA[
+	  <![CDATA[;
+	  
 	    select * from content where content_no=#content_no#
 	  ]]>
 	</select>

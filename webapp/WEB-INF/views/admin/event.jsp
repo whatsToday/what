@@ -57,8 +57,8 @@
                   </td>
                   <td><input size="10" type="text" id="content_no" name="content_no" readonly="readonly"></td>
                   <td><input size="10" type="text" name="message"></td>
-                  <td><input size="10" type="Date" name="regDate"></td>
-                  <td><input size="10" type="Date" name="dueDate"></td>
+                  <td><input size="10" type="Date" name="regDate" id="regDate" onchange="checkDate(2);"></td>
+                  <td><input size="10" type="Date" name="dueDate" id="dueDate" onchange="checkDate(1);"></td>
                   <td><input size="10" type="text" name="eventStatus"></td>
                   <td><input size="10" type="submit" value="등록"></td>
                </tr>
@@ -172,7 +172,54 @@
                 $("#content_no").val(response.content_no);
              } 
           })
-       } 
+       }
+       
+function checkDate(num){
+	var date = new Date();
+	var nowYear = date.getFullYear();
+	var nowMonth = date.getMonth()+1;
+	var nowDay = date.getDate();
+	var nowDate = date.toISOString().substring(0, 10);
+	
+	var preDate = $("#regDate").val();
+	var preYear = preDate.split("-")[0];
+	var preMonth = preDate.split("-")[1];
+	var preDay = preDate.split("-")[2];
+	
+	var afterDate = $("#dueDate").val();
+	var afterYear = afterDate.split("-")[0];
+	var afterMonth = afterDate.split("-")[1];
+	var afterDay = afterDate.split("-")[2];
+	
+	if(num==1){
+	if(preYear > afterYear){
+		alert("양식이 맞지 않습니다.")
+		$("#dueDate").val(preDate)
+	}
+	if(preMonth > afterMonth){
+		alert("양식이 맞지 않습니다.")
+		$("#dueDate").val(preDate)
+	}
+	if(preDay > afterDay){
+		alert("양식이 맞지 않습니다.")
+		$("#dueDate").val(preDate)
+	}
+	}
+	if(num==2){
+	  if(nowYear>preYear){
+		  alert("시작일은 오늘부터 가능합니다.");
+		  $("#regDate").val(nowDate);
+	  }
+	  if(nowMonth>preMonth){
+		  alert("시작일은 오늘부터 가능합니다.");
+		  $("#regDate").val(nowDate);
+	  }
+	  if(nowDay>preDay){
+		  alert("시작일은 오늘부터 가능합니다.");
+		  $("#regDate").val(nowDate);
+	  }
+	}
+}
    </script>
 
 <!-- javascript

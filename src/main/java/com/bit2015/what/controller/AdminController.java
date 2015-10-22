@@ -541,7 +541,7 @@ public class AdminController {
 		return "/admin/searchlist";
 	}
 	
-	/*@RequestMapping("/searchlist")
+	@RequestMapping("/searchlist")
 	
 	public String searchList(@RequestParam( required=false, defaultValue="1") int page, Model model) {
 	 	int limit=5; 
@@ -570,7 +570,7 @@ public class AdminController {
     	
 	  	return "/admin/searchlist";
 }
-*/
+
 	
 	@RequestMapping("/searchplan")
 	public String searchPlan(Model model ,@RequestParam(required = false) String memberName,@RequestParam(defaultValue="1") int page){
